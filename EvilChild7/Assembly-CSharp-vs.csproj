@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\Terrains\GenerationTerrainScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonCellScript.cs" />
      <None Include="Assets\Dev\git_pensebete.txt" />
+     <None Include="Assets\Dev\changelog.txt" />
+     <None Include="Assets\Dev\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
