@@ -48,9 +48,37 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Terrains\GenerationTerrainScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonCellScript.cs" />
+     <None Include="Assets\Textures\Pheromones\readme.txt" />
+     <None Include="Assets\Scripts\Terrains\readme.txt" />
+     <None Include="Assets\Scenes\readme.txt" />
+     <None Include="Assets\Menus\Menus\readme.txt" />
+     <None Include="Assets\Prefabs\Nourritures\readme.txt" />
+     <None Include="Assets\Prefabs\Eau\readme.txt" />
+     <None Include="Assets\Textures\Terrains\readme.txt" />
      <None Include="Assets\Dev\git_pensebete.txt" />
+     <None Include="Assets\Audios\readme.txt" />
+     <None Include="Assets\Docs\readme.txt" />
+     <None Include="Assets\Textures\Eau\readme.txt" />
      <None Include="Assets\Dev\changelog.txt" />
+     <None Include="Assets\Scripts\Eau\readme.txt" />
+     <None Include="Assets\Prefabs\Pheromones\readme.txt" />
+     <None Include="Assets\Scripts\Parties\readme.txt" />
+     <None Include="Assets\Menus\Boutons\readme.txt" />
+     <None Include="Assets\Textures\Fourmis\readme.txt" />
+     <None Include="Assets\Scripts\Pheromones\readme.txt" />
+     <None Include="Assets\Textures\Cailloux\readme.txt" />
+     <None Include="Assets\Scripts\Nourritures\readme.txt" />
+     <None Include="Assets\Prefabs\Cailloux\readme.txt" />
+     <None Include="Assets\Scripts\Serveurs\readme.txt" />
+     <None Include="Assets\Textures\Nourritures\readme.txt" />
+     <None Include="Assets\Scripts\Fourmis\readme.txt" />
+     <None Include="Assets\Scripts\Cailloux\readme.txt" />
+     <None Include="Assets\Textures\Scarabées\readme.txt" />
+     <None Include="Assets\Scripts\Scarabées\readme.txt" />
      <None Include="Assets\Dev\TODO.txt" />
+     <None Include="Assets\Prefabs\Fourmis\readme.txt" />
+     <None Include="Assets\Prefabs\Scarabées\readme.txt" />
+     <None Include="Assets\Prefabs\Terrains\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
