@@ -5,10 +5,13 @@ Commentaire...:  Ajout changelog.txt et TODO.txt;
 
 __________________________________
 
-Numero........:  ;
-Date..........:  :
-Auteur........:  ;
-Commentaire...:  ;
+Numero........:  2;
+Date..........:  16/10/2014:
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le terrain :
+		- 4 terrain différents de difficultés croissantes
+		- génération aléatoire du terrain;
 
 __________________________________
 

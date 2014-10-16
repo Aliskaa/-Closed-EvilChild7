@@ -1,1 +1,1 @@
-Fichier readme.txt
+Dossier contenant les scripts CS (classes, utilitaires etc.) pour gérer le terrain.

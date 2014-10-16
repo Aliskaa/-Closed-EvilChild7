@@ -1,12 +1,12 @@
 ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
-1		1			lancé 		[py]		Réaliser le terrain
-2		1			non lancé				Cases pour l'eau
-3		3			non lancé				Générateur de terrains
-4		2			non lancé				Mottes de terres
+1		1			terminé		[py]		Réaliser le terrain
+2		1			terminé		[py]		Cases pour l'eau
+3		2			terminé					Générateur de terrains
+4		4			non lancé				Mottes de terres
 5		1			lancé 		[soph]		Ouvrière : UI
 6		1			non lancé				Ouvrière : Phéromones
-7		1			non lancé				Ouvrière : IA
+7		1			lancé		[py]		Ouvrière : IA
 8		1			non lancé				Reine : UI
 9		1			non lancé				Reine : Phéromones
 10		1			non lancé				Reine : IA
