@@ -1,0 +1,26 @@
+ID		PRIORITE	STATUT		QUI			DESCRIPTION
+
+1		1			lancé 		[py]		Réaliser le terrain
+2		1			non lancé				Cases pour l'eau
+3		3			non lancé				Générateur de terrains
+4		2			non lancé				Mottes de terres
+5		1			lancé 		[soph]		Ouvrière : UI
+6		1			non lancé				Ouvrière : Phéromones
+7		1			non lancé				Ouvrière : IA
+8		1			non lancé				Reine : UI
+9		1			non lancé				Reine : Phéromones
+10		1			non lancé				Reine : IA
+11		1			non lancé				Oeuf : UI
+12		2			non lancé				Combattante : UI
+13		2			non lancé				Combattante : Phéromones
+14		2			non lancé				Combattante : IA
+15		3			non lancé				Contre-maitresse : UI
+16		3			non lancé				Contre-maitresse : Phéromones
+17		3			non lancé				Contre-maitresse : IA
+18		3			non lancé				Générale : UI
+19		3			non lancé				Générale : Phéromones
+20		3			non lancé				Générale : IA
+21		2			non lancé				Scarabée : UI
+22		2			non lancé				Scarabée : IA
+23		2			non lancé				Caillou : UI
+24		1			non lancé				Nourriture : UI
