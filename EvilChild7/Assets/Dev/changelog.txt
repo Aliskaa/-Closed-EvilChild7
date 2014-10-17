@@ -27,10 +27,12 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ;
-Date..........:  :
-Auteur........:  ;
-Commentaire...:  ;
+Numero........:  4;
+Date..........:  18/10/2014 00h15;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le déplacement des fourmis sur le terrain :
+		- Prototypages des méthodes;
 
 __________________________________
 
