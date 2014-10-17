@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -80,6 +80,16 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// La taille d'une pièce
 	/// </summary>
 	public int taillePiece;
+
+	/// <summary>
+	/// Le game object parent qui va embarquer le terrain
+	/// </summary>
+	public GameObject parentTerrain;
+
+	/// <summary>
+	/// Le type de terrain à générer
+	/// </summary>
+	public TypeMap type;
 	#endregion
 
 	#region Attributs package
@@ -98,7 +108,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// </summary>
     public void Awake(){
         GetHexagonesProp();
-		CreerMap(TypeMap.RANDOM);
+		CreerMap(type);
     }
 
 	/// <summary>
@@ -110,8 +120,10 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <returns>The new chunk's script</returns>
 	public HexagonesVueScript CreerPiece( int x, int y, TypeTuile type ){
 
-		if ( x == 0 && y == 0 ){
+		// Création du GameObject et ajout au parent
+		if ( x == 0 && y == 0 && chunkHolder == null ){
 			chunkHolder = new GameObject("Terrain");
+			chunkHolder.transform.parent = parentTerrain.transform;
 		}
 
 		GameObject chunkObj = new GameObject("MorceauTerrain[" + x + "," + y + "]");

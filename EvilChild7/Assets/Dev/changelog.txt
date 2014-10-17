@@ -1,12 +1,12 @@
 Numero........:  1;
-Date..........:  15/10/2014:
+Date..........:  15/10/2014;
 Auteur........:  py;
 Commentaire...:  Ajout changelog.txt et TODO.txt;
 
 __________________________________
 
 Numero........:  2;
-Date..........:  16/10/2014:
+Date..........:  16/10/2014;
 Auteur........:  py;
 Commentaire...:  
 	Travail sur le terrain :
@@ -15,10 +15,15 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ;
-Date..........:  :
-Auteur........:  ;
-Commentaire...:  ;
+Numero........:  3;
+Date..........:  17/10/2014 22h43;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le terrain :
+		- Possibilité de définir le G.O. embarquant le terrain
+		- Ajout du script dans le G.O. du bac à sable au lieu d'avoir un G.O. exprès
+		- Configuration de la caméra : angle de vue, position
+		- Ajout de la lumière sur le bac à sable;
 
 __________________________________
 
