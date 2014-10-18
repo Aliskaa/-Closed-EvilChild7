@@ -5,14 +5,16 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// Classe permettant de gérer les infos sur les hexagones
+/// Classe permettant de gérer les infos sur les hexagones.
+/// Ces objets sont répliqués dans un tableau et servent pour le maillage d'un HexagonesVueScript.
+/// Ce composant est ensuite affecté sur un game object "BlocTerrain" qui est un morceau de terrain.
 /// </summary>
 public class HexagoneInfo {
 
@@ -20,12 +22,6 @@ public class HexagoneInfo {
 	 * Attributs *
 	 * ********* */
 
-    #region Attributs privés
-	/// <summary>
-	/// Coordonnées 3D sur la grille
-	/// </summary>
-    private Vector3 positionGrille;
-	#endregion
 
 	#region Attributs publics
 	/// <summary>
@@ -37,6 +33,11 @@ public class HexagoneInfo {
 	/// La position globale
 	/// </summary>
     public Vector3 positionGobale;
+
+	/// <summary>
+	/// Coordonnées 3D sur la grille
+	/// </summary>
+	public Vector3 positionGrille;
 
 	/// <summary>
 	///

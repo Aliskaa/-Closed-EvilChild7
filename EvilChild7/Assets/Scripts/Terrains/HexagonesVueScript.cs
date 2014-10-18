@@ -5,16 +5,20 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.0.1
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// Classe permettant de crééer des hexagones
+/// Script permettant de crééer des hexagones.
+/// Ce composant est affecté à un game object qui est un morceau de terrain, "BlocTerrain".
+/// Un maillage d'hexagones est fait sur cette vue, et une texture y est appliquée.
+/// Les infos des hexagones sont dans des objets HexagonesInfos.
 /// </summary>
 /// <see cref="MonoBehaviour"/>
+/// <see cref="HexagoneInfo"/> 
 public class HexagonesVueScript : MonoBehaviour {
 
 	/* ********* *

@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\TerrainManagerScript.cs" />
+     <Compile Include="Assets\Scripts\Utils\JSONUtils.cs" />
      <None Include="Assets\Textures\Pheromones\readme.txt" />
      <None Include="Assets\Scripts\Terrains\readme.txt" />
      <None Include="Assets\Scenes\readme.txt" />

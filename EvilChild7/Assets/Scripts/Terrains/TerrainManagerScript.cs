@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.1.1
 /// </remarks>
 
 using UnityEngine;
@@ -14,7 +14,12 @@ using System.Collections;
 
 /// <summary>
 /// Master controller of the world; makes the chunks and handles world values
+/// Gestionnaire de terrain : créé les blocs ("morceaux de terrains") et gère les valeurs du monde.
+/// Le "bac à sable" contient un "terrain" qui contient plusieurs 'morceaux de terrains", ou blocs.
+/// Ces blocs ont un maillage d'hexagones de meme texture.
 /// </summary>
+/// <see cref="HexagonesVueScript"/>
+/// <see cref="HexagoneInfo"/> 
 public class TerrainManagerScript : MonoBehaviour {
 
 	/* ********* *
@@ -126,7 +131,7 @@ public class TerrainManagerScript : MonoBehaviour {
 			chunkHolder.transform.parent = parentTerrain.transform;
 		}
 
-		GameObject chunkObj = new GameObject("MorceauTerrain[" + x + "," + y + "]");
+		GameObject chunkObj = new GameObject("BlocTerrain[" + x + "," + y + "]");
 		chunkObj.AddComponent<HexagonesVueScript>();
 		Texture2D texture;
 		switch (type) {

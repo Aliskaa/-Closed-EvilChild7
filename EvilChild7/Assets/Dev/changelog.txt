@@ -36,11 +36,17 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ;
-Date..........:  :
-Auteur........:  ;
-Commentaire...:  ;
-
+Numero........:  5;
+Date..........:  18/10/2014;
+Auteur........:  py;
+Commentaire...:  
+	Ajout classe utilitaire pour traiter du JSON
+	Travail sur le déplacement des fourmis sur le terrain :
+		- La position de la fourmis : morceau de terrain et infos3D
+		- Ajout d'un CharacterController pour faire bouger la fourmis
+	Ajouts des nouveaux prefabs : bout de bois, cailloux gros/petits, scarabee, bonbon, mure
+	Créations dossiers pour les bouts de bois, la lumière et les caméras
+	Scène de débug pour voir les mises à échelle;
 __________________________________
 
 Numero........:  ;
