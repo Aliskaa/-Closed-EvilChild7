@@ -5,13 +5,14 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.1
+/// PY Lapersonne - Version 1.1.2
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 
 
+#region TerrainManagerScript
 /// <summary>
 /// Master controller of the world; makes the chunks and handles world values
 /// Gestionnaire de terrain : créé les blocs ("morceaux de terrains") et gère les valeurs du monde.
@@ -26,7 +27,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	 * Attributs *
 	 * ********* */
 
-    #region Attributs publics
+#region Attributs publics
 
 	/// <summary>
 	/// Le mesh pour des hexagones à la flat design
@@ -95,19 +96,19 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// Le type de terrain à générer
 	/// </summary>
 	public TypeMap type;
-	#endregion
+#endregion
 
-	#region Attributs package
+#region Attributs package
 	int segmentsEnX;
     int segmentsEnZ;
-	#endregion
+#endregion
 
 
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
-	#region Méthodes publics
+#region Méthodes publics
 	/// <summary>
 	/// 
 	/// </summary>
@@ -152,9 +153,9 @@ public class TerrainManagerScript : MonoBehaviour {
 		return chunkObj.GetComponent<HexagonesVueScript>();
 
 	}
-	#endregion
+#endregion
 	
-	#region Méthodes privées
+#region Méthodes privées
 	/// <summary>
 	/// Créé des meshes pour les hexagones 
 	/// </summary>
@@ -406,9 +407,9 @@ public class TerrainManagerScript : MonoBehaviour {
 		}
 
 	}
-	#endregion
+#endregion
 
-	#region Méthodes package
+#region Méthodes package
 	/// <summary>
 	/// Créé la map selon le type voulu
 	/// </summary>
@@ -432,9 +433,10 @@ public class TerrainManagerScript : MonoBehaviour {
 				break;
 		}
 	}
-	#endregion
+#endregion
 	
 }
+#endregion
 
 #region TypeTuile
 /// <summary>

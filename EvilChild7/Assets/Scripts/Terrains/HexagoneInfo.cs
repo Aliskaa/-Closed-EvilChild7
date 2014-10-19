@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.1.1
 /// </remarks>
 
 using UnityEngine;
@@ -23,7 +23,7 @@ public class HexagoneInfo {
 	 * ********* */
 
 
-	#region Attributs publics
+#region Attributs publics
 	/// <summary>
 	/// La position locale
 	/// </summary>
@@ -73,14 +73,14 @@ public class HexagoneInfo {
 	/// Les triangles de l'hexagone
 	/// </summary>
     public int[] triangles;
-	#endregion
+#endregion
 
 
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
-	#region Méthodes publiques
+#region Méthodes publiques
 	/// <summary>
 	/// Retourne la position axiale sur la grille
 	/// </summary>
@@ -106,9 +106,9 @@ public class HexagoneInfo {
     public void Start(){
         DefinirMesh();
     }
-	#endregion
+#endregion
 
-	#region Attributs privés
+#region Attributs privés
     /// <summary>
     /// Récupère les données sur les hexagones depuis le TerrainManager
 	/// pour les mettre dans le mesh Unity local
@@ -120,6 +120,6 @@ public class HexagoneInfo {
         meshLocal.uv = parentChunk.worldManager.meshHexagonesFlat.uv;
         meshLocal.RecalculateNormals();
     }
-	#endregion
+#endregion
 
 }

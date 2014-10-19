@@ -1,12 +1,12 @@
 ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
-1		1			terminé					Réaliser le terrain
-2		1			terminé					Cases pour l'eau
-3		2			terminé					Générateur de terrains
+1		1			terminé		X			Réaliser le terrain
+2		1			terminé		X			Cases pour l'eau
+3		2			terminé		X			Générateur de terrains
 4		4			non lancé				Mottes de terres
 5		1			non lancé				Ouvrière : UI
 6		1			non lancé				Ouvrière : Phéromones
-7		1			lancé		[py]		Ouvrière : IA
+7		1			lancé		[py]		Ouvrière : Intelligence Graphique
 8		1			non lancé				Reine : UI
 9		1			non lancé				Reine : Phéromones
 10		1			non lancé				Reine : IA
@@ -24,14 +24,16 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 22		2			non lancé				Scarabée : IA
 23		2			non lancé				Caillou : UI
 24		1			non lancé				Nourriture : UI
-25		1			non lancé	[py]		Collisions sur les cotés du bac
+25		1			terminé		X			Collisions sur les cotés du bac
 26		1			non lancé	[py]		Fourmis : Rotation
 27		1			non lancé	[py]		Fourmis : Déambulation
-28		1			non lancé	[py]		Fourmis : voir où elle peut aller (eau/obstacle/...)
+28		1			terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
 29		1			non lancé	[py]		Fourmis : voir les cases et leurs types
 30		1			non lancé	[py]		Fourmis : visée : proportions/distances
-31		1			non lancé	[py]		Fourmis : bonnes porportions pour aller d'une case à l'autre
+31		1			lancé		[py]		Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(position, centrage, ...)
-32		1			non lancé	[py]		Voir nécessité script pour créé des GO données 
+32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
 											(pop scarabées, éclosions fourmis, ...)											
-33													
+33		1			non lancé	[py]		Améliorer le bac: cotés, skybox, fond, ...											
+34		1			non lancé	[py]		Fourmis : voir où elle peut aller : eau, bois, sable
+35		1			non lancé	[py]		Le terrain est de travers ? : les fourmis bougent en diagonale

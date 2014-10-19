@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.0.1
 /// </remarks>
 
 using UnityEngine;
@@ -20,16 +20,19 @@ public class JSONUtils {
 	 * Attributs *
 	 * ********* */
 
-	#region Attributs
-	private static Regex regexBlocTerrain = new Regex (@"BlocTerrain");
-	#endregion
+#region Attributs
+	/// <summary>
+	/// Regex pour repérer si c'est un bloc de terrain
+	/// </summary>
+	private static Regex regexBlocTerrain = new Regex(@"BlocTerrain");
+#endregion
 
 
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
-	#region Méthodes
+#region Méthodes
 	/// <summary>
 	/// Créé une version en string d'un game object de type BlocTerrain.
 	/// String de la forme :
@@ -123,6 +126,6 @@ public class JSONUtils {
 		  .Append("}}");
 		return sb.ToString();
 	}
-	#endregion
+#endregion
 
 }

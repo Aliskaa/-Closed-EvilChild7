@@ -25,7 +25,7 @@ public class HexagonesVueScript : MonoBehaviour {
 	 * Attributs *
 	 * ********* */
 
-    #region Attributs privés
+#region Attributs privés
 	/// <summary>
 	/// Le mesh filter Unity à utiliser
 	/// </summary>
@@ -35,9 +35,9 @@ public class HexagonesVueScript : MonoBehaviour {
 	/// Le box collider d'Unity à utiliser
 	/// </summary>
 	private new BoxCollider collider;
-	#endregion
+#endregion
 
-	#region Attributs publics
+#region Attributs publics
     /// <summary>
     /// Le tableau d'hexagones
     /// </summary>
@@ -67,14 +67,14 @@ public class HexagonesVueScript : MonoBehaviour {
 	/// Référece vers l'objet permettant de gérer le terrain
 	/// </summary>
     public TerrainManagerScript worldManager;
-    #endregion
+#endregion
 
 
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
-	#region Méthodes publiques
+#region Méthodes publiques
     /// <summary>
     /// Définit la dimension d'une pièce
     /// </summary>
@@ -186,9 +186,9 @@ public class HexagonesVueScript : MonoBehaviour {
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
 
 	}
-	#endregion
+#endregion
 	
-	#region Méthodes package
+#region Méthodes package
 	/// <summary>
 	/// Créé le collider
 	/// </summary>
@@ -203,9 +203,9 @@ public class HexagonesVueScript : MonoBehaviour {
 		collider.size = filter.mesh.bounds.size;
 		
 	}
-	#endregion
+#endregion
 	
-	#region Méthodes privées
+#region Méthodes privées
 	/// <summary>
 	/// Combine les différents hexagones du mesh de la pièce dans un seul mesh
 	/// </summary>
@@ -233,6 +233,6 @@ public class HexagonesVueScript : MonoBehaviour {
         CreerCollider();
 
     }
-	#endregion
+#endregion
 	
 }

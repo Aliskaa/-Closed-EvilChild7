@@ -1,10 +1,12 @@
-﻿	/// <summary>
-/// DeplacementFourmisScript.cs
-/// Script pour gérer le déplacements des fourmis sur le terrain
+﻿/// <summary>
+/// DeplacementsFourmisScript.cs
+/// Script pour gérer les déplacements des fourmis sur le terrain avec entre autres
+/// 	- le déplacement à proprement parler
+/// 	- la connaissance du terrain de la fourmis et de la place qu'elle a
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.2.1
 /// </remarks>
 
 using UnityEngine;
@@ -16,14 +18,14 @@ using System.Collections;
 /// <see cref="TerrainManagerScript"/>
 /// <see cref="HexagonesVueScript"/>
 /// <see cref="HexagoneInfo"/> 
-public class DeplacementFourmisScript : MonoBehaviour {
+public class DeplacementsFourmisScript : MonoBehaviour {
 
 
 	/* ********* *
 	 * Attributs *
 	 * ********* */
 
-	#region Attributs privés
+#region Attributs privés
 	/// <summary>
 	/// Le vecteur pour le déplacement
 	/// </summary>
@@ -33,21 +35,21 @@ public class DeplacementFourmisScript : MonoBehaviour {
 	/// Le controleur pour la fourmis
 	/// </summary>
 	private CharacterController controleurPerso;
-	#endregion
+#endregion
 
-	#region Attributs publics
+#region Attributs publics
 	/// <summary>
 	/// La vitesse de déplacement
 	/// </summary>
 	public float deplacementVitesse;
-	#endregion
+#endregion
 
 
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
-	#region Méthodes privées
+#region Méthodes privées
 	/// <summary>
 	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée la fourmis,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
@@ -106,12 +108,13 @@ public class DeplacementFourmisScript : MonoBehaviour {
 	/// Fait déambuler la fourmis
 	/// </summary>
 	private void Deambuler(){
-		deplacementDirection.x++;
+		deplacementDirection.x = deplacementDirection.x + 1 * deplacementVitesse;
 		controleurPerso.Move(deplacementDirection * Time.deltaTime);
 	}
-	#endregion
 
-	#region Méthodes package
+#endregion
+
+#region Méthodes package
 	/// <summary>
 	/// Routine appellée automatiquement par Unity dès que le script va se lancer
 	/// (appel précédant celui de Start()).
@@ -120,24 +123,21 @@ public class DeplacementFourmisScript : MonoBehaviour {
 		deplacementDirection = Vector2.zero;
 		controleurPerso = GetComponent<CharacterController>();
 	}
-
-	// Use this for initialization
-	void Start(){
 	
-	}
-
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
 		Deplacement();
+		/*
 		Debug.Log("BlocTerrain :" + GetBlocCourantAsGO());
 		Debug.Log("BlocTerrain = " + GetBlocCourantAsString());
 		Debug.Log ("Infos = " + Get3dInfos());
+		*/
 	}
-	#endregion
+#endregion
 
-	#region Méthodes publiques
+#region Méthodes publiques
 	/// <summary>
 	/// Méthode de déplacement de la fourmis
 	/// </summary>
@@ -156,7 +156,7 @@ public class DeplacementFourmisScript : MonoBehaviour {
 	public string Get3dInfos(){
 		return JSONUtils.parseInfos3D(gameObject.transform.position, gameObject.transform.rotation);
 	}
-	#endregion
+#endregion
 
 }
 

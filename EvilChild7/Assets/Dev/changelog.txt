@@ -49,15 +49,36 @@ Commentaire...:
 	Scène de débug pour voir les mises à échelle;
 __________________________________
 
+Numero........:  6;
+Date..........:  ;
+Auteur........:  py;
+Commentaire...:  
+	Ajout classe utilitaire pour choper un type en fonction d'un nom de game object
+	Correction sur le game object du bac à sable : pb position en Y des cotés
+	Correction bug sur vitesse de déplacement qui explose
+	Travail sur la fourmis, le terrain, les collisions des GO/fourmis
+		- Complétion du readme pour décrire le GO "fourmis noire"
+		- Ajout des rigid body et des colliders pour la fourmis et les bords du bac à sable
+		- Détection des collisions et anticipation;
+
+__________________________________
+
 Numero........:  ;
-Date..........:  :
+Date..........:  ;
 Auteur........:  ;
 Commentaire...:  ;
 
 __________________________________
 
 Numero........:  ;
-Date..........:  :
+Date..........:  ;
+Auteur........:  ;
+Commentaire...:  ;
+
+__________________________________
+
+Numero........:  ;
+Date..........:  ;
 Auteur........:  ;
 Commentaire...:  ;
 
