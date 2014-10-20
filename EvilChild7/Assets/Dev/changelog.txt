@@ -50,7 +50,7 @@ Commentaire...:
 __________________________________
 
 Numero........:  6;
-Date..........:  ;
+Date..........:  19/10/2014;
 Auteur........:  py;
 Commentaire...:  
 	Ajout classe utilitaire pour choper un type en fonction d'un nom de game object
@@ -63,10 +63,12 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ;
-Date..........:  ;
-Auteur........:  ;
-Commentaire...:  ;
+Numero........:  7;
+Date..........:  20/10/2014 12h20;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le positionnement et le déplacement d'une fourmis par rapport à un hexagone
+		- Ajout d'un meilleur déplacement, moins de déviation en Z;
 
 __________________________________
 

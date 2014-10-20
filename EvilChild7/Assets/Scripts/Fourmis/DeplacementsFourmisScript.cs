@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.1
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -31,10 +31,10 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	private Vector2 deplacementDirection;
 
-	/// <summary>
-	/// Le controleur pour la fourmis
-	/// </summary>
-	private CharacterController controleurPerso;
+//	/// <summary>
+//	/// Le controleur pour la fourmis
+//	/// </summary>
+	//	private CharacterController controleurPerso;
 #endregion
 
 #region Attributs publics
@@ -85,7 +85,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Retourne les cases visibles par la fourmis
 	/// </summary>
 	private void GetCasesVisibles(){
-
+		// TODO
 	}
 
 	/// <summary>
@@ -93,7 +93,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="rotation">Le sens de rotation</param>
 	private void FaireRotation( Rotation rotation ){
-
+		// TODO
 	}
 
 	/// <summary>
@@ -101,17 +101,35 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	private void Avancer( int nbCases ){
-
+		// TODO
+		deplacementDirection.x = deplacementDirection.x + 1 * deplacementVitesse;
+		rigidbody.velocity = new Vector3(1*deplacementVitesse, 0, 0);
 	}
 
 	/// <summary>
 	/// Fait déambuler la fourmis
 	/// </summary>
 	private void Deambuler(){
-		deplacementDirection.x = deplacementDirection.x + 1 * deplacementVitesse;
-		controleurPerso.Move(deplacementDirection * Time.deltaTime);
+
+		// Réalisation d'une rotation (random)
+		// TODO
+		FaireRotation(Rotation.AUCUN);
+
+		// Déplacement dans une direction (face à soit)
+		// FIXME Déviation sur le long terme
+		Avancer(1);
+
 	}
 
+	/// <summary>
+	/// Retourne la position courante de l'objet
+	/// </summary>
+	private void GetPositionCourante(){
+		// TODO
+		Debug.Log("BlocTerrain :" + GetBlocCourantAsGO());
+		Debug.Log("BlocTerrain = " + GetBlocCourantAsString());
+		Debug.Log ("Infos = " + Get3dInfos());
+	}
 #endregion
 
 #region Méthodes package
@@ -121,7 +139,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		deplacementDirection = Vector2.zero;
-		controleurPerso = GetComponent<CharacterController>();
+		//controleurPerso = GetComponent<CharacterController>();
 	}
 	
 	/// <summary>
@@ -129,11 +147,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Update(){
 		Deplacement();
-		/*
-		Debug.Log("BlocTerrain :" + GetBlocCourantAsGO());
-		Debug.Log("BlocTerrain = " + GetBlocCourantAsString());
-		Debug.Log ("Infos = " + Get3dInfos());
-		*/
+		GetPositionCourante();
 	}
 #endregion
 
@@ -143,6 +157,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	public void Deplacement(){
 		Deambuler();
+		// Ou autre type de déplacement (attaque, ...)
 	}
 
 	/// <summary>
@@ -165,6 +180,10 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 /// Les types de rotations possibles
 /// </summary>
 public enum Rotation { 
+	/// <summary>
+	/// Pas de rotation
+	/// </summary>
+	AUCUN,
 	/// <summary>
 	/// Nord : rien, coté de l'hexagone où est la tete de la fourmis
 	/// </summary>

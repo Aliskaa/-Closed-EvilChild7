@@ -19,7 +19,7 @@ Liste des scripts :
 	- DeplacementsFourmisScript
 			- Pour gérer le déplacement de la fourmis sur le terrain ainsi que la vision
 			qu'elle a de celui-ci (sa place, sa posiiton, etc.)
-			- Déplacement Vitesse: 0.0125
+			- Déplacement Vitesse: 5
 	- CollisionsFourmisScript
 			- Pour gérer les collisions
 			- Longueur visee: 5
