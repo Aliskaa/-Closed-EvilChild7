@@ -72,10 +72,12 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ;
-Date..........:  ;
-Auteur........:  ;
-Commentaire...:  ;
+Numero........:  8;
+Date..........:  21/10/2014 15h40;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le positionnement et le déplacement d'une fourmis par rapprot à un hexagone
+		- Tests pour des solutions "propres", abandon CharacterController;
 
 __________________________________
 

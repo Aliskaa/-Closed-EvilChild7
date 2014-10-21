@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -30,11 +30,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Le vecteur pour le déplacement
 	/// </summary>
 	private Vector2 deplacementDirection;
-
-//	/// <summary>
-//	/// Le controleur pour la fourmis
-//	/// </summary>
-	//	private CharacterController controleurPerso;
 #endregion
 
 #region Attributs publics
@@ -80,14 +75,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		GameObject goBlocTerrain = GetBlocCourantAsGO();
 		return JSONUtils.parseBlocTerrain(goBlocTerrain);
 	}
-
-	/// <summary>
-	/// Retourne les cases visibles par la fourmis
-	/// </summary>
-	private void GetCasesVisibles(){
-		// TODO
-	}
-
+	
 	/// <summary>
 	/// Effectue une rotation de la fourmis
 	/// </summary>
@@ -101,9 +89,12 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	private void Avancer( int nbCases ){
-		// TODO
-		deplacementDirection.x = deplacementDirection.x + 1 * deplacementVitesse;
-		rigidbody.velocity = new Vector3(1*deplacementVitesse, 0, 0);
+
+		// TODO : Avancer du nombre de cases voulu
+		// Calculer le point d'arrivé, mettre à jour les flags
+		// Distance de 5.5 de centre à centre hexagonal ?
+		rigidbody.velocity = new Vector3 (1 * deplacementVitesse, 0, 0);
+
 	}
 
 	/// <summary>
@@ -111,13 +102,16 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	private void Deambuler(){
 
-		// Réalisation d'une rotation (random)
 		// TODO
-		FaireRotation(Rotation.AUCUN);
+		// Choix du nombre de cases et de l'angle de rotation
+		Rotation rotation = Rotation.AUCUN;
+		int nbCases = 1;
+
+		// Réalisation d'une rotation (random)
+		FaireRotation(rotation);
 
 		// Déplacement dans une direction (face à soit)
-		// FIXME Déviation sur le long terme
-		Avancer(1);
+		Avancer(nbCases);
 
 	}
 
@@ -125,10 +119,10 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Retourne la position courante de l'objet
 	/// </summary>
 	private void GetPositionCourante(){
-		// TODO
 		Debug.Log("BlocTerrain :" + GetBlocCourantAsGO());
-		Debug.Log("BlocTerrain = " + GetBlocCourantAsString());
-		Debug.Log ("Infos = " + Get3dInfos());
+		Debug.Log("BlocTerrain :" + GetBlocCourantAsString());
+		Debug.Log("Infos :" + Get3dInfos());
+		// TODO : Voir si on peut récupérer l'hexagone
 	}
 #endregion
 
@@ -139,7 +133,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		deplacementDirection = Vector2.zero;
-		//controleurPerso = GetComponent<CharacterController>();
 	}
 	
 	/// <summary>
@@ -156,8 +149,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Méthode de déplacement de la fourmis
 	/// </summary>
 	public void Deplacement(){
+		// TODO : Déambuler, attaquer, miam, ...
 		Deambuler();
-		// Ou autre type de déplacement (attaque, ...)
 	}
 
 	/// <summary>

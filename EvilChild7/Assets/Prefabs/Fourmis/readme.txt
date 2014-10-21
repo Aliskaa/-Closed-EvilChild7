@@ -3,7 +3,7 @@ et composants liés à lui afin de gérer ses déplacement, son intelligence ou 
 physique par exemple.
 
 Liste des composants :
-	- Character Controller
+	- Character Controller [PLUS UTILISE POUR L'INSTANT]
 			- Pour faire déplacer l'objet.
 			- Center: X=0 Y=4 Z=0
 	- Ajout d'un rigid body
