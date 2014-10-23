@@ -81,9 +81,12 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ;
-Date..........:  ;
-Auteur........:  ;
-Commentaire...:  ;
+Numero........:  9;
+Date..........:  23/10/2014 19h00;
+Auteur........:  py;
+Commentaire...:  
+	Nettoyage code/logs
+	Travail sur le positionnement et le déplacement d'une fourmis/d'un objet par rapport à un hexagone
+		- Maintenant un système a été fait pour centrer l'objet sur l'hexagone le plus proche.;
 
 __________________________________

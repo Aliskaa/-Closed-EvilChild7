@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.4.0
+/// PY Lapersonne - Version 1.5.0
 /// </remarks>
 
 using UnityEngine;
@@ -30,6 +30,11 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Le vecteur pour le déplacement
 	/// </summary>
 	private Vector2 deplacementDirection;
+
+	/// <summary>
+	/// Flag pour indiquer si l'objet a été rencentré ou pas.
+	/// </summary>
+	private bool recentrage;
 #endregion
 
 #region Attributs publics
@@ -56,10 +61,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		RaycastHit hit;
 		if ( Physics.Raycast(transform.position, -Vector3.up, out hit, 100.0F) ){
 			// Récupération du morceau de terrain contenant plusieurs hexagones
-			GameObject goBlocTerrain = hit.transform.gameObject;
-			//HexagonesVueScript compBlocTerrain =  goBlocTerrain.GetComponent<HexagonesVueScript>();
-			//Debug.DrawLine(transform.position, hit.point);
-			return goBlocTerrain;
+			return hit.transform.gameObject;
 		} else {
 			return null;
 		}
@@ -118,29 +120,39 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// Retourne la position courante de l'objet
 	/// </summary>
-	private void GetPositionCourante(){
+	private void AfficherPositionCourante(){
 		Debug.Log("BlocTerrain :" + GetBlocCourantAsGO());
 		Debug.Log("BlocTerrain :" + GetBlocCourantAsString());
 		Debug.Log("Infos :" + Get3dInfos());
-		// TODO : Voir si on peut récupérer l'hexagone
+	}
+
+	/// <summary>
+	/// Idéalement, dès qu'un objet apparait sur le terrain, il faut le recentrer sur un hexagone.
+	/// Pour cela, la classe utilitaire TerrainUtils permet de trouver l'hexagone le plus proche.
+	/// Une fois cet hexagone trouvé, il faut recentrer l'objet courant dessus une bonne fois pour toute.
+	/// Par la suite, il suffirait de déplacer l'objet courant avec une distance correspondant à
+	/// un multiple de la distance entre deux centres d'hexagones afin d'avoir un objet toujours centré.
+	/// </summary>
+	/// <remarks>
+	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
+	/// </remarks>
+	private void Recentrer(){
+		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.position);
+		transform.position = hexPlusProche.positionGobale;
 	}
 #endregion
 
 #region Méthodes package
 	/// <summary>
-	/// Routine appellée automatiquement par Unity dès que le script va se lancer
-	/// (appel précédant celui de Start()).
-	/// </summary>
-	void Awake(){
-		deplacementDirection = Vector2.zero;
-	}
-	
-	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
+		if (! recentrage){
+			Recentrer();
+			recentrage = true;
+		}
 		Deplacement();
-		GetPositionCourante();
+		//AfficherPositionCourante();
 	}
 #endregion
 

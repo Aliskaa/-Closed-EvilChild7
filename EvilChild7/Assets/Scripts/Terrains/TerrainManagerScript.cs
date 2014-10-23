@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.2
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -109,14 +109,6 @@ public class TerrainManagerScript : MonoBehaviour {
 	 * ******** */
 
 #region Méthodes publics
-	/// <summary>
-	/// 
-	/// </summary>
-    public void Awake(){
-        GetHexagonesProp();
-		CreerMap(type);
-    }
-
 	/// <summary>
 	/// Créé une nouvelle pièce
 	/// </summary>
@@ -407,31 +399,39 @@ public class TerrainManagerScript : MonoBehaviour {
 		}
 
 	}
-#endregion
 
-#region Méthodes package
 	/// <summary>
 	/// Créé la map selon le type voulu
 	/// </summary>
 	/// <param name="typeMap">Le type de terrain</param>
-	void CreerMap( TypeMap typeMap ){
+	private void CreerMap( TypeMap typeMap ){
 		switch (typeMap){
-			case TypeMap.NIVEAU_1:
-				CreerMapDesert();
-				break;
-			case TypeMap.NIVEAU_2:
-				CreerMapLac();
-				break;
-			case TypeMap.NIVEAU_3:
-				CreerMapTraversees();
-				break;
-			case TypeMap.NIVEAU_4:
-				CreerMapEtranglement();
-				break;
-			case TypeMap.RANDOM:
-				CreerMapRandom();
-				break;
+		case TypeMap.NIVEAU_1:
+			CreerMapDesert();
+			break;
+		case TypeMap.NIVEAU_2:
+			CreerMapLac();
+			break;
+		case TypeMap.NIVEAU_3:
+			CreerMapTraversees();
+			break;
+		case TypeMap.NIVEAU_4:
+			CreerMapEtranglement();
+			break;
+		case TypeMap.RANDOM:
+			CreerMapRandom();
+			break;
 		}
+	}
+#endregion
+
+#region Méthodes package
+	/// <summary>
+	/// Routine appellée automatiquement par Unity au lancement du script
+	/// </summary>
+	void Awake(){
+		GetHexagonesProp();
+		CreerMap(type);
 	}
 #endregion
 	

@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.0.1
 /// </remarks>
 
 using UnityEngine;
@@ -25,7 +25,7 @@ public class GameObjectUtils {
 	/// <summary>
 	/// Regex pour repérer si c'est un bloc de terrain
 	/// </summary>
-	private static Regex regexBlocTerrain = new Regex(@"BlocTerrain");
+	//private static Regex regexBlocTerrain = new Regex(@"BlocTerrain");
 
 	/// <summary>
 	/// Regex pour repérer si c'est un coté du bac à sable

@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.1
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -101,7 +101,8 @@ public class HexagoneInfo {
     }
 
     /// <summary>
-    /// This is the setup called from HexChunk when it's ready for us to generate our meshes
+    /// Procédure appellée par HexagoneVueScript
+	/// pour faire le mesh d'un hexagone
     /// </summary>
     public void Start(){
         DefinirMesh();
@@ -119,6 +120,7 @@ public class HexagoneInfo {
         meshLocal.triangles = parentChunk.worldManager.meshHexagonesFlat.triangles;
         meshLocal.uv = parentChunk.worldManager.meshHexagonesFlat.uv;
         meshLocal.RecalculateNormals();
+		meshLocal.name = "Hexagone";
     }
 #endregion
 

@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.1
+/// PY Lapersonne - Version 1.1.1
 /// </remarks>
 
 using UnityEngine;
@@ -104,7 +104,7 @@ public class HexagonesVueScript : MonoBehaviour {
                     tabHexagones[x, z].parentChunk = this;
                     tabHexagones[x, z].Start();
                 } else {
-                    Debug.LogError("null hexagon found in memory: " + x + " " + z);
+                    Debug.LogError("Null hexagon found in memory: " + x + " " + z);
                 }
             }
         }
@@ -148,7 +148,7 @@ public class HexagonesVueScript : MonoBehaviour {
 		Vector2 posGlobale;
 		tabHexagones[x, y] = new HexagoneInfo();
 		hexagoneInfo = tabHexagones[x, y];
-		
+
 		// Définit la position globale for le positionnement des textures
 		posGlobale.x = x + (dimensionsPiece.x * xSector);
 		posGlobale.y = y + (dimensionsPiece.y * ySector);
@@ -159,6 +159,8 @@ public class HexagonesVueScript : MonoBehaviour {
 
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
+
+		TerrainUtils.ajouterHexagone(hexagoneInfo);
 
 	}
 
@@ -184,6 +186,8 @@ public class HexagonesVueScript : MonoBehaviour {
 		
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
+
+		TerrainUtils.ajouterHexagone(hexagoneInfo);
 
 	}
 #endregion

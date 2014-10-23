@@ -30,12 +30,12 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
 29		1			non lancé	[py]		Fourmis : voir les cases et leurs types
 30		1			non lancé	[py]		Fourmis : visée : proportions/distances
-31		1			lancé		[py]		Fourmis : bonnes proportions pour aller d'une case à l'autre
-											(position, centrage, ...)
+31		1		>	lancé		[py]		Fourmis : bonnes proportions pour aller d'une case à l'autre
+											(distance de aprourt de case à case, ...)
 32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
 											(pop scarabées, éclosions fourmis, ...)											
 33		1			non lancé	[py]		Améliorer le bac: cotés, skybox, fond, ...											
 34		1			non lancé	[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
-36		1			non lancé	[py]		Mettre des IDS et/ou tags sur chaque hexagone
+36		1			terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
 
