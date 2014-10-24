@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.5.0
+/// PY Lapersonne - Version 1.6.0
 /// </remarks>
 
 using UnityEngine;
@@ -27,14 +27,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 #region Attributs privés
 	/// <summary>
-	/// Le vecteur pour le déplacement
-	/// </summary>
-	private Vector2 deplacementDirection;
-
-	/// <summary>
 	/// Flag pour indiquer si l'objet a été rencentré ou pas.
 	/// </summary>
-	private bool recentrage;
+	private bool recentrageFait;
 #endregion
 
 #region Attributs publics
@@ -42,6 +37,12 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// La vitesse de déplacement
 	/// </summary>
 	public float deplacementVitesse;
+
+	/// <summary>
+	/// Flag indiquant que l'objet est en mouvement afin d'appeler entre
+	/// autres les méthodes de déplacement
+	/// </summary>
+	private bool enMouvement;
 #endregion
 
 
@@ -87,16 +88,29 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Fait avancer la fourmis de nbCases cases
+	/// Fait avancer la fourmis de nbCases cases.
+	/// Si nbCases est à -1, l'objet ne bouge plus
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	private void Avancer( int nbCases ){
+
+		if  (nbCases == -1 ){
+			rigidbody.velocity = new Vector3 (0, 0, 0);
+			return;
+		}
 
 		// TODO : Avancer du nombre de cases voulu
 		// Calculer le point d'arrivé, mettre à jour les flags
 		// Distance de 5.5 de centre à centre hexagonal ?
 		rigidbody.velocity = new Vector3 (1 * deplacementVitesse, 0, 0);
 
+	}
+
+	/// <summary>
+	/// Stoppe l'objet en mouvement
+	/// </summary>
+	private void Stopper(){
+		Avancer(-1);
 	}
 
 	/// <summary>
@@ -144,27 +158,36 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 #region Méthodes package
 	/// <summary>
+	/// Routine appellée automatiquement par Unity au démarrage du script
+	/// </summary>
+	void Awake(){
+		recentrageFait = false;
+		enMouvement = true;
+	}
+
+	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
-		if (! recentrage){
+		if (! recentrageFait){
 			Recentrer();
-			recentrage = true;
+			recentrageFait = true;
 		}
-		Deplacement();
-		//AfficherPositionCourante();
+		if (enMouvement){
+			Deambuler();
+			//AfficherPositionCourante();
+			enMouvement = false;// DEBUG
+		} else {
+			//Stopper();
+			// FIXME
+			// Revoir la partie déplacement :
+			// Mettre une force qui décroit, force bine ajustée pour avancer
+			// d'un multiple de distances de cases
+		}
 	}
 #endregion
 
 #region Méthodes publiques
-	/// <summary>
-	/// Méthode de déplacement de la fourmis
-	/// </summary>
-	public void Deplacement(){
-		// TODO : Déambuler, attaquer, miam, ...
-		Deambuler();
-	}
-
 	/// <summary>
 	/// Retourne les infos 3D de la fourmis à savoir sa rotation en (x,y,z) et sa position en (x,y,z).
 	/// String de  la forme :

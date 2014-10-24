@@ -90,3 +90,47 @@ Commentaire...:
 		- Maintenant un système a été fait pour centrer l'objet sur l'hexagone le plus proche.;
 
 __________________________________
+
+Numero........:  10;
+Date..........:  24/10/2014 23h50;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le déplacement d'un objet
+		- Changement de méthode, suppression CharacterController, travail sur système de force qui décroit;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+
+

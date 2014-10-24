@@ -26,7 +26,9 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 24		1			non lancé				Nourriture : UI
 25					terminé		X			Collisions sur les cotés du bac
 26		1			lancé		[py]		Fourmis : Rotation
-27		1			lancé		[py]		Fourmis : Déambulation
+27		1		>	lancé		[py]		Fourmis : Déambulation : apliquer force qui se réduit pour bouger d'une case à l'autre.
+											Mettre des flags pour que l'Update ne relance pas la fonction à chaque fois
+											Pas vraiment de méthode de stop ?
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
 29		1			non lancé	[py]		Fourmis : voir les cases et leurs types
 30		1			non lancé	[py]		Fourmis : visée : proportions/distances
@@ -38,4 +40,6 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 34		1			non lancé	[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36		1			terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
+37				 	terminé		X			La fourmis (rigidbody) se déplace toute seule, meme sans update des scripts
+38		1		 	lancé		[py]		Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
 

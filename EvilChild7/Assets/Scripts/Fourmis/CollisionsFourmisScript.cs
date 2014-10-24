@@ -91,7 +91,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 		if ( Physics.Raycast(charles.origin, charles.origin + charles.direction, out hit, visee) ){
 			string nomObjetProche = hit.transform.gameObject.name;
 			objetSurChemin = GameObjectUtils.parseToTypeCollision(nomObjetProche);
-			//Debug.Log("Détecté : "+objetSurChemin);
+			Debug.Log("Détecté : "+objetSurChemin);
 		} else {
 			objetTouche = TypeCollision.AUCUN;
 			objetSurChemin = TypeCollision.AUCUN;
@@ -108,8 +108,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// lorsqu'il y a une collision, i.e. lorsque des rigidbodys avec des colliders
 	/// entrent en contact
 	/// </summary>
-	/// <param name="coll">Le collider de 'lobjet entrain en collision avec soit</param>
-	//void OnCollisionEnter( Collision coll )
+	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
 	void OnTriggerEnter( Collider coll ){
 		string nomObjetTouche = coll.gameObject.name;
 		objetTouche = GameObjectUtils.parseToTypeCollision(nomObjetTouche);
