@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -33,6 +33,11 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// L'objet avec lequel on va entrer en collision
 	/// </summary>
 	private TypeCollision objetSurChemin;
+
+	/// <summary>
+	/// Référence vers le script de déplacement de l'objet
+	/// </summary>
+	private DeplacementsFourmisScript scriptDeplacement;
 #endregion
 
 
@@ -40,7 +45,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// La longueur de visée
 	/// </summary>
-	public float longueurVisee;
+	public const float longueurVisee = 2*DeplacementsFourmisScript.DISTANCE_CASE;
 #endregion
 
 
@@ -91,7 +96,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 		if ( Physics.Raycast(charles.origin, charles.origin + charles.direction, out hit, visee) ){
 			string nomObjetProche = hit.transform.gameObject.name;
 			objetSurChemin = GameObjectUtils.parseToTypeCollision(nomObjetProche);
-			Debug.Log("Détecté : "+objetSurChemin);
+			//Debug.Log("Détecté : "+objetSurChemin);
 		} else {
 			objetTouche = TypeCollision.AUCUN;
 			objetSurChemin = TypeCollision.AUCUN;
@@ -106,19 +111,23 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// Routine appellée automatiquement par Unity
 	/// lorsqu'il y a une collision, i.e. lorsque des rigidbodys avec des colliders
-	/// entrent en contact
+	/// entrent en contact entre eux.
+	/// Si celà arrive, arret du mouvement pour l'objet.
+	/// Celui-ci sera remis en mouvement via le script de déplacement
 	/// </summary>
 	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
-	void OnTriggerEnter( Collider coll ){
-		string nomObjetTouche = coll.gameObject.name;
-		objetTouche = GameObjectUtils.parseToTypeCollision(nomObjetTouche);
-		//Debug.Log ("Collision OnTriggerEnter avec : "+objetTouche);
-	}
-
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
 		objetTouche = GameObjectUtils.parseToTypeCollision(nomObjetTouche);
-		//Debug.Log ("Collision OnCollisionEnter avec : "+objetTouche);
+		//Debug.Log("Collision OnCollisionEnter avec : "+objetTouche);
+		scriptDeplacement.Stopper();
+	}
+
+	/// <summary>
+	/// Routine appellée automatiquement par Unity au lancement du script
+	/// </summary>
+	void Awake(){
+		scriptDeplacement = (DeplacementsFourmisScript) gameObject.GetComponent(typeof(DeplacementsFourmisScript));
 	}
 
 	/// <summary>

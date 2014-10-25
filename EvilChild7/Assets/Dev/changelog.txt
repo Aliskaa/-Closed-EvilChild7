@@ -110,11 +110,15 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  12;
+Date..........:  25/10/2014 20h38;
 Auteur........:  py;
 Commentaire...:
-	;
+	Correction des warnings dans DeplacementsFourmisScript
+	Travail sur la collision d'une fourmis
+			- Code plus propre pour la distance de vue
+	Travail sur le déplacement d'une fourmis
+			- Dès qu'il ya une collison, la fourmis bouge ailleurs : A REGLER;
 
 __________________________________
 

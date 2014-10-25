@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -121,14 +121,42 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="rotation">Le sens de rotation</param>
 	private void FaireRotation( Rotation rotation ){
-		// TODO
-	}
-
-	/// <summary>
-	/// Stoppe l'objet en mouvement
-	/// </summary>
-	private void Stopper(){
-		Avancer(-1);
+		Rotation r;
+		if (rotation == Rotation.RANDOM) {
+			int typeRotation = Random.Range(1, 6);
+			r = (Rotation)typeRotation;
+		} else {
+			r = rotation;
+		}
+		switch (r){
+			case Rotation.NORD:
+				//transform.rotation = Quaternion.Euler(0,-90,0);
+				transform.Rotate(0,-90,0);
+				break;
+			case Rotation.NORD_OUEST:
+				//transform.rotation = Quaternion.Euler(0,-135,0);				
+				transform.Rotate(0,-135,0);
+				break;
+			case Rotation.SUD_OUEST:
+				//transform.rotation = Quaternion.Euler(0,+135,0);
+				transform.Rotate(0,+135,0);
+				break;
+			case Rotation.SUD:
+				//transform.rotation = Quaternion.Euler(0,+90,0);
+				transform.Rotate(0,+90,0);
+				break;
+			case Rotation.SUD_EST:
+				//transform.rotation = Quaternion.Euler(0,+45,0);
+				transform.Rotate(0,+45,0);
+				break;
+			case Rotation.NORD_EST:
+				//transform.rotation = Quaternion.Euler(0,-45,0);
+				transform.Rotate(0,-45,0);
+				break;
+			default:
+				Debug.Log("ERREUR: FaireRotation() : Rotation non gérée :"+r);
+				break;
+		}
 	}
 
 	/// <summary>
@@ -139,19 +167,12 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	private void Deambuler(){
 
-		// TODO
-		/*
-		 * Choix du nombre de cases et de l'angle de rotation
-		 */
-
-		Rotation rotation = Rotation.AUCUN;
-		int nbCases = 1;
-
+		// FIXME
 		/*
 		 * Réalisation d'une rotation (random)
 		 */
-
-		FaireRotation(rotation);
+		//Rotation rotation = Rotation.AUCUN;
+		//FaireRotation(rotation);
 
 		/*
 		 * Déplacement de la fourmis
@@ -174,10 +195,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		Vector3 force = Vector3.ClampMagnitude(gain * correctionVitesse, forceMax);
 		rigidbody.AddForce(force);
 
-		if (transform.position == positionAatteindre){
+		Debug.Log("Je déambule de "+transform.position+" vers "+positionAatteindre );
+		if (Vector3.Distance(transform.position,positionAatteindre) <= 0.02){
+			//Debug.Log ("Objectif atteint");
 			enMouvement = false;
 			objectifAtteint = true;
-		}
+		}/* else {
+			Debug.Log ("Objectif pas encore atteint : "+Vector3.Distance(transform.position,positionAatteindre));
+		}*/
 
 	}
 #endregion
@@ -190,7 +215,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		recentrageFait = false;
 		enMouvement = false;
 		objectifAtteint = false;
-		Avancer(53);// DEBUG
+		Avancer(5);// DEBUG
 	}
 
 	/// <summary>
@@ -201,11 +226,18 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			Recentrer();
 			recentrageFait = true;
 		}
-		if (enMouvement){
+		// A chaque frame, continuer la déambulation selon les flags
+		if (enMouvement && !objectifAtteint){
 			Deambuler();
-		}/* else {
-			Stopper();
-		}*/
+		// Ou en relancer une nouvelle (si la fourmis ne bouge plus)
+		} else {
+			Debug.Log("Plus de déambulation, redémarrage");
+			int nombreDesCases = Random.Range(1,6);
+			Avancer(nombreDesCases);
+			FaireRotation(Rotation.RANDOM);
+			Recentrer();
+			//Stopper();
+		}
 	}
 #endregion
 
@@ -217,14 +249,61 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	public void Avancer( int nbCases ){
 		if  (nbCases <= 0 ){
-			rigidbody.velocity = new Vector3 (0, 0, 0);
+			rigidbody.velocity = Vector3.zero;
+			rigidbody.angularVelocity = Vector3.zero;
+			rigidbody.isKinematic = true;
+			enMouvement = false;
+			objectifAtteint = true;
 			return;
 		}
+		Debug.Log ("Dois avancer de "+nbCases+" cases");
+		// Changer le X et le Z par rapport à l'angle
 		positionAatteindre = transform.position;
-		positionAatteindre.x += nbCases*DISTANCE_CASE;
-		positionAatteindre.y = 0;
+		Rotation r = (Rotation)transform.rotation.y;
+		switch (r){
+			case Rotation.NORD:
+				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				break;
+			case Rotation.NORD_EST:
+				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				positionAatteindre.z += nbCases*DISTANCE_CASE;
+				break;
+			case Rotation.NORD_OUEST:
+				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+				break;
+			case Rotation.SUD:
+				positionAatteindre.x += nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				break;
+			case Rotation.SUD_EST:
+				positionAatteindre.x += nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				positionAatteindre.z += nbCases*DISTANCE_CASE;
+				break;
+			case Rotation.SUD_OUEST:
+				positionAatteindre.x += nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+				break;
+			default:
+				Debug.Log("ERREUR: BIG JERK, valeur pas gérée dans switch:"+transform.rotation.y);
+				break;
+		}
 		enMouvement = true;
 		objectifAtteint = false;
+		rigidbody.isKinematic = false;
+		Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
+	}
+
+	/// <summary>
+	/// Stoppe l'objet en mouvement
+	/// </summary>
+	public void Stopper(){
+		Avancer(-1);
 	}
 
 	/// <summary>
@@ -246,34 +325,39 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 /// <summary>
 /// Les types de rotations possibles
 /// </summary>
-public enum Rotation { 
+public enum Rotation : int { 
+	/// <summary>
+	/// Rotation aléatoire
+	/// </summary>
+	RANDOM = -1,
 	/// <summary>
 	/// Pas de rotation
 	/// </summary>
-	AUCUN,
+	AUCUN = 0,
 	/// <summary>
-	/// Nord : rien, coté de l'hexagone où est la tete de la fourmis
+	/// Nord
+	/// Typiquement, tete de la fourmis vers la direction -X, de bas en haut
 	/// </summary>
-	NORD, 
+	NORD = 1, 
 	/// <summary>
-	/// Nord Est : coté en haut à droite
+	/// Nord Est
 	/// </summary>
-	NORD_EST,
+	NORD_EST = 2,
 	/// <summary>
-	/// Sud Est : coté en bas à droite
+	/// Sud Est
 	/// </summary>
-	SUD_EST,
+	SUD_EST = 3,
 	/// <summary>
-	/// Sud : à l'opposé de là où regarde la fourmis
+	/// Sud : direction X, tete de la fourmis vers X, de haut en bas
 	/// </summary>
-	SUD,
+	SUD = 4,
 	/// <summary>
-	/// Nord Ouest : coté en haut à gauche
+	/// Nord Ouest
 	/// </summary>
-	NORD_OUEST,
+	NORD_OUEST = 5,
 	/// <summary>
-	/// Sud Ouest : coté en bas à gauche
+	/// Sud Ouest
 	/// </summary>
-	SUD_OUEST
+	SUD_OUEST = 6
 }
 #endregion

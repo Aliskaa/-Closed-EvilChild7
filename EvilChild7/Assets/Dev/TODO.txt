@@ -25,13 +25,13 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 23		2			non lancé				Caillou : UI
 24		1			non lancé				Nourriture : UI
 25					terminé		X			Collisions sur les cotés du bac
-26		1		>	lancé		[py]		Fourmis : Rotation
+26		1		>>	lancé		[py]		Fourmis : Rotation
 27		1			terminé		X			Fourmis : Déambulation : apliquer force qui se réduit pour bouger d'une case à l'autre.
 											Mettre des flags pour que l'Update ne relance pas la fonction à chaque fois
 											Pas vraiment de méthode de stop ?
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
 29		1		>	non lancé	[py]		Fourmis : voir les cases et leurs types
-30		1		>	non lancé	[py]		Fourmis : visée : proportions/distances
+30		1		>	lancé		[py]		Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de aprourt de case à case, ...)
 32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
