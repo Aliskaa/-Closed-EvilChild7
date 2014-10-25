@@ -6,7 +6,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 4		4			non lancé				Mottes de terres
 5		1			non lancé				Ouvrière : UI
 6		1			non lancé				Ouvrière : Phéromones
-7					lancé		[py]		Ouvrière : Intelligence Graphique
+7				>	lancé		[py]		Ouvrière : Intelligence Graphique
 8		1			non lancé				Reine : UI
 9		1			non lancé				Reine : Phéromones
 10		1			non lancé				Reine : IA
@@ -25,21 +25,21 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 23		2			non lancé				Caillou : UI
 24		1			non lancé				Nourriture : UI
 25					terminé		X			Collisions sur les cotés du bac
-26		1			lancé		[py]		Fourmis : Rotation
-27		1		>	lancé		[py]		Fourmis : Déambulation : apliquer force qui se réduit pour bouger d'une case à l'autre.
+26		1		>	lancé		[py]		Fourmis : Rotation
+27		1			terminé		X			Fourmis : Déambulation : apliquer force qui se réduit pour bouger d'une case à l'autre.
 											Mettre des flags pour que l'Update ne relance pas la fonction à chaque fois
 											Pas vraiment de méthode de stop ?
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
-29		1			non lancé	[py]		Fourmis : voir les cases et leurs types
-30		1			non lancé	[py]		Fourmis : visée : proportions/distances
-31		1		>	lancé		[py]		Fourmis : bonnes proportions pour aller d'une case à l'autre
+29		1		>	non lancé	[py]		Fourmis : voir les cases et leurs types
+30		1		>	non lancé	[py]		Fourmis : visée : proportions/distances
+31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de aprourt de case à case, ...)
 32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
 											(pop scarabées, éclosions fourmis, ...)											
 33		1			non lancé	[py]		Améliorer le bac: cotés, skybox, fond, ...											
-34		1			non lancé	[py]		Fourmis : voir où elle peut aller : eau, bois, sable
+34		1		>	non lancé	[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36		1			terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
 37				 	terminé		X			La fourmis (rigidbody) se déplace toute seule, meme sans update des scripts
-38		1		 	lancé		[py]		Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
-
+38		1		>> 	lancé		[py]		Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
+39		1		>	non lancé	[py]		Tester la fourmis dans tous les sens		

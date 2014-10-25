@@ -100,11 +100,13 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  11;
+Date..........:  25/10/2014 17h43;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur le déplacement d'une fourmis
+			- Maintenant la fourmis se déplace proprement pour aller d'une case à une autre, en fonction d'un nombre de case
+			La fourmis accelère au début et ralentis à la fin;
 
 __________________________________
 

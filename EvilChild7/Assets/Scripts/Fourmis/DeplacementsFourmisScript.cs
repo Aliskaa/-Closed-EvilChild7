@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.6.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -30,6 +30,22 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Flag pour indiquer si l'objet a été rencentré ou pas.
 	/// </summary>
 	private bool recentrageFait;
+
+	/// <summary>
+	/// Flag indiquant que l'objet est en mouvement ou non
+	/// </summary>
+	private bool enMouvement;
+	
+	/// <summary>
+	/// Flag indiquant que l'objectif, i.e. la position de la case à atteindre
+	/// a été atteint
+	/// </summary>
+	private bool objectifAtteint;
+
+	/// <summary>
+	/// La position que doit atteindre l'objet, i.e. le centre d'une case
+	/// </summary>
+	private Vector3 positionAatteindre;
 #endregion
 
 #region Attributs publics
@@ -39,10 +55,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	public float deplacementVitesse;
 
 	/// <summary>
-	/// Flag indiquant que l'objet est en mouvement afin d'appeler entre
-	/// autres les méthodes de déplacement
+	/// La distance pour aller du centre d'une case à un autre
 	/// </summary>
-	private bool enMouvement;
+	public const int DISTANCE_CASE = 5;
 #endregion
 
 
@@ -57,7 +72,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <returns>Le bloc de terrain en tant que GameObject</returns>
 	private GameObject GetBlocCourantAsGO(){
-
 		// Lancement d'un rayon vers la case sous la fourmis
 		RaycastHit hit;
 		if ( Physics.Raycast(transform.position, -Vector3.up, out hit, 100.0F) ){
@@ -66,7 +80,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		} else {
 			return null;
 		}
-
 	}
 
 	/// <summary>
@@ -77,58 +90,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	private string GetBlocCourantAsString(){
 		GameObject goBlocTerrain = GetBlocCourantAsGO();
 		return JSONUtils.parseBlocTerrain(goBlocTerrain);
-	}
-	
-	/// <summary>
-	/// Effectue une rotation de la fourmis
-	/// </summary>
-	/// <param name="rotation">Le sens de rotation</param>
-	private void FaireRotation( Rotation rotation ){
-		// TODO
-	}
-
-	/// <summary>
-	/// Fait avancer la fourmis de nbCases cases.
-	/// Si nbCases est à -1, l'objet ne bouge plus
-	/// </summary>
-	/// <param name="nbCases">Le nombre de cases à avancer</param>
-	private void Avancer( int nbCases ){
-
-		if  (nbCases == -1 ){
-			rigidbody.velocity = new Vector3 (0, 0, 0);
-			return;
-		}
-
-		// TODO : Avancer du nombre de cases voulu
-		// Calculer le point d'arrivé, mettre à jour les flags
-		// Distance de 5.5 de centre à centre hexagonal ?
-		rigidbody.velocity = new Vector3 (1 * deplacementVitesse, 0, 0);
-
-	}
-
-	/// <summary>
-	/// Stoppe l'objet en mouvement
-	/// </summary>
-	private void Stopper(){
-		Avancer(-1);
-	}
-
-	/// <summary>
-	/// Fait déambuler la fourmis
-	/// </summary>
-	private void Deambuler(){
-
-		// TODO
-		// Choix du nombre de cases et de l'angle de rotation
-		Rotation rotation = Rotation.AUCUN;
-		int nbCases = 1;
-
-		// Réalisation d'une rotation (random)
-		FaireRotation(rotation);
-
-		// Déplacement dans une direction (face à soit)
-		Avancer(nbCases);
-
 	}
 
 	/// <summary>
@@ -154,6 +115,71 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.position);
 		transform.position = hexPlusProche.positionGobale;
 	}
+
+	/// <summary>
+	/// Effectue une rotation de la fourmis
+	/// </summary>
+	/// <param name="rotation">Le sens de rotation</param>
+	private void FaireRotation( Rotation rotation ){
+		// TODO
+	}
+
+	/// <summary>
+	/// Stoppe l'objet en mouvement
+	/// </summary>
+	private void Stopper(){
+		Avancer(-1);
+	}
+
+	/// <summary>
+	/// Routine appelée par la routine Unity Update().
+	/// Fait déambuler la fourmis.
+	/// Pour ce faire, va faire une rotation ou non, et va faire avancer la fourmis
+	/// d'un certain nombre de case.
+	/// </summary>
+	private void Deambuler(){
+
+		// TODO
+		/*
+		 * Choix du nombre de cases et de l'angle de rotation
+		 */
+
+		Rotation rotation = Rotation.AUCUN;
+		int nbCases = 1;
+
+		/*
+		 * Réalisation d'une rotation (random)
+		 */
+
+		FaireRotation(rotation);
+
+		/*
+		 * Déplacement de la fourmis
+		 * http://answers.unity3d.com/questions/195698/stopping-a-rigidbody-at-target.html
+		 */
+
+		float velocityFinale = 2.5f;	// Pour convertir la distance restant pour avoir la velocité finale (= façon de stopper)
+		float vitesseMax = 15.0f;
+		float forceMax = 40.0f;
+		float gain = 5f; 				// Gain par rapport à la position finale à atteindre
+
+		//Debug.Log ("Je suis en :" + transform.position + ", et dois aller en :" + positionAatteindre);
+		Vector3 distance = positionAatteindre - transform.position;
+		distance.y = 0; // ignore height differences
+		// Calcul de la vitesse à atteindre proportionnellement à la distance, bornée par vietsseMax
+		Vector3 vitesseVoulue = Vector3.ClampMagnitude(velocityFinale * distance, vitesseMax);
+		// Calcul de l'erreur que l'on a avec la vitesse
+		Vector3 correctionVitesse = vitesseVoulue - rigidbody.velocity;
+		// Calcul d'une force proporitonnele à l'erreur, bornée par maxForce
+		Vector3 force = Vector3.ClampMagnitude(gain * correctionVitesse, forceMax);
+		rigidbody.AddForce(force);
+
+		if (transform.position == positionAatteindre){
+			enMouvement = false;
+			objectifAtteint = true;
+		}
+
+	}
 #endregion
 
 #region Méthodes package
@@ -162,7 +188,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		recentrageFait = false;
-		enMouvement = true;
+		enMouvement = false;
+		objectifAtteint = false;
+		Avancer(53);// DEBUG
 	}
 
 	/// <summary>
@@ -175,19 +203,30 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		}
 		if (enMouvement){
 			Deambuler();
-			//AfficherPositionCourante();
-			enMouvement = false;// DEBUG
-		} else {
-			//Stopper();
-			// FIXME
-			// Revoir la partie déplacement :
-			// Mettre une force qui décroit, force bine ajustée pour avancer
-			// d'un multiple de distances de cases
-		}
+		}/* else {
+			Stopper();
+		}*/
 	}
 #endregion
 
 #region Méthodes publiques
+	/// <summary>
+	/// Fait avancer la fourmis de nbCases cases.
+	/// Si nbCases est à <= 0, l'objet ne bouge plus
+	/// </summary>
+	/// <param name="nbCases">Le nombre de cases à avancer</param>
+	public void Avancer( int nbCases ){
+		if  (nbCases <= 0 ){
+			rigidbody.velocity = new Vector3 (0, 0, 0);
+			return;
+		}
+		positionAatteindre = transform.position;
+		positionAatteindre.x += nbCases*DISTANCE_CASE;
+		positionAatteindre.y = 0;
+		enMouvement = true;
+		objectifAtteint = false;
+	}
+
 	/// <summary>
 	/// Retourne les infos 3D de la fourmis à savoir sa rotation en (x,y,z) et sa position en (x,y,z).
 	/// String de  la forme :
