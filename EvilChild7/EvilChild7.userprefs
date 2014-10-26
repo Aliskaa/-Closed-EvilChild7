@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev\changelog.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev\TODO.txt">
     <Files>
-      <File FileName="Assets\Dev\changelog.txt" Line="126" Column="34" />
-      <File FileName="Assets\Dev\TODO.txt" Line="39" Column="24" />
+      <File FileName="Assets\Dev\changelog.txt" Line="145" Column="44" />
+      <File FileName="Assets\Dev\TODO.txt" Line="33" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

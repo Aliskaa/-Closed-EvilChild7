@@ -30,14 +30,14 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 											Mettre des flags pour que l'Update ne relance pas la fonction à chaque fois
 											Pas vraiment de méthode de stop ?
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
-29		1		>	non lancé	[py]		Fourmis : voir les cases et leurs types
-30		1		>	lancé		[py]		Fourmis : visée : proportions/distances
+29		1		>	lancé		[py]		Fourmis : voir les cases et leurs types
+30					terminé		X			Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de aprourt de case à case, ...)
 32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
 											(pop scarabées, éclosions fourmis, ...)											
 33		1			non lancé	[py]		Améliorer le bac: cotés, skybox, fond, ...											
-34		1		>	non lancé	[py]		Fourmis : voir où elle peut aller : eau, bois, sable
+34		1		>	lancé		[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36					terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
 37				 	terminé		X			La fourmis (rigidbody) se déplace toute seule, meme sans update des scripts
