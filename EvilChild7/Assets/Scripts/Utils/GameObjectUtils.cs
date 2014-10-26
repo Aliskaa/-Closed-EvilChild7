@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.1
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -13,7 +13,7 @@ using System;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Fichier utilitaire pour gérer des games objects
+/// Classe utilitaire pour gérer des games objects
 /// </summary>
 public class GameObjectUtils {
 
@@ -28,10 +28,25 @@ public class GameObjectUtils {
 	//private static Regex regexBlocTerrain = new Regex(@"BlocTerrain");
 
 	/// <summary>
-	/// Regex pour repérer si c'est un coté du bac à sable
+	/// Regex pour repérer si c'est le coté 1 du bac à sable (en -Z)
 	/// </summary>
-	private static Regex regexCoteBac = new Regex(@"Coté");
-	
+	private static Regex regexCoteBac1 = new Regex(@"Coté 1");
+
+	/// <summary>
+	/// Regex pour repérer si c'est le coté 2 du bac à sable (en +Z)
+	/// </summary>
+	private static Regex regexCoteBac2 = new Regex(@"Coté 2");
+
+	/// <summary>
+	/// Regex pour repérer si c'est le coté 3 du bac à sable (en -X)
+	/// </summary>
+	private static Regex regexCoteBac3 = new Regex(@"Coté 3");
+
+	/// <summary>
+	/// Regex pour repérer si c'est le coté 4 du bac à sable (en +X)
+	/// </summary>
+	private static Regex regexCoteBac4 = new Regex(@"Coté 4");
+
 	/// <summary>
 	/// Regex pour voir si c'est soit
 	/// </summary>
@@ -53,13 +68,13 @@ public class GameObjectUtils {
 	/// <param name="nomGo">
 	/// Le nom du Game Object que l'on veut connaitre
 	/// </param>
-	public static TypeCollision parseToTypeCollision( string nomGo ){
-		TypeCollision objet = TypeCollision.INCONNU;
-		if ( regexCoteBac.IsMatch(nomGo) )
-			objet = TypeCollision.COTE_BAC;
-		else if ( regexSoit.IsMatch(nomGo) )
-			objet = TypeCollision.SOIT_MEME;
-		return objet;
+	public static TypesObjetsRencontres parseToTypeCollision( string nomGo ){
+		if (regexCoteBac1.IsMatch (nomGo)) return TypesObjetsRencontres.COTE_BAC_1;
+		if (regexCoteBac2.IsMatch (nomGo)) return TypesObjetsRencontres.COTE_BAC_2;
+		if (regexCoteBac3.IsMatch (nomGo)) return TypesObjetsRencontres.COTE_BAC_3;
+		if (regexCoteBac4.IsMatch (nomGo)) return TypesObjetsRencontres.COTE_BAC_4;
+		if (regexSoit.IsMatch (nomGo)) return TypesObjetsRencontres.SOIT_MEME;
+		return TypesObjetsRencontres.INCONNU;
 	}
 #endregion
 

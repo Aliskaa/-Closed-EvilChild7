@@ -55,6 +55,9 @@
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\GameObjectUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\JSONUtils.cs" />
+     <Compile Include="Assets\Scripts\Utils\TypesAxesVisee.cs" />
+     <Compile Include="Assets\Scripts\Utils\TypesObjetsRencontres.cs" />
+     <Compile Include="Assets\Scripts\Utils\TypesRotations.cs" />
      <None Include="Assets\Textures\Pheromones\readme.txt" />
      <None Include="Assets\Scripts\Terrains\readme.txt" />
      <None Include="Assets\Scenes\readme.txt" />

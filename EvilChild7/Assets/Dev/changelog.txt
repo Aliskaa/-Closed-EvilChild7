@@ -122,11 +122,19 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  13;
+Date..........:  26/10/2014 18h18;
 Auteur........:  py;
 Commentaire...:
-	;
+	Nettoyage des sources : log, code inutile, séparation des enums, constantes
+	Amélioration de GameObjectUtils
+	Correction des rotations prises en charges dans les switchs
+	Travail sur le déplacement d'une fourmis et les collisions
+			- L'orientation/rotation de la fourmis est relativement propre et fonctionnelle
+			- La fourmis bouge n'importe où sur le terrain et a des bonnes orientations
+			- La fourmis change de sens quand elle rencontre un coté de bac à sable
+			- Meilleur recentrage mais pas encore parfait (déplacement pas très propre, à cheval sur plusieurs cases)
+	(Bien sur on peut toujours extraire ces scripts (Collisions, Déplacements) pour d'autres objets);
 
 __________________________________
 

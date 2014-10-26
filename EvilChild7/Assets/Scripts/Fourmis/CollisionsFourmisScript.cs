@@ -4,14 +4,13 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-#region CollisionsFourmisScript
 /// <summary>
 /// Script pour gérer les collisions que peut avoir une fourmis
 /// </summary>
@@ -25,16 +24,6 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	
 #region Attributs privés
 	/// <summary>
-	/// L'objet/dernier objet avec lequel on est entré en collision
-	/// </summary>
-	private TypeCollision objetTouche;
-
-	/// <summary>
-	/// L'objet avec lequel on va entrer en collision
-	/// </summary>
-	private TypeCollision objetSurChemin;
-
-	/// <summary>
 	/// Référence vers le script de déplacement de l'objet
 	/// </summary>
 	private DeplacementsFourmisScript scriptDeplacement;
@@ -43,9 +32,25 @@ public class CollisionsFourmisScript : MonoBehaviour {
 
 #region Atributs publics
 	/// <summary>
-	/// La longueur de visée
+	/// La longueur de visée pour une ouvrière
 	/// </summary>
-	public const float longueurVisee = 2*DeplacementsFourmisScript.DISTANCE_CASE;
+	public const float LONGUEUR_VISEE_OUVRIERE 
+		= DeplacementsFourmisScript.VISEE_MAX_OUVRIERE*DeplacementsFourmisScript.DISTANCE_CASE;
+	/// <summary>
+	/// La longueur de visée pour une contremaitresse
+	/// </summary>
+	public const float LONGUEUR_VISEE_CONTREMAITRESSE 
+		= DeplacementsFourmisScript.VISEE_MAX_CONTREMAITRESSE*DeplacementsFourmisScript.DISTANCE_CASE;
+	/// <summary>
+	/// La longueur de visée pour une soldate
+	/// </summary>
+	public const float LONGUEUR_VISEE_SOLDATE 
+		= DeplacementsFourmisScript.VISEE_MAX_SOLDATE*DeplacementsFourmisScript.DISTANCE_CASE;
+	/// <summary>
+	/// La longueur de visée pour une générale
+	/// </summary>
+	public const float LONGUEUR_VISEE_GENERALE 
+		= DeplacementsFourmisScript.VISEE_MAX_GENERALE*DeplacementsFourmisScript.DISTANCE_CASE;
 #endregion
 
 
@@ -94,12 +99,10 @@ public class CollisionsFourmisScript : MonoBehaviour {
 
 		RaycastHit hit;
 		if ( Physics.Raycast(charles.origin, charles.origin + charles.direction, out hit, visee) ){
-			string nomObjetProche = hit.transform.gameObject.name;
-			objetSurChemin = GameObjectUtils.parseToTypeCollision(nomObjetProche);
+			//string nomObjetProche = hit.transform.gameObject.name;
+			//TypeCollision objetSurChemin = GameObjectUtils.parseToTypeCollision(nomObjetProche);
 			//Debug.Log("Détecté : "+objetSurChemin);
 		} else {
-			objetTouche = TypeCollision.AUCUN;
-			objetSurChemin = TypeCollision.AUCUN;
 			//Debug.Log("Rien de détecté");
 		}
 
@@ -118,9 +121,9 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
-		objetTouche = GameObjectUtils.parseToTypeCollision(nomObjetTouche);
+		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToTypeCollision(nomObjetTouche);
 		//Debug.Log("Collision OnCollisionEnter avec : "+objetTouche);
-		scriptDeplacement.Stopper();
+		scriptDeplacement.StopperParCollision(objetTouche);
 	}
 
 	/// <summary>
@@ -135,145 +138,8 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// Va checker les collisions qui peuvent apparaitre.
 	/// </summary>
 	void Update(){
-		DetecterObstacle(TypeAxes.DEVANT, longueurVisee);
+		DetecterObstacle(TypeAxes.DEVANT, LONGUEUR_VISEE_OUVRIERE);
 	}
 #endregion
 
 }
-#endregion
-
-
-#region TypeCollision
-/// <summary>
-/// Les différentes collisions qui peuvent arriver.
-/// Ces valeurs sont à utiliser lordque la fourmis (ou autre game object cible)
-/// est SUR LE MEME CASE (meme position) qu'autre chose.
-/// 
-/// [0;9]   : par rapport au terrain
-/// [10;19] : par rapport aux obstacles inertes
-/// [20;29] : par rapport aux unités alliées
-/// [30;39] : par rapport aux unités ennemies
-/// [40;49] : par rapport à d'autres menaces
-/// [50;59] : par rapport à la nourriture
-/// </summary>
-public enum TypeCollision : int {
-	/// <summary>
-	/// Objet en collision inconnu
-	/// </summary>
-	INCONNU = -3,
-	/// <summary>
-	/// Aucun objet en collision
-	/// </summary>
-	AUCUN = -2,
-	/// <summary>
-	/// Ca peut arriver...
-	/// </summary>
-	SOIT_MEME = -1,
-	/// <summary>
-	/// Collision avec un coté du bac
-	/// </summary>
-	COTE_BAC = 0,
-	/// <summary>
-	/// Collision avec un petit caillou
-	/// </summary>
-	PETIT_CAILLOU = 10,
-	/// <summary>
-	/// Collision avec un gros caillou
-	/// </summary>
-	GROS_CAILLOUX =11,
-	/// <summary>
-	/// Collision avec un bout de bois
-	/// </summary>
-	BOUT_DE_BOIS = 12,
-	/// <summary>
-	/// Une ouvrière amie
-	/// </summary>
-	OUVRIERE_AMIE = 20,
-	/// <summary>
-	/// Une contre-maitrsse alliée
-	/// </summary>
-	CONTREMAITRE_AMIE = 21,
-	/// <summary>
-	/// Une combattante alliée
-	/// </summary>
-	COMBATTANTE_AMIE = 22,
-	/// <summary>
-	/// Une générale alliée
-	/// </summary>
-	GENERALE_AMIE = 23,
-	/// <summary>
-	/// La reine de la fourmillière
-	/// </summary>
-	REINE_AMIE = 24,
-	/// <summary>
-	/// Des phéromones produites par une contre-maitre amie
-	/// </summary>
-	PHEROMONES_CM_AMIE = 25,
-	/// <summary>
-	/// Un oeuf pondu par la reine du camp
-	/// </summary>
-	OEUF_AMI = 26,
-	/// <summary>
-	/// Une ouvrière ennemie
-	/// </summary>
-	OUVRIERE_ENNEMIE = 30,
-	/// <summary>
-	/// Une contre-maitrsse ennemie
-	/// </summary>
-	CONTREMAITRE_ENNEMIE = 31,
-	/// <summary>
-	/// Une combattante ennemie
-	/// </summary>
-	COMBATTANTE_ENNEMIE = 32,
-	/// <summary>
-	/// Une générale ennemie
-	/// </summary>
-	GENERALE_ENNEMIE = 33,
-	/// <summary>
-	/// La reine du camp adverse
-	/// </summary>
-	REINE_ENNEMIE = 34,
-	/// <summary>
-	/// Un oeuf pondu par la reine du camp adverse
-	/// </summary>
-	OEUF_ENNEMIE = 35,
-	/// <summary>
-	/// Un scarabée	
-	/// </summary>
-	SCARABEE = 40	
-}
-#endregion
-
-
-#region Axes de détections
-/// <summary>
-/// Les différents axes pour détecter un obstacle.
-/// </summary>
-public enum TypeAxes {
-	/// <summary>
-	/// Détection par devant
-	/// </summary>
-	DEVANT,
-	/// <summary>
-	/// Détection par derrière
-	/// </summary>
-	DERRIERE,
-	/// <summary>
-	/// Détection à gauche
-	/// </summary>
-	GAUCHE,
-	/// <summary>
-	/// Détection à droite
-	/// </summary>
-	DROITE,
-	/// <summary>
-	/// Détection au dessus
-	/// </summary>
-	DESSUS,
-	/// <summary>
-	/// Détection en dessous
-	/// </summary>
-	DESSOUS,
-}
-#endregion
-

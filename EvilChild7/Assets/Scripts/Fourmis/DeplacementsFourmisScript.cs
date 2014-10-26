@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 2.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -28,36 +28,67 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 #region Attributs privés
 	/// <summary>
 	/// Flag pour indiquer si l'objet a été rencentré ou pas.
+	/// Flag mis à jour régulièrement.
 	/// </summary>
-	private bool recentrageFait;
+	// FIXME pas très propre
+	private bool recentrageFait;  
 
 	/// <summary>
 	/// Flag indiquant que l'objet est en mouvement ou non
+	/// Flag mis à jour régulièrement.
 	/// </summary>
 	private bool enMouvement;
 	
 	/// <summary>
 	/// Flag indiquant que l'objectif, i.e. la position de la case à atteindre
-	/// a été atteint
+	/// a été atteint.
+	/// Flag mis à jour régulièrement
 	/// </summary>
 	private bool objectifAtteint;
 
 	/// <summary>
-	/// La position que doit atteindre l'objet, i.e. le centre d'une case
+	/// La position que doit atteindre l'objet, i.e. le centre d'une case.
+	/// Position mise à jour régulièrement.
 	/// </summary>
 	private Vector3 positionAatteindre;
+	
+	/// <summary>
+	/// L'orientation courante de l'objet
+	/// </summary>
+	// FIXME pas très propre
+	private TypesRotations orientationCourante;
+	
 #endregion
 
 #region Attributs publics
 	/// <summary>
-	/// La vitesse de déplacement
+	/// La vitesse maximale de déplacement.
+	/// 2 ou 3 pour une fourmis peut convenir.
 	/// </summary>
-	public float deplacementVitesse;
+	public float vitesseMax;
 
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre
 	/// </summary>
 	public const int DISTANCE_CASE = 5;
+
+	// FIXME Mettre ça dans les scripts modéliser les fourmis (vie, attaque, pods, PTAC, ...)
+	/// <summary>
+	/// La visée maximale d'une ouvrière en termes de cases
+	/// </summary>
+	public const int VISEE_MAX_OUVRIERE = 2;
+	/// <summary>
+	/// La visée maximale d'une contremaitre en termes de cases
+	/// </summary>
+	public const int VISEE_MAX_CONTREMAITRESSE = 4;
+	/// <summary>
+	/// La visée maximale d'une soldate en termes de cases
+	/// </summary>
+	public const int VISEE_MAX_SOLDATE = 2;
+	/// <summary>
+	/// La visée maximale d'une générale en termes de cases
+	/// </summary>
+	public const int VISEE_MAX_GENERALE = 4;
 #endregion
 
 
@@ -112,51 +143,60 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
 	/// </remarks>
 	private void Recentrer(){
+		//Debug.Log("Recentrage");
 		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.position);
 		transform.position = hexPlusProche.positionGobale;
 	}
 
 	/// <summary>
-	/// Effectue une rotation de la fourmis
+	/// Effectue une rotation de la fourmis.
+	/// Les valeurs utilisées pour la rotation sont des valeurs euleriennes,
+	/// elles peuvent etre récupérées par transform.rotation.eulerAngles.
 	/// </summary>
 	/// <param name="rotation">Le sens de rotation</param>
-	private void FaireRotation( Rotation rotation ){
-		Rotation r;
-		if (rotation == Rotation.RANDOM) {
-			int typeRotation = Random.Range(1, 6);
-			r = (Rotation)typeRotation;
+	private void FaireRotation( TypesRotations rotation ){
+		TypesRotations r;
+		if (rotation == TypesRotations.RANDOM){
+			// Définition de la rotation : plage de valeur définie dans[-135;+135]
+			// avec un pas de +45. L'idée est de tirer un nombre qui servira de coefficient
+			// multiplicateur pour 45
+			int typeRotation = Random.Range(-3, +3);
+			int angle = (+45)*typeRotation;
+			// Problem si on tire un angle de 0 ou de 180
+			if ( angle == 0 ) angle = 90; 
+			if ( angle == 180 ) angle = -90; 
+			r = (TypesRotations)angle;
 		} else {
 			r = rotation;
 		}
+		orientationCourante = r;
+		transform.rotation = Quaternion.identity;
 		switch (r){
-			case Rotation.NORD:
-				//transform.rotation = Quaternion.Euler(0,-90,0);
+			case TypesRotations.NORD:
 				transform.Rotate(0,-90,0);
 				break;
-			case Rotation.NORD_OUEST:
-				//transform.rotation = Quaternion.Euler(0,-135,0);				
+			case TypesRotations.NORD_OUEST:
 				transform.Rotate(0,-135,0);
 				break;
-			case Rotation.SUD_OUEST:
-				//transform.rotation = Quaternion.Euler(0,+135,0);
+			case TypesRotations.SUD_OUEST:
 				transform.Rotate(0,+135,0);
 				break;
-			case Rotation.SUD:
-				//transform.rotation = Quaternion.Euler(0,+90,0);
+			case TypesRotations.SUD:
 				transform.Rotate(0,+90,0);
 				break;
-			case Rotation.SUD_EST:
-				//transform.rotation = Quaternion.Euler(0,+45,0);
+			case TypesRotations.SUD_EST:
 				transform.Rotate(0,+45,0);
 				break;
-			case Rotation.NORD_EST:
-				//transform.rotation = Quaternion.Euler(0,-45,0);
+			case TypesRotations.NORD_EST:
 				transform.Rotate(0,-45,0);
 				break;
+			case TypesRotations.AUCUN:
+				break;
 			default:
-				Debug.Log("ERREUR: FaireRotation() : Rotation non gérée :"+r);
+				Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
 				break;
 		}
+		//Debug.Log("Rotation actuelle en Y : " + r);
 	}
 
 	/// <summary>
@@ -167,26 +207,18 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	private void Deambuler(){
 
-		// FIXME
-		/*
-		 * Réalisation d'une rotation (random)
-		 */
-		//Rotation rotation = Rotation.AUCUN;
-		//FaireRotation(rotation);
-
 		/*
 		 * Déplacement de la fourmis
 		 * http://answers.unity3d.com/questions/195698/stopping-a-rigidbody-at-target.html
 		 */
 
 		float velocityFinale = 2.5f;	// Pour convertir la distance restant pour avoir la velocité finale (= façon de stopper)
-		float vitesseMax = 15.0f;
 		float forceMax = 40.0f;
 		float gain = 5f; 				// Gain par rapport à la position finale à atteindre
 
 		//Debug.Log ("Je suis en :" + transform.position + ", et dois aller en :" + positionAatteindre);
 		Vector3 distance = positionAatteindre - transform.position;
-		distance.y = 0; // ignore height differences
+		distance.y = 0;
 		// Calcul de la vitesse à atteindre proportionnellement à la distance, bornée par vietsseMax
 		Vector3 vitesseVoulue = Vector3.ClampMagnitude(velocityFinale * distance, vitesseMax);
 		// Calcul de l'erreur que l'on a avec la vitesse
@@ -195,15 +227,16 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		Vector3 force = Vector3.ClampMagnitude(gain * correctionVitesse, forceMax);
 		rigidbody.AddForce(force);
 
-		Debug.Log("Je déambule de "+transform.position+" vers "+positionAatteindre );
-		if (Vector3.Distance(transform.position,positionAatteindre) <= 0.02){
+		if (System.Math.Round(Vector3.Distance(transform.position,positionAatteindre)) == 0){
 			//Debug.Log ("Objectif atteint");
 			enMouvement = false;
 			objectifAtteint = true;
+			Recentrer();
 		}/* else {
 			Debug.Log ("Objectif pas encore atteint : "+Vector3.Distance(transform.position,positionAatteindre));
 		}*/
 
+		//Recentrer();
 	}
 #endregion
 
@@ -215,7 +248,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		recentrageFait = false;
 		enMouvement = false;
 		objectifAtteint = false;
-		Avancer(5);// DEBUG
+		Avancer(2);// FIXME pour des besoins de débugs
 	}
 
 	/// <summary>
@@ -231,10 +264,10 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			Deambuler();
 		// Ou en relancer une nouvelle (si la fourmis ne bouge plus)
 		} else {
-			Debug.Log("Plus de déambulation, redémarrage");
+			//Debug.Log("Plus de déambulation, redémarrage");
 			int nombreDesCases = Random.Range(1,6);
+			FaireRotation(TypesRotations.RANDOM);
 			Avancer(nombreDesCases);
-			FaireRotation(Rotation.RANDOM);
 			Recentrer();
 			//Stopper();
 		}
@@ -248,6 +281,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	public void Avancer( int nbCases ){
+
+		// Arret de l'objet
 		if  (nbCases <= 0 ){
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.angularVelocity = Vector3.zero;
@@ -256,47 +291,52 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			objectifAtteint = true;
 			return;
 		}
-		Debug.Log ("Dois avancer de "+nbCases+" cases");
-		// Changer le X et le Z par rapport à l'angle
+
+		//Debug.Log("Dois avancer de "+nbCases+" cases");
 		positionAatteindre = transform.position;
-		Rotation r = (Rotation)transform.rotation.y;
-		switch (r){
-			case Rotation.NORD:
+
+		switch (orientationCourante){
+			case TypesRotations.NORD:
 				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				break;
-			case Rotation.NORD_EST:
+			case TypesRotations.NORD_EST:
 				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				positionAatteindre.z += nbCases*DISTANCE_CASE;
 				break;
-			case Rotation.NORD_OUEST:
+			case TypesRotations.NORD_OUEST:
 				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
 				break;
-			case Rotation.SUD:
+			case TypesRotations.SUD:
 				positionAatteindre.x += nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				break;
-			case Rotation.SUD_EST:
+			case TypesRotations.SUD_EST:
 				positionAatteindre.x += nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				positionAatteindre.z += nbCases*DISTANCE_CASE;
 				break;
-			case Rotation.SUD_OUEST:
+			case TypesRotations.SUD_OUEST:
 				positionAatteindre.x += nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+				break;
+			case TypesRotations.AUCUN:
+				// TODO
 				break;
 			default:
-				Debug.Log("ERREUR: BIG JERK, valeur pas gérée dans switch:"+transform.rotation.y);
+				Debug.LogError("ERREUR: Valeur pas gérée dans switch : "+orientationCourante);
 				break;
 		}
+
 		enMouvement = true;
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
-		Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
+		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
+
 	}
 
 	/// <summary>
@@ -304,6 +344,39 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	public void Stopper(){
 		Avancer(-1);
+	}
+
+	/// <summary>
+	/// Stoppe l'objet en mouvement à cause d'une collision
+	/// </summary>
+	/// <param name="causeCollision">
+	/// L'objet qui a causé la collision. En fonction de cet objet, l'objet courant
+	/// bouge différement (ex: ne pas s'acharner à aller sur un coté du bac à sable)
+	/// </param>
+	public void StopperParCollision( TypesObjetsRencontres causeCollision ){
+		// Arret de l'objet
+		Avancer(-1);
+		// Changement de direction su on tape dans un coté du bac à sable
+		switch (causeCollision){
+			case TypesObjetsRencontres.COTE_BAC_1:
+				FaireRotation(TypesRotations.SUD_EST);
+				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				break;
+			case TypesObjetsRencontres.COTE_BAC_2:
+				FaireRotation(TypesRotations.SUD_OUEST);
+				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				break;
+			case TypesObjetsRencontres.COTE_BAC_3:
+				FaireRotation(TypesRotations.SUD);
+				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				break;
+			case TypesObjetsRencontres.COTE_BAC_4:
+				FaireRotation(TypesRotations.NORD);
+				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				break;
+			default:
+				break;
+		}
 	}
 
 	/// <summary>
@@ -320,44 +393,3 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 #endregion
 
 }
-
-#region Rotation
-/// <summary>
-/// Les types de rotations possibles
-/// </summary>
-public enum Rotation : int { 
-	/// <summary>
-	/// Rotation aléatoire
-	/// </summary>
-	RANDOM = -1,
-	/// <summary>
-	/// Pas de rotation
-	/// </summary>
-	AUCUN = 0,
-	/// <summary>
-	/// Nord
-	/// Typiquement, tete de la fourmis vers la direction -X, de bas en haut
-	/// </summary>
-	NORD = 1, 
-	/// <summary>
-	/// Nord Est
-	/// </summary>
-	NORD_EST = 2,
-	/// <summary>
-	/// Sud Est
-	/// </summary>
-	SUD_EST = 3,
-	/// <summary>
-	/// Sud : direction X, tete de la fourmis vers X, de haut en bas
-	/// </summary>
-	SUD = 4,
-	/// <summary>
-	/// Nord Ouest
-	/// </summary>
-	NORD_OUEST = 5,
-	/// <summary>
-	/// Sud Ouest
-	/// </summary>
-	SUD_OUEST = 6
-}
-#endregion

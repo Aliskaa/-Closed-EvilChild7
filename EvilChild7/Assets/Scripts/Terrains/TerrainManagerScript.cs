@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -95,7 +95,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Le type de terrain à générer
 	/// </summary>
-	public TypeMap type;
+	public TypesMaps type;
 #endregion
 
 #region Attributs package
@@ -116,7 +116,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <param name="y">La hauteur entre les pièces</param>
 	/// <param name="type">Le type de terrain</param>
 	/// <returns>The new chunk's script</returns>
-	public HexagonesVueScript CreerPiece( int x, int y, TypeTuile type ){
+	public HexagonesVueScript CreerPiece( int x, int y, TypesTuiles type ){
 
 		// Création du GameObject et ajout au parent
 		if ( x == 0 && y == 0 && chunkHolder == null ){
@@ -128,10 +128,10 @@ public class TerrainManagerScript : MonoBehaviour {
 		chunkObj.AddComponent<HexagonesVueScript>();
 		Texture2D texture;
 		switch (type) {
-			case TypeTuile.SABLE:
+			case TypesTuiles.SABLE:
 				texture = textureTerrainSable;
 				break;
-			case TypeTuile.EAU:
+			case TypesTuiles.EAU:
 				texture = textureTerrainEau;
 				break;
 			default:
@@ -222,7 +222,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
-				pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+				pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
 				pieces[x, z].SetDimension(taillePiece, taillePiece);
@@ -254,9 +254,9 @@ public class TerrainManagerScript : MonoBehaviour {
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				if ( x >= (segmentsEnX/3) && x <= (2*segmentsEnX/3)
 				    && z >= (segmentsEnZ/3) && z <= (2*segmentsEnZ/3) ){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.EAU);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.EAU);
 				} else {
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -288,30 +288,30 @@ public class TerrainManagerScript : MonoBehaviour {
 		// FIXME : Trop lourd
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
-				pieces[x, z] = CreerPiece(x, z, TypeTuile.EAU);
+				pieces[x, z] = CreerPiece(x, z, TypesTuiles.EAU);
 				if ( x >= segmentsEnX/4 && x <= segmentsEnX/3
 				    && z >= segmentsEnZ/4 && z <= segmentsEnZ/3){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4
 				    && z <= segmentsEnZ/3){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( x >= segmentsEnX/3 && x <= 2*segmentsEnX/3
 				    && z >= segmentsEnZ/4 && z <= segmentsEnZ/3){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( x >= segmentsEnX/4 && x <= segmentsEnX/3
 				    && z >= segmentsEnZ/3 && z <= 3*segmentsEnZ/4){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( x >= segmentsEnX/3 && x <= 3*segmentsEnX/4
 				    && z >= 2*segmentsEnZ/3 && z <= 3*segmentsEnZ/4){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4
 				    && z >= 3*segmentsEnZ/4){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -343,15 +343,15 @@ public class TerrainManagerScript : MonoBehaviour {
 		// FIXME : Trop lourd
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
-				pieces[x, z] = CreerPiece(x, z, TypeTuile.EAU);
+				pieces[x, z] = CreerPiece(x, z, TypesTuiles.EAU);
 				if ( x >= segmentsEnX/8 && x <= segmentsEnX/7 ){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( x >= 9*segmentsEnX/10 ){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				if ( z >= 4*segmentsEnZ/9 && z <= 5*segmentsEnZ/9 ){
-					pieces[x, z] = CreerPiece(x, z, TypeTuile.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -384,7 +384,7 @@ public class TerrainManagerScript : MonoBehaviour {
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				// 1 : Type sable, 2 : Type eau
 				int numType = Random.Range(1,200);
-				pieces[x, z] = CreerPiece(x, z, (TypeTuile)(numType%2+1));
+				pieces[x, z] = CreerPiece(x, z, (TypesTuiles)(numType%2+1));
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
 				pieces[x, z].SetDimension(taillePiece, taillePiece);
@@ -404,21 +404,21 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// Créé la map selon le type voulu
 	/// </summary>
 	/// <param name="typeMap">Le type de terrain</param>
-	private void CreerMap( TypeMap typeMap ){
+	private void CreerMap( TypesMaps typeMap ){
 		switch (typeMap){
-		case TypeMap.NIVEAU_1:
+		case TypesMaps.NIVEAU_1:
 			CreerMapDesert();
 			break;
-		case TypeMap.NIVEAU_2:
+		case TypesMaps.NIVEAU_2:
 			CreerMapLac();
 			break;
-		case TypeMap.NIVEAU_3:
+		case TypesMaps.NIVEAU_3:
 			CreerMapTraversees();
 			break;
-		case TypeMap.NIVEAU_4:
+		case TypesMaps.NIVEAU_4:
 			CreerMapEtranglement();
 			break;
-		case TypeMap.RANDOM:
+		case TypesMaps.RANDOM:
 			CreerMapRandom();
 			break;
 		}
@@ -442,7 +442,7 @@ public class TerrainManagerScript : MonoBehaviour {
 /// <summary>
 /// Les types de tuiles
 /// </summary>
-public enum TypeTuile : int { 
+public enum TypesTuiles : int { 
 	/// <summary>
 	/// Du sable
 	/// </summary>
@@ -458,7 +458,7 @@ public enum TypeTuile : int {
 /// <summary>
 /// Les types de map
 /// </summary>
-public enum TypeMap { 
+public enum TypesMaps { 
 	/// <summary>
 	/// Que du sable, le désert
 	/// </summary>
