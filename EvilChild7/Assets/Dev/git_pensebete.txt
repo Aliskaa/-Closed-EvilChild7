@@ -18,7 +18,7 @@ git commit --amend
 # Ajouter le tag SOURCES_INIT au commit n°6eec66cdfb21a82907915499f6198f19aba136d4 (cf git log)
 git tag SOURCES_INIT 6eec66cdfb21a82907915499f6198f19aba136d4
 # Ou alors
-git tag -v vA.B.C -m "Message kidéchir"
+git tag -a vA.B.C -m "Message kidéchir"
 
 
 # Envoyer les tags au repo (tag = release)

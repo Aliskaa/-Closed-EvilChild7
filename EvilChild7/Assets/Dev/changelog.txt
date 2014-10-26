@@ -154,11 +154,12 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  16;
+Date..........:  26/10/2014 19h47;
 Auteur........:  py;
 Commentaire...:
-	;
+	Correction du fichier git_pensebete.txt
+	Correction erreur déplacement trop long de la fourmis;
 
 __________________________________
 

@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.2.0
+/// PY Lapersonne - Version 2.2.1
 /// </remarks>
 
 using UnityEngine;
@@ -265,7 +265,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		// Ou en relancer une nouvelle (si la fourmis ne bouge plus)
 		} else {
 			//Debug.Log("Plus de déambulation, redémarrage");
-			int nombreDesCases = Random.Range(1,6);
+			int nombreDesCases = Random.Range(1,VISEE_MAX_OUVRIERE);
 			FaireRotation(TypesRotations.RANDOM);
 			Avancer(nombreDesCases);
 			Recentrer();
