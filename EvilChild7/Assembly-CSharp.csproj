@@ -48,10 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Fourmis\CollisionsFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" />
-     <Compile Include="Assets\Scripts\Terrains\CivGridUtils.cs" />
-     <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
-     <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />
-     <Compile Include="Assets\Scripts\Terrains\TerrainManagerScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\GameObjectUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\JSONUtils.cs" />
@@ -65,7 +61,6 @@
      <None Include="Assets\Prefabs\Nourritures\readme.txt" />
      <None Include="Assets\Prefabs\Eau\readme.txt" />
      <None Include="Assets\Textures\Terrains\readme.txt" />
-     <None Include="Assets\Dev\git_pensebete.txt" />
      <None Include="Assets\Audios\readme.txt" />
      <None Include="Assets\Docs\readme.txt" />
      <None Include="Assets\Textures\Eau\readme.txt" />
@@ -85,7 +80,6 @@
      <None Include="Assets\Scripts\Cailloux\readme.txt" />
      <None Include="Assets\Textures\Scarabées\readme.txt" />
      <None Include="Assets\Scripts\Scarabées\readme.txt" />
-     <None Include="Assets\Dev\TODO.txt" />
      <None Include="Assets\Prefabs\Fourmis\readme.txt" />
      <None Include="Assets\Prefabs\Scarabées\readme.txt" />
      <None Include="Assets\Prefabs\Terrains\readme.txt" />
