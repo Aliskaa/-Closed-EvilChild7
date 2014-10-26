@@ -57,8 +57,9 @@ git branch
 git checkout py
 
 
-# Fusionner les modifications entre la branche courante et la branche "py"
-git merge py
+# Récupérer les modifications de "brancheAvecModifsAchoper"
+# et fusionner le tout dans la branche courante
+git merge brancheAvecModifsAchoper
 
 
 # Faire un diff
