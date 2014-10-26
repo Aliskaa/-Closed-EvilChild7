@@ -146,11 +146,11 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  15;
+Date..........:  26/10/2014 19h10;
 Auteur........:  py;
 Commentaire...:
-	;
+	Git : je t'emmerde en toute cordialité avec tes merges chiants;
 
 __________________________________
 
