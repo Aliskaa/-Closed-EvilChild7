@@ -4,26 +4,6 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 2					terminé		X			Cases pour l'eau
 3					terminé		X			Générateur de terrains
 4		4			non lancé				Mottes de terres
-5		1			non lancé				Ouvrière : UI
-6		1			non lancé				Ouvrière : Phéromones
-7				>	lancé		[py]		Ouvrière : Intelligence Graphique
-8		1			non lancé				Reine : UI
-9		1			non lancé				Reine : Phéromones
-10		1			non lancé				Reine : IA
-11		1			non lancé				Oeuf : UI
-12		2			non lancé				Combattante : UI
-13		2			non lancé				Combattante : Phéromones
-14		2			non lancé				Combattante : IA
-15		3			non lancé				Contre-maitresse : UI
-16		3			non lancé				Contre-maitresse : Phéromones
-17		3			non lancé				Contre-maitresse : IA
-18		3			non lancé				Générale : UI
-19		3			non lancé				Générale : Phéromones
-20		3			non lancé				Générale : IA
-21		2			non lancé				Scarabée : UI
-22		2			non lancé				Scarabée : IA
-23		2			non lancé				Caillou : UI
-24		1			non lancé				Nourriture : UI
 25					terminé		X			Collisions sur les cotés du bac
 26					terminé		X			Fourmis : Rotation
 27					terminé		X			Fourmis : Déambulation : apliquer force qui se réduit pour bouger d'une case à l'autre.
@@ -34,9 +14,8 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 30					terminé		X			Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de aprourt de case à case, ...)
-32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
-											(pop scarabées, éclosions fourmis, ...)											
-33		1		>	lancé		[py]		Améliorer le bac: cotés, skybox, fond, ...											
+32					non lancé	[py]		Voir nécessité script pour créér des GO donnés (pop scarabées, éclosions fourmis, ...)																				
+33		1		>>	lancé		[py]		Améliorer le bac: cotés, skybox, fond, ...											
 34		1		>	lancé		[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36					terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
@@ -45,3 +24,47 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
 40		2			non lancé	[py]		Le recentrage n'est pas parfait
 41		1			non lancé	[py]		Faire la vue et l'odorat dans les 6 sens possibles, pas que devant
+42		1						[py]		Configurer tous les prefabs (rigidbody, box collider) pour :
+44								[py]			- fourmis rouge combattante
+45								[py]			- fourmis rouge générale
+46								[py]			- fourmis rouge contremaitre
+47								[py]			- fourmis rouge reine
+48								[py]			- fourmis noire combattante
+49								[py]			- fourmis noire générale
+50								[py]			- fourmis noire contremaitre
+51								[py]			- fourmis noire reine
+52								[py]			- oeuf fourmis
+53								[py]			- bout de bois
+54								[py]			- cailloux gros
+55								[py]			- cailloux petits
+56								[py]			- bonbon anglais
+57								[py]			- bonbon anglais bleu
+58								[py]			- bonbon mure
+59								[py]			- bonbon orange
+60								[py]			- bonbon rose
+61								[py]			- bonbon vert
+62								[py]			- phéromones
+63								[py]			- scarabées
+64								[py]		Configurer tous les prefabs (collisions, déplacements, IA) pour :
+65								[py]			- fourmis rouge combattante
+66								[py]			- fourmis rouge générale
+67								[py]			- fourmis rouge contremaitre
+68								[py]			- fourmis rouge reine
+69								[py]			- fourmis noire combattante
+70								[py]			- fourmis noire générale
+71								[py]			- fourmis noire contremaitre
+72								[py]			- fourmis noire reine
+73								[py]			- oeuf fourmis
+74								[py]			- bout de bois
+75								[py]			- cailloux gros
+76								[py]			- cailloux petits
+77								[py]			- bonbon anglais
+78								[py]			- bonbon anglais bleu
+79								[py]			- bonbon mure
+80								[py]			- bonbon orange
+81								[py]			- bonbon rose
+82								[py]			- bonbon vert
+83								[py]			- phéromones
+84								[py]			- scarabées
+
+
