@@ -36,7 +36,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 											(distance de aprourt de case à case, ...)
 32		1			non lancé	[py]		Voir nécessité script pour créér des GO donnés 
 											(pop scarabées, éclosions fourmis, ...)											
-33		1			non lancé	[py]		Améliorer le bac: cotés, skybox, fond, ...											
+33		1		>	lancé		[py]		Améliorer le bac: cotés, skybox, fond, ...											
 34		1		>	lancé		[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36					terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
@@ -44,4 +44,4 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 38					terminé		X			Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
 40		2			non lancé	[py]		Le recentrage n'est pas parfait
-
+41		1			non lancé	[py]		Faire la vue et l'odorat dans les 6 sens possibles, pas que devant

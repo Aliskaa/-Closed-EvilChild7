@@ -1,12 +1,16 @@
 fileFormatVersion: 2
-guid: 5439bc12f0e03104c84867fe063e2e4a
+guid: 6ede6081ba822c2448821e381c783447
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Point
+    100004: Sphere_002
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    400002: Point
+    400004: Sphere_002
+    2300000: Sphere_002
+    3300000: Sphere_002
     4300000: Sphere_002
     9500000: //RootNode
   materials:
