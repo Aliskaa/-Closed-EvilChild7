@@ -180,11 +180,12 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  19;
+Date..........:  28/10/2014 11h54;
 Auteur........:  py;
 Commentaire...:
-	;
+	Changement de la texture de l'herbe pour une autre de type "tuile"
+	Ajout de deux packages pour de sprefabs de bonbons et d'univers enfantin;
 
 __________________________________
 
