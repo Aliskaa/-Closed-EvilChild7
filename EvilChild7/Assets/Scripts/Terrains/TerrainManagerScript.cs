@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -91,6 +91,21 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// Le game object parent qui va embarquer le terrain
 	/// </summary>
 	public GameObject parentTerrain;
+
+	/// <summary>
+	/// La position en X du terrain
+	/// </summary>
+	public float positionX;
+
+	/// <summary>
+	/// La position en Y du terrain
+	/// </summary>
+	public float positionY;
+
+	/// <summary>
+	/// La position en Z du terrain
+	/// </summary>
+	public float positionZ;
 
 	/// <summary>
 	/// Le type de terrain à générer
@@ -422,6 +437,8 @@ public class TerrainManagerScript : MonoBehaviour {
 			CreerMapRandom();
 			break;
 		}
+		chunkHolder.transform.position = new Vector3(positionX, positionY, positionZ);
+		chunkHolder.transform.Translate(new Vector3 (positionX, positionY, positionZ));
 	}
 #endregion
 

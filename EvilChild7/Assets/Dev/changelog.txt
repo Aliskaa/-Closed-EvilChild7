@@ -189,11 +189,21 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  20;
+Date..........:  29/10/2014 18h22;
 Auteur........:  py;
 Commentaire...:
-	;
+	Nettoyage des packages
+	Nettoyage des scenes de debug
+	Ajouts des nouveaux prefabs de Sophie
+	Création du monde de jeu
+		- Nouveaux éléments
+		- Ajout du prefab du monde de jeu
+		- Correction en conséquence de la positon du terrain
+		- Adaptation de la caméra
+		- Ajout d'une skybox
+		- Ajout des particules féériques
+	Tache 33 terminée;
 
 __________________________________
 

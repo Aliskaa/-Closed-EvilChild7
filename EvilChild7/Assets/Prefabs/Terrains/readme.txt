@@ -43,4 +43,7 @@ Liste des scripts :
 			- Taille Map X=20, Y=20
 			- Taille Piece = 4
 			- Parent terrain : Bac à sable
+			- Position en X=-49.25
+			- Position en Y=0.1
+			- Position en Z=-46.5
 			
