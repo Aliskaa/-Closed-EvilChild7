@@ -51,13 +51,14 @@
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\GameObjectUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\JSONUtils.cs" />
-     <Compile Include="Assets\Scripts\Utils\TypesAxesVisee.cs" />
+     <Compile Include="Assets\Scripts\Utils\TypesAxes.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesObjetsRencontres.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesRotations.cs" />
      <None Include="Assets\Textures\Pheromones\readme.txt" />
      <None Include="Assets\Scripts\Terrains\readme.txt" />
      <None Include="Assets\Scenes\readme.txt" />
      <None Include="Assets\Menus\Menus\readme.txt" />
+     <None Include="Assets\Prefabs\Cameras\readme.txt" />
      <None Include="Assets\Prefabs\Nourritures\readme.txt" />
      <None Include="Assets\Prefabs\Eau\readme.txt" />
      <None Include="Assets\Textures\Terrains\readme.txt" />
@@ -70,6 +71,7 @@
      <None Include="Assets\Scripts\Parties\readme.txt" />
      <None Include="Assets\Menus\Boutons\readme.txt" />
      <None Include="Assets\Textures\Fourmis\readme.txt" />
+     <None Include="Assets\Prefabs\Lumieres\readme.txt" />
      <None Include="Assets\Scripts\Pheromones\readme.txt" />
      <None Include="Assets\Textures\Cailloux\readme.txt" />
      <None Include="Assets\Scripts\Nourritures\readme.txt" />
