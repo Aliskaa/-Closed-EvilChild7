@@ -214,11 +214,23 @@ Commentaire...:  (ノ^_^)ノ ⌨      JU57 4 1337 C0MM17;
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  22;
+Date..........:  31/10/2014 21h52;
 Auteur........:  py;
 Commentaire...:
-	;
+	Correction de la dénomination des prefabs
+	Création du script "InvocateurObjetsScripts" permettant de faire apparaitre des objets
+	Mise à jour des gameobjets du monde de jeu suite au refactoring des prefabs
+		- Particules
+		- Monde de jeu
+	Mise à jour des scenes de debug
+	Enrichissement du monde de jeu
+	Simplification du script TerrainManagerScript
+	Travail sur le recentrage des objets :
+		- lors des invocations selon position la plus proche [en cours]
+		- lors des déplacements des fourmis [en cours]
+ʕノ•ᴥ•ʔノ︵ ●～*
+	
 
 __________________________________
 

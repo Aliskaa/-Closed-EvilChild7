@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// DeplacementsFourmisScript.cs
 /// Script pour gérer les déplacements des fourmis sur le terrain avec entre autres
 /// 	- le déplacement à proprement parler
@@ -143,9 +143,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
 	/// </remarks>
 	private void Recentrer(){
-		//Debug.Log("Recentrage");
 		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.position);
-		transform.position = hexPlusProche.positionGobale;
+		Debug.Log("Recentrage de "+transform.position+" vers "+hexPlusProche.positionGlobale);
+		transform.position = hexPlusProche.positionGlobale;
 	}
 
 	/// <summary>

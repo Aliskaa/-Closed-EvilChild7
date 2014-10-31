@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// TerrainUtils.cs
 /// Fichier utilitaire pour gérer certains aspects du terrain,
 /// à savoir les hexgones et la position des objets sur ces hexagone.
@@ -62,7 +62,7 @@ public static class TerrainUtils {
 		float minimumDifferenceZ = float.MaxValue;
 		HexagoneInfo hexagPlusProche = null;
 		foreach ( HexagoneInfo h in hexagones ){
-			Vector3 posH = h.positionGobale;
+			Vector3 posH = h.positionGlobale;
 			float dX = Math.Abs(positionObjet.x - posH.x);
 			float dZ = Math.Abs(positionObjet.z - posH.z);
 			if ( dX <= minimumDifferenceX && dZ <= minimumDifferenceZ  ){
@@ -88,9 +88,9 @@ public static class TerrainUtils {
 	public static Vector3 decalageHexagone( Vector3 positionObjet ){
 		HexagoneInfo cible = hexagonePlusProche(positionObjet);
 		Vector3 decalage = new Vector3(
-								cible.positionGobale.x-positionObjet.x,
-								cible.positionGobale.y-positionObjet.y,
-								cible.positionGobale.z-positionObjet.z
+								cible.positionGlobale.x-positionObjet.x,
+								cible.positionGlobale.y-positionObjet.y,
+								cible.positionGlobale.z-positionObjet.z
 							);
 		return decalage;
 	}

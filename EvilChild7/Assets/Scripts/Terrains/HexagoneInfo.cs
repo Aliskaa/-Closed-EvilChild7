@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.2.1
 /// </remarks>
 
 using UnityEngine;
@@ -32,7 +32,7 @@ public class HexagoneInfo {
 	/// <summary>
 	/// La position globale
 	/// </summary>
-    public Vector3 positionGobale;
+    public Vector3 positionGlobale;
 
 	/// <summary>
 	/// Coordonnées 3D sur la grille

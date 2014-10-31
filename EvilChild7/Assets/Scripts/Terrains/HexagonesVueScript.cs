@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// HexagoneVueScript.cs
 /// Script permettant d'avoir des pièces d'hexagones
 /// http://forum.unity3d.com/threads/procedural-hexagon-terrain-tutorial.233296/
@@ -155,7 +155,7 @@ public class HexagonesVueScript : MonoBehaviour {
 		
 		hexagoneInfo.CubeGridPosition = new Vector3(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f), posGlobale.y, -(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f) + posGlobale.y));
 		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)), 0, (y * worldManager.hexExt.z) * 1.5f);
-		hexagoneInfo.positionGobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
+		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
 
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
@@ -182,7 +182,7 @@ public class HexagonesVueScript : MonoBehaviour {
 		
 		hexagoneInfo.CubeGridPosition = new Vector3(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f), positionGlobale.y, -(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f) + positionGlobale.y));
 		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)) + worldManager.hexExt.x, 0, (y * worldManager.hexExt.z) * 1.5f);
-		hexagoneInfo.positionGobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
+		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
 		
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;

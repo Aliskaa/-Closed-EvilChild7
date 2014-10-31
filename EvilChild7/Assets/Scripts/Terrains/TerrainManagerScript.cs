@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -93,29 +93,16 @@ public class TerrainManagerScript : MonoBehaviour {
 	public GameObject parentTerrain;
 
 	/// <summary>
-	/// La position en X du terrain
-	/// </summary>
-	public float positionX;
-
-	/// <summary>
-	/// La position en Y du terrain
-	/// </summary>
-	public float positionY;
-
-	/// <summary>
-	/// La position en Z du terrain
-	/// </summary>
-	public float positionZ;
-
-	/// <summary>
 	/// Le type de terrain à générer
 	/// </summary>
 	public TypesMaps type;
 #endregion
 
 #region Attributs package
+
 	int segmentsEnX;
     int segmentsEnZ;
+
 #endregion
 
 
@@ -135,7 +122,9 @@ public class TerrainManagerScript : MonoBehaviour {
 
 		// Création du GameObject et ajout au parent
 		if ( x == 0 && y == 0 && chunkHolder == null ){
-			chunkHolder = new GameObject("Terrain");
+			//chunkHolder = new GameObject("Terrain");
+			//chunkHolder = (GameObject)(new GameObject("Terrain"));////////////
+			chunkHolder = GameObject.Find("Terrain");////////////
 			chunkHolder.transform.parent = parentTerrain.transform;
 		}
 
@@ -156,6 +145,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		chunkObj.AddComponent<MeshRenderer>().material.mainTexture = texture;
 		chunkObj.AddComponent<MeshFilter>();
 		chunkObj.transform.parent = chunkHolder.transform;
+		////chunkObj.transform.parent = GameObject.Find ("Terrain").transform;
 
 		return chunkObj.GetComponent<HexagonesVueScript>();
 
@@ -437,8 +427,8 @@ public class TerrainManagerScript : MonoBehaviour {
 			CreerMapRandom();
 			break;
 		}
-		chunkHolder.transform.position = new Vector3(positionX, positionY, positionZ);
-		chunkHolder.transform.Translate(new Vector3 (positionX, positionY, positionZ));
+		// FIXME : Valeur en dur, Translate() non relatif, sale
+		chunkHolder.transform.Translate(new Vector3 (-98.5f, 0.1f, -93));
 	}
 #endregion
 
@@ -449,6 +439,11 @@ public class TerrainManagerScript : MonoBehaviour {
 	void Awake(){
 		GetHexagonesProp();
 		CreerMap(type);
+		#region DEBUG TEST
+		GameObject bacAsable = GameObject.Find("Bac à sable");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptInvoc.InvoquerObjetRecentre(Invocations.TRES_GROS_CAILLOU);
+		#endregion
 	}
 #endregion
 	
