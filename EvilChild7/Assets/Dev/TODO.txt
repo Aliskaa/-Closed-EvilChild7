@@ -66,5 +66,5 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 82								[py]			- bonbon vert
 83								[py]			- phéromones
 84								[py]			- scarabées
-
+85		0		>				[py]		Recentrer les objets !!!
 

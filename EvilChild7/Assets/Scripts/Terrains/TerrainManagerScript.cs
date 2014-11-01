@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 3.0.1
 /// </remarks>
 
 using UnityEngine;
@@ -146,6 +146,8 @@ public class TerrainManagerScript : MonoBehaviour {
 		chunkObj.AddComponent<MeshFilter>();
 		chunkObj.transform.parent = chunkHolder.transform;
 		////chunkObj.transform.parent = GameObject.Find ("Terrain").transform;
+
+		Debug.Log ("Position globale du bloc terrain " + x + "/" + y + " : " + chunkObj.transform.position);
 
 		return chunkObj.GetComponent<HexagonesVueScript>();
 

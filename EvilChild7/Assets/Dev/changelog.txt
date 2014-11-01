@@ -234,11 +234,13 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  23;
+Date..........:  01/11/2014 19h48;
 Auteur........:  py;
 Commentaire...:
-	;
+		Travail sur le recentrage des objets :
+		- lors des invocations selon position la plus proche [en cours]
+		- lors des déplacements des fourmis [en cours]
 
 __________________________________
 

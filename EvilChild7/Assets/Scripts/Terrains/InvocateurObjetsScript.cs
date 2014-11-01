@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.0.1
 /// </remarks>
 
 using UnityEngine;
@@ -211,13 +211,13 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	public GameObject InvoquerObjetRecentre(Invocations objet){
 		GameObject invoc = InvoquerObjet(objet);
 		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(invoc.transform.position);
-		Debug.Log("Ma position :" + invoc.transform.position + ", pour " + hexPlusProche.positionGlobale);
+		//Debug.Log("Ma position :" + invoc.transform.position + ", pour " + hexPlusProche.positionGlobale);
 		if (hexPlusProche == null) {
 			Debug.LogError("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
 		} else {
 			invoc.transform.position = hexPlusProche.positionGlobale;
 		}
-		Debug.Log("Ma nouvelle position :" + invoc.transform.position);
+		//Debug.Log("Ma nouvelle position :" + invoc.transform.position);
 		return invoc;
 	}
 #endregion
