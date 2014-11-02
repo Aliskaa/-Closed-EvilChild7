@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.1
+/// PY Lapersonne - Version 3.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -45,6 +45,7 @@ public class TerrainManagerScript : MonoBehaviour {
     /// </summary>
     [HideInInspector]
     public Vector3 hexExt;
+
 	/// <summary>
 	/// La taille de l'hexagone
 	/// </summary>
@@ -122,9 +123,7 @@ public class TerrainManagerScript : MonoBehaviour {
 
 		// Création du GameObject et ajout au parent
 		if ( x == 0 && y == 0 && chunkHolder == null ){
-			//chunkHolder = new GameObject("Terrain");
-			//chunkHolder = (GameObject)(new GameObject("Terrain"));////////////
-			chunkHolder = GameObject.Find("Terrain");////////////
+			chunkHolder = GameObject.Find("Terrain");
 			chunkHolder.transform.parent = parentTerrain.transform;
 		}
 
@@ -145,9 +144,6 @@ public class TerrainManagerScript : MonoBehaviour {
 		chunkObj.AddComponent<MeshRenderer>().material.mainTexture = texture;
 		chunkObj.AddComponent<MeshFilter>();
 		chunkObj.transform.parent = chunkHolder.transform;
-		////chunkObj.transform.parent = GameObject.Find ("Terrain").transform;
-
-		Debug.Log ("Position globale du bloc terrain " + x + "/" + y + " : " + chunkObj.transform.position);
 
 		return chunkObj.GetComponent<HexagonesVueScript>();
 
@@ -236,13 +232,18 @@ public class TerrainManagerScript : MonoBehaviour {
 				pieces[x, z].xSector = x;
 				pieces[x, z].ySector = z;
 				pieces[x, z].worldManager = this;
+				/*
+				Debug.Log ("Positions bloc terrain : "
+				           +"global:"+pieces[x, z].gameObject.transform.position
+				           +" local:"+pieces[x, z].gameObject.transform.localPosition);
+				*/
 			}
 		}
 		
 		foreach ( HexagonesVueScript chunk in pieces ){
 			chunk.Demarrer();
 		}
-		
+
 	}
 
 	/// <summary>
@@ -444,7 +445,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		#region DEBUG TEST
 		GameObject bacAsable = GameObject.Find("Bac à sable");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjetRecentre(Invocations.TRES_GROS_CAILLOU);
+		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 		#endregion
 	}
 #endregion

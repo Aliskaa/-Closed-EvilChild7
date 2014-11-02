@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.2.1
+/// PY Lapersonne - Version 2.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -26,13 +26,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	 * ********* */
 
 #region Attributs privés
-	/// <summary>
-	/// Flag pour indiquer si l'objet a été rencentré ou pas.
-	/// Flag mis à jour régulièrement.
-	/// </summary>
-	// FIXME pas très propre
-	private bool recentrageFait;  
-
 	/// <summary>
 	/// Flag indiquant que l'objet est en mouvement ou non
 	/// Flag mis à jour régulièrement.
@@ -57,7 +50,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	// FIXME pas très propre
 	private TypesRotations orientationCourante;
-	
 #endregion
 
 #region Attributs publics
@@ -101,7 +93,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée la fourmis,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
 	/// </summary>
-	/// <returns>Le bloc de terrain en tant que GameObject</returns>
+	/// <returns>Le bloc de terrain en tant que GameObject, null si aucun objet en dessous</returns>
 	private GameObject GetBlocCourantAsGO(){
 		// Lancement d'un rayon vers la case sous la fourmis
 		RaycastHit hit;
@@ -143,9 +135,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
 	/// </remarks>
 	private void Recentrer(){
-		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.position);
-		Debug.Log("Recentrage de "+transform.position+" vers "+hexPlusProche.positionGlobale);
-		transform.position = hexPlusProche.positionGlobale;
+		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche (transform.localPosition);
+		//Debug.Log("Recentrage de l="+transform.localPosition+" vers "+hexPlusProche.positionGlobale);
+		transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 	}
 
 	/// <summary>
@@ -245,20 +237,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity au démarrage du script
 	/// </summary>
 	void Awake(){
-		recentrageFait = false;
 		enMouvement = false;
 		objectifAtteint = false;
-		Avancer(2);// FIXME pour des besoins de débugs
 	}
 
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
-		if (! recentrageFait){
-			Recentrer();
-			recentrageFait = true;
-		}
 		// A chaque frame, continuer la déambulation selon les flags
 		if (enMouvement && !objectifAtteint){
 			Deambuler();

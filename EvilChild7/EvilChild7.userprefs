@@ -1,14 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev\changelog.txt">
     <Files>
-      <File FileName="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" Line="11" Column="1" />
-      <File FileName="Assets\Dev\changelog.txt" Line="238" Column="34" />
-      <File FileName="Assets\Dev\TODO.txt" Line="69" Column="43" />
-      <File FileName="Assets\Scripts\Terrains\TerrainUtils.cs" Line="127" Column="1" />
-      <File FileName="Assets\Scripts\Terrains\TerrainManagerScript.cs" Line="151" Column="3" />
-      <File FileName="Assets\Scripts\Terrains\HexagonesVueScript.cs" Line="105" Column="48" />
-      <File FileName="Assets\Scripts\Fourmis\CollisionsFourmisScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Dev\changelog.txt" Line="251" Column="1" />
+      <File FileName="Assets\Dev\TODO.txt" Line="24" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

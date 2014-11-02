@@ -238,9 +238,49 @@ Numero........:  23;
 Date..........:  01/11/2014 19h48;
 Auteur........:  py;
 Commentaire...:
-		Travail sur le recentrage des objets :
+	Travail sur le recentrage des objets :
 		- lors des invocations selon position la plus proche [en cours]
 		- lors des déplacements des fourmis [en cours]
+
+__________________________________
+
+Numero........:  24;
+Date..........:  02/11/2014 17h55;
+Auteur........:  py;
+Commentaire...:
+(ˆڡˆ) 
+	Les modèles d'hexagones en mémoire servant aux mesh ont été revus
+		- Nettoyage de code
+		- Position LOCALE par rapport au GameObjet grand-parent TERRAIN
+	Le recentrage d'un objet invoqué a été revu
+		- Prise en compte de la position locale par rapport au terrain de l'hexagone
+	Revision du système pour choper l'hexagone le plus proche d'un point donné
+	Nettoyage du code avec masquage des variables publics inutiles dans l'inspecteur
+	Taches 86 et 87 terminées;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
 
 __________________________________
 

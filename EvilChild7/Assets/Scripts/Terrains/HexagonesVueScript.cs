@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.1
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -41,27 +41,32 @@ public class HexagonesVueScript : MonoBehaviour {
     /// <summary>
     /// Le tableau d'hexagones
     /// </summary>
+	[HideInInspector]
     public HexagoneInfo[,] tabHexagones;
 
 	/// <summary>
 	/// Les dimensions de l'objet
 	/// </summary>
+	[HideInInspector]
     public Vector2 dimensionsPiece;
 
 	/// <summary>
 	/// Les dimensions de l'hexagone
 	/// </summary>
-    public Vector3 dimensionHexagone;
+	[HideInInspector]
+	public Vector3 dimensionHexagone;
 
     /// <summary>
     /// 
     /// </summary>
-    public int xSector;
+	[HideInInspector]
+	public int xSector;
 
 	/// <summary>
 	/// 
 	/// </summary>
-    public int ySector;
+	[HideInInspector]
+	public int ySector;
 
 	/// <summary>
 	/// Référece vers l'objet permettant de gérer le terrain
@@ -92,12 +97,10 @@ public class HexagonesVueScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Démarrer la création des vues en créant et assemblant des pièces
+    /// Démarre la création des vues en créant et assemblant des pièces (ensembles d'hexagones)
     /// </summary>
     public void Demarrer(){
-
         GenererPiece();
-
 		for( int x = 0; x < dimensionsPiece.x; x++ ){
             for ( int z = 0; z < dimensionsPiece.y; z++ ){
                 if ( tabHexagones[x, z] != null ){
@@ -108,19 +111,15 @@ public class HexagonesVueScript : MonoBehaviour {
                 }
             }
         }
-
         // Combiner tous les hexagones du mesh de la piece dans un seul mesh
         CombinerHexagones();
-
     }
 
 	/// <summary>
 	/// Génère la pièce, i.e. l'ensemble des hexagones
 	/// </summary>
 	public void GenererPiece(){
-
 		tabHexagones = new HexagoneInfo[(int)dimensionsPiece.x, (int)dimensionsPiece.y];
-
 		bool notOdd;
 		for ( int y = 0; y < dimensionsPiece.y; y++ ){
 			notOdd = ((y % 2) == 0);
@@ -134,7 +133,6 @@ public class HexagonesVueScript : MonoBehaviour {
 				}
 			}
 		}
-
 	}
 
 	/// <summary>
@@ -152,10 +150,17 @@ public class HexagonesVueScript : MonoBehaviour {
 		// Définit la position globale for le positionnement des textures
 		posGlobale.x = x + (dimensionsPiece.x * xSector);
 		posGlobale.y = y + (dimensionsPiece.y * ySector);
-		
+
 		hexagoneInfo.CubeGridPosition = new Vector3(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f), posGlobale.y, -(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f) + posGlobale.y));
 		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)), 0, (y * worldManager.hexExt.z) * 1.5f);
 		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
+
+		// Calcul de la position locale de l'hexagone par rapport au terrain
+		// FIXME A améliorer
+		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
+		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
+		posLocaleSurTerrain.z += (y+1)*3;
+		hexagoneInfo.positionLocaleSurTerrain = posLocaleSurTerrain;
 
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
@@ -179,11 +184,18 @@ public class HexagonesVueScript : MonoBehaviour {
 		// Définit la position globale for le positionnement des textures
 		positionGlobale.x = x + (dimensionsPiece.x * xSector);
 		positionGlobale.y = y + (dimensionsPiece.y * ySector);
-		
+
 		hexagoneInfo.CubeGridPosition = new Vector3(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f), positionGlobale.y, -(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f) + positionGlobale.y));
 		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)) + worldManager.hexExt.x, 0, (y * worldManager.hexExt.z) * 1.5f);
 		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
-		
+
+		// Calcul de la position locale de l'hexagone par rapport au terrain
+		// FIXME A améliorer
+		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
+		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
+		posLocaleSurTerrain.z += (y+1)*3;
+		hexagoneInfo.positionLocaleSurTerrain = posLocaleSurTerrain;
+
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
 
@@ -197,15 +209,12 @@ public class HexagonesVueScript : MonoBehaviour {
 	/// Créé le collider
 	/// </summary>
 	void CreerCollider(){
-		
 		if( collider == null ){
 			collider = gameObject.AddComponent<BoxCollider>();
 		}
-		
 		// Lier le centre et la taille du colldier et du mesh
 		collider.center = filter.mesh.bounds.center;
 		collider.size = filter.mesh.bounds.size;
-		
 	}
 #endregion
 	

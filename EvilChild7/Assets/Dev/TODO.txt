@@ -10,21 +10,19 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 											Mettre des flags pour que l'Update ne relance pas la fonction à chaque fois
 											Pas vraiment de méthode de stop ?
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
-29		1		>	lancé		[py]		Fourmis : voir les cases et leurs types
+29		1		>	lancé		[py]		Fourmis : voir les cases et leurs types, où elle peut aller
 30					terminé		X			Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de aprourt de case à case, ...)
 32					non lancé	[py]		Voir nécessité script pour créér des GO donnés (pop scarabées, éclosions fourmis, ...)																				
 33					terminé		X			Améliorer le bac: cotés, skybox, fond, ...											
-34		1		>	lancé		[py]		Fourmis : voir où elle peut aller : eau, bois, sable
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36					terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
 37				 	terminé		X			La fourmis (rigidbody) se déplace toute seule, meme sans update des scripts
 38					terminé		X			Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
-40		2			non lancé	[py]		Le recentrage n'est pas parfait
-41		1			non lancé	[py]		Faire la vue et l'odorat dans les 6 sens possibles, pas que devant
-42		1		>				[py]		Configurer tous les prefabs (rigidbody, box collider) pour :
+41		1		>	non lancé	[py]		Faire la vue et l'odorat dans les 6 sens possibles, pas que devant
+42		1		>	non lancé	[py]		Configurer tous les prefabs (rigidbody, box collider) pour :
 44								[py]			- fourmis rouge combattante
 45								[py]			- fourmis rouge générale
 46								[py]			- fourmis rouge contremaitre
@@ -66,5 +64,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 82								[py]			- bonbon vert
 83								[py]			- phéromones
 84								[py]			- scarabées
-85		0		>				[py]		Recentrer les objets !!!
+85		1			non lancé	[py]		Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
+86					terminé		X			Système pour choper hexagone à partir de coordonnées
+87					terminé		X			Correction positions des objets invoqués
 

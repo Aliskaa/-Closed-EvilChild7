@@ -3,8 +3,14 @@
 /// Script pour invoquer/crééer/isntancier des objets sur le terrain
 /// </summary>
 /// 
+/// Exemple d'utilisation :
+/// <code>
+/// 		GameObject bacAsable = GameObject.Find("Bac à sable");
+/// 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
+/// </code>
 /// <remarks>
-/// PY Lapersonne - Version 1.0.1
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -196,7 +202,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 		if (hexPlusProche == null) {
 			Debug.LogError ("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
 		} else {
-			invoc.transform.position = hexPlusProche.positionGlobale;
+			invoc.transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 		}
 		return invoc;
 	}
@@ -210,12 +216,12 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	/// <param name="objet">Le type d'objet à créer</param>
 	public GameObject InvoquerObjetRecentre(Invocations objet){
 		GameObject invoc = InvoquerObjet(objet);
-		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(invoc.transform.position);
+		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(invoc.transform.localPosition);
 		//Debug.Log("Ma position :" + invoc.transform.position + ", pour " + hexPlusProche.positionGlobale);
 		if (hexPlusProche == null) {
 			Debug.LogError("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
 		} else {
-			invoc.transform.position = hexPlusProche.positionGlobale;
+			invoc.transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 		}
 		//Debug.Log("Ma nouvelle position :" + invoc.transform.position);
 		return invoc;

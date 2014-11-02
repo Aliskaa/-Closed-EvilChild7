@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.0.1
 /// </remarks>
 
 using UnityEngine;
@@ -21,7 +21,6 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	 * Attributs *
 	 * ********* */
 
-	
 #region Attributs privés
 	/// <summary>
 	/// Référence vers le script de déplacement de l'objet
@@ -30,7 +29,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 #endregion
 
 
-#region Atributs publics
+#region Constantes publiques
 	/// <summary>
 	/// La longueur de visée pour une ouvrière
 	/// </summary>
@@ -57,8 +56,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
-
-
+	
 #region Méthodes privées
 	/// <summary>
 	/// Méthode pour détecter des obstacles sur un axe donné

@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.1
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -18,61 +18,85 @@ using System.Collections;
 /// </summary>
 public class HexagoneInfo {
 
+
 	/* ********* *
 	 * Attributs *
 	 * ********* */
 
-
 #region Attributs publics
 	/// <summary>
-	/// La position locale
+	/// La position locale, utile pour des calculs de meshs.
+	/// Dépréciée.
 	/// </summary>
-    public Vector3 positionLocale;
+	// FIXME Verifier la relle utilité, supprimer au besoin
+	[HideInInspector]
+	public Vector3 positionLocale;
 
 	/// <summary>
-	/// La position globale
+	/// La position globale, utile pour des calculs 3D.
+	/// Dépréciée.
 	/// </summary>
-    public Vector3 positionGlobale;
+	// FIXME Verifier la relle utilité, supprimer au besoin
+	[HideInInspector]
+	public Vector3 positionGlobale;
+
+	/// <summary>
+	/// La position locale de l'objet par rapport
+	/// au GameObject grand-parent "Terrain" et non pas par rapport
+	/// au GameObject parent "BlocTerrain" : ceci permet de faire une corrélation
+	/// entre un objet sur le terrain et un hexagone.
+	/// Représente la position "utile" de l'hexagone.
+	/// </summary>
+	[HideInInspector]
+	public Vector3 positionLocaleSurTerrain;
 
 	/// <summary>
 	/// Coordonnées 3D sur la grille
 	/// </summary>
+	[HideInInspector]
 	public Vector3 positionGrille;
 
 	/// <summary>
 	///
 	/// </summary>
-    public Vector3 hexExt;
+	[HideInInspector]
+	public Vector3 hexExt;
 
 	/// <summary>
 	/// Le centre de l'hexagone
 	/// </summary>
-    public Vector3 centreHexagone;
+	[HideInInspector]
+	public Vector3 centreHexagone;
 
 	/// <summary>
 	/// L'objet embarquant cet hexagone
 	/// </summary>
-    public HexagonesVueScript parentChunk;
+	[HideInInspector]
+	public HexagonesVueScript parentChunk;
 
 	/// <summary>
 	/// Le mesh Uity local
 	/// </summary>
-    public Mesh meshLocal;
+	[HideInInspector]
+	public Mesh meshLocal;
 	
    	/// <summary>
    	/// Tableau de sommets
    	/// </summary>
-    public Vector3[] sommets;
+	[HideInInspector]
+	public Vector3[] sommets;
 
 	/// <summary>
 	/// Tableau pour ramener dans des coordonnes 2D
 	/// </summary>
-    public Vector2[] uv;
+	[HideInInspector]
+	public Vector2[] uv;
 
 	/// <summary>
 	/// Les triangles de l'hexagone
 	/// </summary>
-    public int[] triangles;
+	[HideInInspector]
+	public int[] triangles;
 #endregion
 
 

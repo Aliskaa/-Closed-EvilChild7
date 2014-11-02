@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.1
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -49,9 +49,11 @@ public static class TerrainUtils {
 	/// Pour ce faire, les hexagones de la map vont etre parcouruts et leurs coordonnées
 	/// en X et en Z vont etre récupérées. L'hexagone qui aura le X et le Z les plus proches
 	/// des X et Z de l'objet sera l'hexagone le plus proche.
+	/// La position donnée en apramètre doit etre une position locale/relative au
+	/// game object "Terrain"
 	/// </summary>
 	/// <remarks>
-	/// Cette opération étant gourmande (parcourt de tous els hexagones avec plusieurs tests),
+	/// Cette opération étant gourmande (parcourt de tous les hexagones avec plusieurs tests),
 	/// il vaut mieux faire cette opération dès qu'un objet attérit sur le terrain.
 	/// </remarks>
 	/// <returns>L'hexagone le plus proche</returns>
@@ -62,7 +64,7 @@ public static class TerrainUtils {
 		float minimumDifferenceZ = float.MaxValue;
 		HexagoneInfo hexagPlusProche = null;
 		foreach ( HexagoneInfo h in hexagones ){
-			Vector3 posH = h.positionGlobale;
+			Vector3 posH = h.positionLocaleSurTerrain;
 			float dX = Math.Abs(positionObjet.x - posH.x);
 			float dZ = Math.Abs(positionObjet.z - posH.z);
 			if ( dX <= minimumDifferenceX && dZ <= minimumDifferenceZ  ){
@@ -76,6 +78,9 @@ public static class TerrainUtils {
 				hexagPlusProche = h;
 			}
 		}
+		if ( hexagPlusProche == null ){
+			Debug.LogError("Aucun hexagone proche n'a été trouvé. Les coordonées sont-elles locales au terrain ?");
+		}
 		return hexagPlusProche;
 	}
 
@@ -88,10 +93,10 @@ public static class TerrainUtils {
 	public static Vector3 decalageHexagone( Vector3 positionObjet ){
 		HexagoneInfo cible = hexagonePlusProche(positionObjet);
 		Vector3 decalage = new Vector3(
-								cible.positionGlobale.x-positionObjet.x,
-								cible.positionGlobale.y-positionObjet.y,
-								cible.positionGlobale.z-positionObjet.z
-							);
+			cible.positionLocaleSurTerrain.x-positionObjet.x,
+			cible.positionLocaleSurTerrain.y-positionObjet.y,
+			cible.positionLocaleSurTerrain.z-positionObjet.z
+		);
 		return decalage;
 	}
 
@@ -100,10 +105,7 @@ public static class TerrainUtils {
 	/// </summary>
 	/// <param name="hexagone">L'hexagone à enregistrer</param>
 	public static void ajouterHexagone( HexagoneInfo hexagone ){
-		Debug.Log("Ajout d'un hexagone : " 
-		          + hexagone.positionGlobale + "/"
-		          + hexagone.positionLocale + "/" 
-		          + hexagone.positionGrille);
+		//Debug.Log("Ajout d'un hexagone : " + hexagone.positionLocaleSurTerrain);
 		hexagones.Add(hexagone);
 	}
 
