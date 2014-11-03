@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -99,6 +99,13 @@ public class HexagoneInfo {
 	public int[] triangles;
 #endregion
 
+#region Attributs privés
+	/// <summary>
+	/// La texture à appliquer sur l'hexagone
+	/// </summary>
+	private Texture texture;
+#endregion
+
 
 	/* ******** *
 	 * Méthodes *
@@ -124,11 +131,29 @@ public class HexagoneInfo {
         set { positionGrille = value; }
     }
 
+	// FIXME Faire setter et getter à la sauce C#
+	/// <summary>
+	/// Retourne la texture appliquée à l'hexagone
+	/// </summary>
+	/// <returns>La texture</returns>
+	public Texture GetTextureAppliquee(){
+		return texture;
+	}
+	/// <summary>
+	/// Définit la texture appliquée à l'hexagone
+	/// </summary>
+	///<param name="t">La texture appliquée</param>
+	public void SetTextureAppliquee( Texture t ){
+		Debug.Log("Définition d'une texture : "+t);
+		texture = t;
+	}
+
     /// <summary>
     /// Procédure appellée par HexagoneVueScript
 	/// pour faire le mesh d'un hexagone
     /// </summary>
-    public void Start(){
+    public void Initialiser(){
+		texture = null;
         DefinirMesh();
     }
 #endregion

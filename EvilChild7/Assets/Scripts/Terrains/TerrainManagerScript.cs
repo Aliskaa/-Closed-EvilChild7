@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.1.0
+/// PY Lapersonne - Version 3.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -119,7 +119,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <param name="y">La hauteur entre les pièces</param>
 	/// <param name="type">Le type de terrain</param>
 	/// <returns>The new chunk's script</returns>
-	public HexagonesVueScript CreerPiece( int x, int y, TypesTuiles type ){
+	public HexagonesVueScript CreerPiece( int x, int y, TypesTerrains type ){
 
 		// Création du GameObject et ajout au parent
 		if ( x == 0 && y == 0 && chunkHolder == null ){
@@ -131,10 +131,10 @@ public class TerrainManagerScript : MonoBehaviour {
 		chunkObj.AddComponent<HexagonesVueScript>();
 		Texture2D texture;
 		switch (type) {
-			case TypesTuiles.SABLE:
+			case TypesTerrains.SABLE:
 				texture = textureTerrainSable;
 				break;
-			case TypesTuiles.EAU:
+			case TypesTerrains.EAU:
 				texture = textureTerrainEau;
 				break;
 			default:
@@ -225,7 +225,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
-				pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+				pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
 				pieces[x, z].SetDimension(taillePiece, taillePiece);
@@ -262,9 +262,9 @@ public class TerrainManagerScript : MonoBehaviour {
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				if ( x >= (segmentsEnX/3) && x <= (2*segmentsEnX/3)
 				    && z >= (segmentsEnZ/3) && z <= (2*segmentsEnZ/3) ){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.EAU);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.EAU);
 				} else {
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -296,30 +296,30 @@ public class TerrainManagerScript : MonoBehaviour {
 		// FIXME : Trop lourd
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
-				pieces[x, z] = CreerPiece(x, z, TypesTuiles.EAU);
+				pieces[x, z] = CreerPiece(x, z, TypesTerrains.EAU);
 				if ( x >= segmentsEnX/4 && x <= segmentsEnX/3
 				    && z >= segmentsEnZ/4 && z <= segmentsEnZ/3){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4
 				    && z <= segmentsEnZ/3){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( x >= segmentsEnX/3 && x <= 2*segmentsEnX/3
 				    && z >= segmentsEnZ/4 && z <= segmentsEnZ/3){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( x >= segmentsEnX/4 && x <= segmentsEnX/3
 				    && z >= segmentsEnZ/3 && z <= 3*segmentsEnZ/4){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( x >= segmentsEnX/3 && x <= 3*segmentsEnX/4
 				    && z >= 2*segmentsEnZ/3 && z <= 3*segmentsEnZ/4){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4
 				    && z >= 3*segmentsEnZ/4){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -351,15 +351,15 @@ public class TerrainManagerScript : MonoBehaviour {
 		// FIXME : Trop lourd
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
-				pieces[x, z] = CreerPiece(x, z, TypesTuiles.EAU);
+				pieces[x, z] = CreerPiece(x, z, TypesTerrains.EAU);
 				if ( x >= segmentsEnX/8 && x <= segmentsEnX/7 ){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( x >= 9*segmentsEnX/10 ){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				if ( z >= 4*segmentsEnZ/9 && z <= 5*segmentsEnZ/9 ){
-					pieces[x, z] = CreerPiece(x, z, TypesTuiles.SABLE);
+					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -392,7 +392,7 @@ public class TerrainManagerScript : MonoBehaviour {
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				// 1 : Type sable, 2 : Type eau
 				int numType = Random.Range(1,200);
-				pieces[x, z] = CreerPiece(x, z, (TypesTuiles)(numType%2+1));
+				pieces[x, z] = CreerPiece(x, z, (TypesTerrains)(numType%2+1));
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
 				pieces[x, z].SetDimension(taillePiece, taillePiece);
@@ -455,9 +455,13 @@ public class TerrainManagerScript : MonoBehaviour {
 
 #region TypeTuile
 /// <summary>
-/// Les types de tuiles
+/// Les types de terrains
 /// </summary>
-public enum TypesTuiles : int { 
+public enum TypesTerrains : int { 
+	/// <summary>
+	/// Aucun type de terrain
+	/// </summary>
+	AUCUN = 0,
 	/// <summary>
 	/// Du sable
 	/// </summary>

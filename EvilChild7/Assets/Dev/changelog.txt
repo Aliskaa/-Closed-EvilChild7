@@ -264,7 +264,10 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur le typage des hexagones pour qu'une fourmis sache où elle est et ce qu'elle a devant elle
+		- Sauvegarde de la texture appliquée dans l'hexagone
+		- GameObject par hexagone -> colliders [en cours]
+		- Améliorations API : possibilité de savoir où est une fourmis ayant le DeplacementsFourmisScripts [en cours];
 
 __________________________________
 

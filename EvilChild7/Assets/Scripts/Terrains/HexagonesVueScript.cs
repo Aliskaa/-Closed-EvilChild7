@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -79,103 +79,100 @@ public class HexagonesVueScript : MonoBehaviour {
 	 * Méthodes *
 	 * ******** */
 
-#region Méthodes publiques
-    /// <summary>
-    /// Définit la dimension d'une pièce
-    /// </summary>
-    /// <param name="x">Quantité d'hexagones sur l'axe x</param>
-    /// <param name="y">Quantité d'hexagones sur l'axe y</param>
-    public void SetDimension( int x, int y ){
-        dimensionsPiece = new Vector2(x, y);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public void OnDestroy(){
-        Destroy(renderer.material);
-    }
-
-    /// <summary>
-    /// Démarre la création des vues en créant et assemblant des pièces (ensembles d'hexagones)
-    /// </summary>
-    public void Demarrer(){
-        GenererPiece();
+#region Méthodes privées
+	/// <summary>
+	/// Combine les différents hexagones du mesh de la pièce dans un seul mesh
+	/// </summary>
+	private void CombinerHexagones(){
+		
+		CombineInstance[,] combine = new CombineInstance[(int)dimensionsPiece.x,(int)dimensionsPiece.y];
+		
 		for( int x = 0; x < dimensionsPiece.x; x++ ){
-            for ( int z = 0; z < dimensionsPiece.y; z++ ){
-                if ( tabHexagones[x, z] != null ){
-                    tabHexagones[x, z].parentChunk = this;
-                    tabHexagones[x, z].Start();
-                } else {
-                    Debug.LogError("Null hexagon found in memory: " + x + " " + z);
-                }
-            }
-        }
-        // Combiner tous les hexagones du mesh de la piece dans un seul mesh
-        CombinerHexagones();
-    }
-
+			for ( int z = 0; z < dimensionsPiece.y; z++ ){
+				combine[x, z].mesh = tabHexagones[x, z].meshLocal;
+				Matrix4x4 matrix = new Matrix4x4();
+				matrix.SetTRS(tabHexagones[x, z].positionLocale, Quaternion.identity, Vector3.one);
+				combine[x, z].transform = matrix;
+			}
+		}
+		
+		filter = gameObject.GetComponent<MeshFilter>();
+		filter.mesh = new Mesh();
+		
+		CombineInstance[] final = null;
+		CivGridUtility.ToSingleArray(combine, out final);
+		
+		filter.mesh.CombineMeshes(final);
+		filter.mesh.RecalculateNormals();
+		CreerCollider();
+		
+	}
+	
 	/// <summary>
 	/// Génère la pièce, i.e. l'ensemble des hexagones
 	/// </summary>
-	public void GenererPiece(){
+	/// <param name="texture">La texture à appliquer sur l'hexagone</param>
+	private void GenererHexagones( Texture texture ){
 		tabHexagones = new HexagoneInfo[(int)dimensionsPiece.x, (int)dimensionsPiece.y];
 		bool notOdd;
 		for ( int y = 0; y < dimensionsPiece.y; y++ ){
 			notOdd = ((y % 2) == 0);
 			if (notOdd){
 				for ( int x = 0; x < dimensionsPiece.x; x++ ){
-					CreerHexagone(x, y);
+					CreerHexagone(x, y, texture);
 				}
 			} else {
 				for ( int x = 0; x < dimensionsPiece.x; x++ ){
-					CreerHexagoneDecale(x, y);
+					CreerHexagoneDecale(x, y, texture);
 				}
 			}
 		}
 	}
-
+	
 	/// <summary>
 	/// Créé un hexagone
 	/// </summary>
 	/// <param name="x">La coordonnée en X</param>
 	/// <param name="y">La coordonnée en Y</param>
-	public void CreerHexagone( int x, int y ){
-
+	/// <param name="texture">La texture qu'aura l'hexagone</param>
+	private void CreerHexagone( int x, int y, Texture texture ){
+		
 		HexagoneInfo hexagoneInfo = null;
 		Vector2 posGlobale;
 		tabHexagones[x, y] = new HexagoneInfo();
 		hexagoneInfo = tabHexagones[x, y];
-
+		
 		// Définit la position globale for le positionnement des textures
 		posGlobale.x = x + (dimensionsPiece.x * xSector);
 		posGlobale.y = y + (dimensionsPiece.y * ySector);
-
+		
 		hexagoneInfo.CubeGridPosition = new Vector3(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f), posGlobale.y, -(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f) + posGlobale.y));
 		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)), 0, (y * worldManager.hexExt.z) * 1.5f);
 		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
-
+		
 		// Calcul de la position locale de l'hexagone par rapport au terrain
 		// FIXME A améliorer
 		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
 		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
 		posLocaleSurTerrain.z += (y+1)*3;
 		hexagoneInfo.positionLocaleSurTerrain = posLocaleSurTerrain;
-
+		
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
-
+		hexagoneInfo.SetTextureAppliquee(texture);
+		
 		TerrainUtils.ajouterHexagone(hexagoneInfo);
-
+		
 	}
-
+	
 	/// <summary>
 	/// Créé un hexagone décalé
 	/// </summary>
 	/// <param name="x">La position en X</param>
 	/// <param name="y">La position en Y</param>
-	public void CreerHexagoneDecale( int x, int y ){
-
+	/// <param name="texture">La texture qu'aura l'hexagone</param>
+	private void CreerHexagoneDecale( int x, int y, Texture texture ){
+		
 		HexagoneInfo hexagoneInfo;
 		Vector2 positionGlobale;
 		tabHexagones[x, y] = new HexagoneInfo();
@@ -184,26 +181,27 @@ public class HexagonesVueScript : MonoBehaviour {
 		// Définit la position globale for le positionnement des textures
 		positionGlobale.x = x + (dimensionsPiece.x * xSector);
 		positionGlobale.y = y + (dimensionsPiece.y * ySector);
-
+		
 		hexagoneInfo.CubeGridPosition = new Vector3(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f), positionGlobale.y, -(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f) + positionGlobale.y));
 		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)) + worldManager.hexExt.x, 0, (y * worldManager.hexExt.z) * 1.5f);
 		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
-
+		
 		// Calcul de la position locale de l'hexagone par rapport au terrain
 		// FIXME A améliorer
 		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
 		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
 		posLocaleSurTerrain.z += (y+1)*3;
 		hexagoneInfo.positionLocaleSurTerrain = posLocaleSurTerrain;
-
+		
 		hexagoneInfo.hexExt = worldManager.hexExt;
 		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
-
+		hexagoneInfo.SetTextureAppliquee(texture);
+		
 		TerrainUtils.ajouterHexagone(hexagoneInfo);
-
+		
 	}
 #endregion
-	
+
 #region Méthodes package
 	/// <summary>
 	/// Créé le collider
@@ -216,35 +214,43 @@ public class HexagonesVueScript : MonoBehaviour {
 		collider.center = filter.mesh.bounds.center;
 		collider.size = filter.mesh.bounds.size;
 	}
-#endregion
 	
-#region Méthodes privées
 	/// <summary>
-	/// Combine les différents hexagones du mesh de la pièce dans un seul mesh
+	/// 
 	/// </summary>
-    private void CombinerHexagones(){
+	void OnDestroy(){
+		Destroy(renderer.material);
+	}
+#endregion
 
-        CombineInstance[,] combine = new CombineInstance[(int)dimensionsPiece.x,(int)dimensionsPiece.y];
+#region Méthodes publiques
+	/// <summary>
+	/// Définit la dimension d'une pièce
+	/// </summary>
+	/// <param name="x">Quantité d'hexagones sur l'axe x</param>
+	/// <param name="y">Quantité d'hexagones sur l'axe y</param>
+	public void SetDimension( int x, int y ){
+		dimensionsPiece = new Vector2(x, y);
+	}
 
-        for( int x = 0; x < dimensionsPiece.x; x++ ){
+    /// <summary>
+    /// Démarre la création des vues en créant et assemblant des pièces (ensembles d'hexagones)
+    /// </summary>
+    public void Demarrer(){
+		Texture texture = gameObject.GetComponent<MeshRenderer>().material.mainTexture;
+        GenererHexagones( texture );
+		for( int x = 0; x < dimensionsPiece.x; x++ ){
             for ( int z = 0; z < dimensionsPiece.y; z++ ){
-                combine[x, z].mesh = tabHexagones[x, z].meshLocal;
-                Matrix4x4 matrix = new Matrix4x4();
-                matrix.SetTRS(tabHexagones[x, z].positionLocale, Quaternion.identity, Vector3.one);
-                combine[x, z].transform = matrix;
+                if ( tabHexagones[x, z] != null ){
+                    tabHexagones[x, z].parentChunk = this;
+                    tabHexagones[x, z].Initialiser();
+                } else {
+                    Debug.LogError("Null hexagon found in memory: " + x + " " + z);
+                }
             }
         }
-
-        filter = gameObject.GetComponent<MeshFilter>();
-        filter.mesh = new Mesh();
-
-		CombineInstance[] final = null;
-        CivGridUtility.ToSingleArray(combine, out final);
-
-        filter.mesh.CombineMeshes(final);
-        filter.mesh.RecalculateNormals();
-        CreerCollider();
-
+        // Combiner tous les hexagones du mesh de la piece dans un seul mesh
+        CombinerHexagones();
     }
 #endregion
 	

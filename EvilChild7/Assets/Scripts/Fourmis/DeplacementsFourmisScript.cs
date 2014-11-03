@@ -135,7 +135,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
 	/// </remarks>
 	private void Recentrer(){
-		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche (transform.localPosition);
+		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.localPosition);
 		//Debug.Log("Recentrage de l="+transform.localPosition+" vers "+hexPlusProche.positionGlobale);
 		transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 	}
@@ -245,6 +245,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
+		HexagoneCourant();
 		// A chaque frame, continuer la déambulation selon les flags
 		if (enMouvement && !objectifAtteint){
 			Deambuler();
@@ -363,6 +364,16 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			default:
 				break;
 		}
+	}
+
+	/// <summary>
+	/// Retourne l'hexagone sur lequel est la fourmis
+	/// </summary>
+	/// <returns>L'hexagone sur lequel est la fourmis</returns>
+	public HexagoneInfo HexagoneCourant(){
+		HexagoneInfo hexagoneCourant = TerrainUtils.hexagonePlusProche(transform.localPosition);
+		Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTextureAppliquee());
+		return hexagoneCourant;
 	}
 
 	/// <summary>

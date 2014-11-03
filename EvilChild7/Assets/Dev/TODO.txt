@@ -67,4 +67,6 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 85		1			non lancé	[py]		Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
 86					terminé		X			Système pour choper hexagone à partir de coordonnées
 87					terminé		X			Correction positions des objets invoqués
+88		1			non lancé	[py]		Cibler une hexagone en le mettant en surbrillance
+
 
