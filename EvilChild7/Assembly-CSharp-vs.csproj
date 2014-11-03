@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Utils\TypesAxes.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesObjetsRencontres.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesRotations.cs" />
+     <None Include="Assets\Dev\git_pensebete.txt" />
      <None Include="Assets\Textures\Pheromones\readme.txt" />
      <None Include="Assets\Scripts\Terrains\readme.txt" />
      <None Include="Assets\Scenes\readme.txt" />
@@ -67,7 +68,6 @@
      <None Include="Assets\Prefabs\Nourritures\readme.txt" />
      <None Include="Assets\Prefabs\Eau\readme.txt" />
      <None Include="Assets\Textures\Terrains\readme.txt" />
-     <None Include="Assets\Dev\git_pensebete.txt" />
      <None Include="Assets\Audios\readme.txt" />
      <None Include="Assets\Docs\readme.txt" />
      <None Include="Assets\Textures\Eau\readme.txt" />
