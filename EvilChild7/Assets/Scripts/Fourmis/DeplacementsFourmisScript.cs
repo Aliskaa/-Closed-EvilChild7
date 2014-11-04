@@ -135,7 +135,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
 	/// </remarks>
 	private void Recentrer(){
-		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(transform.localPosition);
+		HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(transform.localPosition);
 		//Debug.Log("Recentrage de l="+transform.localPosition+" vers "+hexPlusProche.positionGlobale);
 		transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 	}
@@ -272,8 +272,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		// Arret de l'objet
 		if  (nbCases <= 0 ){
 			rigidbody.velocity = Vector3.zero;
-			rigidbody.angularVelocity = Vector3.zero;
-			rigidbody.isKinematic = true;
 			enMouvement = false;
 			objectifAtteint = true;
 			return;
@@ -371,7 +369,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <returns>L'hexagone sur lequel est la fourmis</returns>
 	public HexagoneInfo HexagoneCourant(){
-		HexagoneInfo hexagoneCourant = TerrainUtils.hexagonePlusProche(transform.localPosition);
+		HexagoneInfo hexagoneCourant = TerrainUtils.HexagonePlusProche(transform.localPosition);
 		//Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTypeTerrain());
 		return hexagoneCourant;
 	}

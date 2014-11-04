@@ -5,11 +5,12 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.2.0
+/// PY Lapersonne - Version 3.3.0
 /// </remarks>
 
 using UnityEngine;
-using System.Collections;
+using System;
+using System.Collections.Generic;
 
 
 #region TerrainManagerScript
@@ -391,7 +392,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				// 1 : Type sable, 2 : Type eau
-				int numType = Random.Range(1,200);
+				int numType = UnityEngine.Random.Range(1,200);
 				pieces[x, z] = CreerPiece(x, z, (TypesTerrains)(numType%2+1));
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));
 				pieces[x, z].dimensionHexagone = tailleHexagone;
@@ -433,6 +434,33 @@ public class TerrainManagerScript : MonoBehaviour {
 		// FIXME : Valeur en dur, Translate() non relatif, sale
 		chunkHolder.transform.Translate(new Vector3 (-98.5f, 0.1f, -93));
 	}
+
+	/// <summary>
+	/// Créé la map 3D, c'est à dire définit les gameobjets
+	/// pour repérer "facilement" certains éléments comme l'eau.
+	/// Pour ce faire, tous les hexagones vont etre parcourus et si un hexagone
+	/// est une case d'eau, un game object sera mis dessus afin de repérer cette case 2D d'eau via un objet 3D
+	/// </summary>
+	private void CreerMap3D(){
+		List<HexagoneInfo> hexagonesEau = TerrainUtils.GetHexagonesEau();
+		GameObject bacAsable = GameObject.Find("Bac à sable");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		foreach ( HexagoneInfo h in hexagonesEau ){
+			scriptInvoc.InvoquerObjet(Invocations.EAU3D, h.positionLocaleSurTerrain);
+		}
+	}
+
+	/// <summary>
+	/// Place un gameobject sur chaque hexagone pour bien vérifier les coordonnées associées
+	/// </summary>
+	private void DebugHexagones(){
+		List<HexagoneInfo> hexags = TerrainUtils.GetHexagones();
+		GameObject bacAsable = GameObject.Find("Bac à sable");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		foreach ( HexagoneInfo h in hexags ){
+			scriptInvoc.InvoquerObjet(Invocations.DEBUG_OBJECT, h.positionLocaleSurTerrain);
+		}
+	}
 #endregion
 
 #region Méthodes package
@@ -442,10 +470,12 @@ public class TerrainManagerScript : MonoBehaviour {
 	void Awake(){
 		GetHexagonesProp();
 		CreerMap(type);
+		CreerMap3D();
 		#region DEBUG TEST
 		GameObject bacAsable = GameObject.Find("Bac à sable");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(95.5f, 0.1f, 107.4f));
+		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
+		                                                 new Vector3(85f, 0.1f, 90f));
 		#endregion
 	}
 #endregion

@@ -11,6 +11,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 											Pas vraiment de méthode de stop ?
 28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
 29		1		>	lancé		[py]		Fourmis : voir les cases et leurs types, où elle peut aller
+												-> Corriger la vue qui est defectueuse (pas de detection)
 30					terminé		X			Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de aprourt de case à case, ...)
@@ -64,7 +65,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 82								[py]			- bonbon vert
 83								[py]			- phéromones
 84								[py]			- scarabées
-85		1			non lancé	[py]		Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
+85		2			non lancé	[py]		Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
 86					terminé		X			Système pour choper hexagone à partir de coordonnées
 87					terminé		X			Correction positions des objets invoqués
 88		1			non lancé	[py]		Cibler une hexagone en le mettant en surbrillance

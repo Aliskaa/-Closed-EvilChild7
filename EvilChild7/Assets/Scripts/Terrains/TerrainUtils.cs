@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.2
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -58,7 +58,7 @@ public static class TerrainUtils {
 	/// </remarks>
 	/// <returns>L'hexagone le plus proche</returns>
 	/// <param name="positionObjet">La position de l'objet</param>
-	public static HexagoneInfo hexagonePlusProche( Vector3 positionObjet ){
+	public static HexagoneInfo HexagonePlusProche( Vector3 positionObjet ){
 		bool flagOxXZ = false;
 		float minimumDifferenceX = float.MaxValue;
 		float minimumDifferenceZ = float.MaxValue;
@@ -90,8 +90,8 @@ public static class TerrainUtils {
 	/// </summary>
 	/// <returns>Le vevteur de correction à appliquer</returns>
 	/// <param name="positionObjet">La position de l'objet à changer</param>
-	public static Vector3 decalageHexagone( Vector3 positionObjet ){
-		HexagoneInfo cible = hexagonePlusProche(positionObjet);
+	public static Vector3 DecalageHexagone( Vector3 positionObjet ){
+		HexagoneInfo cible = HexagonePlusProche(positionObjet);
 		Vector3 decalage = new Vector3(
 			cible.positionLocaleSurTerrain.x-positionObjet.x,
 			cible.positionLocaleSurTerrain.y-positionObjet.y,
@@ -104,7 +104,7 @@ public static class TerrainUtils {
 	/// Enregistre un hexagone
 	/// </summary>
 	/// <param name="hexagone">L'hexagone à enregistrer</param>
-	public static void ajouterHexagone( HexagoneInfo hexagone ){
+	public static void AjouterHexagone( HexagoneInfo hexagone ){
 		hexagones.Add(hexagone);
 	}
 
@@ -112,15 +112,51 @@ public static class TerrainUtils {
 	/// Supprime un hexagone
 	/// </summary>
 	/// <param name="hexagone">L'hexagone à supprimer</param>
-	public static void supprimerHexagone( HexagoneInfo hexagone ){
+	public static void SupprimerHexagone( HexagoneInfo hexagone ){
 		hexagones.Remove(hexagone);
 	}
 
 	/// <summary>
 	/// Supprime tous les hexagones
 	/// </summary>
-	public static void supprimerHexagones(){
+	public static void SupprimerHexagones(){
 		hexagones = new List<HexagoneInfo>();
+	}
+
+	/// <summary>
+	/// Retourne les hexagones ayant de l'eau
+	/// </summary>
+	/// <returns>Une liste d'hexagones d'eau</returns>
+	public static List<HexagoneInfo> GetHexagonesEau(){
+		List<HexagoneInfo> hexagonesEau = new List<HexagoneInfo>();
+		foreach ( HexagoneInfo h in hexagones ){
+			if ( h.TextureAppliquee == TypesTerrains.EAU ){
+				hexagonesEau.Add(h);
+			}
+		}
+		return hexagonesEau;
+	}
+
+	/// <summary>
+	/// Retourne les hexagones ayant du sable
+	/// </summary>
+	/// <returns>Une liste d'hexagones de sable</returns>
+	public static List<HexagoneInfo> GetHexagonesSable(){
+		List<HexagoneInfo> hexagonesSable = new List<HexagoneInfo>();
+		foreach ( HexagoneInfo h in hexagones ){
+			if ( h.TextureAppliquee == TypesTerrains.SABLE ){
+				hexagonesSable.Add(h);
+			}
+		}
+		return hexagonesSable;
+	}
+
+	/// <summary>
+	/// Renvoie tous les hexagones
+	/// </summary>
+	/// <returns>Une liste avec tous les hexagones</returns>
+	public static List<HexagoneInfo> GetHexagones(){
+		return hexagones;
 	}
 #endregion
 

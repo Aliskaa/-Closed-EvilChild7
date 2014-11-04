@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// InvocateurObjetsScript
 /// Script pour invoquer/crééer/isntancier des objets sur le terrain
 /// </summary>
@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -27,17 +27,28 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	 * ********* */
 
 #region Constantes
-	private const string packageBois = "Assets/Prefabs/Bois/";
-	private const string packageCailloux = "Assets/Prefabs/Cailloux/";
-	private const string packageFourmi = "Assets/Prefabs/Fourmis/";
-	private const string packageNourritures = "Assets/Prefabs/Nourritures/";
-	private const string packagePheromones = "Assets/Prefabs/Pheromones/";
-	private const string packageScarabees = "Assets/Prefabs/Scarabées/";
 
+	#region Packages
+	private const string packageBois 			= "Assets/Prefabs/Bois/";
+	private const string packageCailloux 		= "Assets/Prefabs/Cailloux/";
+	private const string packageFourmi 			= "Assets/Prefabs/Fourmis/";
+	private const string packageNourritures 	= "Assets/Prefabs/Nourritures/";
+	private const string packagePheromones 		= "Assets/Prefabs/Pheromones/";
+	private const string packageScarabees 		= "Assets/Prefabs/Scarabées/";
+	private const string packageEau				= "Assets/Prefabs/Eau/";
+	private const string packageTerrain 		= "Assets/Prefabs/Terrains/";
+	private const string packageDebug	 		= "Assets/Prefabs/Debug/";
+	#endregion
+
+	#region Cailloux, eau, bois
 	private const string fichierBoutDeBois 		= "bout_de_bois.dae";
 	private const string fichierPetitCaillou 	= "petit_caillou.dae";
 	private const string fichierCaillou 		= "caillou.dae";
 	private const string fichierTresGrosCaillou = "tres_gros_caillou.dae";
+	private const string fichierEau3D 			= "Eau3D.prefab";
+	#endregion
+
+	#region Bestioles
 	private const string fichierFNCmb 			= "fourmi_noire_combattante.dae";
 	private const string fichierFNCm 			= "fourmi_noire_contremaitre.dae";
 	private const string fichierFNG 			= "fourmi_noire_generale.dae";
@@ -49,14 +60,24 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierFRO 			= "fourmi_rouge_ouvriere.dae";
 	private const string fichierFRR 			= "fourmi_rouge_reine.dae";
 	private const string fichierOeuf 			= "oeuf_fourmi.dae";
+	private const string fichierPhero 			= "pheromone.dae";
+	private const string fichierScara 			= "scarabee.dae";
+	#endregion
+
+	#region Bonbons
 	private const string fichierBAB 			= "bonbon_anglais_bleu.dae";
 	private const string fichierBAR 			= "bonbon_anglais_rose.dae";
 	private const string fichierBM 				= "bonbon_mure.dae";
 	private const string fichierBO 				= "bonbon_orange.dae";
 	private const string fichierBR 				= "bonbon_rose.dae";
 	private const string fichierBV 				= "bonbon_vert.dae";
-	private const string fichierPhero 			= "pheromone.dae";
-	private const string fichierScara 			= "scarabee.dae";
+	#endregion
+	
+	#region Debug
+	private const string fichierDebugObject 	= "Debug_Object.prefab";
+	private const string fichierDebugFourmis 	= "DEBUG_fourmis_combattante.prefab";
+	#endregion
+
 #endregion
 
 
@@ -166,6 +187,18 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageScarabees;
 				nomFichier = fichierScara;
 				break;
+			case Invocations.EAU3D:
+				cheminPackage = packageEau;
+				nomFichier = fichierEau3D;
+				break;
+			case Invocations.DEBUG_OBJECT:
+				cheminPackage = packageTerrain;
+				nomFichier = fichierDebugObject;
+				break;
+			case Invocations.DEBUG_FOURMIS:
+				cheminPackage = packageDebug;
+				nomFichier = fichierDebugFourmis;
+				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);
 				return null;
@@ -198,7 +231,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	/// <param name="positionApprox">La position approximative, non définitive de l'objet.</param>
 	public GameObject InvoquerObjet(Invocations objet, Vector3 positionApprox){
 		GameObject invoc = InvoquerObjet(objet);
-		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(positionApprox);
+		HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(positionApprox);
 		if (hexPlusProche == null) {
 			Debug.LogError ("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
 		} else {
@@ -216,7 +249,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	/// <param name="objet">Le type d'objet à créer</param>
 	public GameObject InvoquerObjetRecentre(Invocations objet){
 		GameObject invoc = InvoquerObjet(objet);
-		HexagoneInfo hexPlusProche = TerrainUtils.hexagonePlusProche(invoc.transform.localPosition);
+		HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(invoc.transform.localPosition);
 		//Debug.Log("Ma position :" + invoc.transform.position + ", pour " + hexPlusProche.positionGlobale);
 		if (hexPlusProche == null) {
 			Debug.LogError("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
@@ -328,5 +361,17 @@ public enum Invocations {
 	/// Un pale anneau vert
 	/// </summary>
 	PHEROMONE,
+	/// <summary>
+	/// Une game object invisible à placer sur les cases d'eau
+	/// </summary>
+	EAU3D,
+	/// <summary>
+	/// Un objet de debug
+	/// </summary>
+	DEBUG_OBJECT,
+	/// <summary>
+	/// Une fourmis pour les debugs
+	/// </summary>
+	DEBUG_FOURMIS
 }
 #endregion

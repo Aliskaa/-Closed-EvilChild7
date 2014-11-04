@@ -270,11 +270,16 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  26;
+Date..........:  05/11/2014 00h17;
 Auteur........:  py;
 Commentaire...:
-	;
+    ლ(o◡oლ)﻿﻿
+	Travail sur les hexagones :
+		- Corrections de leurs positions locales avec des offsets pour tout centrer nickel
+		- Methode de debug pour placer un objet à chaque hexagone afin d'avoir un débogage visuel
+		- Detection d'objets Eau3D par une fourmis [en cours]
+		- Ajouts d'objets de debugs
 
 __________________________________
 

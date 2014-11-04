@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -58,9 +58,14 @@ public class GameObjectUtils {
 	private static Regex regexSable = new Regex(@"sable");
 
 	/// <summary>
-	/// Regex pour voir si on a de l'eau
+	/// Regex pour voir si on a de l'eau (sol)
 	/// </summary>
-	private static Regex regexEau = new Regex(@"eau");
+	private static Regex regexEauSol = new Regex(@"eau");
+
+	/// <summary>
+	/// Regex pour voir si on a de l'eau (game object)
+	/// </summary>
+	private static Regex regexEau3d = new Regex(@"Eau3D");
 #endregion
 
 
@@ -84,8 +89,9 @@ public class GameObjectUtils {
 		if (regexCoteBac3.IsMatch(nomGo)) return TypesObjetsRencontres.COTE_BAC_3;
 		if (regexCoteBac4.IsMatch(nomGo)) return TypesObjetsRencontres.COTE_BAC_4;
 		if (regexSoi.IsMatch(nomGo)) return TypesObjetsRencontres.SOIT_MEME;
-		if (regexEau.IsMatch(nomGo)) return TypesObjetsRencontres.EAU;
+		if (regexEauSol.IsMatch(nomGo)) return TypesObjetsRencontres.EAU;
 		if (regexSable.IsMatch(nomGo)) return TypesObjetsRencontres.SABLE;
+		if (regexEau3d.IsMatch(nomGo)) return TypesObjetsRencontres.EAU;
 		return TypesObjetsRencontres.INCONNU;
 	}
 #endregion

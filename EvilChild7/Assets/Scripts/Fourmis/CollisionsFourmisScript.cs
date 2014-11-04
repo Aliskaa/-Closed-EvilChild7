@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 2.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -97,9 +97,9 @@ public class CollisionsFourmisScript : MonoBehaviour {
 
 		RaycastHit hit;
 		if ( Physics.Raycast(charles.origin, charles.origin + charles.direction, out hit, visee) ){
-			//string nomObjetProche = hit.transform.gameObject.name;
-			//TypeCollision objetSurChemin = GameObjectUtils.parseToTypeCollision(nomObjetProche);
-			//Debug.Log("Détecté : "+objetSurChemin);
+			string nomObjetProche = hit.transform.gameObject.name;
+			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);
+			Debug.Log("Détecté : "+objetSurChemin);
 		} else {
 			//Debug.Log("Rien de détecté");
 		}

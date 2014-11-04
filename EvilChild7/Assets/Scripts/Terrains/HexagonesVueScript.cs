@@ -147,10 +147,10 @@ public class HexagonesVueScript : MonoBehaviour {
 		// Calcul de la position locale de l'hexagone par rapport au terrain
 		// FIXME A améliorer
 		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
-		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
-		posLocaleSurTerrain.z += (y+1)*3;
+		posLocaleSurTerrain.x += (float)(x*1.75+1) * 3 + (3 / 2) + -4;
+		posLocaleSurTerrain.z += (float)(y*1.5+1)*3 + -3;
+
 		tabHexagones[x, y].positionLocaleSurTerrain = posLocaleSurTerrain;
-		
 		tabHexagones[x, y].hexExt = worldManager.hexExt;
 		tabHexagones[x, y].centreHexagone = worldManager.centreHexagone;
 
@@ -160,7 +160,7 @@ public class HexagonesVueScript : MonoBehaviour {
 			tabHexagones[x,y].TextureAppliquee = TypesTerrains.EAU;
 		}
 
-		TerrainUtils.ajouterHexagone(tabHexagones[x, y]);
+		TerrainUtils.AjouterHexagone(tabHexagones[x, y]);
 		
 	}
 	
@@ -188,10 +188,10 @@ public class HexagonesVueScript : MonoBehaviour {
 		// Calcul de la position locale de l'hexagone par rapport au terrain
 		// FIXME A améliorer
 		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
-		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
-		posLocaleSurTerrain.z += (y+1)*3;
+		posLocaleSurTerrain.x += (float)(x*1.75+2) * 3 + (3 / 2) + -4;
+		posLocaleSurTerrain.z += (float)(y*1.5+1)*3 + -3;
+
 		tabHexagones[x, y].positionLocaleSurTerrain = posLocaleSurTerrain;
-		
 		tabHexagones[x, y].hexExt = worldManager.hexExt;
 		tabHexagones[x, y].centreHexagone = worldManager.centreHexagone;
 
@@ -201,7 +201,7 @@ public class HexagonesVueScript : MonoBehaviour {
 			tabHexagones[x, y].TextureAppliquee = TypesTerrains.EAU;
 		} 
 		
-		TerrainUtils.ajouterHexagone(tabHexagones[x, y]);
+		TerrainUtils.AjouterHexagone(tabHexagones[x, y]);
 		
 	}
 #endregion
