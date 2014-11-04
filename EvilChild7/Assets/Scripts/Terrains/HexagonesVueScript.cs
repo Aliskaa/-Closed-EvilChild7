@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -84,9 +84,7 @@ public class HexagonesVueScript : MonoBehaviour {
 	/// Combine les différents hexagones du mesh de la pièce dans un seul mesh
 	/// </summary>
 	private void CombinerHexagones(){
-		
 		CombineInstance[,] combine = new CombineInstance[(int)dimensionsPiece.x,(int)dimensionsPiece.y];
-		
 		for( int x = 0; x < dimensionsPiece.x; x++ ){
 			for ( int z = 0; z < dimensionsPiece.y; z++ ){
 				combine[x, z].mesh = tabHexagones[x, z].meshLocal;
@@ -95,17 +93,13 @@ public class HexagonesVueScript : MonoBehaviour {
 				combine[x, z].transform = matrix;
 			}
 		}
-		
 		filter = gameObject.GetComponent<MeshFilter>();
-		filter.mesh = new Mesh();
-		
+		filter.mesh = new Mesh();	
 		CombineInstance[] final = null;
-		CivGridUtility.ToSingleArray(combine, out final);
-		
+		CivGridUtility.ToSingleArray(combine, out final);	
 		filter.mesh.CombineMeshes(final);
 		filter.mesh.RecalculateNormals();
-		CreerCollider();
-		
+		CreerCollider();	
 	}
 	
 	/// <summary>
@@ -136,32 +130,37 @@ public class HexagonesVueScript : MonoBehaviour {
 	/// <param name="y">La coordonnée en Y</param>
 	/// <param name="texture">La texture qu'aura l'hexagone</param>
 	private void CreerHexagone( int x, int y, Texture texture ){
-		
-		HexagoneInfo hexagoneInfo = null;
+
 		Vector2 posGlobale;
 		tabHexagones[x, y] = new HexagoneInfo();
-		hexagoneInfo = tabHexagones[x, y];
-		
+
 		// Définit la position globale for le positionnement des textures
 		posGlobale.x = x + (dimensionsPiece.x * xSector);
 		posGlobale.y = y + (dimensionsPiece.y * ySector);
 		
-		hexagoneInfo.CubeGridPosition = new Vector3(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f), posGlobale.y, -(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f) + posGlobale.y));
-		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)), 0, (y * worldManager.hexExt.z) * 1.5f);
-		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
+		tabHexagones[x, y].CubeGridPosition = new Vector3(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f), posGlobale.y, -(posGlobale.x - Mathf.Round((posGlobale.y / 2) + .1f) + posGlobale.y));
+		tabHexagones[x, y].positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)), 0, (y * worldManager.hexExt.z) * 1.5f);
+		tabHexagones[x, y].positionGlobale = new Vector3(tabHexagones[x, y].positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)),
+		                                                 tabHexagones[x, y].positionLocale.y, 
+		                                                 tabHexagones[x, y].positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
 		
 		// Calcul de la position locale de l'hexagone par rapport au terrain
 		// FIXME A améliorer
 		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
 		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
 		posLocaleSurTerrain.z += (y+1)*3;
-		hexagoneInfo.positionLocaleSurTerrain = posLocaleSurTerrain;
+		tabHexagones[x, y].positionLocaleSurTerrain = posLocaleSurTerrain;
 		
-		hexagoneInfo.hexExt = worldManager.hexExt;
-		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
-		hexagoneInfo.SetTextureAppliquee(texture);
-		
-		TerrainUtils.ajouterHexagone(hexagoneInfo);
+		tabHexagones[x, y].hexExt = worldManager.hexExt;
+		tabHexagones[x, y].centreHexagone = worldManager.centreHexagone;
+
+		if ( GameObjectUtils.parseToType (texture.name) == TypesObjetsRencontres.SABLE ){
+			tabHexagones[x,y].TextureAppliquee = TypesTerrains.SABLE;
+		} else if ( GameObjectUtils.parseToType (texture.name) == TypesObjetsRencontres.EAU ){ 
+			tabHexagones[x,y].TextureAppliquee = TypesTerrains.EAU;
+		}
+
+		TerrainUtils.ajouterHexagone(tabHexagones[x, y]);
 		
 	}
 	
@@ -173,31 +172,36 @@ public class HexagonesVueScript : MonoBehaviour {
 	/// <param name="texture">La texture qu'aura l'hexagone</param>
 	private void CreerHexagoneDecale( int x, int y, Texture texture ){
 		
-		HexagoneInfo hexagoneInfo;
 		Vector2 positionGlobale;
 		tabHexagones[x, y] = new HexagoneInfo();
-		hexagoneInfo = tabHexagones[x, y];
-		
+
 		// Définit la position globale for le positionnement des textures
 		positionGlobale.x = x + (dimensionsPiece.x * xSector);
 		positionGlobale.y = y + (dimensionsPiece.y * ySector);
 		
-		hexagoneInfo.CubeGridPosition = new Vector3(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f), positionGlobale.y, -(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f) + positionGlobale.y));
-		hexagoneInfo.positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)) + worldManager.hexExt.x, 0, (y * worldManager.hexExt.z) * 1.5f);
-		hexagoneInfo.positionGlobale = new Vector3(hexagoneInfo.positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), hexagoneInfo.positionLocale.y, hexagoneInfo.positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
+		tabHexagones[x, y].CubeGridPosition = new Vector3(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f), positionGlobale.y, -(positionGlobale.x - Mathf.Round((positionGlobale.y / 2) + .1f) + positionGlobale.y));
+		tabHexagones[x, y].positionLocale = new Vector3((x * (worldManager.hexExt.x * 2)) + worldManager.hexExt.x, 0, (y * worldManager.hexExt.z) * 1.5f);
+		tabHexagones[x, y].positionGlobale = new Vector3(tabHexagones[x, y].positionLocale.x + (xSector * (dimensionsPiece.x * dimensionHexagone.x)), 
+		                                                 tabHexagones[x, y].positionLocale.y, 
+		                                                 tabHexagones[x, y].positionLocale.z + ((ySector * (dimensionsPiece.y * dimensionHexagone.z)) * (.75f)));
 		
 		// Calcul de la position locale de l'hexagone par rapport au terrain
 		// FIXME A améliorer
 		Vector3 posLocaleSurTerrain = gameObject.transform.localPosition;
 		posLocaleSurTerrain.x += (x+1) * 3 + (3 / 2);
 		posLocaleSurTerrain.z += (y+1)*3;
-		hexagoneInfo.positionLocaleSurTerrain = posLocaleSurTerrain;
+		tabHexagones[x, y].positionLocaleSurTerrain = posLocaleSurTerrain;
 		
-		hexagoneInfo.hexExt = worldManager.hexExt;
-		hexagoneInfo.centreHexagone = worldManager.centreHexagone;
-		hexagoneInfo.SetTextureAppliquee(texture);
+		tabHexagones[x, y].hexExt = worldManager.hexExt;
+		tabHexagones[x, y].centreHexagone = worldManager.centreHexagone;
+
+		if ( GameObjectUtils.parseToType (texture.name) == TypesObjetsRencontres.SABLE ){
+			tabHexagones[x, y].TextureAppliquee = TypesTerrains.SABLE;
+		} else if ( GameObjectUtils.parseToType (texture.name) == TypesObjetsRencontres.EAU ){
+			tabHexagones[x, y].TextureAppliquee = TypesTerrains.EAU;
+		} 
 		
-		TerrainUtils.ajouterHexagone(hexagoneInfo);
+		TerrainUtils.ajouterHexagone(tabHexagones[x, y]);
 		
 	}
 #endregion

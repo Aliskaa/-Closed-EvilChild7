@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.1
+/// PY Lapersonne - Version 1.1.2
 /// </remarks>
 
 using UnityEngine;
@@ -105,8 +105,6 @@ public static class TerrainUtils {
 	/// </summary>
 	/// <param name="hexagone">L'hexagone à enregistrer</param>
 	public static void ajouterHexagone( HexagoneInfo hexagone ){
-		Debug.Log("Ajout d'un hexagone : " + hexagone.positionLocaleSurTerrain
-		          +", de texture : "+ hexagone.GetTextureAppliquee());
 		hexagones.Add(hexagone);
 	}
 

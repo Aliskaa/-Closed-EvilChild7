@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// CollisionsFourmisScript.cs
 /// Script pour gérer les collisions que peuvent avoir les fourmis
 /// </summary>
@@ -119,7 +119,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
-		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToTypeCollision(nomObjetTouche);
+		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType(nomObjetTouche);
 		//Debug.Log("Collision OnCollisionEnter avec : "+objetTouche);
 		scriptDeplacement.StopperParCollision(objetTouche);
 	}

@@ -445,7 +445,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		#region DEBUG TEST
 		GameObject bacAsable = GameObject.Find("Bac à sable");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
+		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(95.5f, 0.1f, 107.4f));
 		#endregion
 	}
 #endregion

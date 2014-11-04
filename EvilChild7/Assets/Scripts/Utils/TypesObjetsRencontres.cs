@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -49,6 +49,14 @@ public enum TypesObjetsRencontres : int {
 	/// Collision avec un coté du bac, celui en +X
 	/// </summary>
 	COTE_BAC_4 = 3,
+	/// <summary>
+	/// Du sable est sous l'objet
+	/// </summary>
+	SABLE = 4,
+	/// <summary>
+	/// De l'eau est sous l'objet
+	/// </summary>
+	EAU = 5,
 	/// <summary>
 	/// Collision avec un petit caillou
 	/// </summary>

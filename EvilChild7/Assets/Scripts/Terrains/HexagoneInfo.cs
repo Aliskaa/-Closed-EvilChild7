@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 2.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -101,9 +101,9 @@ public class HexagoneInfo {
 
 #region Attributs privés
 	/// <summary>
-	/// La texture à appliquer sur l'hexagone
+	/// Le type de terrain de l'hexagone
 	/// </summary>
-	private Texture texture;
+	private TypesTerrains typeTerrain;
 #endregion
 
 
@@ -122,7 +122,7 @@ public class HexagoneInfo {
     }
 	
 	/// <summary>
-	/// Getters et setters pour la position 3D sur la grille
+	/// Getter et setter pour la position 3D sur la grille
 	/// </summary>
 	/// <value>La position 3D sur la grille</value>
     public Vector3 CubeGridPosition
@@ -131,21 +131,14 @@ public class HexagoneInfo {
         set { positionGrille = value; }
     }
 
-	// FIXME Faire setter et getter à la sauce C#
 	/// <summary>
-	/// Retourne la texture appliquée à l'hexagone
+	/// Getter et setters pour la texture du terrain
 	/// </summary>
-	/// <returns>La texture</returns>
-	public Texture GetTextureAppliquee(){
-		return texture;
-	}
-	/// <summary>
-	/// Définit la texture appliquée à l'hexagone
-	/// </summary>
-	///<param name="t">La texture appliquée</param>
-	public void SetTextureAppliquee( Texture t ){
-		Debug.Log("Définition d'une texture : "+t);
-		texture = t;
+	/// <value>The texture appliquee.</value>
+	public TypesTerrains TextureAppliquee
+	{
+		get { return typeTerrain; }
+		set { typeTerrain = value; }
 	}
 
     /// <summary>
@@ -153,7 +146,6 @@ public class HexagoneInfo {
 	/// pour faire le mesh d'un hexagone
     /// </summary>
     public void Initialiser(){
-		texture = null;
         DefinirMesh();
     }
 #endregion

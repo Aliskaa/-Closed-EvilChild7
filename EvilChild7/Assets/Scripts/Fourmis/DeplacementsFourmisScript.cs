@@ -372,7 +372,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <returns>L'hexagone sur lequel est la fourmis</returns>
 	public HexagoneInfo HexagoneCourant(){
 		HexagoneInfo hexagoneCourant = TerrainUtils.hexagonePlusProche(transform.localPosition);
-		Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTextureAppliquee());
+		//Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTypeTerrain());
 		return hexagoneCourant;
 	}
 
