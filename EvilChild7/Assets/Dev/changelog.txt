@@ -278,16 +278,19 @@ Commentaire...:
 	Travail sur les hexagones :
 		- Corrections de leurs positions locales avec des offsets pour tout centrer nickel
 		- Methode de debug pour placer un objet à chaque hexagone afin d'avoir un débogage visuel
-		- Detection d'objets Eau3D par une fourmis [en cours]
 		- Ajouts d'objets de debugs
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  27;
+Date..........:  05/11/2014 18h15;
 Auteur........:  py;
 Commentaire...:
-	;
+	\(-ㅂ-)/ 
+	Travail sur la détection de l'eau
+		- Bug corrigé : la direction du rayon était incorrecte, maintant le rayon de détection est OK
+		- Maintenant les fourmis détectent l'eau
+		- Les gameobjects des cases d'eau ont un rendu visuel
 
 __________________________________
 

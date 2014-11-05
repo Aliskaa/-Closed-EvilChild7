@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.2.0
+/// PY Lapersonne - Version 2.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -92,17 +92,23 @@ public class CollisionsFourmisScript : MonoBehaviour {
 		}
 
 		// Création du rayon qui va partir dans le bonne direction
-		Ray charles = new Ray(transform.position, transform.TransformDirection(directionV));
-		Debug.DrawLine(charles.origin, charles.origin + charles.direction * visee, Color.blue);
+		Vector3 positionRayon = transform.position;
+		positionRayon.y += 1f;
 
+		Vector3 directionRayon = transform.TransformDirection(directionV);
+		directionRayon.Normalize();
+
+		Ray charles = new Ray(positionRayon, directionRayon);
 		RaycastHit hit;
-		if ( Physics.Raycast(charles.origin, charles.origin + charles.direction, out hit, visee) ){
+
+		if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) ){
 			string nomObjetProche = hit.transform.gameObject.name;
 			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);
 			Debug.Log("Détecté : "+objetSurChemin);
-		} else {
-			//Debug.Log("Rien de détecté");
-		}
+			Debug.DrawLine(charles.origin, hit.point, Color.red);
+		}/* else {
+			Debug.Log("Rien de détecté");
+		}*/
 
 	}
 #endregion
@@ -117,10 +123,11 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// Celui-ci sera remis en mouvement via le script de déplacement
 	/// </summary>
 	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
+	//void OnTriggerEnter( Collider coll ){
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
 		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType(nomObjetTouche);
-		//Debug.Log("Collision OnCollisionEnter avec : "+objetTouche);
+		Debug.Log("Collision OnCollisionEnter avec : "+objetTouche);
 		scriptDeplacement.StopperParCollision(objetTouche);
 	}
 
