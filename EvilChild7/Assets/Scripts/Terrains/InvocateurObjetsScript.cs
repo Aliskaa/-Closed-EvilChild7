@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;

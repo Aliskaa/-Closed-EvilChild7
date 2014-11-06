@@ -310,7 +310,11 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur le pointagee/click d'un hexagone :
+		- Survol d'un hexagone
+		- Couleur selon survol/point [en cours]
+		- Couleur au clic [en cours]
+		- Amélioration du script d'invocations d'objets pour les msies en évidences d'hexagonres;
 
 __________________________________
 

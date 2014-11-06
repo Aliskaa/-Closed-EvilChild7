@@ -1,12 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev\changelog.txt">
     <Files>
-      <File FileName="Assets\Dev\changelog.txt" Line="305" Column="42" />
+      <File FileName="Assets\Dev\changelog.txt" Line="317" Column="91" />
       <File FileName="Assets\Dev\TODO.txt" Line="71" Column="63" />
-      <File FileName="Assets\Scripts\Interactions\PointAndClickScript.cs" Line="63" Column="92" />
-      <File FileName="Assets\Scripts\Terrains\TerrainManagerScript.cs" Line="478" Column="1" />
-      <File FileName="Assets\Scripts\Terrains\TerrainUtils.cs" Line="108" Column="5" />
+      <File FileName="Assets\Scripts\Interactions\PointAndClickScript.cs" Line="99" Column="67" />
+      <File FileName="Assets\Scripts\Terrains\InvocateurObjetsScript.cs" Line="8" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
