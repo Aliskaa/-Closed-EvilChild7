@@ -50,11 +50,11 @@
      <Compile Include="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Interactions\PointAndClickScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\CivGridUtils.cs" />
+     <Compile Include="Assets\Scripts\Terrains\DebugScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\InvocateurObjetsScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\Rendoring3DCasesScript.cs" />
-     <Compile Include="Assets\Scripts\Terrains\RendoringSableScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\TerrainManagerScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\GameObjectUtils.cs" />
@@ -77,6 +77,7 @@
      <None Include="Assets\Dev\changelog.txt" />
      <None Include="Assets\Scripts\Eau\readme.txt" />
      <None Include="Assets\Prefabs\Pheromones\readme.txt" />
+     <None Include="Assets\Prefabs\Debug\readme.txt" />
      <None Include="Assets\Scripts\Parties\readme.txt" />
      <None Include="Assets\Menus\Boutons\readme.txt" />
      <None Include="Assets\Textures\Fourmis\readme.txt" />

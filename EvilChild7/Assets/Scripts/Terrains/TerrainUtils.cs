@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -67,6 +67,12 @@ public static class TerrainUtils {
 			Vector3 posH = h.positionLocaleSurTerrain;
 			float dX = Math.Abs(positionObjet.x - posH.x);
 			float dZ = Math.Abs(positionObjet.z - posH.z);
+			// 1er cas : on a directement un hexagone
+			if ( posH.x == positionObjet.x && posH.z == positionObjet.z ){
+				flagOxXZ = true;
+				return h;
+			}
+			// 2ème cas : il faut touver l'hexagone le plus approprié
 			if ( dX <= minimumDifferenceX && dZ <= minimumDifferenceZ  ){
 				minimumDifferenceX = dX;
 				minimumDifferenceZ = dZ;
@@ -79,7 +85,7 @@ public static class TerrainUtils {
 			}
 		}
 		if ( hexagPlusProche == null ){
-			Debug.LogError("Aucun hexagone proche n'a été trouvé. Les coordonées sont-elles locales au terrain ?");
+			Debug.Log("Aucun hexagone proche n'a été trouvé. Les coordonées sont-elles locales au terrain ?");
 		}
 		return hexagPlusProche;
 	}

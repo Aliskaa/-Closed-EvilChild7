@@ -5,12 +5,12 @@
 /// 
 /// Exemple d'utilisation :
 /// <code>
-/// 		GameObject bacAsable = GameObject.Find("Bac à sable");
+/// 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 /// 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -41,42 +41,44 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	#endregion
 
 	#region Cailloux, eau, bois
-	private const string fichierBoutDeBois 		= "bout_de_bois.dae";
-	private const string fichierPetitCaillou 	= "petit_caillou.dae";
-	private const string fichierCaillou 		= "caillou.dae";
-	private const string fichierTresGrosCaillou = "tres_gros_caillou.dae";
+	private const string fichierBoutDeBois 		= "bois.prefab";
+	private const string fichierPetitCaillou 	= "petit_caillou.prefab";
+	private const string fichierCaillou 		= "caillou.prefab";
+	private const string fichierTresGrosCaillou = "tres_gros_caillou.prefab";
 	private const string fichierEau3D 			= "Eau3D.prefab";
 	#endregion
 
 	#region Bestioles
-	private const string fichierFNCmb 			= "fourmi_noire_combattante.dae";
-	private const string fichierFNCm 			= "fourmi_noire_contremaitre.dae";
-	private const string fichierFNG 			= "fourmi_noire_generale.dae";
-	private const string fichierFNO 			= "fourmi_noire_ouvriere.dae";
-	private const string fichierFNR 			= "fourmi_noire_reine.dae";
-	private const string fichierFRCmb 			= "fourmi_rouge_combattante.dae";
-	private const string fichierFRCm			= "fourmi_rouge_contremaitre.dae";
-	private const string fichierFRG 			= "fourmi_rouge_generale.dae";
-	private const string fichierFRO 			= "fourmi_rouge_ouvriere.dae";
-	private const string fichierFRR 			= "fourmi_rouge_reine.dae";
-	private const string fichierOeuf 			= "oeuf_fourmi.dae";
-	private const string fichierPhero 			= "pheromone.dae";
-	private const string fichierScara 			= "scarabee.dae";
+	private const string fichierFNCmb 			= "fourmi_noire_combattante.prefab";
+	private const string fichierFNCm 			= "fourmi_noire_contremaitre.prefab";
+	private const string fichierFNG 			= "fourmi_noire_generale.prefab";
+	private const string fichierFNO 			= "fourmi_noire_ouvriere.prefab";
+	private const string fichierFNR 			= "fourmi_noire_reine.prefab";
+	private const string fichierFRCmb 			= "fourmi_rouge_combattante.prefab";
+	private const string fichierFRCm			= "fourmi_rouge_contremaitre.prefab";
+	private const string fichierFRG 			= "fourmi_rouge_generale.prefab";
+	private const string fichierFRO 			= "fourmi_rouge_ouvriere.prefab";
+	private const string fichierFRR 			= "fourmi_rouge_reine.prefab";
+	private const string fichierOeuf 			= "oeuf_fourmi.prefab";
+	private const string fichierPhero 			= "pheromone.prefab";
+	private const string fichierScara 			= "scarabee.prefab";
 	#endregion
 
 	#region Bonbons
-	private const string fichierBAB 			= "bonbon_anglais_bleu.dae";
-	private const string fichierBAR 			= "bonbon_anglais_rose.dae";
-	private const string fichierBM 				= "bonbon_mure.dae";
-	private const string fichierBO 				= "bonbon_orange.dae";
-	private const string fichierBR 				= "bonbon_rose.dae";
-	private const string fichierBV 				= "bonbon_vert.dae";
+	private const string fichierBAB 			= "bonbon_anglais_bleu.prefab";
+	private const string fichierBAR 			= "bonbon_anglais_rose.prefab";
+	private const string fichierBM 				= "bonbon_mure.prefab";
+	private const string fichierBO 				= "bonbon_orange.prefab";
+	private const string fichierBR 				= "bonbon_rose.prefab";
+	private const string fichierBV 				= "bonbon_vert.prefab";
 	#endregion
 	
 	#region Debug
 	private const string fichierDebugObject 	= "Debug_Object.prefab";
 	private const string fichierDebugFourmis 	= "DEBUG_fourmis_combattante.prefab";
 	#endregion
+
+	private const string fichierSelectionCase 	= "Selection case.prefab";
 
 #endregion
 
@@ -191,8 +193,12 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageEau;
 				nomFichier = fichierEau3D;
 				break;
-			case Invocations.DEBUG_OBJECT:
+			case Invocations.SELECTION_CASE:
 				cheminPackage = packageTerrain;
+				nomFichier = fichierSelectionCase;
+				break;
+			case Invocations.DEBUG_OBJECT:
+				cheminPackage = packageDebug;
 				nomFichier = fichierDebugObject;
 				break;
 			case Invocations.DEBUG_FOURMIS:
@@ -361,6 +367,10 @@ public enum Invocations {
 	/// Un pale anneau vert
 	/// </summary>
 	PHEROMONE,
+	/// <summary>
+	/// Une lumière dans un anneau pour montrer la case visée
+	/// </summary>
+	SELECTION_CASE,
 	/// <summary>
 	/// Une game object invisible à placer sur les cases d'eau
 	/// </summary>

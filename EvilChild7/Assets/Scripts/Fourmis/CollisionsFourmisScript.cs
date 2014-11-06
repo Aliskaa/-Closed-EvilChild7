@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.3.0
+/// PY Lapersonne - Version 2.3.1
 /// </remarks>
 
 using UnityEngine;
@@ -127,7 +127,7 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
 		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType(nomObjetTouche);
-		Debug.Log("Collision OnCollisionEnter avec : "+objetTouche);
+		Debug.Log("Collision OnCollisionEnter avec : "+objetTouche+" / "+nomObjetTouche);
 		scriptDeplacement.StopperParCollision(objetTouche);
 	}
 

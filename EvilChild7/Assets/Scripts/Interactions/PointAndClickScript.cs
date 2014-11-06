@@ -25,13 +25,14 @@ public class PointAndClickScript : MonoBehaviour {
 	 * Attributs *
 	 * ********* */
 
-#region Attributs
+#region Attributs privés
 	/// <summary>
-	/// Flag mettant un hexagone dans une couleur différente
-	/// s'il est clické
+	/// Le dernier hexagone pointé/selectionné (qui peut toujours l'etre)
 	/// </summary>
-	public bool modeCouleurClick;
+	private HexagoneInfo dernierHexagone;
+#endregion
 
+#region Attributs publics
 	/// <summary>
 	/// Flag mettant un hexagone dans une couleur différente
 	/// s'il est survolé
@@ -44,7 +45,7 @@ public class PointAndClickScript : MonoBehaviour {
 	public bool modeSurvol;
 
 	/// <summary>
-	/// Flag indiquant que l'on gère el click de la souris
+	/// Flag indiquant que l'on gère le click de la souris
 	/// </summary>
 	public bool modeClick;
 
@@ -56,7 +57,7 @@ public class PointAndClickScript : MonoBehaviour {
 	/// <summary>
 	/// La texture à appliquer en cas de click sur un hexagone
 	/// </summary>
-	public Texture textureClikc;
+	public Texture textureClick;
 #endregion
 
 #region Constantes
@@ -96,16 +97,7 @@ public class PointAndClickScript : MonoBehaviour {
 				Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
 				//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
 				HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordLocales);
-				Debug.Log("Hexagone le plus proche du clic = " + hexagoneClick.positionLocaleSurTerrain );
-				/*
-				if ( modeCouleurClick ){
-					// FIXME Prendre un truc moins dégueulasse
-					GameObject bacAsable = GameObject.Find("Bac à sable");
-					if ( bacAsable == null ) Debug.LogError("BOUM");
-					InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-					scriptInvoc.InvoquerObjet(Invocations.DEBUG_OBJECT, hexagoneClick.positionLocaleSurTerrain);
-				}
-				*/
+				Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
 			}
 		}
 	}
@@ -115,6 +107,7 @@ public class PointAndClickScript : MonoBehaviour {
 	/// x/y en coordonnées x/y/z locales au terrain.
 	/// Pour cela, va récupérer la position de la souris, puis va récupérer le plan du sol.
 	/// Puis va lancer un rayon avec ce sol.
+	/// Là où est la souris, un game object nommé "Selection case" de tag POINTEUR sera créé.
 	/// </summary>
 	private void DetecterSurvol(){
 		Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
@@ -122,20 +115,63 @@ public class PointAndClickScript : MonoBehaviour {
 		Plane planDuSol = new Plane(Vector3.up, transform.position);
 		if ( planDuSol.Raycast(rayon, out distance) ){ 
 			Vector3 pointImpact = rayon.GetPoint(distance);
-			//Debug.Log("Coordonnées de la souris sur le plan  = " + pointImpact );
-			Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
-			//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
-			HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordLocales);
-			Debug.Log("Hexagone le plus proche du clic = " + hexagoneClick.positionLocaleSurTerrain );
-			/*
-			if ( modeCouleurSurvol ){
-				// FIXME Prendre un truc moins dégueulasse
-				GameObject bacAsable = GameObject.Find("Bac à sable");
-				if ( bacAsable == null ) Debug.LogError("BOUM");
-				InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-				scriptInvoc.InvoquerObjet(Invocations.DEBUG_OBJECT, hexagoneClick.positionLocaleSurTerrain);
+			// Récupération de l'hexagone si on a la souris sur le terrain :
+			// pour ce faire vérifier la position de la souris par rapport aux coord globales
+			if ( IsSourisSurTerrain(pointImpact) ){
+				//Debug.Log("Coordonnées de la souris sur le plan  = " + pointImpact );
+				Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
+				//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
+				HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordLocales);
+				//Debug.Log("Hexagone le plus proche du clic = " + hexagoneClick.positionLocaleSurTerrain );
+				if ( modeCouleurSurvol ){
+					GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+					InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+					SupprimerPointeurs( hexagoneClick );
+					// Création d'un nouveau gameobject
+					scriptInvoc.InvoquerObjet(Invocations.SELECTION_CASE, hexagoneClick.positionLocaleSurTerrain);
+				}
+			} else {
+				SupprimerPointeurs( null );
+				dernierHexagone = null;
 			}
-			*/
+		}
+	}
+
+	/// <summary>
+	/// Indique si la souris pointe sur le terrain
+	/// </summary>
+	/// <remarks>
+	/// L'angle -x/-z du terrain : x=-98 et z=-94.
+	/// L'angle +x/+z du terrain : x=0 et z=-8
+	/// </remarks>
+	/// <returns><c>true</c> Si la souris pointe vers le terrain, <c>false</c> sinon</returns>
+	/// <param name="position">La position de la souris</param>
+	private bool IsSourisSurTerrain( Vector3 position ){
+		if (position.x < -98) return false;
+		if (position.x > 0) return false;
+		if (position.z < -94) return false;
+		if (position.z > -8) return false;
+		return true;
+	}
+
+	/// <summary>
+	/// Supprime les game objects ayant servi en tant que pointeurs
+	/// </summary>
+	/// <param name="h">Hexagone où est la souris, null si la souris n'est plus sur le terrain</param>
+	private void SupprimerPointeurs( HexagoneInfo h ){
+		GameObject[] anciens = GameObject.FindGameObjectsWithTag("POINTEUR");
+		// Cas où la souris n'est plus sur le terrain
+		if ( h == null ){
+			foreach ( GameObject go in anciens ) if ( go != null ) Destroy(go);
+			return;
+		}
+		// Supprimer le game object de selection si un autre hexagone est visé
+		if ( h != dernierHexagone ){
+			if ( anciens.Length > 1 ){
+				for ( int i = 0; i < anciens.Length; i++ ){
+					if ( anciens[i] != null ) Destroy(anciens[i]);
+				}
+			}
 		}
 	}
 #endregion

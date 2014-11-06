@@ -1,10 +1,11 @@
 ﻿/// <summary>
-/// TypesAxeVisee.cs
-/// Fichier pour gérer les différents types d'axe de visée pour entre autres les lancés de rayons
+/// TypesObjetsRencontres.cs
+/// Fichier pour gérer les différents objets avec lesquels on peut entrer en collision
+/// ou que l'on peut détecter
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -15,18 +16,18 @@ using UnityEngine;
 /// 
 /// [0;9]   : par rapport au terrain
 /// [10;19] : par rapport aux obstacles inertes
-/// [20;29] : par rapport aux unités alliées
-/// [30;39] : par rapport aux unités ennemies
+/// [20;29] : par rapport aux unités noires
+/// [30;39] : par rapport aux unités rouges
 /// [40;49] : par rapport à d'autres menaces
-/// [50;59] : par rapport à la nourriture
+/// [50;69] : par rapport à la nourriture
 /// </summary>
 public enum TypesObjetsRencontres : int {
 	/// <summary>
-	/// Objet en collision inconnu
+	/// Objet en collision / détecté inconnu
 	/// </summary>
 	INCONNU = -3,
 	/// <summary>
-	/// Aucun objet en collision
+	/// Aucun objet en collision ou detecté
 	/// </summary>
 	AUCUN = -2,
 	/// <summary>
@@ -34,96 +35,140 @@ public enum TypesObjetsRencontres : int {
 	/// </summary>
 	SOIT_MEME = -1,
 	/// <summary>
-	/// Collision avec un coté du bac, celui en -Z
+	/// Collision / détection avec un coté du bac, celui en -Z
 	/// </summary>
 	COTE_BAC_1 = 0,
 	/// <summary>
-	/// Collision avec un coté du bac, celui en +Z
+	/// Collision / détection avec un coté du bac, celui en +Z
 	/// </summary>
 	COTE_BAC_2 = 1,
 	/// <summary>
-	/// Collision avec un coté du bac, celui en -X
+	/// Collision / détection avec un coté du bac, celui en -X
 	/// </summary>
 	COTE_BAC_3 = 2,
 	/// <summary>
-	/// Collision avec un coté du bac, celui en +X
+	/// Collision / détection avec un coté du bac, celui en +X
 	/// </summary>
 	COTE_BAC_4 = 3,
 	/// <summary>
-	/// Du sable est sous l'objet
+	/// Collision / détection avec du sable est sous l'objet
 	/// </summary>
 	SABLE = 4,
 	/// <summary>
-	/// De l'eau est sous l'objet
+	/// Collision / détection de l'eau est sous l'objet
 	/// </summary>
 	EAU = 5,
 	/// <summary>
-	/// Collision avec un petit caillou
+	/// Collision / détection avec le game object pour l'eau
+	/// </summary>
+	EAU3D = 6,
+	/// <summary>
+	/// Collision / détection avec un petit caillou
 	/// </summary>
 	PETIT_CAILLOU = 10,
 	/// <summary>
-	/// Collision avec un gros caillou
+	/// Collision / détection avec un caillou
 	/// </summary>
-	GROS_CAILLOUX =11,
+	CAILLOU = 11,
 	/// <summary>
-	/// Collision avec un bout de bois
+	/// Collision / détection avec un gros caillou
 	/// </summary>
-	BOUT_DE_BOIS = 12,
+	TRES_GROS_CAILLOUX = 12,
 	/// <summary>
-	/// Une ouvrière amie
+	/// Collision / détection avec un bout de bois
 	/// </summary>
-	OUVRIERE_AMIE = 20,
+	BOUT_DE_BOIS = 13,
 	/// <summary>
-	/// Une contre-maitrsse alliée
+	/// Collision / détection avec une ouvrière noire
 	/// </summary>
-	CONTREMAITRE_AMIE = 21,
+	OUVRIERE_NOIRE = 20,
 	/// <summary>
-	/// Une combattante alliée
+	//// Collision / détection avec une contre-maitresse noire
 	/// </summary>
-	COMBATTANTE_AMIE = 22,
+	CONTREMAITRE_NOIRE = 21,
 	/// <summary>
-	/// Une générale alliée
+	/// Collision / détection avec une combattante noire
 	/// </summary>
-	GENERALE_AMIE = 23,
+	COMBATTANTE_NOIRE = 22,
 	/// <summary>
-	/// La reine de la fourmillière
+	/// Collision / détection avec une générale noire
 	/// </summary>
-	REINE_AMIE = 24,
+	GENERALE_NOIRE = 23,
 	/// <summary>
-	/// Des phéromones produites par une contre-maitre amie
+	/// Collision / détection avec la reine de la fourmillière noire
 	/// </summary>
-	PHEROMONES_CM_AMIE = 25,
+	REINE_NOIRE = 24,
 	/// <summary>
-	/// Un oeuf pondu par la reine du camp
+	/// Collision / détection avec des phéromones produites par une contre-maitre noire
 	/// </summary>
-	OEUF_AMI = 26,
+	PHEROMONES_CM_NOIRE = 25,
 	/// <summary>
-	/// Une ouvrière ennemie
+	/// Collision / détection avec des phéromones produites par une ouvrière noire
 	/// </summary>
-	OUVRIERE_ENNEMIE = 30,
+	PHEROMONES_OUV_NOIRE = 26,
 	/// <summary>
-	/// Une contre-maitrsse ennemie
+	/// Collision / détection avec un oeuf pondu par la reine du camp noir
 	/// </summary>
-	CONTREMAITRE_ENNEMIE = 31,
+	OEUF_NOIR = 27,
 	/// <summary>
-	/// Une combattante ennemie
+	/// Collision / détection avec une ouvrière rouge
 	/// </summary>
-	COMBATTANTE_ENNEMIE = 32,
+	OUVRIERE_ROUGE = 30,
 	/// <summary>
-	/// Une générale ennemie
+	/// Collision / détection avec une contre-maitrsse rouge
 	/// </summary>
-	GENERALE_ENNEMIE = 33,
+	CONTREMAITRE_ROUGE = 31,
 	/// <summary>
-	/// La reine du camp adverse
+	/// Collision / détection avec une combattante rouge
 	/// </summary>
-	REINE_ENNEMIE = 34,
+	COMBATTANTE_ROUGE = 32,
 	/// <summary>
-	/// Un oeuf pondu par la reine du camp adverse
+	/// Collision / détection avec une générale rouge
 	/// </summary>
-	OEUF_ENNEMIE = 35,
+	GENERALE_ROUGE = 33,
 	/// <summary>
-	/// Un scarabée	
+	/// Collision / détection avec la reine du camp adverse
 	/// </summary>
-	SCARABEE = 40	
+	REINE_ROUGE = 34,
+	/// <summary>
+	/// Collision / détection avec des phéromones produites par une contre-maitre rouge
+	/// </summary>
+	PHEROMONES_CM_ROUGE = 35,
+	/// <summary>
+	/// Collision / détection avec des phéromones produites par une ouvrière rouge
+	/// </summary>
+	PHEROMONES_OUV_ROUGE = 36,
+	/// <summary>
+	/// Collision / détection avec un oeuf pondu par la reine du camp rouge
+	/// </summary>
+	OEUF_ROUGE = 37,
+	/// <summary>
+	/// Collision / détection avec un scarabée	
+	/// </summary>
+	SCARABEE = 40,
+	/// <summary>
+	/// Collision / détection avec un bonbon anglais bleu
+	/// </summary>
+	BONBON_ANGLAIS_BLEU = 50,
+	/// <summary>
+	/// Collision / détection avec un bonbon anglais rose
+	/// </summary>
+	BONBON_ANGLAIS_ROSE = 51,
+	/// <summary>
+	/// Collision / détection avec un bonbon mure
+	/// </summary>
+	BONBON_MURE = 52,
+	/// <summary>
+	/// Collision / détection avec un bonbon orange
+	/// </summary>
+	BONBON_ORANGE = 53,
+	/// <summary>
+	/// Collision / détection avec un bonbon rose
+	/// </summary>
+	BONBON_ROSE = 54,
+	/// <summary>
+	/// Collision / détection avec un bonbon vert
+	/// </summary>
+	BONBON_VERT = 55
 }
 

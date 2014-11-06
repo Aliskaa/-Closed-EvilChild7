@@ -1,20 +1,13 @@
 fileFormatVersion: 2
-guid: a9063ac983293f445aa9d1633323676c
+guid: 6ab8f695a5fa6dc498e350093e6824d4
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Cube_003
-    100002: //RootNode
-    100004: Torus
-    400000: Cube_003
-    400002: //RootNode
-    400004: Torus
-    2300000: Cube_003
-    2300002: Torus
-    3300000: Cube_003
-    3300002: Torus
-    4300000: Torus
-    4300002: Cube_003
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube
     9500000: //RootNode
   materials:
     importMaterials: 1

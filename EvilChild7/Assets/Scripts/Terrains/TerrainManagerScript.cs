@@ -149,6 +149,15 @@ public class TerrainManagerScript : MonoBehaviour {
 		return chunkObj.GetComponent<HexagonesVueScript>();
 
 	}
+
+	/// <summary>
+	/// Vérifie si le terrain est rempli, i.e. si tous les hexagones sont créés
+	/// </summary>
+	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
+	public bool VerifierRemplissageTerrain(){
+		float nombreHexagonesAttendus = tailleMap.x * tailleMap.y;
+		return TerrainUtils.GetHexagones().Count == nombreHexagonesAttendus;
+	}
 #endregion
 	
 #region Méthodes privées
@@ -471,12 +480,6 @@ public class TerrainManagerScript : MonoBehaviour {
 		GetHexagonesProp();
 		CreerMap(type);
 		CreerMap3D();
-		#region DEBUG TEST
-//		GameObject bacAsable = GameObject.Find("Bac à sable");
-//		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-//		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
-//		                                                 new Vector3(85f, 0.1f, 90f));
-		#endregion
 	}
 #endregion
 	

@@ -22,27 +22,27 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 38					terminé		X			Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
 41		1		>	non lancé	[py]		Faire la vue et l'odorat dans les 6 sens possibles, pas que devant
-42		1		>	non lancé	[py]		Configurer tous les prefabs (rigidbody, box collider) pour :
-44								[py]			- fourmis rouge combattante
-45								[py]			- fourmis rouge générale
-46								[py]			- fourmis rouge contremaitre
-47								[py]			- fourmis rouge reine
-48								[py]			- fourmis noire combattante
-49								[py]			- fourmis noire générale
-50								[py]			- fourmis noire contremaitre
-51								[py]			- fourmis noire reine
-52								[py]			- oeuf fourmis
-53								[py]			- bout de bois
-54								[py]			- cailloux gros
-55								[py]			- cailloux petits
-56								[py]			- bonbon anglais
-57								[py]			- bonbon anglais bleu
-58								[py]			- bonbon mure
-59								[py]			- bonbon orange
-60								[py]			- bonbon rose
-61								[py]			- bonbon vert
-62								[py]			- phéromones
-63								[py]			- scarabées
+42		1			lancé		[py]		Configurer tous les prefabs (rigidbody, box collider) pour :
+44								X				- fourmis rouge combattante
+45								X				- fourmis rouge générale
+46								X				- fourmis rouge contremaitre
+47								X				- fourmis rouge reine
+48								X				- fourmis noire combattante
+49								X				- fourmis noire générale
+50								X				- fourmis noire contremaitre
+51								X				- fourmis noire reine
+52								X				- oeuf fourmis
+53								X				- bout de bois
+54								X				- cailloux gros
+55								X				- cailloux petits
+56								X				- bonbon anglais rose
+57								X				- bonbon anglais bleu
+58								X				- bonbon mure
+59								X				- bonbon orange
+60								X				- bonbon rose
+61								X				- bonbon vert
+62								X				- phéromones
+63								X				- scarabées
 64								[py]		Configurer tous les prefabs (collisions, déplacements, IA) pour :
 65								[py]			- fourmis rouge combattante
 66								[py]			- fourmis rouge générale
@@ -67,7 +67,14 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 85		2			non lancé	[py]		Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
 86					terminé		X			Système pour choper hexagone à partir de coordonnées
 87					terminé		X			Correction positions des objets invoqués
-88		1		>	lancé		[py]		Cibler une hexagone en le mettant en surbrillance
-89		1		>	lancé		[py]		Aider Sophie pour clic 2D ---> coord 3D locales terrain 
-
+88					terminé		X			Cibler une hexagone en le mettant en surbrillance
+89					terminé		X			Aider Sophie pour clic 2D ---> coord 3D locales terrain 
+90		2			non lancé	[py]		Mettre des codes secrets et des konami codes
+91		0		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
+92		1			non lancé	[py]		Transformation d'oeuf en fourmis
+93		1			non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvrire rouge
+												- Prefab
+												- Detection/collisions
+												- Invocation
+												
 

@@ -47,3 +47,6 @@ Liste des scripts :
 			- Position en Y=0.1
 			- Position en Z=-46.5
 			
+Liste des tags :
+	- Game Object "Bac à sable" : tag BAC_A_SABLE
+	- Game Object "Selection case" : tag POINTEUR

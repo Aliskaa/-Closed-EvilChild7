@@ -1,27 +1,48 @@
-Un GameObject pour les fourmis, ici "Fourmis Noire" doit avoir plusieurs scripts
-et composants liés à lui afin de gérer ses déplacement, son intelligence ou sa
-physique par exemple.
+Configuration des prefabs "fourmis" :
 
-Liste des composants :
-	- Character Controller [PLUS UTILISE POUR L'INSTANT]
-			- Pour faire déplacer l'objet.
-			- Center: X=0 Y=4 Z=0
-	- Ajout d'un rigid body
-			- Pour les collisions
-			- Contraints: Freeze Position en Y, freeze rotations en X, Y, Z
-	- Ajout d'un Box Collider
-			- Center: X=0.5 Y=2 Z=1
-			- Size: X=6 Y=2.5 Z=6
-			- IsTrigger à true
+* fourmi_noire_combattante :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0.8/1/0.5 ; 3/2/3
 
+* fourmi_noire_contremaitre :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0.8/1/0.5 ; 3/2/3
+	
+* fourmi_noire_generale :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0.8/1/0.75 ; 3/2/3
+	
+* fourmi_noire_combattante :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : valeurs par défaut
+	
+* fourmi_noire_reinee :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : valeurs par défaut
+	
+* fourmi_rouge_combattante :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0.5/1/0.5 ; 3/2/3
+	
+* fourmi_rouge_contremaitre :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0.8/1/0.5 ; 3/2/3.5
+	
+* fourmi_rouge_generale :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0.5/1/0.8 ; 3/2/3	
 
-Liste des scripts :
-	- DeplacementsFourmisScript
-			- Pour gérer le déplacement de la fourmis sur le terrain ainsi que la vision
-			qu'elle a de celui-ci (sa place, sa posiiton, etc.)
-			- Déplacement Vitesse: 5
-	- CollisionsFourmisScript
-			- Pour gérer les collisions
-			- Longueur visee: 5
-			
+* fourmi_rouge_ouvriere :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : valeurs par défaut
+	
+* fourmi_rouge_reine :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : valeurs par défaut
+	
+* oeuf_fourmi :
+	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
+	- BoxCollider : 0/0.8/0 ; 2/2.5/3.5
+	
 
+	

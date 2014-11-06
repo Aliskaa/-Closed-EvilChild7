@@ -306,15 +306,26 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  29;
+Date..........:  07/11/2014 00h04;
 Auteur........:  py;
 Commentaire...:
-	Travail sur le pointagee/click d'un hexagone :
+*⁂((✪⥎✪))⁂*
+	*Travail sur le pointage/click d'un hexagone :
 		- Survol d'un hexagone
-		- Couleur selon survol/point [en cours]
-		- Couleur au clic [en cours]
-		- Amélioration du script d'invocations d'objets pour les msies en évidences d'hexagonres;
+		- Couleur qui change si survol souris
+		- Amélioration du script d'invocations d'objets pour les mises en évidences d'hexagonres
+		- Nouveau prefab pour le survol de la souris
+	*Correction InvocateurObjectsScripts (problème de chemin vers le package des objets de debug)
+	*Travail sur config de tous les prefabs (colliders et rigidbody), MAJ des readme
+	*Changement de prefab pour le bout de bois
+	*Correction sur l'invocation d'objet (bug si coordonnées en paramètres = coord hexagones)
+	*Mise jour de la classe GameObjectUtils pour parser les noms des objets
+	*Correction TypesObjetsRencontres pour prendre en charge tous les types d'objets
+	*Création d'un script de debug pour éviter de squatter d'autres scripts pour faire des tests
+	*Creation méthode pour savoir si le terrain est rempli
+	*Taches 89 et 88 terminées
+	*Taches 44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62 et 63 terminées;
 
 __________________________________
 
