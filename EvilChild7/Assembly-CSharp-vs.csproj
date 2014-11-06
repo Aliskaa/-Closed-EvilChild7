@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Fourmis\CollisionsFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" />
+     <Compile Include="Assets\Scripts\Interactions\PointAndClickScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\CivGridUtils.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />

@@ -472,10 +472,10 @@ public class TerrainManagerScript : MonoBehaviour {
 		CreerMap(type);
 		CreerMap3D();
 		#region DEBUG TEST
-		GameObject bacAsable = GameObject.Find("Bac à sable");
-		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
-		                                                 new Vector3(85f, 0.1f, 90f));
+//		GameObject bacAsable = GameObject.Find("Bac à sable");
+//		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+//		/*GameObject objet = */scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
+//		                                                 new Vector3(85f, 0.1f, 90f));
 		#endregion
 	}
 #endregion

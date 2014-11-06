@@ -294,6 +294,42 @@ Commentaire...:
 
 __________________________________
 
+Numero........:  28;
+Date..........:  06/11/2014 09h49;
+Auteur........:  py;
+Commentaire...:
+	Travail sur la récupération de coordonnées 3D locales via un clic 2D
+		- Création du dossier Interactions dans le dossier Script pour tous les scripts
+		(clic, drag, ...)
+		- Ajout d'une nouvelle scene de debug pour les clics
+		- Maintenant un clic repère un hexagone;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;

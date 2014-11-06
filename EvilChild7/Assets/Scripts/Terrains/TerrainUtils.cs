@@ -105,6 +105,7 @@ public static class TerrainUtils {
 	/// </summary>
 	/// <param name="hexagone">L'hexagone à enregistrer</param>
 	public static void AjouterHexagone( HexagoneInfo hexagone ){
+		//Debug.Log("Hexagone ajouté : " + hexagone.positionLocaleSurTerrain);
 		hexagones.Add(hexagone);
 	}
 
