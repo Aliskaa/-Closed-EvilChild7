@@ -70,11 +70,10 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 88					terminé		X			Cibler une hexagone en le mettant en surbrillance
 89					terminé		X			Aider Sophie pour clic 2D ---> coord 3D locales terrain 
 90		2			non lancé	[py]		Mettre des codes secrets et des konami codes
-91		0		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
+91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
 92		1			non lancé	[py]		Transformation d'oeuf en fourmis
 93		1			non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvrire rouge
 												- Prefab
 												- Detection/collisions
 												- Invocation
-												
-
+94		1		>	lancé		[py]		Konami code : pluie de nourriture

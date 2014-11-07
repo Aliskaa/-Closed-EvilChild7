@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\GameObjectUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\JSONUtils.cs" />
+     <Compile Include="Assets\Scripts\Utils\KonamiCode.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesAxes.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesObjetsRencontres.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesRotations.cs" />

@@ -11,6 +11,9 @@
 
 using UnityEngine;
 
+/// <summary>
+/// Script de debug à coller n'importe où et à complèter avec n'importe quoi.
+/// </summary>
 public class DebugScript : MonoBehaviour {
 
 

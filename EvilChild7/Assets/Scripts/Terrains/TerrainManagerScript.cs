@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.4.0
+/// PY Lapersonne - Version 3.4.1
 /// </remarks>
 
 using UnityEngine;
@@ -423,22 +423,23 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="typeMap">Le type de terrain</param>
 	private void CreerMap( TypesMaps typeMap ){
+//		Debug.Log("Création du terrain : "+typeMap);
 		switch (typeMap){
-		case TypesMaps.NIVEAU_1:
-			CreerMapDesert();
-			break;
-		case TypesMaps.NIVEAU_2:
-			CreerMapLac();
-			break;
-		case TypesMaps.NIVEAU_3:
-			CreerMapTraversees();
-			break;
-		case TypesMaps.NIVEAU_4:
-			CreerMapEtranglement();
-			break;
-		case TypesMaps.RANDOM:
-			CreerMapRandom();
-			break;
+			case TypesMaps.NIVEAU_1:
+				CreerMapDesert();
+				break;
+			case TypesMaps.NIVEAU_2:
+				CreerMapLac();
+				break;
+			case TypesMaps.NIVEAU_3:
+				CreerMapTraversees();
+				break;
+			case TypesMaps.NIVEAU_4:
+				CreerMapEtranglement();
+				break;
+			case TypesMaps.RANDOM:
+				CreerMapRandom();
+				break;
 		}
 		// FIXME : Valeur en dur, Translate() non relatif, sale
 		chunkHolder.transform.Translate(new Vector3 (-98.5f, 0.1f, -93));
@@ -478,6 +479,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		GetHexagonesProp();
+		Debug.Log("Création du terrain : "+type);
 		CreerMap(type);
 		CreerMap3D();
 	}
@@ -510,26 +512,26 @@ public enum TypesTerrains : int {
 /// <summary>
 /// Les types de map
 /// </summary>
-public enum TypesMaps { 
+public enum TypesMaps : int { 
 	/// <summary>
 	/// Que du sable, le désert
 	/// </summary>
-	NIVEAU_1, 
+	NIVEAU_1 = 1, 
 	/// <summary>
 	/// De l'eau et du sable, un lac
 	/// </summary>
-	NIVEAU_2,
+	NIVEAU_2 = 2,
 	/// <summary>
 	/// Beaucoup d'eau, une grande traversée
 	/// </summary>
-	NIVEAU_3,
+	NIVEAU_3 = 3,
 	/// <summary>
 	/// Encore plus d'eau, un zig-zag
 	/// </summary>
-	NIVEAU_4,
+	NIVEAU_4 = 4,
 	/// <summary>
 	/// Génération aléatoire de la map
 	/// </summary>
-	RANDOM
+	RANDOM = 0
 }
 #endregion
