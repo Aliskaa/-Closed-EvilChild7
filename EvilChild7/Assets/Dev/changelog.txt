@@ -329,11 +329,11 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  30;
+Date..........:  07/11/2014 01h02;
 Auteur........:  py;
 Commentaire...:
-	;
+	Ajout d'une scène de présentation avec des captures d'écrans;
 
 __________________________________
 
