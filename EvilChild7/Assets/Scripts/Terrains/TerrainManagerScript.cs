@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.3.0
+/// PY Lapersonne - Version 3.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -307,28 +307,28 @@ public class TerrainManagerScript : MonoBehaviour {
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				pieces[x, z] = CreerPiece(x, z, TypesTerrains.EAU);
-				if ( x >= segmentsEnX/4 && x <= segmentsEnX/3
-				    && z >= segmentsEnZ/4 && z <= segmentsEnZ/3){
+				if ( z >= segmentsEnZ/4 && z <= segmentsEnZ/3
+				    && x >= segmentsEnX/4 && x <= segmentsEnX/3){
 					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
-				if ( x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4
-				    && z <= segmentsEnZ/3){
+				if ( z >= 2*segmentsEnZ/3 && z <= 3*segmentsEnZ/4
+				    && x <= segmentsEnX/3){
 					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
-				if ( x >= segmentsEnX/3 && x <= 2*segmentsEnX/3
-				    && z >= segmentsEnZ/4 && z <= segmentsEnZ/3){
+				if ( z >= segmentsEnZ/3 && z <= 2*segmentsEnZ/3
+				    && x >= segmentsEnX/4 && x <= segmentsEnX/3){
 					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
-				if ( x >= segmentsEnX/4 && x <= segmentsEnX/3
-				    && z >= segmentsEnZ/3 && z <= 3*segmentsEnZ/4){
+				if ( z >= segmentsEnZ/4 && z <= segmentsEnZ/3
+				    && x >= segmentsEnX/3 && x <= 3*segmentsEnX/4){
 					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
-				if ( x >= segmentsEnX/3 && x <= 3*segmentsEnX/4
-				    && z >= 2*segmentsEnZ/3 && z <= 3*segmentsEnZ/4){
+				if ( z >= segmentsEnZ/3 && z <= 3*segmentsEnZ/4
+				    && x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4){
 					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
-				if ( x >= 2*segmentsEnX/3 && x <= 3*segmentsEnX/4
-				    && z >= 3*segmentsEnZ/4){
+				if ( z >= 2*segmentsEnZ/3 && z <= 3*segmentsEnZ/4
+				    && x >= 3*segmentsEnX/4){
 					pieces[x, z] = CreerPiece(x, z, TypesTerrains.SABLE);
 				}
 				pieces[x, z].gameObject.transform.position = new Vector3(x * (taillePiece * tailleHexagone.x), 0f, (z * (taillePiece * tailleHexagone.z) * (.75f)));

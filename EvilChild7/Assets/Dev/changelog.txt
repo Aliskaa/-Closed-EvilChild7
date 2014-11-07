@@ -337,6 +337,40 @@ Commentaire...:
 
 __________________________________
 
+Numero........:  31;
+Date..........:  07/11/2014 11h42;
+Auteur........:  py;
+Commentaire...:
+	Travail et correctifs en rapport avec la présentation client :
+		- Correction de la génération du terrain pour le niveau 4
+		- Ajouts de captures d'écran;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
