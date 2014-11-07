@@ -186,5 +186,4 @@ public class PointAndClickScript : MonoBehaviour {
 		if ( modeSurvol ) DetecterSurvol();
 	}
 #endregion
-
 }

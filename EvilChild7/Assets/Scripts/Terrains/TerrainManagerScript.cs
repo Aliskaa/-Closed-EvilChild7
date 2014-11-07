@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.4.1
+/// PY Lapersonne - Version 3.4.2
 /// </remarks>
 
 using UnityEngine;
@@ -157,6 +157,15 @@ public class TerrainManagerScript : MonoBehaviour {
 	public bool VerifierRemplissageTerrain(){
 		float nombreHexagonesAttendus = tailleMap.x * tailleMap.y;
 		return TerrainUtils.GetHexagones().Count == nombreHexagonesAttendus;
+	}
+
+	/// <summary>
+	/// Va convertir des coordonées 3D GLOBALES (typqiuement venant d'un clic de souris ou autres)
+	/// en coordonnées 3D LOCALES au terrain.
+	/// </summary>
+	/// <param name="coord">Des coordonnées globales</param>
+	public Vector3 ConvertirCoordonnes( Vector3 coord ){
+		return transform.worldToLocalMatrix.MultiplyPoint(coord);
 	}
 #endregion
 	

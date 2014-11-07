@@ -347,11 +347,14 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  32;
+Date..........:  07/11/2014 17h40;
 Auteur........:  py;
 Commentaire...:
-	;
+	Mise à jour TODOList suite à réunion client
+	Correction bug invocation scarabee
+	Mise en place d'un konami code faisant apparaitre des bonbons et des scarabées
+	Taches 94 et 97 terminées;
 
 __________________________________
 

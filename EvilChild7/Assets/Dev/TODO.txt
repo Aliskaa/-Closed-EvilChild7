@@ -76,4 +76,15 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 												- Prefab
 												- Detection/collisions
 												- Invocation
-94		1		>	lancé		[py]		Konami code : pluie de nourriture
+94					terminé		X			Konami code : pluie de nourriture
+95		1			non lancé	[py]		Mettre à jour le terrain avec les remarques du client :
+												- pas de fourmis en dehors du terrain
+												- replacer le chemin
+												- attention à la maison trop grande
+96		1			non lancé	[py]		Phéromones : propoer aprticules (vertes et rouges pour ouvriere et cm)
+97					terminé		X		Fonction pour convertir coor globale sen locales par rapport au terrain
+98		1			non lancé	[py]		Voir si nécéssité de bloquer les positions x/y/z des objets
+
+
+
+												

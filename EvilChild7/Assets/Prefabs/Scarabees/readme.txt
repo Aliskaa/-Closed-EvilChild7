@@ -1,5 +1,5 @@
 Configuration des prefabs "scarabees" :
 
 * scarabee :
-	- Rigidbody avec freeze rotation et position en X, Y, Z
+	- Rigidbody avec freeze rotation en  X, Y, Z et position en X, Z
 	- CapsuleCollider : valeurs par défaut

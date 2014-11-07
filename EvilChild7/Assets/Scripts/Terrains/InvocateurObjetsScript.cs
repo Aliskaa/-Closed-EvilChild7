@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 1.4.0
+/// PY Lapersonne - Version 1.5.0
 /// </remarks>
 
 using UnityEngine;
@@ -34,7 +34,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string packageFourmi 			= "Assets/Prefabs/Fourmis/";
 	private const string packageNourritures 	= "Assets/Prefabs/Nourritures/";
 	private const string packagePheromones 		= "Assets/Prefabs/Pheromones/";
-	private const string packageScarabees 		= "Assets/Prefabs/Scarabées/";
+	private const string packageScarabees 		= "Assets/Prefabs/Scarabees/";
 	private const string packageEau				= "Assets/Prefabs/Eau/";
 	private const string packageTerrain 		= "Assets/Prefabs/Terrains/";
 	private const string packageDebug	 		= "Assets/Prefabs/Debug/";
@@ -247,6 +247,27 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Invoque l'objet demandé et le place sur l'hexagone
+	/// le plus proche de la position indiquée en ajoutant en plus un décalage dans les
+	/// coordonnées (typiquement : invoquer un objet sur une case mais le emttre très haut en Y pour qu'il tombe bien)
+	/// </summary>
+	/// <returns>Le game object, rattaché au terrain, sur l'hexagone le plus proche
+	/// de la position indiquée, avec l'offset appliqué</returns>
+	/// <param name="objet">Le type d'objet à créer</param>
+	/// <param name="positionApprox">La position approximative, non définitive de l'objet.</param>
+	public GameObject InvoquerObjetAvecOffset(Invocations objet, Vector3 positionApprox, Vector3 offset){
+		GameObject invoc = InvoquerObjet(objet);
+		HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(positionApprox);
+		if (hexPlusProche == null) {
+			Debug.LogError ("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
+		} else {
+			invoc.transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
+			invoc.transform.Translate(offset);
+		}
+		return invoc;
+	}
+
+	/// <summary>
 	/// Invoque l'objet demandé et le recentre automatiquement
 	/// </summary>
 	/// <remarks>Il faut que le gameobject "Terrain" soit initlaisé avec tous ses game objets
@@ -273,115 +294,120 @@ public class InvocateurObjetsScript : MonoBehaviour {
 #region Invocation
 /// <summary>
 /// Les types d'objets que l'on peut créer
+/// [10;19] : par rapport aux obstacles inertes
+/// [20;29] : par rapport aux unités noires
+/// [30;39] : par rapport aux unités rouges
+/// [40;49] : par rapport à d'autres menaces
+/// [50;69] : par rapport à la nourriture
 /// </summary>
-public enum Invocations {
+public enum Invocations : int {
 	/// <summary>
 	/// Un bout de bois
 	/// </summary>
-	BOUT_DE_BOIS,
+	BOUT_DE_BOIS = 10,
 	/// <summary>
 	/// Un caillou
 	/// </summary>
-	CAILLOU,
+	CAILLOU = 11,
 	/// <summary>
 	/// Un petit caillou
 	/// </summary>
-	PETIT_CAILLOU,
+	PETIT_CAILLOU = 12,
 	/// <summary>
 	/// Un très gros caillou
 	/// </summary>
-	TRES_GROS_CAILLOU,
+	TRES_GROS_CAILLOU = 13,
 	/// <summary>
 	/// Une fourmi noire tete nue
 	/// </summary>
-	FOURMI_NOIRE_OUVRIERE,
+	FOURMI_NOIRE_OUVRIERE = 20,
 	/// <summary>
 	/// Une fourmi noire avec un chapeau bleu
 	/// </summary>
-	FOURMI_NOIRE_COMBATTANTE,
+	FOURMI_NOIRE_COMBATTANTE = 21,
 	/// <summary>
 	/// Une fourmi noire avec un casque jaune
 	/// </summary>
-	FOURMI_NOIRE_CONTREMAITRE,
+	FOURMI_NOIRE_CONTREMAITRE = 22,
 	/// <summary>
 	/// Une fourmi noire avec un képi bleu
 	/// </summary>
-	FOURMI_NOIRE_GENERALE,
+	FOURMI_NOIRE_GENERALE = 23,
 	/// <summary>
 	/// Une fourmi noire avec une couronne
 	/// </summary>
-	FOURMI_NOIRE_REINE,
+	FOURMI_NOIRE_REINE = 24,
 	/// <summary>
 	/// Une fourmi rouge avec un chapeau bleu
 	/// </summary>
-	FOURMI_ROUGE_OUVRIERE,
+	FOURMI_ROUGE_OUVRIERE = 30,
 	/// <summary>
 	/// Une fourmi rouge avec un chapeau bleu
 	/// </summary>
-	FOURMI_ROUGE_COMBATTANTE,
+	FOURMI_ROUGE_COMBATTANTE = 31,
 	/// <summary>
 	/// Une fourmi rouge avec un casque jaune
 	/// </summary>
-	FOURMI_ROUGE_CONTREMAITRE,
+	FOURMI_ROUGE_CONTREMAITRE = 32,
 	/// <summary>
 	/// Une fourmi rouge avec un képi bleu
 	/// </summary>
-	FOURMI_ROUGE_GENERALE,
+	FOURMI_ROUGE_GENERALE = 33,
 	/// <summary>
 	/// Une fourmi rouge avec une couronne
 	/// </summary>
-	FOURMI_ROUGE_REINE,
+	FOURMI_ROUGE_REINE = 34,
 	/// <summary>
 	/// Un oeuf tout vert
 	/// </summary>
-	OEUF_FOURMI,
+	OEUF_FOURMI = 35,
 	/// <summary>
 	/// Un scarabee tout vert affamé
 	/// </summary>
-	SCARABEE,
+	SCARABEE = 40,
 	/// <summary>
 	/// Un bonbon cylindrique bleu d'extérieur et noir dedans
 	/// </summary>
-	BONBON_ANGLAIS_BLEU,
+	BONBON_ANGLAIS_BLEU = 50,
 	/// <summary>
 	/// Un bon cylindrique rose d'extérieur et noir dedans
 	/// </summary>
-	BONBON_ANGLAIS_ROSE,
+	BONBON_ANGLAIS_ROSE = 51,
 	/// <summary>
 	/// Un bonbon rouge en forme de mure
 	/// </summary>
-	BONBON_MURE,
+	BONBON_MURE = 52,
 	/// <summary>
 	/// Un bonbon rayé blanc et rouge
 	/// </summary>
-	BONBON_ORANGE,
+	BONBON_ORANGE = 53,
 	/// <summary>
 	/// Un bonbon rayé blanc et rose
 	/// </summary>
-	BONBON_ROSE,
+	BONBON_ROSE = 54,
 	/// <summary>
 	/// Un bonbon rayé blanc et vert
 	/// </summary>
-	BONBON_VERT,
+	BONBON_VERT = 55,
 	/// <summary>
 	/// Un pale anneau vert
 	/// </summary>
-	PHEROMONE,
+	PHEROMONE = 70,
 	/// <summary>
 	/// Une lumière dans un anneau pour montrer la case visée
 	/// </summary>
-	SELECTION_CASE,
+	SELECTION_CASE = 71,
 	/// <summary>
 	/// Une game object invisible à placer sur les cases d'eau
 	/// </summary>
-	EAU3D,
+	EAU3D = 72,
 	/// <summary>
 	/// Un objet de debug
 	/// </summary>
-	DEBUG_OBJECT,
+	DEBUG_OBJECT = 173,
 	/// <summary>
 	/// Une fourmis pour les debugs
 	/// </summary>
-	DEBUG_FOURMIS
+	DEBUG_FOURMIS = 174
 }
 #endregion

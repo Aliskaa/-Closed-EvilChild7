@@ -26,48 +26,56 @@ public class KonamiCode : MonoBehaviour {
 	/// <summary>
 	/// Un indice
 	/// </summary>
-	private int indice = 0;
-
-	/// <summary>
-	/// Temps écoulé depuis le début de la saisie du code
-	/// </summary>
-	float tempDepuisDebut = 0f;
-
-	/// <summary>
-	/// Temps écoulé depuis la dernière touche saisie
-	/// </summary>
-	float tempsDepuisDerniereTouche = 0f;
+	private int indiceToucheActuelle = 0;
 #endregion
-
-#region Attributs publics
-	/// <summary>
-	/// En millisecondes
-	/// </summary>
-	public float timeKey = 0f;
-
-	/// <summary>
-	/// En millisecondes
-	/// </summary>
-	public float timeCode = 0f;
-
-	/// <summary>
-	/// 
-	/// </summary>
-	public GameObject receiver;
-
-	/// <summary>
-	/// 
-	/// </summary>
-	public string message;
-#endregion
-
 
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
-#region Méthodes package
+#region Méthodes privées
+	/// <summary>
+	/// Armageddon version bonbons : des bonbons tombent
+	/// du ciel et atterissent sur le terrain.
+	/// </summary>
+	private void Bonbongedon(){
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		int nombreBonbons = UnityEngine.Random.Range (10, 50);
+		for ( int i = 0; i < nombreBonbons; i++ ){
+			int bonbon =  UnityEngine.Random.Range(50,55);
+			Invocations bonbonInvoc = (Invocations)bonbon;
+			int randomX = UnityEngine.Random.Range(55,148);    // Limites en X du terrain
+			//int randomY = UnityEngine.Random.Range(15,100);    // Altitudes min et max
+			int randomZ = UnityEngine.Random.Range(52,132);     // Limites en Z du terrain
+			scriptInvoc.InvoquerObjetAvecOffset( 
+			                  bonbonInvoc, 
+			                  new Vector3(randomX, 0, randomZ),
+			                  new Vector3(0,0/*randomY*/,0));
+		}
+	}
 
+	/// <summary>
+	/// Armageddon version scarabées : des scarabées tombent
+	/// du ciel et atterissent sur le terrain.
+	/// </summary>
+	private void Scarabgedon(){
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		int nombreScarabees = UnityEngine.Random.Range(1, 3);
+		for ( int i = 0; i < nombreScarabees; i++ ){
+			int randomX = UnityEngine.Random.Range(55,148);   // Limites en X du terrain
+			//int randomY = UnityEngine.Random.Range(15,100);   // Altitudes min et max
+			int randomZ = UnityEngine.Random.Range(52,132);   // Limites en Z du terrain
+			scriptInvoc.InvoquerObjetAvecOffset( 
+			                Invocations.SCARABEE, 
+			                new Vector3(randomX, 0, randomZ),
+			                new Vector3(0,0/*randomY*/,0));
+		}
+	}
+#endregion
+
+#region Méthodes package
 	/// <summary>
 	/// Routine appelée automatiquement par Unity au lancement du script
 	/// </summary>
@@ -84,55 +92,32 @@ public class KonamiCode : MonoBehaviour {
 			KeyCode.B,
 			KeyCode.A
 		};
-		indice = 0;
-		tempDepuisDebut = 0f;
-		tempsDepuisDerniereTouche = 0f;
-		timeKey = 0f;
-		timeCode = 0f;
+		indiceToucheActuelle = 0;
 	}
 
 	/// <summary>
-	/// 
+	/// Routine appelée automatiquement par Unity pour traiter les évènements liés
+	/// à la GUI/UI
 	/// </summary>
-	//void OnEnable(){
-		//if (receiver == null) enabled = false;
-	//}
-
-	/// <summary>
-	/// Routine appelée automatiquement par Unity à la mise à jour du script
-	/// </summary>
-	void Update(){
-		tempsDepuisDerniereTouche += Time.deltaTime;
-		tempDepuisDebut += Time.deltaTime;
-/*
-		if ( Input.anyKeyDown == false ){
-			Debug.Log(">>>>> KO");
-			return;
-		}
-*/
-		/*
-		if ( Input.GetKeyDown(codesTouches[indice]) == false /*
-		    	|| tempDepuisDebut >= timeCode 
-		    	|| tempsDepuisDerniereTouche >= timeKey* / ){
-			Debug.Log(">>>>> Trop tard");
-			indice = 0;
-		}
-		*/
-		if ( Input.GetKeyDown(this.codesTouches[indice]) ){
-			if ( indice == 0 ) tempDepuisDebut = 0f;
-			tempsDepuisDerniereTouche = 0f;
-			indice++;
-			Debug.Log(">>>>> Ah ?");
-			if ( indice >= codesTouches.Length ){
-				Debug.Log(">>>>> KONAMI !!");
-				//if ( receiver != null ){
-				//	receiver.SendMessage(message, SendMessageOptions.DontRequireReceiver);
-				//}
-				indice = 0;
+	void OnGUI(){
+		Event e = Event.current;
+		if ( e!= null && e.isKey & Input.anyKeyDown && e.keyCode.ToString () != "None" ){
+			KeyCode kc = e.keyCode;
+			if ( kc == codesTouches[indiceToucheActuelle] ){
+				indiceToucheActuelle++;
+				if ( indiceToucheActuelle+1 > codesTouches.Length ){
+					indiceToucheActuelle = 0;
+					if ( UnityEngine.Random.Range(1,10) <= 3 ){
+						Scarabgedon();
+					} else {
+						Bonbongedon();
+					}
+				}
+			} else {
+				indiceToucheActuelle = 0;
 			}
 		}
 	}
-
 #endregion
 
 }

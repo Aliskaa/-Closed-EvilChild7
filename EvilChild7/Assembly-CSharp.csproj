@@ -95,7 +95,7 @@
      <None Include="Assets\Scripts\Scarabées\readme.txt" />
      <None Include="Assets\Dev\TODO.txt" />
      <None Include="Assets\Prefabs\Fourmis\readme.txt" />
-     <None Include="Assets\Prefabs\Scarabées\readme.txt" />
+     <None Include="Assets\Prefabs\Scarabees\readme.txt" />
      <None Include="Assets\Prefabs\Terrains\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
