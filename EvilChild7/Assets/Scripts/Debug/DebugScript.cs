@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.0.1
 /// </remarks>
 
 using UnityEngine;
@@ -62,6 +62,21 @@ public class DebugScript : MonoBehaviour {
 		                              new Vector3(85f, 0.1f, 90f));
 			scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
 			                          new Vector3(65f, 0.1f, 75f));
+		}
+
+		/*
+		 * Debogage click / convertion coordonnées
+		 */
+		if ( Input.GetMouseButtonDown(1/*CLIC_DROIT_SOURIS*/) ){
+			Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
+			float distance;
+			Plane planDuSol = new Plane(Vector3.up, transform.position);
+			if ( planDuSol.Raycast(rayon, out distance) ){ 
+				Vector3 pointImpact = rayon.GetPoint(distance);
+				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
+				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
+			}
 		}
 	}
 #endregion

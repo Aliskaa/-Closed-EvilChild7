@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.4.2
+/// PY Lapersonne - Version 3.4.3
 /// </remarks>
 
 using UnityEngine;
@@ -165,7 +165,10 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="coord">Des coordonnées globales</param>
 	public Vector3 ConvertirCoordonnes( Vector3 coord ){
-		return transform.worldToLocalMatrix.MultiplyPoint(coord);
+		chunkHolder = GameObject.Find("Terrain");
+		Vector3 coordLocalesTerrain = chunkHolder.transform.worldToLocalMatrix.MultiplyPoint(coord);
+		//Debug.Log("Coordonnées locales calculées : " + coordLocalesTerrain);
+		return coordLocalesTerrain;
 	}
 #endregion
 	

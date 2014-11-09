@@ -2,8 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev\changelog.txt">
     <Files>
-      <File FileName="Assets\Dev\changelog.txt" Line="351" Column="34" />
-      <File FileName="Assets\Dev\TODO.txt" Line="66" Column="9" />
+      <File FileName="Assets\Dev\changelog.txt" Line="362" Column="34" />
+      <File FileName="Assets\Scripts\Interactions\PointAndClickScript.cs" Line="100" Column="7" />
+      <File FileName="Assets\Dev\TODO.txt" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Terrains\TerrainManagerScript.cs" Line="167" Column="54" />
+      <File FileName="Assets\Scripts\Debug\DebugScript.cs" Line="78" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -7,7 +7,7 @@
 /// http://mteys.com/detection-des-clics-sur-les-objets-unity/
 /// </remarks>
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.1.1
 /// </remarks>
 
 using UnityEngine;
@@ -97,7 +97,7 @@ public class PointAndClickScript : MonoBehaviour {
 				Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
 				//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
 				HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordLocales);
-				Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
+				//Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
 			}
 		}
 	}
