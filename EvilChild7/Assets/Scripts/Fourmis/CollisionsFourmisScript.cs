@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.3.1
+/// PY Lapersonne - Version 2.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -66,13 +66,32 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	private void DetecterObstacle( TypeAxes direction, float visee ){
 
 		// Convertion direction <-> vecteur
+		Color debugRayColor = Color.black;
 		Vector3 directionV;
-		switch (direction) {
+		switch ( direction ){
 			case TypeAxes.DEVANT:
+				debugRayColor = Color.blue;
 				directionV = Vector3.forward;
 				break;
 			case TypeAxes.DERRIERE:
+				debugRayColor = Color.green;
 				directionV = Vector3.back;
+				break;
+			case TypeAxes.DERRIERE_DROITE:
+				debugRayColor = Color.red;
+				directionV = Vector3.back + Vector3.right;
+				break;
+			case TypeAxes.DERRIERE_GAUCHE:
+				debugRayColor = Color.yellow;
+				directionV = Vector3.back + Vector3.left;
+				break;
+			case TypeAxes.DEVANT_DROITE:
+				debugRayColor = Color.white;
+				directionV = Vector3.forward + Vector3.right;
+				break;
+			case TypeAxes.DEVANT_GAUCHE:
+				debugRayColor = Color.magenta;
+				directionV = Vector3.forward + Vector3.left;
 				break;
 			case TypeAxes.GAUCHE:
 				directionV = Vector3.left;
@@ -101,11 +120,12 @@ public class CollisionsFourmisScript : MonoBehaviour {
 		Ray charles = new Ray(positionRayon, directionRayon);
 		RaycastHit hit;
 
+		//if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee*30) ){
 		if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) ){
 			string nomObjetProche = hit.transform.gameObject.name;
 			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);
 			Debug.Log("Détecté : "+objetSurChemin);
-			Debug.DrawLine(charles.origin, hit.point, Color.red);
+			Debug.DrawLine(charles.origin, hit.point, debugRayColor);
 		}/* else {
 			Debug.Log("Rien de détecté");
 		}*/
@@ -144,6 +164,11 @@ public class CollisionsFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Update(){
 		DetecterObstacle(TypeAxes.DEVANT, LONGUEUR_VISEE_OUVRIERE);
+		DetecterObstacle(TypeAxes.DEVANT_DROITE, LONGUEUR_VISEE_OUVRIERE);
+		DetecterObstacle(TypeAxes.DEVANT_GAUCHE, LONGUEUR_VISEE_OUVRIERE);
+		DetecterObstacle(TypeAxes.DERRIERE, LONGUEUR_VISEE_OUVRIERE);
+		DetecterObstacle(TypeAxes.DERRIERE_DROITE, LONGUEUR_VISEE_OUVRIERE);
+		DetecterObstacle(TypeAxes.DERRIERE_GAUCHE, LONGUEUR_VISEE_OUVRIERE);
 	}
 #endregion
 

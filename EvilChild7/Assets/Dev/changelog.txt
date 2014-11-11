@@ -358,27 +358,33 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  33;
+Date..........:  09/11/2014 17h15;
 Auteur........:  py;
 Commentaire...:
-	;
+	Correction convertion coordoonées globales <--> locales terrain;
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  34;
+Date..........:  10/11/2014 15h56;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur détection/vue/ordorat dans les 6 sens :
+		- maintenant la vue/l'odorat sont implémentés dans els 6 sens (rayons implémentés)
+	Amélioration konami code: all blacks et red necks !
+	Taches 41 et 90 terminées
+	Tache 38 re-ouverte;
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  35;
+Date..........:  11/11/2014 15h16;
 Auteur........:  py;
 Commentaire...:
-	;
+	Nettoyage et debogage
+	Mise à jours de fihciers suite à commit/push defectueux
+	Fin du travail sur la conception des 3 cheat codes;
 
 __________________________________
 

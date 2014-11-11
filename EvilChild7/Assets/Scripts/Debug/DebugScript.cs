@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.1
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -58,8 +58,6 @@ public class DebugScript : MonoBehaviour {
 			flagOKPop = true;
 			GameObject bacAsable = GameObject.Find("Bac à sable");
 			InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU,
-		                              new Vector3(85f, 0.1f, 90f));
 			scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
 			                          new Vector3(65f, 0.1f, 75f));
 		}
@@ -75,6 +73,9 @@ public class DebugScript : MonoBehaviour {
 				Vector3 pointImpact = rayon.GetPoint(distance);
 				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
+				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
+				InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
+				ios.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
 				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
 			}
 		}
