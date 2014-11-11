@@ -2,11 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev\changelog.txt">
     <Files>
-      <File FileName="Assets\Dev\changelog.txt" Line="382" Column="34" />
-      <File FileName="Assets\Dev\TODO.txt" Line="74" Column="42" />
-      <File FileName="Assets\Scripts\Fourmis\CollisionsFourmisScript.cs" Line="124" Column="3" />
-      <File FileName="Assets\Scripts\Debug\DebugScript.cs" Line="50" Column="63" />
-      <File FileName="Assets\Scripts\Utils\CheatCode.cs" Line="234" Column="1" />
+      <File FileName="Assets\Dev\changelog.txt" Line="392" Column="23" />
+      <File FileName="Assets\Dev\TODO.txt" Line="29" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

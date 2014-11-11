@@ -388,6 +388,82 @@ Commentaire...:
 
 __________________________________
 
+Numero........:  36;
+Date..........:  11/11/2014 18h37;
+Auteur........:  py;
+Commentaire...:
+	Renommage de "CollisionsFourmisScripts" en "DétectionFourmisScript"
+	Travail sur une version plus propre/modulaire/fonctionnelle de la vue et de l'odorat d'une fourmis
+		- Création de la classe "IA/Cible" représentant un objet detecté
+		- La signalisation des objets reprérés est partielement implémentée [attente de la conception de l'IA sur la preprod...]
+	Modification de l'univers de jeu pour appliquer les remaraques du client
+		- monde moins vide
+		- chemin de la grande maison et grande maison supprimés car fausse affordance
+		- changement de la texture du sable
+		- suppressions des fourmis et cailloux de déco car fausse affordance
+	Mise à jour des scènes
+	Nettoyage du dossier de dev
+	Tache 95 terminée	
+	Tache 99 terminée [atente conception IA];
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;

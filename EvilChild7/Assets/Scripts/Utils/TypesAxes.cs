@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.1.1
 /// </remarks>
 
 using UnityEngine;
@@ -14,7 +14,7 @@ using UnityEngine;
 /// Enumeration pour lister les différents types d'axe de visée pour par exemple
 /// détecter des obstacles
 /// </summary>
-public enum TypeAxes {
+public enum TypesAxes {
 	/// <summary>
 	/// Détection par devant
 	/// </summary>

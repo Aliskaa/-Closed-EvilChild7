@@ -13,7 +13,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 29					terminé		X			Fourmis : voir les cases et leurs types, où elle peut aller
 30					terminé		X			Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
-											(distance de parourt de case à case, ...)
+											(distance de parcourt de case à case, ...)
 32					non lancé	[py]		Voir nécessité script pour créér des GO donnés (pop scarabées, éclosions fourmis, ...)																				
 33					terminé		X			Améliorer le bac: cotés, skybox, fond, ...											
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
@@ -43,27 +43,27 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 61								X				- bonbon vert
 62								X				- phéromones
 63								X				- scarabées
-64								[py]		Configurer tous les prefabs (collisions, déplacements, IA) pour :
-65								[py]			- fourmis rouge combattante
-66								[py]			- fourmis rouge générale
-67								[py]			- fourmis rouge contremaitre
-68								[py]			- fourmis rouge reine
-69								[py]			- fourmis noire combattante
-70								[py]			- fourmis noire générale
-71								[py]			- fourmis noire contremaitre
-72								[py]			- fourmis noire reine
-73								[py]			- oeuf fourmis
-74								[py]			- bout de bois
-75								[py]			- cailloux gros
-76								[py]			- cailloux petits
-77								[py]			- bonbon anglais
-78								[py]			- bonbon anglais bleu
-79								[py]			- bonbon mure
-80								[py]			- bonbon orange
-81								[py]			- bonbon rose
-82								[py]			- bonbon vert
-83								[py]			- phéromones
-84								[py]			- scarabées
+64				>				[py]		Configurer tous les prefabs : SCRIPTS (collisions, déplacements, IA) pour :
+65				>				[py]			- fourmis rouge combattante
+66				>				[py]			- fourmis rouge générale
+67				>				[py]			- fourmis rouge contremaitre
+68				>				[py]			- fourmis rouge reine
+69				>				[py]			- fourmis noire combattante
+70				>				[py]			- fourmis noire générale
+71				>				[py]			- fourmis noire contremaitre
+72				>				[py]			- fourmis noire reine
+73				>				[py]			- oeuf fourmis
+74				>				[py]			- bout de bois
+75				>				[py]			- cailloux gros
+76				>				[py]			- cailloux petits
+77				>				[py]			- bonbon anglais
+78				>				[py]			- bonbon anglais bleu
+79				>				[py]			- bonbon mure
+80				>				[py]			- bonbon orange
+81				>				[py]			- bonbon rose
+82				>				[py]			- bonbon vert
+83				>				[py]			- phéromones
+84				>				[py]			- scarabées
 85		2			non lancé	[py]		Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
 86					terminé		X			Système pour choper hexagone à partir de coordonnées
 87					terminé		X			Correction positions des objets invoqués
@@ -72,18 +72,22 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 90					terminé		X			Mettre des codes secrets et des konami codes
 91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
 92		1			non lancé	[py]		Transformation d'oeuf en fourmis
-93		1			non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvriere rouge
-												- Prefab (particules de couleurs)
-												- Detection/collisions
-												- Invocation
+93		1		>	non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvriere rouge
+				>								- Prefab (particules de couleurs)
+				>								- Detection/collisions
+				>								- Invocation
 94					terminé		X			Konami code : pluie de nourriture
-95		1		>	non lancé	[py]		Mettre à jour le terrain avec les remarques du client :
-												- pas de fourmis en dehors du terrain
-												- replacer le chemin
-												- attention à la maison trop grande
+95					terminé		X			Mettre à jour le terrain avec les remarques du client :
+								X				- pas de fourmis en dehors du terrain
+								X				- revoir le chemin
+								X				- attention à la maison trop grande
+								X				- tuile pour la texture sable
 97					terminé		X			Fonction pour convertir coord globale en locales par rapport au terrain
 98		1			non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
-99		1		>	lancé		[py]		Vue et odorat algos : lister les objets vus et les envoyer à l'IA (objets, sens, distance)
-
-
+99					terminé		[py]		Vue et odorat algos : lister les objets vus et les envoyer à l'IA (objets, sens, distance)
+100		2			non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
+101		1		>	non lancé	[py]		Gestion de la caméra : possibilité de la bouger, limiter sa vue et ses mouvements
+											pour ne pas sortir
+											
+									
 												
