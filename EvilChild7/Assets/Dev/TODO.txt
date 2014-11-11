@@ -86,7 +86,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 98		1			non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
 99					terminé		[py]		Vue et odorat algos : lister les objets vus et les envoyer à l'IA (objets, sens, distance)
 100		2			non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
-101		1		>	non lancé	[py]		Gestion de la caméra : possibilité de la bouger, limiter sa vue et ses mouvements
+101		1		>>	non lancé	[py]		Gestion de la caméra : possibilité de la bouger, limiter sa vue et ses mouvements
 											pour ne pas sortir
 											
 									

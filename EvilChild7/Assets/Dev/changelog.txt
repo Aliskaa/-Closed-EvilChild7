@@ -412,7 +412,7 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
+	Mise à jour des prefabs et des game objects du terrain;
 
 __________________________________
 
