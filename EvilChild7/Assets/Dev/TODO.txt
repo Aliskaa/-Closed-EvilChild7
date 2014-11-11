@@ -22,7 +22,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 38		1		>	relancé		[py]		Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
 41					terminé		X			Faire la vue et l'odorat dans les 6 sens possibles, pas que devant : lancers de rayons
-42		1		>	lancé		[py]		Configurer tous les prefabs (rigidbody, box collider) pour :
+42		1		>	lancé		[py]		Configurer tous les prefabs (rigidbody, box collider, position au pop) pour :
 44								X				- fourmis rouge combattante
 45								X				- fourmis rouge générale
 46								X				- fourmis rouge contremaitre

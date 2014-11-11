@@ -408,11 +408,13 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  37;
+Date..........:  11/11/2014 23h20;
 Auteur........:  py;
 Commentaire...:
-	Mise à jour des prefabs et des game objects du terrain;
+	Mise à jour des prefabs et des game objects du terrain
+	Relancement des taches 42 à 63 : les prefabs ont été revus (fourmis noirs et blanches)
+	Travail sur le déplacement de la caméra (fichier CameraScript);
 
 __________________________________
 
