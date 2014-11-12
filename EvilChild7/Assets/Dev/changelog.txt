@@ -422,7 +422,7 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur le déplacement de la caméra;
 
 __________________________________
 
