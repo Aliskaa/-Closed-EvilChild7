@@ -13,10 +13,6 @@ using UnityEngine;
 /// <summary>
 /// Classe pour gérer la caméra : position, mouvements, positions et angles autorisés ou non, etc.
 /// </summary>
-
-// TODO : Touche haut et bas : monter et descendre, aps de zoom
-// TODO : rotation, déplacements dans tous les sens, zomm in et out
-// TODO : bloquer la caméra pour aps qu'elle aille plus loin que necessaire
 public class CameraScript : MonoBehaviour {
 
 
@@ -102,22 +98,6 @@ public class CameraScript : MonoBehaviour {
 #endregion
 
 #region Attributs privés
-	
-	/// <summary>
-	/// Concerne le zoom
-	/// </summary>
-	private Vector2 zoomRange = new Vector2( -10, 100 );
-
-	/// <summary>
-	/// Concerne le zoom
-	/// </summary>
-	private float currentZoom = 0;
-	
-	/// <summary>
-	/// Concerne le zoom
-	/// </summary>
-	private Vector2 zoomAngleRange;
-
 	/// <summary>
 	/// La position initiale
 	/// </summary>
@@ -140,13 +120,6 @@ public class CameraScript : MonoBehaviour {
 	 * ******** */
 
 #region Méthodes package
-	/// <summary>
-	/// Awake this instance.
-	/// </summary>
-	void Awake(){
-		zoomAngleRange = new Vector2( 20, 70 );
-	}
-
 	/// <summary>
 	/// Start this instance.
 	/// </summary>
@@ -187,43 +160,59 @@ public class CameraScript : MonoBehaviour {
 		/*
 		 * Touche d : aller à droite
 		 */
-		if ( Input.GetKey(TOUCHE_DROITE) ){          
-			transform.Translate(Vector3.right * Time.deltaTime * vitessePanoramique, Space.Self );  
+		if ( Input.GetKey(TOUCHE_DROITE) ){   
+			if ( transform.position.z <= -25 ){
+				transform.Translate(Vector3.right * Time.deltaTime * vitessePanoramique, Space.Self );  
+			}
 			return;
 		}
 		/*
 		 * Touche a : aller à gauche
 		 */
-		if ( Input.GetKey(TOUCHE_GAUCHE) ){         
-			transform.Translate(Vector3.left * Time.deltaTime * vitessePanoramique, Space.Self );              
+		if ( Input.GetKey(TOUCHE_GAUCHE) ){
+			if ( transform.position.z >= -75 ){
+				transform.Translate(Vector3.left * Time.deltaTime * vitessePanoramique, Space.Self );              
+			}
 			return;
 		}
 		/*
 		 * Touche z : aller devant / monter
 		 */
-		if ( Input.GetKey(TOUCHE_HAUT) ){// || Input.mousePosition.y >= Screen.height * (1 - edgeScroll) ) {            
-			transform.Translate(Vector3.forward * Time.deltaTime * vitessePanoramique, Space.Self );             
+		if ( Input.GetKey(TOUCHE_HAUT) ){
+			Vector3 posCour = transform.position;
+			if ( posCour.x >= 270 && posCour.y <= 452 ){
+				transform.Translate(Vector3.up * Time.deltaTime * vitessePanoramique, Space.Self );       
+			}
 			return;
 		}
 		/*
 		 * Touche s : aller derrière / descendre
 		 */
-		if ( Input.GetKey(TOUCHE_BAS) ){//|| Input.mousePosition.y <= Screen.height * edgeScroll ) {         
-			transform.Translate(Vector3.forward * Time.deltaTime * -vitessePanoramique, Space.Self );            
+		if ( Input.GetKey(TOUCHE_BAS) ){
+			Vector3 posCour = transform.position;
+			if ( posCour.x <= 340 && posCour.y >= 381 ){
+				transform.Translate(Vector3.down * Time.deltaTime * vitessePanoramique, Space.Self );            
+			}
 			return;
 		}  
 		/*
 		 * Touche a : rotation gauche
 		 */
-		if ( Input.GetKey(TOUCHE_ROTATION_GAUCHE) ){//|| Input.mousePosition.x <= Screen.width * edgeScroll ) {
-			transform.Rotate(Vector3.up * Time.deltaTime * -rotateSpeed, Space.World);
+		if ( Input.GetKey(TOUCHE_ROTATION_GAUCHE) ){
+			float angleDeg = Mathf.Rad2Deg*transform.localRotation.y;
+			if (angleDeg <= 39 ){
+				transform.Rotate(Vector3.up * Time.deltaTime * -rotateSpeed, Space.World);
+			}
 			return;
 		}
 		/*
 		 * Touche e : rotation droite
 		 */
-		if ( Input.GetKey(TOUCHE_ROTATION_DROITE) ){//|| Input.mousePosition.x >= Screen.width * (1 - edgeScroll) ) {
-			transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed, Space.World);
+		if ( Input.GetKey(TOUCHE_ROTATION_DROITE) ){
+			float angleDeg = Mathf.Rad2Deg*transform.localRotation.y;
+			if (angleDeg >= 34 ){
+				transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed, Space.World);
+			}
 			return;
 		}
 		/*
@@ -239,9 +228,8 @@ public class CameraScript : MonoBehaviour {
 		 * Molette vers le haut : zoom
 		 */
 		float zoom = Input.GetAxis(MOLETTE_ZOOM);
-		if (zoom > 0 ){
-			float currentFOV = camera.fieldOfView;
-			// Mathf.Clamp(valeur à cadrer, minimum, maximum);
+		float currentFOV = camera.fieldOfView;
+		if (zoom > 0 && currentFOV >= 1.30 ){
 			Camera.main.fieldOfView -= Mathf.Clamp(currentFOV, zoom, Time.deltaTime * vitesseZoom);
 			return;
 		}
@@ -249,9 +237,8 @@ public class CameraScript : MonoBehaviour {
 		 * Molette vers le bas : dézoom
 		 */
 		zoom = Input.GetAxis(MOLETTE_ZOOM);
-		if (zoom < 0 ){
-			float currentFOV = camera.fieldOfView;
-			// Mathf.Clamp(valeur à cadrer, minimum, maximum);
+		currentFOV = camera.fieldOfView;
+		if (zoom < 0 && currentFOV <= 16.81){
 			Camera.main.fieldOfView += Mathf.Clamp(currentFOV, zoom, Time.deltaTime * vitesseZoom);
 			return;
 		}

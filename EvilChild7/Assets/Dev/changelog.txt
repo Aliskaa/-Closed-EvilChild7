@@ -418,11 +418,14 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  38;
+Date..........:  12/11/2014 17h25;
 Auteur........:  py;
 Commentaire...:
-	Travail sur le déplacement de la caméra;
+	Travail sur le déplacement de la caméra
+		- Zoom avant, zoom arrière, rotation gauche et droite, haut, bas, gauche, droite
+		- Limitation des mouvements de la caméra
+	Tache 101 terminée;
 
 __________________________________
 
