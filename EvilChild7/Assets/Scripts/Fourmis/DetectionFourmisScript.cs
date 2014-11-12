@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 3.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -127,7 +127,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 		Ray charles = new Ray(positionRayon, directionRayon);
 		RaycastHit hit;
 
-		//if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee*30) ){
+		//if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee*30) ){ // DEBUG
 		if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) ){
 			string nomObjetProche = hit.transform.gameObject.name;
 			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);

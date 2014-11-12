@@ -429,11 +429,15 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  39;
+Date..........:  12/11/2014 18h23;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur déplacements de fourmis :
+		- recentrage enlevé
+		- meilleur déplacement (lerp)
+		- arret aux collisons
+	Taches 85 et 38 traitées;
 
 __________________________________
 

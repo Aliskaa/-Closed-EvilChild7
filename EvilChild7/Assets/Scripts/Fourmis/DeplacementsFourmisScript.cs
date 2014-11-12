@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.3.0
+/// PY Lapersonne - Version 2.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -50,6 +50,11 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	// FIXME pas très propre
 	private TypesRotations orientationCourante;
+
+	/// <summary>
+	/// Flag indiquant que la fourmis doit se stopper à cause d'une collision
+	/// </summary>
+	private bool stopCollision;
 #endregion
 
 #region Attributs publics
@@ -199,10 +204,23 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	private void Deambuler(){
 
+		stopCollision = false;
+
+		transform.position = Vector3.Lerp(transform.position, positionAatteindre, 0.03f);
+
+		if ( Vector3.Distance(transform.position, positionAatteindre) <= 1 ){
+			enMouvement = false;
+			objectifAtteint = true;
+		}
+		
+/*
+/////////////////////////
+// CODE OK, merci de ne pas supprimer pour le moment (Pierre-Yves)
+
 		/*
 		 * Déplacement de la fourmis
 		 * http://answers.unity3d.com/questions/195698/stopping-a-rigidbody-at-target.html
-		 */
+		 * /
 
 		float velocityFinale = 2.5f;	// Pour convertir la distance restant pour avoir la velocité finale (= façon de stopper)
 		float forceMax = 40.0f;
@@ -226,9 +244,13 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			Recentrer();
 		}/* else {
 			Debug.Log ("Objectif pas encore atteint : "+Vector3.Distance(transform.position,positionAatteindre));
-		}*/
+		}* /
 
 		//Recentrer();
+		
+/////////////////////////
+*/
+
 	}
 #endregion
 
@@ -239,6 +261,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	void Awake(){
 		enMouvement = false;
 		objectifAtteint = false;
+		stopCollision = false;
 	}
 
 	/// <summary>
@@ -248,15 +271,19 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		HexagoneCourant();
 		// A chaque frame, continuer la déambulation selon les flags
 		if (enMouvement && !objectifAtteint){
+			Debug.Log("Déambulation");
 			Deambuler();
 		// Ou en relancer une nouvelle (si la fourmis ne bouge plus)
 		} else {
-			//Debug.Log("Plus de déambulation, redémarrage");
-			int nombreDesCases = Random.Range(1,VISEE_MAX_OUVRIERE);
-			FaireRotation(TypesRotations.RANDOM);
-			Avancer(nombreDesCases);
-			Recentrer();
-			//Stopper();
+			if ( ! stopCollision ){
+				// FIXME Coupler ça avec l'IA
+				Debug.Log("Plus de déambulation, redémarrage");
+				int nombreDesCases = Random.Range(1,VISEE_MAX_OUVRIERE);
+				FaireRotation(TypesRotations.RANDOM);
+				Avancer(nombreDesCases);
+				//Recentrer();
+				//Stopper();
+			}
 		}
 	}
 #endregion
@@ -271,7 +298,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 		// Arret de l'objet
 		if  (nbCases <= 0 ){
+			Debug.Log("STOP !");
 			rigidbody.velocity = Vector3.zero;
+			rigidbody.angularVelocity = Vector3.zero;
 			enMouvement = false;
 			objectifAtteint = true;
 			return;
@@ -339,6 +368,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// bouge différement (ex: ne pas s'acharner à aller sur un coté du bac à sable)
 	/// </param>
 	public void StopperParCollision( TypesObjetsRencontres causeCollision ){
+		stopCollision = true;
 		// Arret de l'objet
 		Avancer(-1);
 		// Changement de direction su on tape dans un coté du bac à sable
