@@ -14,7 +14,7 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 30					terminé		X			Fourmis : visée : proportions/distances
 31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
 											(distance de parcourt de case à case, ...)
-32					non lancé	[py]		Voir nécessité script pour créer des GO données (pop scarabées, éclosions fourmis, ...)																				
+32					terminé		X			Voir nécessité script pour créer des GO donnés (pop scarabées, éclosions fourmis, ...)																				
 33					terminé		X			Améliorer le bac: cotés, skybox, fond, ...											
 35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
 36					terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
@@ -23,11 +23,11 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
 41					terminé		X			Faire la vue et l'odorat dans les 6 sens possibles, pas que devant : lancers de rayons
 42		1		>>	lancé		[py]		Configurer tous les prefabs (rigidbody, box collider, position au pop) pour :
-44								X				- fourmis rouge combattante
-45								X				- fourmis rouge générale
-46								X				- fourmis rouge contremaitre
-47								X				- fourmis rouge reine
-48								X				- fourmis noire combattante
+44								X				- fourmis blanche combattante et ouvriere
+45								X				- fourmis blanche générale
+46								X				- fourmis blanche contremaitre
+47								X				- fourmis blanche reine
+48								X				- fourmis noire combattante et ouvriere
 49								X				- fourmis noire générale
 50								X				- fourmis noire contremaitre
 51								X				- fourmis noire reine
@@ -44,11 +44,11 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 62								X				- phéromones
 63								X				- scarabées
 64				>				[py]		Configurer tous les prefabs : SCRIPTS (collisions, déplacements, IA) pour :
-65				>				[py]			- fourmis rouge combattante
-66				>				[py]			- fourmis rouge générale
-67				>				[py]			- fourmis rouge contremaitre
-68				>				[py]			- fourmis rouge reine
-69				>				[py]			- fourmis noire combattante
+65				>				[py]			- fourmis blanche combattante et ouvriere
+66				>				[py]			- fourmis blanche générale
+67				>				[py]			- fourmis blanche contremaitre
+68				>				[py]			- fourmis blanche reine
+69				>				[py]			- fourmis noire combattante et ouvriere
 70				>				[py]			- fourmis noire générale
 71				>				[py]			- fourmis noire contremaitre
 72				>				[py]			- fourmis noire reine
@@ -69,10 +69,10 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 87					terminé		X			Correction positions des objets invoqués
 88					terminé		X			Cibler une hexagone en le mettant en surbrillance
 89					terminé		X			Aider Sophie pour clic 2D ---> coord 3D locales terrain 
-90					terminé		X			Mettre des codes secrets et des konami codes
+90					terminé		X			Mettre des codes
 91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
 92		1			non lancé	[py]		Transformation d'oeuf en fourmis
-93		1		>	non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvriere rouge
+93		1		>>	non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvriere rouge
 				>								- Prefab (particules de couleurs)
 				>								- Detection/collisions
 				>								- Invocation

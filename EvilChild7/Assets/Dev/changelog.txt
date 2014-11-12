@@ -456,7 +456,16 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
+	Prise en charge des derniers prefabs des fourmsi (noires et blanches)
+		- Ajout des prefabs
+		- Config positions
+		- Mise à jour invocateur
+	Mise à jour rpefab de débogage
+	Mise à jour des classes utilisant les anciennes fourmis rouges (TypesObjetsRencontrés, GameObjectUtils, Invocateur, ...)
+	Mise à jour des classes utilisant les phéromones (TypesObjetsRencontrés, GameObjectUtils, Invocateur, ...)
+	Correction bug collision fourmis avec terrain
+	Création des phéromones
+	Tache 32 terminée;
 
 __________________________________
 

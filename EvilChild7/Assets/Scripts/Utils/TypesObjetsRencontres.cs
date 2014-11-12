@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -17,7 +17,7 @@ using UnityEngine;
 /// [0;9]   : par rapport au terrain
 /// [10;19] : par rapport aux obstacles inertes
 /// [20;29] : par rapport aux unités noires
-/// [30;39] : par rapport aux unités rouges
+/// [30;39] : par rapport aux unités blanches
 /// [40;49] : par rapport à d'autres menaces
 /// [50;69] : par rapport à la nourriture
 /// </summary>
@@ -62,6 +62,10 @@ public enum TypesObjetsRencontres : int {
 	/// Collision / détection avec le game object pour l'eau
 	/// </summary>
 	EAU3D = 6,
+	/// <summary>
+	/// Collision avec une partie du terrain
+	/// </summary>
+	BLOC_TERRAIN = 7,
 	/// <summary>
 	/// Collision / détection avec un petit caillou
 	/// </summary>
@@ -111,37 +115,37 @@ public enum TypesObjetsRencontres : int {
 	/// </summary>
 	OEUF_NOIR = 27,
 	/// <summary>
-	/// Collision / détection avec une ouvrière rouge
+	/// Collision / détection avec une ouvrière blanche
 	/// </summary>
-	OUVRIERE_ROUGE = 30,
+	OUVRIERE_BLANCHE = 30,
 	/// <summary>
-	/// Collision / détection avec une contre-maitrsse rouge
+	/// Collision / détection avec une contre-maitrsse blanche
 	/// </summary>
-	CONTREMAITRE_ROUGE = 31,
+	CONTREMAITRE_BLANCHE = 31,
 	/// <summary>
-	/// Collision / détection avec une combattante rouge
+	/// Collision / détection avec une combattante blanche
 	/// </summary>
-	COMBATTANTE_ROUGE = 32,
+	COMBATTANTE_BLANCHE = 32,
 	/// <summary>
-	/// Collision / détection avec une générale rouge
+	/// Collision / détection avec une générale blanche
 	/// </summary>
-	GENERALE_ROUGE = 33,
+	GENERALE_BLANCHE = 33,
 	/// <summary>
-	/// Collision / détection avec la reine du camp adverse
+	/// Collision / détection avec la reine du camp blanche
 	/// </summary>
-	REINE_ROUGE = 34,
+	REINE_BLANCHE = 34,
 	/// <summary>
-	/// Collision / détection avec des phéromones produites par une contre-maitre rouge
+	/// Collision / détection avec des phéromones produites par une contre-maitre blanche
 	/// </summary>
-	PHEROMONES_CM_ROUGE = 35,
+	PHEROMONES_CM_BLANCHE = 35,
 	/// <summary>
-	/// Collision / détection avec des phéromones produites par une ouvrière rouge
+	/// Collision / détection avec des phéromones produites par une ouvrière blanche
 	/// </summary>
-	PHEROMONES_OUV_ROUGE = 36,
+	PHEROMONES_OUV_BLANCHE = 36,
 	/// <summary>
-	/// Collision / détection avec un oeuf pondu par la reine du camp rouge
+	/// Collision / détection avec un oeuf pondu par la reine du camp blanc
 	/// </summary>
-	OEUF_ROUGE = 37,
+	OEUF_BLANC = 37,
 	/// <summary>
 	/// Collision / détection avec un scarabée	
 	/// </summary>

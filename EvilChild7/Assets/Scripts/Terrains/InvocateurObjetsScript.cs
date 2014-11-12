@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 1.5.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -31,7 +31,9 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	#region Packages
 	private const string packageBois 			= "Assets/Prefabs/Bois/";
 	private const string packageCailloux 		= "Assets/Prefabs/Cailloux/";
-	private const string packageFourmi 			= "Assets/Prefabs/Fourmis/";
+	private const string packageFourmis			= "Assets/Prefabs/Fourmis/";
+	private const string packageFourmisNoires	= "Assets/Prefabs/Fourmis/noires/";
+	private const string packageFourmisBlanches	= "Assets/Prefabs/Fourmis/blanches/";
 	private const string packageNourritures 	= "Assets/Prefabs/Nourritures/";
 	private const string packagePheromones 		= "Assets/Prefabs/Pheromones/";
 	private const string packageScarabees 		= "Assets/Prefabs/Scarabees/";
@@ -54,11 +56,11 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierFNG 			= "fourmi_noire_generale.prefab";
 	private const string fichierFNO 			= "fourmi_noire_ouvriere.prefab";
 	private const string fichierFNR 			= "fourmi_noire_reine.prefab";
-	private const string fichierFRCmb 			= "fourmi_rouge_combattante.prefab";
-	private const string fichierFRCm			= "fourmi_rouge_contremaitre.prefab";
-	private const string fichierFRG 			= "fourmi_rouge_generale.prefab";
-	private const string fichierFRO 			= "fourmi_rouge_ouvriere.prefab";
-	private const string fichierFRR 			= "fourmi_rouge_reine.prefab";
+	private const string fichierFBCmb 			= "fourmi_blanche_combattante.prefab";
+	private const string fichierFBCm			= "fourmi_blanche_contremaitre.prefab";
+	private const string fichierFBG 			= "fourmi_blanche_generale.prefab";
+	private const string fichierFBO 			= "fourmi_blanche_ouvriere.prefab";
+	private const string fichierFBR 			= "fourmi_blanche_reine.prefab";
 	private const string fichierOeuf 			= "oeuf_fourmi.prefab";
 	private const string fichierPhero 			= "pheromone.prefab";
 	private const string fichierScara 			= "scarabee.prefab";
@@ -75,7 +77,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	
 	#region Debug
 	private const string fichierDebugObject 	= "Debug_Object.prefab";
-	private const string fichierDebugFourmis 	= "DEBUG_fourmis_combattante.prefab";
+	private const string fichierDebugFourmis 	= "Debug_fourmi_blanche_generale.prefab";
 	#endregion
 
 	private const string fichierSelectionCase 	= "Selection case.prefab";
@@ -138,47 +140,47 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				nomFichier = fichierTresGrosCaillou;
 				break;
 			case Invocations.FOURMI_NOIRE_COMBATTANTE:
-				cheminPackage = packageFourmi;
+				cheminPackage = packageFourmisNoires;
 				nomFichier = fichierFNCmb;
 				break;
 			case Invocations.FOURMI_NOIRE_CONTREMAITRE:
-				cheminPackage = packageFourmi;
+				cheminPackage = packageFourmisNoires;
 				nomFichier = fichierFNCm;
 				break;
 			case Invocations.FOURMI_NOIRE_GENERALE:
-				cheminPackage = packageFourmi;
+				cheminPackage = packageFourmisNoires;
 				nomFichier = fichierFNG;
 				break;
 			case Invocations.FOURMI_NOIRE_OUVRIERE:
-				cheminPackage = packageFourmi;
+				cheminPackage = packageFourmisNoires;
 				nomFichier = fichierFNO;
 				break;
 			case Invocations.FOURMI_NOIRE_REINE:
-				cheminPackage = packageFourmi;
+				cheminPackage = packageFourmisNoires;
 				nomFichier = fichierFNR;
 				break;
-			case Invocations.FOURMI_ROUGE_COMBATTANTE:
-				cheminPackage = packageFourmi;
-				nomFichier = fichierFRCmb;
+			case Invocations.FOURMI_BLANCHE_COMBATTANTE:
+				cheminPackage = packageFourmisBlanches;
+				nomFichier = fichierFBCmb;
 				break;
-			case Invocations.FOURMI_ROUGE_CONTREMAITRE:
-				cheminPackage = packageFourmi;
-				nomFichier = fichierFRCm;
+			case Invocations.FOURMI_BLANCHE_CONTREMAITRE:
+				cheminPackage = packageFourmisBlanches;
+				nomFichier = fichierFBCm;
 				break;
-			case Invocations.FOURMI_ROUGE_GENERALE:
-				cheminPackage = packageFourmi;
-				nomFichier = fichierFRG;
+			case Invocations.FOURMI_BLANCHE_GENERALE:
+				cheminPackage = packageFourmisBlanches;
+				nomFichier = fichierFBG;
 				break;
 			case Invocations.FOURMI_ROUGE_OUVRIERE:
-				cheminPackage = packageFourmi;
-				nomFichier = fichierFRO;
+				cheminPackage = packageFourmisBlanches;
+				nomFichier = fichierFBO;
 				break;
-			case Invocations.FOURMI_ROUGE_REINE:
-				cheminPackage = packageFourmi;
-				nomFichier = fichierFRR;
+			case Invocations.FOURMI_BLANCHE_REINE:
+				cheminPackage = packageFourmisBlanches;
+				nomFichier = fichierFBR;
 				break;
 			case Invocations.OEUF_FOURMI:
-				cheminPackage = packageFourmi;
+				cheminPackage = packageFourmis;
 				nomFichier = fichierOeuf;
 				break;
 			case Invocations.PHEROMONE:
@@ -338,25 +340,25 @@ public enum Invocations : int {
 	/// </summary>
 	FOURMI_NOIRE_REINE = 24,
 	/// <summary>
-	/// Une fourmi rouge avec un chapeau bleu
+	/// Une fourmi blanche
 	/// </summary>
 	FOURMI_ROUGE_OUVRIERE = 30,
 	/// <summary>
-	/// Une fourmi rouge avec un chapeau bleu
+	/// Une fourmi blanche avec un chapeau bleu
 	/// </summary>
-	FOURMI_ROUGE_COMBATTANTE = 31,
+	FOURMI_BLANCHE_COMBATTANTE = 31,
 	/// <summary>
-	/// Une fourmi rouge avec un casque jaune
+	/// Une fourmi blanche avec un casque jaune
 	/// </summary>
-	FOURMI_ROUGE_CONTREMAITRE = 32,
+	FOURMI_BLANCHE_CONTREMAITRE = 32,
 	/// <summary>
-	/// Une fourmi rouge avec un képi bleu
+	/// Une fourmi blanche avec un képi bleu
 	/// </summary>
-	FOURMI_ROUGE_GENERALE = 33,
+	FOURMI_BLANCHE_GENERALE = 33,
 	/// <summary>
-	/// Une fourmi rouge avec une couronne
+	/// Une fourmi blanche avec une couronne
 	/// </summary>
-	FOURMI_ROUGE_REINE = 34,
+	FOURMI_BLANCHE_REINE = 34,
 	/// <summary>
 	/// Un oeuf tout vert
 	/// </summary>

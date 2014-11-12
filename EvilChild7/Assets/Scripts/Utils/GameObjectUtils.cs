@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.4.0
+/// PY Lapersonne - Version 1.5.0
 /// </remarks>
 
 using UnityEngine;
@@ -113,29 +113,29 @@ public class GameObjectUtils {
 	private static Regex regexFNR = new Regex(@"fourmi_noire_reine");
 
 	/// <summary>
-	/// Regex pour voir c'est une fourmi rouge combattante
+	/// Regex pour voir c'est une fourmi blanche combattante
 	/// </summary>
-	private static Regex regexFRCmb = new Regex(@"fourmi_rouge_combattante");
+	private static Regex regexFBCmb = new Regex(@"fourmi_blanche_combattante");
 	
 	/// <summary>
-	/// Regex pour voir c'est une fourmi rouge contremaitre
+	/// Regex pour voir c'est une fourmi blanche contremaitre
 	/// </summary>
-	private static Regex regexFRCm = new Regex(@"fourmi_rouge_contremaitre");
+	private static Regex regexFBCm = new Regex(@"fourmi_blanche_contremaitre");
 	
 	/// <summary>
-	/// Regex pour voir c'est une fourmi rouge generale
+	/// Regex pour voir c'est une fourmi blanche generale
 	/// </summary>
-	private static Regex regexFRGnl = new Regex(@"fourmi_rouge_generale");	
+	private static Regex regexFBGnl = new Regex(@"fourmi_blanche_generale");	
 	
 	/// <summary>
-	/// Regex pour voir c'est une fourmi rouge ouvriere
+	/// Regex pour voir c'est une fourmi blanche ouvriere
 	/// </summary>
-	private static Regex regexFRO = new Regex(@"fourmi_rouge_ouvriere");
+	private static Regex regexFBO = new Regex(@"fourmi_blanche_ouvriere");
 	
 	/// <summary>
-	/// Regex pour voir c'est une fourmi rouge reine
+	/// Regex pour voir c'est une fourmi blanche reine
 	/// </summary>
-	private static Regex regexFRRRrrrr  = new Regex(@"fourmi_rouge_reine");
+	private static Regex regexFBR  = new Regex(@"fourmi_blanche_reine");
 
 	/// <summary>
 	/// Regex pour voir c'est un oeuf de fourmi
@@ -173,14 +173,34 @@ public class GameObjectUtils {
 	private static Regex regexBV = new Regex(@"bonbon_vert");
 
 	/// <summary>
-	/// Regex pour voir c'est une pheromone
+	/// Regex pour voir c'est une pheromone d'ouvrière blanche
 	/// </summary>
-	private static Regex regexPheromone = new Regex(@"pheromone");
+	private static Regex regexPOB = new Regex(@"pheromones_ouvriere_blanche");
+
+	/// <summary>
+	/// Regex pour voir c'est une pheromone d'ouvrière noire
+	/// </summary>
+	private static Regex regexPON = new Regex(@"pheromones_ouvriere_noire");
+
+	/// <summary>
+	/// Regex pour voir c'est une pheromone de contremaitre blanche
+	/// </summary>
+	private static Regex regexPCB = new Regex(@"pheromones_contremaitre_blanche");
+
+	/// <summary>
+	/// Regex pour voir c'est une pheromone de contremaitre noire
+	/// </summary>
+	private static Regex regexPCN = new Regex(@"pheromones_contremaitre_noire");
 
 	/// <summary>
 	/// Regex pour voir c'est un scarabée
 	/// </summary>
-	private static Regex regexScarabee = new Regex(@"scarabee");	
+	private static Regex regexScarabee = new Regex(@"scarabee");
+
+	/// <summary>
+	/// Regex pour voir c'est une aprtie du terrain
+	/// </summary>
+	private static Regex regexTerrain = new Regex(@"BlocTerrain");	
 #endregion
 
 
@@ -199,6 +219,7 @@ public class GameObjectUtils {
 	/// Le nom du Game Object que l'on veut connaitre
 	/// </param>
 	public static TypesObjetsRencontres parseToType( string nomGo ){
+		if (regexTerrain.IsMatch (nomGo))		return TypesObjetsRencontres.BLOC_TERRAIN;
 		if (regexCoteBac1.IsMatch(nomGo)) 		return TypesObjetsRencontres.COTE_BAC_1;
 		if (regexCoteBac2.IsMatch(nomGo))		return TypesObjetsRencontres.COTE_BAC_2;
 		if (regexCoteBac3.IsMatch(nomGo)) 		return TypesObjetsRencontres.COTE_BAC_3;
@@ -213,18 +234,20 @@ public class GameObjectUtils {
 		if (regexTresGrosCaillou.IsMatch(nomGo)) return TypesObjetsRencontres.TRES_GROS_CAILLOUX;
 		if (regexFNO.IsMatch(nomGo)) 			return TypesObjetsRencontres.OUVRIERE_NOIRE;
 		if (regexFNR.IsMatch(nomGo)) 			return TypesObjetsRencontres.REINE_NOIRE;
-		if (regexFNGnl.IsMatch (nomGo)) 		return TypesObjetsRencontres.GENERALE_NOIRE;
-		if (regexFNCm.IsMatch (nomGo)) 			return TypesObjetsRencontres.CONTREMAITRE_NOIRE;
-		if (regexFNCmb.IsMatch (nomGo)) 		return TypesObjetsRencontres.COMBATTANTE_NOIRE;
-		if (regexOeuf.IsMatch (nomGo)) 			return TypesObjetsRencontres.OEUF_NOIR;
-		// TODO oeuf rouge
-		if (regexPheromone.IsMatch (nomGo)) 	return TypesObjetsRencontres.PHEROMONES_OUV_NOIRE;
-		// TODO pheromones ouvrires rouge, contre maitre noire, contre-mzitre rouge
-		if (regexFRCm.IsMatch(nomGo)) 			return TypesObjetsRencontres.CONTREMAITRE_ROUGE;
-		if (regexFRCmb.IsMatch(nomGo)) 			return TypesObjetsRencontres.COMBATTANTE_ROUGE;
-		if (regexFRGnl.IsMatch (nomGo)) 		return TypesObjetsRencontres.GENERALE_ROUGE;
-		if (regexFRO.IsMatch(nomGo)) 			return TypesObjetsRencontres.OUVRIERE_ROUGE;
-		if (regexFRRRrrrr.IsMatch(nomGo)) 		return TypesObjetsRencontres.REINE_ROUGE;
+		if (regexFNGnl.IsMatch(nomGo)) 			return TypesObjetsRencontres.GENERALE_NOIRE;
+		if (regexFNCm.IsMatch(nomGo)) 			return TypesObjetsRencontres.CONTREMAITRE_NOIRE;
+		if (regexFNCmb.IsMatch(nomGo)) 			return TypesObjetsRencontres.COMBATTANTE_NOIRE;
+		if (regexOeuf.IsMatch(nomGo)) 			return TypesObjetsRencontres.OEUF_NOIR;
+		// TODO oeuf blanc
+		if (regexPOB.IsMatch(nomGo)) 			return TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE;
+		if (regexPON.IsMatch(nomGo)) 			return TypesObjetsRencontres.PHEROMONES_OUV_NOIRE;
+		if (regexPCB.IsMatch (nomGo)) 			return TypesObjetsRencontres.PHEROMONES_CM_BLANCHE;
+		if (regexPCN.IsMatch (nomGo)) 			return TypesObjetsRencontres.PHEROMONES_CM_NOIRE;
+		if (regexFBCm.IsMatch(nomGo)) 			return TypesObjetsRencontres.CONTREMAITRE_BLANCHE;
+		if (regexFBCmb.IsMatch(nomGo)) 			return TypesObjetsRencontres.COMBATTANTE_BLANCHE;
+		if (regexFBGnl.IsMatch(nomGo)) 			return TypesObjetsRencontres.GENERALE_BLANCHE;
+		if (regexFBO.IsMatch(nomGo)) 			return TypesObjetsRencontres.OUVRIERE_BLANCHE;
+		if (regexFBR.IsMatch(nomGo)) 			return TypesObjetsRencontres.REINE_BLANCHE;
 		if (regexScarabee.IsMatch(nomGo)) 		return TypesObjetsRencontres.SCARABEE;
 		if (regexBM.IsMatch(nomGo)) 			return TypesObjetsRencontres.BONBON_MURE;
 		if (regexBO.IsMatch(nomGo))				return TypesObjetsRencontres.BONBON_ORANGE;

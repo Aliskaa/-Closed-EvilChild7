@@ -16,27 +16,27 @@ Configuration des prefabs "fourmis" :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : valeurs par défaut
 	
-* fourmi_noire_reinee :
+* fourmi_noire_reine :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : valeurs par défaut
 	
-* fourmi_rouge_combattante :
+* fourmi_blanche_combattante :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : 0.5/1/0.5 ; 3/2/3
 	
-* fourmi_rouge_contremaitre :
+* fourmi_blanche_contremaitre :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : 0.8/1/0.5 ; 3/2/3.5
 	
-* fourmi_rouge_generale :
+* fourmi_blanche_generale :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : 0.5/1/0.8 ; 3/2/3	
 
-* fourmi_rouge_ouvriere :
+* fourmi_blanche_ouvriere :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : valeurs par défaut
 	
-* fourmi_rouge_reine :
+* fourmi_blanche_reine :
 	- Rigidbody avec freeze rotation en X, Y, Z, freeze position en Y
 	- BoxCollider : valeurs par défaut
 	

@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// CheatCode.cs
 /// </summary>
 /// 
@@ -178,7 +178,7 @@ public class CheatCode : MonoBehaviour {
 			int randomX = UnityEngine.Random.Range(55,148);
 			int randomZ = UnityEngine.Random.Range(52,132);
 			scriptInvoc.InvoquerObjetAvecOffset( 
-			                                    Invocations.FOURMI_ROUGE_GENERALE, 
+			                                    Invocations.FOURMI_BLANCHE_GENERALE, 
 			                                    new Vector3(randomX, 0, randomZ),
 			                                    new Vector3(0,0/*randomY*/,0));
 		}

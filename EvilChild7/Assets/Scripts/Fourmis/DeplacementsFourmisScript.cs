@@ -206,7 +206,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 		stopCollision = false;
 
-		transform.position = Vector3.Lerp(transform.position, positionAatteindre, 0.03f);
+		transform.position = Vector3.Lerp(transform.position, positionAatteindre, 0.1f);
 
 		if ( Vector3.Distance(transform.position, positionAatteindre) <= 1 ){
 			enMouvement = false;
@@ -268,7 +268,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
-		HexagoneCourant();
 		// A chaque frame, continuer la déambulation selon les flags
 		if (enMouvement && !objectifAtteint){
 			//Debug.Log("Déambulation");
@@ -283,6 +282,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				Avancer(nombreDesCases);
 				//Recentrer();
 				//Stopper();
+			} else {
+				//Debug.Log("BAAAAAAAAAAAAAAAAAAAAM");
 			}
 		}
 	}
@@ -349,7 +350,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		enMouvement = true;
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
-		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
+		Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
 
 	}
 
