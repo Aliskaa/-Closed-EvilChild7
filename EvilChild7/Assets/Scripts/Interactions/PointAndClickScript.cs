@@ -96,7 +96,7 @@ public class PointAndClickScript : MonoBehaviour {
 				//Debug.Log("Coordonnées de la souris sur le plan  = " + pointImpact );
 				Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
 				//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
-				/*HexagoneInfo hexagoneClick =*/ TerrainUtils.HexagonePlusProche(coordLocales);
+				/*HexagoneInfo hexagoneClick = */TerrainUtils.HexagonePlusProche(coordLocales);
 				//Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
 			}
 		}

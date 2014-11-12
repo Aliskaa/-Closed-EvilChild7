@@ -62,7 +62,10 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierFBO 			= "fourmi_blanche_ouvriere.prefab";
 	private const string fichierFBR 			= "fourmi_blanche_reine.prefab";
 	private const string fichierOeuf 			= "oeuf_fourmi.prefab";
-	private const string fichierPhero 			= "pheromone.prefab";
+	private const string fichierPON 			= "pheromones_ouvriere_noire.prefab";
+	private const string fichierPOB 			= "pheromones_ouvriere_blanche.prefab";
+	private const string fichierPCN 			= "pheromones_contremaitre_noire.prefab";
+	private const string fichierPCB	 			= "pheromones_contremaitre_blanche.prefab";
 	private const string fichierScara 			= "scarabee.prefab";
 	#endregion
 
@@ -171,7 +174,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageFourmisBlanches;
 				nomFichier = fichierFBG;
 				break;
-			case Invocations.FOURMI_ROUGE_OUVRIERE:
+			case Invocations.FOURMI_BLANCHE_OUVRIERE:
 				cheminPackage = packageFourmisBlanches;
 				nomFichier = fichierFBO;
 				break;
@@ -183,9 +186,21 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageFourmis;
 				nomFichier = fichierOeuf;
 				break;
-			case Invocations.PHEROMONE:
+			case Invocations.PHEROMONES_CONTREMAITRE_BLANCHE:
 				cheminPackage = packagePheromones;
-				nomFichier = fichierPhero;
+				nomFichier = fichierPCB;
+				break;
+			case Invocations.PHEROMONES_CONTREMAITRE_NOIRE:
+				cheminPackage = packagePheromones;
+				nomFichier = fichierPCN;
+				break;
+			case Invocations.PHEROMONES_OUVRIERE_BLANCHE:
+				cheminPackage = packagePheromones;
+				nomFichier = fichierPOB;
+				break;
+			case Invocations.PHEROMONES_OUVRIERE_NOIRE:
+				cheminPackage = packagePheromones;
+				nomFichier = fichierPON;
 				break;
 			case Invocations.SCARABEE:
 				cheminPackage = packageScarabees;
@@ -298,7 +313,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 /// Les types d'objets que l'on peut créer
 /// [10;19] : par rapport aux obstacles inertes
 /// [20;29] : par rapport aux unités noires
-/// [30;39] : par rapport aux unités rouges
+/// [30;39] : par rapport aux unités blanches
 /// [40;49] : par rapport à d'autres menaces
 /// [50;69] : par rapport à la nourriture
 /// </summary>
@@ -340,9 +355,17 @@ public enum Invocations : int {
 	/// </summary>
 	FOURMI_NOIRE_REINE = 24,
 	/// <summary>
+	/// Un petit bloc de particules vert foncé
+	/// </summary>
+	PHEROMONES_OUVRIERE_NOIRE = 25,
+	/// <summary>
+	/// Un petit bloc de particules jaune foncé
+	/// </summary>
+	PHEROMONES_CONTREMAITRE_NOIRE = 26,
+	/// <summary>
 	/// Une fourmi blanche
 	/// </summary>
-	FOURMI_ROUGE_OUVRIERE = 30,
+	FOURMI_BLANCHE_OUVRIERE = 30,
 	/// <summary>
 	/// Une fourmi blanche avec un chapeau bleu
 	/// </summary>
@@ -360,9 +383,17 @@ public enum Invocations : int {
 	/// </summary>
 	FOURMI_BLANCHE_REINE = 34,
 	/// <summary>
+	/// Un petit bloc de particules vert pale
+	/// </summary>
+	PHEROMONES_OUVRIERE_BLANCHE = 35,
+	/// <summary>
+	/// Un petit bloc de particules jaune pale
+	/// </summary>
+	PHEROMONES_CONTREMAITRE_BLANCHE = 36,
+	/// <summary>
 	/// Un oeuf tout vert
 	/// </summary>
-	OEUF_FOURMI = 35,
+	OEUF_FOURMI = 39,
 	/// <summary>
 	/// Un scarabee tout vert affamé
 	/// </summary>
@@ -391,10 +422,6 @@ public enum Invocations : int {
 	/// Un bonbon rayé blanc et vert
 	/// </summary>
 	BONBON_VERT = 55,
-	/// <summary>
-	/// Un pale anneau vert
-	/// </summary>
-	PHEROMONE = 70,
 	/// <summary>
 	/// Une lumière dans un anneau pour montrer la case visée
 	/// </summary>

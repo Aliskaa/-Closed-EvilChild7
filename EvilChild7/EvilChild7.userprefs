@@ -1,12 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Utils\GameObjectUtils.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
     <Files>
-      <File FileName="Assets\Scripts\Terrains\InvocateurObjetsScript.cs" Line="359" Column="24" />
-      <File FileName="Assets\Dev\changelog.txt" Line="465" Column="50" />
-      <File FileName="Assets\Dev\TODO.txt" Line="75" Column="9" />
-      <File FileName="Assets\Scripts\Utils\TypesObjetsRencontres.cs" Line="66" Column="27" />
-      <File FileName="Assets\Scripts\Utils\GameObjectUtils.cs" Line="238" Column="78" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="447" Column="16" />
+      <File FileName="Assets\Dev_py\TODO.txt" Line="79" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

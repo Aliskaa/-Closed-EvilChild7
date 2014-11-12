@@ -72,10 +72,10 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 90					terminé		X			Mettre des codes
 91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
 92		1			non lancé	[py]		Transformation d'oeuf en fourmis
-93		1		>>	non lancé	[py]		Phéromones contre-maitre noire et rouge et ouvriere rouge
-				>								- Prefab (particules de couleurs)
-				>								- Detection/collisions
-				>								- Invocation
+93					terminé		X			Phéromones contre-maitre noire et rouge et ouvriere rouge
+												- Prefab (particules de couleurs)
+												- Detection/collisions
+												- Invocation
 94					terminé		X			Konami code : pluie de nourriture
 95					terminé		X			Mettre à jour le terrain avec les remarques du client :
 								X				- pas de fourmis en dehors du terrain

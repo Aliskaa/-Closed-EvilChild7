@@ -350,7 +350,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		enMouvement = true;
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
-		Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
+		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
 
 	}
 

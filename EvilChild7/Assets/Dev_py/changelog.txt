@@ -452,8 +452,8 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  41;
+Date..........:  13/11/2014 00h26;
 Auteur........:  py;
 Commentaire...:
 	Prise en charge des derniers prefabs des fourmsi (noires et blanches)
@@ -465,7 +465,34 @@ Commentaire...:
 	Mise à jour des classes utilisant les phéromones (TypesObjetsRencontrés, GameObjectUtils, Invocateur, ...)
 	Correction bug collision fourmis avec terrain
 	Création des phéromones
-	Tache 32 terminée;
+	Scène de présentation du client réalisée
+	Ajouts captures pour dossier de dev
+	Tache 32 terminée
+	Tache 93 terminée;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
 
 __________________________________
 
