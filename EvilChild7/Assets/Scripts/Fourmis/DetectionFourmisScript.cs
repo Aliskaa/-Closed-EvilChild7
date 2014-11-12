@@ -178,7 +178,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
 		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType(nomObjetTouche);
-		Debug.Log("Collision OnCollisionEnter avec : "+objetTouche+" / "+nomObjetTouche);
+		//Debug.Log("Collision OnCollisionEnter avec : "+objetTouche+" / "+nomObjetTouche);
 		scriptDeplacement.StopperParCollision(objetTouche);
 	}
 

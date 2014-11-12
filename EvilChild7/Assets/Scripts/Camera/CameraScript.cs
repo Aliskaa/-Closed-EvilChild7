@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -95,6 +95,16 @@ public class CameraScript : MonoBehaviour {
 	/// Zoom avant avec la souris	
 	/// </summary>
 	private const string MOLETTE_ZOOM = "Mouse ScrollWheel";
+
+	/// <summary>
+	/// Touche pour activer le positionnement en rase motte
+	/// </summary>
+	private const string TOUCHE_RAZMOT = "left ctrl";
+
+	/// <summary>
+	/// Clic gauche de la souris
+	/// </summary>
+	private const int CLIC_GAUCHE_SOURIS = 0;
 #endregion
 
 #region Attributs privés
@@ -135,29 +145,6 @@ public class CameraScript : MonoBehaviour {
 	void Update(){
 
 		/*
-		 * Clic gauche : panoramique
-		 * /
-		if ( Input.GetMouseButtonDown(CLIC_GAUCHE) ){
-
-			Debug.Log("SAUCISSE"	);
-			transform.Translate(Vector3.right * Time.deltaTime * vitessePanoramique * (Input.mousePosition.x - Screen.width * 0.5f) / (Screen.width * 0.5f), Space.World);
-			transform.Translate(Vector3.forward * Time.deltaTime * vitessePanoramique * (Input.mousePosition.y - Screen.height * 0.5f) / (Screen.height * 0.5f), Space.World);
-		
-			// zoom in/out
-			currentZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000 * vitesseZoom;
-			
-			currentZoom = Mathf.Clamp( currentZoom, zoomRange.x, zoomRange.y );
-			
-			transform.position = new Vector3( transform.position.x, transform.position.y - (transform.position.y - (positionInitiale.y + currentZoom)) * 0.1f, transform.position.z );
-			
-			float x = transform.eulerAngles.x - (transform.eulerAngles.x - (rotationInitiale.x + currentZoom * vitesseRotation)) * 0.1f;
-			x = Mathf.Clamp( x, zoomAngleRange.x, zoomAngleRange.y );
-			
-			transform.eulerAngles = new Vector3( x, transform.eulerAngles.y, transform.eulerAngles.z );
-
-		} else {
-		*/
-		/*
 		 * Touche d : aller à droite
 		 */
 		if ( Input.GetKey(TOUCHE_DROITE) ){   
@@ -190,7 +177,7 @@ public class CameraScript : MonoBehaviour {
 		 */
 		if ( Input.GetKey(TOUCHE_BAS) ){
 			Vector3 posCour = transform.position;
-			if ( posCour.x <= 340 && posCour.y >= 381 ){
+			if ( posCour.x <= 355 && posCour.y >= 290 ){
 				transform.Translate(Vector3.down * Time.deltaTime * vitessePanoramique, Space.Self );            
 			}
 			return;
@@ -225,24 +212,45 @@ public class CameraScript : MonoBehaviour {
 			return;
 		}
 		/*
-		 * Molette vers le haut : zoom
+		 * Rase motte : ctrl + souris moeltte bas
 		 */
 		float zoom = Input.GetAxis(MOLETTE_ZOOM);
+		if ( Input.GetKey(TOUCHE_RAZMOT) && zoom < 0 ){
+			Vector3 pos = transform.position;
+			if ( pos.x <= 422 && pos.y >= 260 && pos.z >= -60 ){
+				transform.Translate(0,50*zoom * Time.deltaTime * vitessePanoramique,0, Space.Self );       
+				transform.Rotate(50*zoom* Time.deltaTime * rotateSpeed, 0,0, Space.Self);
+			}
+		}
+		/*
+		 * Rase cielle : ctrl + souris molette haut
+		 */
+		//zoom = Input.GetAxis(MOLETTE_ZOOM);
+		if ( Input.GetKey(TOUCHE_RAZMOT) && zoom > 0 ){
+			Vector3 pos = transform.position;
+			if ( pos.x >= 185 && pos.y <= 450 && pos.z >= -60 ){
+				transform.Translate(0,50*zoom * Time.deltaTime * vitessePanoramique,0, Space.Self );       
+				transform.Rotate(50*zoom* Time.deltaTime * rotateSpeed, 0,0, Space.Self);
+			}
+		}
+		/*
+		 * Molette vers le haut : zoom
+		 */
+		//zoom = Input.GetAxis(MOLETTE_ZOOM);
 		float currentFOV = camera.fieldOfView;
-		if (zoom > 0 && currentFOV >= 1.30 ){
+		if ( ! Input.GetKey(TOUCHE_RAZMOT) && zoom > 0 && currentFOV >= 1.30 ){
 			Camera.main.fieldOfView -= Mathf.Clamp(currentFOV, zoom, Time.deltaTime * vitesseZoom);
 			return;
 		}
 		/*
 		 * Molette vers le bas : dézoom
 		 */
-		zoom = Input.GetAxis(MOLETTE_ZOOM);
+		//zoom = Input.GetAxis(MOLETTE_ZOOM);
 		currentFOV = camera.fieldOfView;
-		if (zoom < 0 && currentFOV <= 16.81){
+		if ( ! Input.GetKey(TOUCHE_RAZMOT) && zoom < 0 && currentFOV <= 16.81){
 			Camera.main.fieldOfView += Mathf.Clamp(currentFOV, zoom, Time.deltaTime * vitesseZoom);
 			return;
 		}
-
 	}
 #endregion
 

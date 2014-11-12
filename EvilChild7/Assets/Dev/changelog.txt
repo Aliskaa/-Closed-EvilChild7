@@ -441,11 +441,14 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  40;
+Date..........:  12/11/2014 22h19;
 Auteur........:  py;
 Commentaire...:
-	;
+	Finalisation caméra
+		- Ajout de ctrl+molette haut et bas
+	Mise à jour du prefab caméra
+	Mise à jours des scènes;
 
 __________________________________
 

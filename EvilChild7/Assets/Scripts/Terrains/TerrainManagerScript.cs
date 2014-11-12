@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.4.3
+/// PY Lapersonne - Version 3.4.4
 /// </remarks>
 
 using UnityEngine;
@@ -491,7 +491,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		GetHexagonesProp();
-		Debug.Log("Création du terrain : "+type);
+		//Debug.Log("Création du terrain : "+type);
 		CreerMap(type);
 		CreerMap3D();
 	}

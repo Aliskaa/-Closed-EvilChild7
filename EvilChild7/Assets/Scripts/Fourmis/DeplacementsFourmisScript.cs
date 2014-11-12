@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.4.0
+/// PY Lapersonne - Version 2.4.1
 /// </remarks>
 
 using UnityEngine;
@@ -271,13 +271,13 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		HexagoneCourant();
 		// A chaque frame, continuer la déambulation selon les flags
 		if (enMouvement && !objectifAtteint){
-			Debug.Log("Déambulation");
+			//Debug.Log("Déambulation");
 			Deambuler();
 		// Ou en relancer une nouvelle (si la fourmis ne bouge plus)
 		} else {
 			if ( ! stopCollision ){
 				// FIXME Coupler ça avec l'IA
-				Debug.Log("Plus de déambulation, redémarrage");
+				//Debug.Log("Plus de déambulation, redémarrage");
 				int nombreDesCases = Random.Range(1,VISEE_MAX_OUVRIERE);
 				FaireRotation(TypesRotations.RANDOM);
 				Avancer(nombreDesCases);
@@ -298,7 +298,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 		// Arret de l'objet
 		if  (nbCases <= 0 ){
-			Debug.Log("STOP !");
+			//Debug.Log("STOP !");
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.angularVelocity = Vector3.zero;
 			enMouvement = false;
