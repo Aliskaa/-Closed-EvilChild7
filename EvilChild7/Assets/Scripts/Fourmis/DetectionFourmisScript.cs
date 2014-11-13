@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.1.0
+/// PY Lapersonne - Version 4.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -32,32 +32,27 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Une lite d'objets qui ont été vus et qui n'ont pas encore été signalé à "l'IA"
 	/// </summary>
 	private List<Cible> objetsDetectes;
+
+	/// <summary>
+	/// La visée qui est appliquée à la fourmis, en fonction de sa caste
+	/// </summary>
+	private int viseeAppliquee;
 #endregion
 
 
-#region Constantes publiques
+#region Constantes privées
 	/// <summary>
-	/// La longueur de visée pour une ouvrière
+	/// La distance pour aller du centre d'une case à un autre
 	/// </summary>
-	public const float LONGUEUR_VISEE_OUVRIERE 
-		= DeplacementsFourmisScript.VISEE_MAX_OUVRIERE*DeplacementsFourmisScript.DISTANCE_CASE;
-	/// <summary>
-	/// La longueur de visée pour une contremaitresse
-	/// </summary>
-	public const float LONGUEUR_VISEE_CONTREMAITRESSE 
-		= DeplacementsFourmisScript.VISEE_MAX_CONTREMAITRESSE*DeplacementsFourmisScript.DISTANCE_CASE;
-	/// <summary>
-	/// La longueur de visée pour une soldate
-	/// </summary>
-	public const float LONGUEUR_VISEE_SOLDATE 
-		= DeplacementsFourmisScript.VISEE_MAX_SOLDATE*DeplacementsFourmisScript.DISTANCE_CASE;
-	/// <summary>
-	/// La longueur de visée pour une générale
-	/// </summary>
-	public const float LONGUEUR_VISEE_GENERALE 
-		= DeplacementsFourmisScript.VISEE_MAX_GENERALE*DeplacementsFourmisScript.DISTANCE_CASE;
+	private const int DISTANCE_CASE = 5;
 #endregion
 
+#region Attributs publics
+	/// <summary>
+	/// Le type de fourmi auquel doit s'appliquer le script
+	/// </summary>
+	public TypesFourmis typeFourmi;
+#endregion
 
 	/* ******** *
 	 * Méthodes *
@@ -162,6 +157,27 @@ public class DetectionFourmisScript : MonoBehaviour {
 			objetsDetectes = new List<Cible>();
 		}
 	}
+
+	/// <summary>
+	/// Initialise les variables qui dépendent de la caste de la fourmis
+	/// </summary>
+	private void InitialiserVariablesFourmi(){
+		switch ( typeFourmi ){
+		case TypesFourmis.COMBATTANTE:
+			viseeAppliquee = (int) ViseesFourmis.VISEE_COMBATTANTE;
+			break;
+		case TypesFourmis.CONTREMAITRE:
+			viseeAppliquee = (int) ViseesFourmis.VISEE_CONTREMAITRE;	
+			break;
+		case TypesFourmis.GENERALE:
+			viseeAppliquee = (int) ViseesFourmis.VISEE_GENERALE;	
+			break;
+		case TypesFourmis.OUVRIERE:
+			viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
+			break;
+		}
+		Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une visee de "+viseeAppliquee);
+	}
 #endregion
 
 
@@ -190,6 +206,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 	void Awake(){
 		scriptDeplacement = (DeplacementsFourmisScript) gameObject.GetComponent(typeof(DeplacementsFourmisScript));
 		objetsDetectes = new List<Cible>();
+		InitialiserVariablesFourmi();
 	}
 
 	/// <summary>
@@ -197,14 +214,38 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Va vérifier ce qu'il y a autour de la fourmis dans les 6 sens possibles/
 	/// </summary>
 	void Update(){
-		VoirEtSentir(TypesAxes.DEVANT, LONGUEUR_VISEE_OUVRIERE);
-		VoirEtSentir(TypesAxes.DEVANT_DROITE, LONGUEUR_VISEE_OUVRIERE);
-		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, LONGUEUR_VISEE_OUVRIERE);
-		VoirEtSentir(TypesAxes.DERRIERE, LONGUEUR_VISEE_OUVRIERE);
-		VoirEtSentir(TypesAxes.DERRIERE_DROITE, LONGUEUR_VISEE_OUVRIERE);
-		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, LONGUEUR_VISEE_OUVRIERE);
+		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DEVANT_DROITE, viseeAppliquee * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, viseeAppliquee * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DERRIERE, viseeAppliquee * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DERRIERE_DROITE, viseeAppliquee * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, viseeAppliquee * DISTANCE_CASE);
 		SignalerDetections();
 	}
 #endregion
 
 }
+
+#region VitessesFourmis
+/// <summary>
+/// Les visées des différentes castes de fourmis (vue et odorat confondues)
+/// </summary>
+public enum ViseesFourmis : int { 
+	/// <summary>
+	/// La visée de l'ouvrière, à 5/4 = 1
+	/// </summary>
+	VISEE_OUVRIERE = 1,
+	/// <summary>
+	/// La visée de la contremaitre, à 20/4 = 5
+	/// </summary>
+	VISEE_CONTREMAITRE = 5,
+	/// <summary>
+	/// La visée de la combattante, à 5/4 = 1
+	/// </summary>
+	VISEE_COMBATTANTE = 1,
+	/// <summary>
+	/// La visée de la générale, à 20/4 = 5
+	/// </summary>
+	VISEE_GENERALE = 5,
+}
+#endregion

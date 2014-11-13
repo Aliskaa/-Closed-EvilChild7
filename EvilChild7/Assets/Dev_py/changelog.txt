@@ -472,11 +472,15 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  42;
+Date..........:  13/11/2014 11h26;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur le scripting de chaque prefab (déplacements, détections, ...)
+		- le script de déplacement s'adapte en fonction du type de fourmi
+		- correction du déplacement : maximum 1 case
+		- le script de détection s'adapte en fonction du type de fourmi
+		- config de toutes les fourmis pour le déplacement et la detection	[en cours];
 
 __________________________________
 

@@ -6,12 +6,13 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.4.1
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 
+#region DeplacementsFourmisScript
 /// <summary>
 /// Script pour gérer le déplacement d'une fourmis
 /// </summary>
@@ -55,37 +56,33 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Flag indiquant que la fourmis doit se stopper à cause d'une collision
 	/// </summary>
 	private bool stopCollision;
-#endregion
 
-#region Attributs publics
 	/// <summary>
-	/// La vitesse maximale de déplacement.
-	/// 2 ou 3 pour une fourmis peut convenir.
+	/// La vitesse qui est appliquée à la fourmis, en fonction de sa caste
 	/// </summary>
-	public float vitesseMax;
+	private int vitesseAppliquee;
 
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre
 	/// </summary>
-	public const int DISTANCE_CASE = 5;
+	private const int DISTANCE_CASE = 5;
 
-	// FIXME Mettre ça dans les scripts modéliser les fourmis (vie, attaque, pods, PTAC, ...)
 	/// <summary>
-	/// La visée maximale d'une ouvrière en termes de cases
+	/// Le nombre de case maximum que peut parcourir la fourmi en une traite
 	/// </summary>
-	public const int VISEE_MAX_OUVRIERE = 2;
+	private const int AVANCEMENT_CASE = 1;
+
 	/// <summary>
-	/// La visée maximale d'une contremaitre en termes de cases
+	/// Un coefficient pour la vitesse de déplacement l'objet
 	/// </summary>
-	public const int VISEE_MAX_CONTREMAITRESSE = 4;
+	private const float COEFF_VITESSE = 0.05f;
+#endregion
+
+#region Attributs publics
 	/// <summary>
-	/// La visée maximale d'une soldate en termes de cases
+	/// Le type de fourmi auquel doit s'appliquer le script
 	/// </summary>
-	public const int VISEE_MAX_SOLDATE = 2;
-	/// <summary>
-	/// La visée maximale d'une générale en termes de cases
-	/// </summary>
-	public const int VISEE_MAX_GENERALE = 4;
+	public TypesFourmis typeFourmi;
 #endregion
 
 
@@ -206,7 +203,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 		stopCollision = false;
 
-		transform.position = Vector3.Lerp(transform.position, positionAatteindre, 0.1f);
+		transform.position = Vector3.Lerp(transform.position, positionAatteindre, COEFF_VITESSE*vitesseAppliquee);
 
 		if ( Vector3.Distance(transform.position, positionAatteindre) <= 1 ){
 			enMouvement = false;
@@ -252,6 +249,27 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 */
 
 	}
+
+	/// <summary>
+	/// Initialise les variables qui dépendent de la caste de la fourmis
+	/// </summary>
+	private void InitialiserVariablesFourmi(){
+		switch ( typeFourmi ){
+			case TypesFourmis.COMBATTANTE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
+				break;
+			case TypesFourmis.CONTREMAITRE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
+				break;
+			case TypesFourmis.GENERALE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
+				break;
+			case TypesFourmis.OUVRIERE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
+				break;
+		}
+		Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
+	}
 #endregion
 
 #region Méthodes package
@@ -262,6 +280,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		enMouvement = false;
 		objectifAtteint = false;
 		stopCollision = false;
+		InitialiserVariablesFourmi();
 	}
 
 	/// <summary>
@@ -277,9 +296,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			if ( ! stopCollision ){
 				// FIXME Coupler ça avec l'IA
 				//Debug.Log("Plus de déambulation, redémarrage");
-				int nombreDesCases = Random.Range(1,VISEE_MAX_OUVRIERE);
 				FaireRotation(TypesRotations.RANDOM);
-				Avancer(nombreDesCases);
+				Avancer(AVANCEMENT_CASE);
 				//Recentrer();
 				//Stopper();
 			} else {
@@ -376,19 +394,19 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		switch (causeCollision){
 			case TypesObjetsRencontres.COTE_BAC_1:
 				FaireRotation(TypesRotations.SUD_EST);
-				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_2:
 				FaireRotation(TypesRotations.SUD_OUEST);
-				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_3:
 				FaireRotation(TypesRotations.SUD);
-				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_4:
 				FaireRotation(TypesRotations.NORD);
-				Avancer(Random.Range(1,VISEE_MAX_OUVRIERE));
+				Avancer(AVANCEMENT_CASE);
 				break;
 			default:
 				break;
@@ -419,3 +437,32 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 #endregion
 
 }
+#endregion 
+
+#region VitessesFourmis
+/// <summary>
+/// Les vitesses des différentes castes de fourmis
+/// </summary>
+public enum VitessesFourmis : int { 
+	/// <summary>
+	/// La vitesse de l'ouvrière, à 1
+	/// </summary>
+	VITESSE_OUVRIERE = 1,
+	/// <summary>
+	/// La vitesse de la contremaitre, à 1
+	/// </summary>
+	VITESSE_CONTREMAITRE = 1,
+	/// <summary>
+	/// La vitesse de la combattante, à 1
+	/// </summary>
+	VITESSE_COMBATTANTE = 1,
+	/// <summary>
+	/// La vitesse de la générale, à 1
+	/// </summary>
+	VITESSE_GENERALE = 1,
+	/// <summary>
+	/// La vitesse du scarabée, à 2
+	/// </summary>
+	VITESSE_SCARABEE = 2
+}
+#endregion

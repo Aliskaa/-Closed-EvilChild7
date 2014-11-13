@@ -43,15 +43,47 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 61								X				- bonbon vert
 62								X				- phéromones
 63								X				- scarabées
-64				>				[py]		Configurer tous les prefabs : SCRIPTS (collisions, déplacements, IA) pour :
+64				>				[py]		Configurer tous les prefabs : SCRIPTS pour :
 65				>				[py]			- fourmis blanche combattante et ouvriere
+														- attaque
+														- ramassage
+														- IA
+														- déplacements
+														- collisions
 66				>				[py]			- fourmis blanche générale
+														- attaque
+														- ramassage
+														- IA
+														- déplacements
+														- collisions
 67				>				[py]			- fourmis blanche contremaitre
+														- attaque
+														- ramassage
+														- IA
+														- déplacements
+														- collisions
 68				>				[py]			- fourmis blanche reine
+														- IA
 69				>				[py]			- fourmis noire combattante et ouvriere
+														- attaque
+														- ramassage
+														- IA
+														- déplacements
+														- collisions
 70				>				[py]			- fourmis noire générale
+														- attaque
+														- ramassage
+														- IA
+														- déplacements
+														- collisions
 71				>				[py]			- fourmis noire contremaitre
+														- attaque
+														- ramassage
+														- IA
+														- déplacements
+														- collisions
 72				>				[py]			- fourmis noire reine
+														- IA
 73				>				[py]			- oeuf fourmis
 74				>				[py]			- bout de bois
 75				>				[py]			- cailloux gros
@@ -64,6 +96,10 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 82				>				[py]			- bonbon vert
 83				>				[py]			- phéromones
 84				>				[py]			- scarabées
+														- attaque
+														- IA
+														- déplacements
+														- collisions
 85					terminé		X			Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
 86					terminé		X			Système pour choper hexagone à partir de coordonnées
 87					terminé		X			Correction positions des objets invoqués
@@ -88,6 +124,12 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 100		2			non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
 101					terminé		X			Gestion de la caméra : possibilité de la bouger, limiter sa vue et ses mouvements
 											pour ne pas sortir
+102		1		>	non lancé	[py]		Mettre durée de vie pour les objets :
+												- oeufs
+												- phéromones											
+												- scarabées
+103		1		> 	non lancé	[py]		Option pour afficher ehxagones sables ou pas												
+												
 											
 									
 												

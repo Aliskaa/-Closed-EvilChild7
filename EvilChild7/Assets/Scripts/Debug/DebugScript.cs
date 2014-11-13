@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -58,8 +58,15 @@ public class DebugScript : MonoBehaviour {
 			flagOKPop = true;
 			GameObject bacAsable = GameObject.Find("Bac à sable");
 			InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-			scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS,
-			                          new Vector3(65f, 0.1f, 75f));
+			//scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS, new Vector3(65f, 0.1f, 75f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(65f, 0.1f, 75f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(85f, 0.1f, 75f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, new Vector3(105f, 0.1f, 75f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, new Vector3(125f, 0.1f, 75f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, new Vector3(65f, 0.1f, 95f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(65f, 0.1f, 105f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, new Vector3(65f, 0.1f, 120f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, new Vector3(65f, 0.1f, 135f));
 		}
 
 		/*
