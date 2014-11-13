@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -14,8 +14,12 @@ using UnityEngine;
 /// Les différentes castes de fourmis que peut prendre en charge le script
 /// </summary>
 public enum TypesFourmis {
-	OUVRIERE,
-	COMBATTANTE,
-	CONTREMAITRE,
-	GENERALE
+	OUVRIERE_NOIRE,
+	COMBATTANTE_NOIRE,
+	CONTREMAITRE_NOIRE,
+	GENERALE_NOIRE,
+	OUVRIERE_BLANCHE,
+	COMBATTANTE_BLANCHE,
+	CONTREMAITRE_BLANCHE,
+	GENERALE_BLANCHE,
 }

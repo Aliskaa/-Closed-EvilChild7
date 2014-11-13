@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 3.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -27,6 +27,16 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	 * ********* */
 
 #region Attributs privés
+	/// <summary>
+	/// Référence vers un script permettant de faire apapraitre des objets
+	/// </summary>
+	private InvocateurObjetsScript scriptInvocation;
+
+	/// <summary>
+	/// Le type de phéromones à invoquer
+	/// </summary>
+	private Invocations typePheromone;
+
 	/// <summary>
 	/// Flag indiquant que l'objet est en mouvement ou non
 	/// Flag mis à jour régulièrement.
@@ -255,20 +265,53 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	private void InitialiserVariablesFourmi(){
 		switch ( typeFourmi ){
-			case TypesFourmis.COMBATTANTE:
+			case TypesFourmis.COMBATTANTE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
+				typePheromone = Invocations.RIEN;
 				break;
-			case TypesFourmis.CONTREMAITRE:
+			case TypesFourmis.CONTREMAITRE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
+				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_NOIRE;
 				break;
-			case TypesFourmis.GENERALE:
+			case TypesFourmis.GENERALE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
+				typePheromone = Invocations.RIEN;
 				break;
-			case TypesFourmis.OUVRIERE:
+			case TypesFourmis.OUVRIERE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
+				typePheromone = Invocations.PHEROMONES_OUVRIERE_NOIRE;
+				break;
+			case TypesFourmis.COMBATTANTE_BLANCHE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
+				typePheromone = Invocations.RIEN;
+				break;
+			case TypesFourmis.CONTREMAITRE_BLANCHE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
+				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_BLANCHE;
+				break;
+			case TypesFourmis.GENERALE_BLANCHE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
+				typePheromone = Invocations.RIEN;	
+				break;
+			case TypesFourmis.OUVRIERE_BLANCHE:
+				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
+				typePheromone = Invocations.PHEROMONES_OUVRIERE_BLANCHE;
+				break;
+			default:
+				vitesseAppliquee = 0;
+				typePheromone = Invocations.RIEN;
 				break;
 		}
 		Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
+	}
+
+	/// <summary>
+	/// Dépose des phéromones
+	/// </summary>
+	/// <param name="position"></param>
+	private void DeposerPheromones( Vector3 position ){
+		//Debug.Log("Dépot de phéromones "+typePheromone+" en "+position);
+		scriptInvocation.InvoquerObjet(typePheromone, position);
 	}
 #endregion
 
@@ -281,6 +324,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		objectifAtteint = false;
 		stopCollision = false;
 		InitialiserVariablesFourmi();
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		scriptInvocation = bacAsable.GetComponent<InvocateurObjetsScript>();
 	}
 
 	/// <summary>
@@ -368,6 +413,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		enMouvement = true;
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
+
+		DeposerPheromones(transform.localPosition);
+
 		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
 
 	}

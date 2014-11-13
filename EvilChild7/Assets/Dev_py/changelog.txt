@@ -454,6 +454,7 @@ __________________________________
 
 Numero........:  41;
 Date..........:  13/11/2014 00h26;
+
 Auteur........:  py;
 Commentaire...:
 	Prise en charge des derniers prefabs des fourmsi (noires et blanches)
@@ -484,11 +485,16 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  43;
+Date..........:  13/11/2014 20h37;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur le script des obets mouvants (déplacements, détections)
+		- attente prefabs corrigés pour reines et ouvrières, autres castes faites
+	Tache 103 terminée : ajout d'une option pour le terrain pour afficher les hexagones de sable
+	Tache 107 terminée : Création des phéromones par les fourmis et suppresion au bout de 25 secondes
+	Eclosion des oeufs avec particules
+	Correction bug de pheromones déposées alords qu'airent pas dut l'etre (Invocateur mis à jour : fait rien si invoc "rien");
 
 __________________________________
 

@@ -10,13 +10,12 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 
-#region InvocateurObjetsScript
 /// <summary>
 /// Classe pour crééer de nouveaux objets via les prefabs.
 /// </summary>
@@ -62,6 +61,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierFBO 			= "fourmi_blanche_ouvriere.prefab";
 	private const string fichierFBR 			= "fourmi_blanche_reine.prefab";
 	private const string fichierOeuf 			= "oeuf_fourmi.prefab";
+	private const string fichierPartEclosions	= "particules_eclosion.prefab";
 	private const string fichierPON 			= "pheromones_ouvriere_noire.prefab";
 	private const string fichierPOB 			= "pheromones_ouvriere_blanche.prefab";
 	private const string fichierPCN 			= "pheromones_contremaitre_noire.prefab";
@@ -222,6 +222,10 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageDebug;
 				nomFichier = fichierDebugFourmis;
 				break;
+			case Invocations.PARTICULES_ECLOSION:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierPartEclosions;
+				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);
 				return null;
@@ -253,6 +257,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	/// <param name="objet">Le type d'objet à créer</param>
 	/// <param name="positionApprox">La position approximative, non définitive de l'objet.</param>
 	public GameObject InvoquerObjet(Invocations objet, Vector3 positionApprox){
+		if (objet == Invocations.RIEN) return null;
 		GameObject invoc = InvoquerObjet(objet);
 		HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(positionApprox);
 		if (hexPlusProche == null) {
@@ -278,8 +283,12 @@ public class InvocateurObjetsScript : MonoBehaviour {
 		if (hexPlusProche == null) {
 			Debug.LogError ("Aucun hexagone n'a été trouvé. Le terrain est-il initialisé ?");
 		} else {
-			invoc.transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
-			invoc.transform.Translate(offset);
+			Vector3 pos = hexPlusProche.positionLocaleSurTerrain;
+			pos.x += offset.x;
+			pos.y += offset.y;
+			pos.z += offset.z;
+			invoc.transform.localPosition = pos;
+			//invoc.transform.Translate(offset);
 		}
 		return invoc;
 	}
@@ -306,137 +315,3 @@ public class InvocateurObjetsScript : MonoBehaviour {
 #endregion
 
 }
-#endregion
-
-#region Invocation
-/// <summary>
-/// Les types d'objets que l'on peut créer
-/// [10;19] : par rapport aux obstacles inertes
-/// [20;29] : par rapport aux unités noires
-/// [30;39] : par rapport aux unités blanches
-/// [40;49] : par rapport à d'autres menaces
-/// [50;69] : par rapport à la nourriture
-/// </summary>
-public enum Invocations : int {
-	/// <summary>
-	/// Un bout de bois
-	/// </summary>
-	BOUT_DE_BOIS = 10,
-	/// <summary>
-	/// Un caillou
-	/// </summary>
-	CAILLOU = 11,
-	/// <summary>
-	/// Un petit caillou
-	/// </summary>
-	PETIT_CAILLOU = 12,
-	/// <summary>
-	/// Un très gros caillou
-	/// </summary>
-	TRES_GROS_CAILLOU = 13,
-	/// <summary>
-	/// Une fourmi noire tete nue
-	/// </summary>
-	FOURMI_NOIRE_OUVRIERE = 20,
-	/// <summary>
-	/// Une fourmi noire avec un chapeau bleu
-	/// </summary>
-	FOURMI_NOIRE_COMBATTANTE = 21,
-	/// <summary>
-	/// Une fourmi noire avec un casque jaune
-	/// </summary>
-	FOURMI_NOIRE_CONTREMAITRE = 22,
-	/// <summary>
-	/// Une fourmi noire avec un képi bleu
-	/// </summary>
-	FOURMI_NOIRE_GENERALE = 23,
-	/// <summary>
-	/// Une fourmi noire avec une couronne
-	/// </summary>
-	FOURMI_NOIRE_REINE = 24,
-	/// <summary>
-	/// Un petit bloc de particules vert foncé
-	/// </summary>
-	PHEROMONES_OUVRIERE_NOIRE = 25,
-	/// <summary>
-	/// Un petit bloc de particules jaune foncé
-	/// </summary>
-	PHEROMONES_CONTREMAITRE_NOIRE = 26,
-	/// <summary>
-	/// Une fourmi blanche
-	/// </summary>
-	FOURMI_BLANCHE_OUVRIERE = 30,
-	/// <summary>
-	/// Une fourmi blanche avec un chapeau bleu
-	/// </summary>
-	FOURMI_BLANCHE_COMBATTANTE = 31,
-	/// <summary>
-	/// Une fourmi blanche avec un casque jaune
-	/// </summary>
-	FOURMI_BLANCHE_CONTREMAITRE = 32,
-	/// <summary>
-	/// Une fourmi blanche avec un képi bleu
-	/// </summary>
-	FOURMI_BLANCHE_GENERALE = 33,
-	/// <summary>
-	/// Une fourmi blanche avec une couronne
-	/// </summary>
-	FOURMI_BLANCHE_REINE = 34,
-	/// <summary>
-	/// Un petit bloc de particules vert pale
-	/// </summary>
-	PHEROMONES_OUVRIERE_BLANCHE = 35,
-	/// <summary>
-	/// Un petit bloc de particules jaune pale
-	/// </summary>
-	PHEROMONES_CONTREMAITRE_BLANCHE = 36,
-	/// <summary>
-	/// Un oeuf tout vert
-	/// </summary>
-	OEUF_FOURMI = 39,
-	/// <summary>
-	/// Un scarabee tout vert affamé
-	/// </summary>
-	SCARABEE = 40,
-	/// <summary>
-	/// Un bonbon cylindrique bleu d'extérieur et noir dedans
-	/// </summary>
-	BONBON_ANGLAIS_BLEU = 50,
-	/// <summary>
-	/// Un bon cylindrique rose d'extérieur et noir dedans
-	/// </summary>
-	BONBON_ANGLAIS_ROSE = 51,
-	/// <summary>
-	/// Un bonbon rouge en forme de mure
-	/// </summary>
-	BONBON_MURE = 52,
-	/// <summary>
-	/// Un bonbon rayé blanc et rouge
-	/// </summary>
-	BONBON_ORANGE = 53,
-	/// <summary>
-	/// Un bonbon rayé blanc et rose
-	/// </summary>
-	BONBON_ROSE = 54,
-	/// <summary>
-	/// Un bonbon rayé blanc et vert
-	/// </summary>
-	BONBON_VERT = 55,
-	/// <summary>
-	/// Une lumière dans un anneau pour montrer la case visée
-	/// </summary>
-	SELECTION_CASE = 71,
-	/// <summary>
-	/// Une game object invisible à placer sur les cases d'eau
-	/// </summary>
-	EAU3D = 72,
-	/// <summary>
-	/// Un objet de debug
-	/// </summary>
-	DEBUG_OBJECT = 173,
-	/// <summary>
-	/// Une fourmis pour les debugs
-	/// </summary>
-	DEBUG_FOURMIS = 174
-}
-#endregion

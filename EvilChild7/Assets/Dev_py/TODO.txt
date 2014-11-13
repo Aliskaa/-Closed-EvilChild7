@@ -1,27 +1,7 @@
 ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
-1					terminé		X			Réaliser le terrain
-2					terminé		X			Cases pour l'eau
-3					terminé		X			Générateur de terrains
 4		4			non lancé				Mottes de terres
-25					terminé		X			Collisions sur les cotés du bac
-26					terminé		X			Fourmis : Rotation
-27					terminé		X			Fourmis : Déambulation : apliquer force qui se réduit pour bouger d'une case à l'autre.
-											Mettre des flags pour que l'Update ne relance pas la fonction à chaque fois
-											Pas vraiment de méthode de stop ?
-28					terminé		X			Fourmis : voir où elle peut aller : obstacles et collisions qui peuvent venir
-29					terminé		X			Fourmis : voir les cases et leurs types, où elle peut aller
-30					terminé		X			Fourmis : visée : proportions/distances
-31					terminé		X			Fourmis : bonnes proportions pour aller d'une case à l'autre
-											(distance de parcourt de case à case, ...)
-32					terminé		X			Voir nécessité script pour créer des GO donnés (pop scarabées, éclosions fourmis, ...)																				
-33					terminé		X			Améliorer le bac: cotés, skybox, fond, ...											
-35					terminé		X			Les fourmis se déplacement en diagonale (x+z) au lieu de x
-36					terminé		X			Mettre des IDS et/ou tags sur chaque hexagone pour les réperer
-37				 	terminé		X			La fourmis (rigidbody) se déplace toute seule, meme sans update des scripts
-38					terminé		X			Collisions = on stoppe l'objet : collisions à prendre en charge sur RigidBody, virer les autres callbacks
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
-41					terminé		X			Faire la vue et l'odorat dans les 6 sens possibles, pas que devant : lancers de rayons
 42		1		>>	lancé		[py]		Configurer tous les prefabs (rigidbody, box collider, position au pop) pour :
 44								X				- fourmis blanche combattante et ouvriere
 45								X				- fourmis blanche générale
@@ -45,43 +25,31 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 63								X				- scarabées
 64				>				[py]		Configurer tous les prefabs : SCRIPTS pour :
 65				>				[py]			- fourmis blanche combattante et ouvriere
-														- attaque
-														- ramassage
 														- IA
-														- déplacements
-														- collisions
+														- déplacements	X		[ ]
+														- collisions	X		[ ]
 66				>				[py]			- fourmis blanche générale
-														- attaque
-														- ramassage
 														- IA
-														- déplacements
-														- collisions
+														- déplacements	X
+														- collisions	X
 67				>				[py]			- fourmis blanche contremaitre
-														- attaque
-														- ramassage
 														- IA
-														- déplacements
-														- collisions
+														- déplacements	X
+														- collisions	X
 68				>				[py]			- fourmis blanche reine
 														- IA
 69				>				[py]			- fourmis noire combattante et ouvriere
-														- attaque
-														- ramassage
 														- IA
-														- déplacements
-														- collisions
+														- déplacements	X		[ ]
+														- collisions	X		[ ]
 70				>				[py]			- fourmis noire générale
-														- attaque
-														- ramassage
 														- IA
-														- déplacements
-														- collisions
+														- déplacements	X
+														- collisions	X
 71				>				[py]			- fourmis noire contremaitre
-														- attaque
-														- ramassage
 														- IA
-														- déplacements
-														- collisions
+														- déplacements	X
+														- collisions	X
 72				>				[py]			- fourmis noire reine
 														- IA
 73				>				[py]			- oeuf fourmis
@@ -100,36 +68,17 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 														- IA
 														- déplacements
 														- collisions
-85					terminé		X			Le déplacement et le recentrage des objets mouvants est visuellement brouillon/sale 
-86					terminé		X			Système pour choper hexagone à partir de coordonnées
-87					terminé		X			Correction positions des objets invoqués
-88					terminé		X			Cibler une hexagone en le mettant en surbrillance
-89					terminé		X			Aider Sophie pour clic 2D ---> coord 3D locales terrain 
-90					terminé		X			Mettre des codes
 91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
 92		1			non lancé	[py]		Transformation d'oeuf en fourmis
-93					terminé		X			Phéromones contre-maitre noire et rouge et ouvriere rouge
-												- Prefab (particules de couleurs)
-												- Detection/collisions
-												- Invocation
-94					terminé		X			Konami code : pluie de nourriture
-95					terminé		X			Mettre à jour le terrain avec les remarques du client :
-								X				- pas de fourmis en dehors du terrain
-								X				- revoir le chemin
-								X				- attention à la maison trop grande
-								X				- tuile pour la texture sable
-97					terminé		X			Fonction pour convertir coord globale en locales par rapport au terrain
 98		1			non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
-99					terminé		[py]		Vue et odorat algos : lister les objets vus et les envoyer à l'IA (objets, sens, distance)
 100		2			non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
-101					terminé		X			Gestion de la caméra : possibilité de la bouger, limiter sa vue et ses mouvements
-											pour ne pas sortir
-102		1		>	non lancé	[py]		Mettre durée de vie pour les objets :
-												- oeufs
-												- phéromones											
-												- scarabées
-103		1		> 	non lancé	[py]		Option pour afficher ehxagones sables ou pas												
-												
-											
+102		1		>>	non lancé	[py]		Mettre durée de vie pour les objets :
+												- oeufs X + particules d'éclosions
+												- scarabées + particules de mort
+104		1		> 	non lancé	[py]		Barre de vie
+105		1		>	non lancé	[py]		Collider/mesh sur objets (cailloux, eau3D, ..), cf Gwendal	
+106		1		>	non lancé	[py]		Retour à la base (reine = position fixe)
+108		1		>> 	non lancé	[py]		Code kinder surprise
+109		1		>>	non lancé	[py]		Particules qui apparaissent à la mort										
 									
 												

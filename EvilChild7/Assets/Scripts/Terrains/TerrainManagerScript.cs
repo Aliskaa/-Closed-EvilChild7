@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.4.4
+/// PY Lapersonne - Version 3.5.0
 /// </remarks>
 
 using UnityEngine;
@@ -65,9 +65,14 @@ public class TerrainManagerScript : MonoBehaviour {
     public GameObject chunkHolder;
 
 	/// <summary>
-	/// La texture du terrain de type sable
+	/// La texture du terrain de type sable avec hexagones visibles
 	/// </summary>
-    public Texture2D textureTerrainSable;
+    public Texture2D textureTerrainSableHexagones;
+	
+	/// <summary>
+	/// La texture du terrain de type sable sans hexagones visibles
+	/// </summary>
+	public Texture2D textureTerrainSable;
 
 	/// <summary>
 	/// La texture du terrain de type eau
@@ -98,6 +103,11 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// Le type de terrain à générer
 	/// </summary>
 	public TypesMaps type;
+
+	/// <summary>
+	/// Flag indiquant s'il faut masquer les hexagones ou non
+	/// </summary>
+	public bool masquerHexagones;
 #endregion
 
 #region Attributs package
@@ -133,13 +143,13 @@ public class TerrainManagerScript : MonoBehaviour {
 		Texture2D texture;
 		switch (type) {
 			case TypesTerrains.SABLE:
-				texture = textureTerrainSable;
+				texture = (masquerHexagones ? textureTerrainSable : textureTerrainSableHexagones);
 				break;
 			case TypesTerrains.EAU:
 				texture = textureTerrainEau;
 				break;
 			default:
-				texture = textureTerrainSable;
+				texture = textureTerrainSableHexagones;
 				break;
 		}
 		chunkObj.AddComponent<MeshRenderer>().material.mainTexture = texture;

@@ -148,7 +148,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 		 */
 		if (objetsDetectes.Count > 0) {
 			System.Text.StringBuilder sb = new System.Text.StringBuilder ();
-			sb.Append ("Objets detectés :\n");
+			sb.Append("Objets detectés :\n");
 			foreach ( Cible c in objetsDetectes ){
 				sb.Append("\t").Append(c).Append("\n");
 			}
@@ -163,18 +163,30 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// </summary>
 	private void InitialiserVariablesFourmi(){
 		switch ( typeFourmi ){
-		case TypesFourmis.COMBATTANTE:
-			viseeAppliquee = (int) ViseesFourmis.VISEE_COMBATTANTE;
-			break;
-		case TypesFourmis.CONTREMAITRE:
-			viseeAppliquee = (int) ViseesFourmis.VISEE_CONTREMAITRE;	
-			break;
-		case TypesFourmis.GENERALE:
-			viseeAppliquee = (int) ViseesFourmis.VISEE_GENERALE;	
-			break;
-		case TypesFourmis.OUVRIERE:
-			viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
-			break;
+			case TypesFourmis.COMBATTANTE_NOIRE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_COMBATTANTE;
+				break;
+			case TypesFourmis.CONTREMAITRE_NOIRE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_CONTREMAITRE;	
+				break;
+			case TypesFourmis.GENERALE_NOIRE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_GENERALE;	
+				break;
+			case TypesFourmis.OUVRIERE_NOIRE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
+				break;
+			case TypesFourmis.COMBATTANTE_BLANCHE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_COMBATTANTE;
+				break;
+			case TypesFourmis.CONTREMAITRE_BLANCHE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_CONTREMAITRE;	
+				break;
+			case TypesFourmis.GENERALE_BLANCHE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_GENERALE;	
+				break;
+			case TypesFourmis.OUVRIERE_BLANCHE:
+				viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
+				break;
 		}
 		Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une visee de "+viseeAppliquee);
 	}
@@ -190,14 +202,27 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Celui-ci sera remis en mouvement via le script de déplacement
 	/// </summary>
 	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
-	//void OnTriggerEnter( Collider coll ){
 	void OnCollisionEnter( Collision coll ){
 		string nomObjetTouche = coll.gameObject.name;
 		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType(nomObjetTouche);
-		if (objetTouche != TypesObjetsRencontres.BLOC_TERRAIN) {
-			//Debug.Log ("Collision OnCollisionEnter avec : " + objetTouche + " / " + nomObjetTouche);
-			scriptDeplacement.StopperParCollision (objetTouche);
-		}
+		if (objetTouche == TypesObjetsRencontres.BLOC_TERRAIN)			 return;
+		if (objetTouche == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE)	 return;
+		if (objetTouche == TypesObjetsRencontres.PHEROMONES_CM_NOIRE) 	 return;
+		if (objetTouche == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE) return;
+		if (objetTouche == TypesObjetsRencontres.PHEROMONES_OUV_NOIRE) 	 return;
+		//Debug.Log ("Collision OnCollisionEnter avec : " + objetTouche + " / " + nomObjetTouche);
+		scriptDeplacement.StopperParCollision (objetTouche);
+	}
+
+	/// <summary>
+	/// Routine appellée automatiquement par Unity
+	/// lorsqu'il y a une collision, i.e. lorsque des rigidbodys avec des colliders
+	/// entrent en contact entre eux ET que ces colliders sont de type "trigger", i.e.
+	/// où la collision est détectée (trigger) mais omù la physique ne s'applique pas.
+	/// </summary>
+	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
+	void OnTriggerEnter( Collider coll ){
+		//Debug.Log ("Collision OnCollisionEnter avec : " + coll);
 	}
 
 	/// <summary>

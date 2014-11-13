@@ -51,9 +51,12 @@
      <Compile Include="Assets\Scripts\Debug\PresentationScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DetectionFourmisScript.cs" />
+     <Compile Include="Assets\Scripts\Fourmis\OeufScript.cs" />
+     <Compile Include="Assets\Scripts\Fourmis\ParticulesOeufScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\TypesFourmis.cs" />
      <Compile Include="Assets\Scripts\IA\Cible.cs" />
      <Compile Include="Assets\Scripts\Interactions\PointAndClickScript.cs" />
+     <Compile Include="Assets\Scripts\Pheromones\PheromonesScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\CivGridUtils.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />
@@ -63,8 +66,10 @@
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\CheatCode.cs" />
      <Compile Include="Assets\Scripts\Utils\GameObjectUtils.cs" />
+     <Compile Include="Assets\Scripts\Utils\Invocations.cs" />
      <Compile Include="Assets\Scripts\Utils\JSONUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesAxes.cs" />
+     <Compile Include="Assets\Scripts\Utils\TypesCamps.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesObjetsRencontres.cs" />
      <Compile Include="Assets\Scripts\Utils\TypesRotations.cs" />
      <None Include="Assets\Dev_py\git_pensebete.txt" />
