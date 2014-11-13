@@ -154,7 +154,7 @@ public class HexagonesVueScript : MonoBehaviour {
 		tabHexagones[x, y].hexExt = worldManager.hexExt;
 		tabHexagones[x, y].centreHexagone = worldManager.centreHexagone;
 
-		if ( GameObjectUtils.parseToType (texture.name) == TypesObjetsRencontres.SABLE ){
+		if ( GameObjectUtils.parseToType(texture.name) == TypesObjetsRencontres.SABLE ){
 			tabHexagones[x,y].TextureAppliquee = TypesTerrains.SABLE;
 		} else if ( GameObjectUtils.parseToType (texture.name) == TypesObjetsRencontres.EAU ){ 
 			tabHexagones[x,y].TextureAppliquee = TypesTerrains.EAU;

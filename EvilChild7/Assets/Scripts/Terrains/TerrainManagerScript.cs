@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.5.0
+/// PY Lapersonne - Version 3.6.0
 /// </remarks>
 
 using UnityEngine;
@@ -179,6 +179,18 @@ public class TerrainManagerScript : MonoBehaviour {
 		Vector3 coordLocalesTerrain = chunkHolder.transform.worldToLocalMatrix.MultiplyPoint(coord);
 		//Debug.Log("Coordonnées locales calculées : " + coordLocalesTerrain);
 		return coordLocalesTerrain;
+	}
+
+	/// <summary>
+	/// Converti une case de sable en une case d'eau
+	/// </summary>
+	/// <param name="coordonnees">Les coordonnées de l'hexagone ciblé (locales au terrain)</param>
+	public void ConvertirCaseEau( Vector3 coordonnees ){
+		HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordonnees);
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptInvoc.InvoquerObjet(Invocations.EAU, hexagoneClick.positionLocaleSurTerrain);
+		scriptInvoc.InvoquerObjet(Invocations.EAU3D, hexagoneClick.positionLocaleSurTerrain);
 	}
 #endregion
 	

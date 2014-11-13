@@ -3,7 +3,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -34,6 +34,11 @@ public class CheatCode : MonoBehaviour {
 	private KeyCode[] codesTouchesSsqd;
 
 	/// <summary>
+	/// Les codes pour les touches du code kinder surpriz
+	/// </summary>
+	private KeyCode[] codesTouchesKs;
+
+	/// <summary>
 	/// Un indice pour le tableau du konami code
 	/// </summary>
 	private int indiceToucheActuelleKonami = 0;
@@ -42,12 +47,16 @@ public class CheatCode : MonoBehaviour {
 	/// Un indice pour le tableau du code rakayou
 	/// </summary>
 	private int indiceToucheActuelleRakayou = 0;
-
 	
 	/// <summary>
 	/// Un indice pour le tableau du code rakayou
 	/// </summary>
 	private int indiceToucheActuelleSsqd = 0;
+
+	/// <summary>
+	/// Un indice pour le tableau du code kinder surpriz
+	/// </summary>
+	private int indiceToucheActuelleKs = 0;
 #endregion
 
 	/* ******** *
@@ -194,6 +203,24 @@ public class CheatCode : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Kinder surpise !
+	/// </summary>
+	private void KinderSurpriz(){
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		int nombreOeufs = UnityEngine.Random.Range (10, 50);
+		for ( int i = 0; i < nombreOeufs; i++ ){
+			int randomX = UnityEngine.Random.Range(55,148);    // Limites en X du terrain
+			//int randomY = UnityEngine.Random.Range(15,100);    // Altitudes min et max
+			int randomZ = UnityEngine.Random.Range(52,132);     // Limites en Z du terrain
+			scriptInvoc.InvoquerObjetAvecOffset( 
+			                                    Invocations.OEUF_FOURMI, 
+			                                    new Vector3(randomX, 0, randomZ),
+			                                    new Vector3(0,0/*randomY*/,0));
+		}
+	}
+
+	/// <summary>
 	/// Code pour égrer le konami code
 	/// </summary>
 	/// <returns><c>true</c>, si c'est bien en rapport avec le konami <c>false</c> sinon.</returns>
@@ -258,6 +285,25 @@ public class CheatCode : MonoBehaviour {
 		}
 		return false;
 	}
+
+	/// <summary>
+	/// Code pour gérer le code kinder surpriz
+	/// </summary>
+	/// <returns><c>true</c>, si c'est bien en rapport avec le code kinder surpriz <c>false</c> sinon.</returns>
+	/// <param name="touche">La touche appuyée qui peut etre en rapport avec le kinder surpriz code</param>
+	private bool GererKinderSupriz( KeyCode touche ){
+		if ( touche == codesTouchesKs[indiceToucheActuelleKs] ){
+			indiceToucheActuelleKs++;
+			if ( indiceToucheActuelleKs+1 > codesTouchesKs.Length ){
+				indiceToucheActuelleKs = 0;
+				KinderSurpriz();
+				return true;
+			}
+		} else {
+			indiceToucheActuelleKs = 0;
+		}
+		return false;
+	}
 #endregion
 
 #region Méthodes package
@@ -302,6 +348,22 @@ public class CheatCode : MonoBehaviour {
 			KeyCode.A,
 			KeyCode.D
 		};
+		indiceToucheActuelleKs = 0;
+		codesTouchesKs = new KeyCode[]{
+			KeyCode.K,
+			KeyCode.I,
+			KeyCode.N,
+			KeyCode.D,
+			KeyCode.E,
+			KeyCode.R,
+			KeyCode.S,
+			KeyCode.U,
+			KeyCode.R,
+			KeyCode.P,
+			KeyCode.R,
+			KeyCode.I,
+			KeyCode.Z
+		};
 	}
 
 	/// <summary>
@@ -315,6 +377,7 @@ public class CheatCode : MonoBehaviour {
 			GererKonami(touche);
 			GererRakayou(touche);
 			GererSuicideSquad(touche);
+			GererKinderSupriz(touche);
 		}
 	}
 #endregion

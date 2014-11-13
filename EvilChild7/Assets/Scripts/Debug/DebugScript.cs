@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.2.1
 /// </remarks>
 
 using UnityEngine;
@@ -50,10 +50,12 @@ public class DebugScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
+
 		/*
 		 * Il faut s'assurer que le terrain soit créé avant de placer les objets
 		 */
 		if ( !flagOKPop && (terrainRempli || VerifierRemplissageTerrain()) ){
+
 			terrainRempli = true;
 			flagOKPop = true;
 			GameObject bacAsable = GameObject.Find("Bac à sable");
@@ -61,8 +63,9 @@ public class DebugScript : MonoBehaviour {
 			//scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS, new Vector3(65f, 0.1f, 75f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(65f, 0.1f, 75f));
 //			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(135, 0.1f, 95f));
-			scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, new Vector3(135, 0.1f, 95f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(65f, 0.1f, 75f));
+			scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, new Vector3(65f, 0.1f, 75f));
+			//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, new Vector3(135, 0.1f, 95f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(150f, 0.1f, 120f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(85f, 0.1f, 135f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(105f, 0.1f, 105f));
@@ -77,7 +80,9 @@ public class DebugScript : MonoBehaviour {
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(65f, 0.1f, 105f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, new Vector3(150f, 0.1f, 120f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, new Vector3(85f, 0.1f, 135f));
+		
 		}
+
 
 		/*
 		 * Debogage click / convertion coordonnées
@@ -91,11 +96,13 @@ public class DebugScript : MonoBehaviour {
 				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-				InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
-				ios.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+				tms.ConvertirCaseEau(click);
+				//InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
+				//ios.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
 				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
 			}
 		}
+
 	}
 #endregion
 

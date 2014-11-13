@@ -1,6 +1,6 @@
 /// <summary>
-/// OeufScript.cs
-/// Script pour gérer les oeufs
+/// ScarabeeScript.cs
+/// Script pour gérer les scarabées
 /// </summary>
 /// 
 /// <remarks>
@@ -13,9 +13,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Classe pour gérer les oeufs
+/// Classe pour gérer les scarabées
 /// </summary>
-public class OeufScript : MonoBehaviour {
+public class ScarabeeScript : MonoBehaviour {
 
 
 	/* ********* *
@@ -24,25 +24,20 @@ public class OeufScript : MonoBehaviour {
 	
 #region Attributs privés
 	/// <summary>
-	/// Le pseudo timer
+	/// Les points de vie
 	/// </summary>
-	private float Timer;
+	// FIXME Voir avec l'IA
+	private int pointsDeVie;
 #endregion
 
 #region Constantes privées
 	/// <summary>
-	/// La duréer d'incubation avant éclosion
+	/// Le nombre de secondes avant la mort
 	/// </summary>
-	private const int DUREE_INCUBATION = 20;
+	private const int NOMBRE_CYCLES_VIEILLISSEMENT = 25;
 #endregion
-	
+
 #region Attributs publics
-	/// <summary>
-	/// Le type de fourmis qui va éclore
-	/// </summary>
-	[HideInInspector]
-	public Invocations fourmi;
-	
 	/// <summary>
 	/// Le camps de la fourmi qui sortira de l'oeuf
 	/// </summary>
@@ -57,19 +52,22 @@ public class OeufScript : MonoBehaviour {
 	
 #region Méthodes privées
 	/// <summary>
-	/// Provoque l'éclosion de la fourmis.
-	/// Pour celà, va masquer l'oeuf, invoquer une fourmis à sa position, et va ensuite
-	/// se détruire.
+	/// Appliquer le vieillissemnt sur le scarabée
 	/// </summary>
-	private void Eclosion(){
-		//Debug.Log("Eclosion de "+fourmi);
+	private void Vieillir(){
+		pointsDeVie -= 100;
+	}
+
+	/// <summary>
+	/// Mort de l'objet
+	/// </summary>
+	private void Mourrir(){
 		Vector3 position = transform.localPosition;
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_ECLOSION, position);
+		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
 		MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
 		meshRender.enabled = false;
-		scriptInvoc.InvoquerObjet(fourmi, position);
 		Destroy(gameObject);
 	}
 #endregion
@@ -79,27 +77,18 @@ public class OeufScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity au lancement du script
 	/// </summary>
 	void Awake(){
-		this.Timer = DUREE_INCUBATION;
-		// FIXME : Voir avec l'IA pour les ratios et le camps
-		int campsInt = Random.Range (1, 2);
-		camps = (TypesCamps)campsInt;
-		int fourmiInt;
-		if ( camps == TypesCamps.BLANC ){
-			fourmiInt = Random.Range(30,33);
-		} else {
-			fourmiInt = Random.Range(20,23);
-		}
-		fourmi = (Invocations)fourmiInt;
-		//Debug.Log("Fourmi de type : "+fourmi);
+		camps = TypesCamps.AUCUN;
+		pointsDeVie = NOMBRE_CYCLES_VIEILLISSEMENT;
+		pointsDeVie = 2500; // FIXME Voir avec l'IA
+		InvokeRepeating("Vieillir", 1 /* départ*/, 1 /*intervalle en secondes*/);
 	}
-	
+
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame.
 	/// </summary>
 	void Update(){
-		this.Timer -= Time.deltaTime;
-		if ( this.Timer <= 0 ){
-			Eclosion();
+		if ( pointsDeVie <= 0 ){ // FIXME Voir avec l'IA
+			Mourrir();
 		}
 	}
 #endregion

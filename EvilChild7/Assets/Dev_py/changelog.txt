@@ -498,12 +498,18 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  44;
+Date..........:  14/11/2014 00h33;
 Auteur........:  py;
 Commentaire...:
-	;
-
+	Travail sur le scarabée : script de mort
+	Tache 102 terminée : durées devie et d'incubation des  scarabées et des oeufs
+	Tache 109 terminée : Ajout de particules dispersées à la mort d'une bestiole (fourmis blanches et noires, scarabées)
+	Ajout des prefabs corrigés de Sophie (reines et ouvrières)
+	Mises à jour de totues les scènes et des prefabs de la scène
+	Tache 92 terminée : éclosion des oeufs
+	Tache 108 terminée : kinder surprise
+	Tache 110 terminée : Ajout d'une méthode pour créer une case d'eau;
 __________________________________
 
 Numero........:  ??;

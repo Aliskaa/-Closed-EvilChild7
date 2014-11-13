@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 3.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -47,6 +47,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierCaillou 		= "caillou.prefab";
 	private const string fichierTresGrosCaillou = "tres_gros_caillou.prefab";
 	private const string fichierEau3D 			= "Eau3D.prefab";
+	private const string fichierEau 			= "eau.dae";
 	#endregion
 
 	#region Bestioles
@@ -67,6 +68,9 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierPCN 			= "pheromones_contremaitre_noire.prefab";
 	private const string fichierPCB	 			= "pheromones_contremaitre_blanche.prefab";
 	private const string fichierScara 			= "scarabee.prefab";
+	private const string fichierMortScara		= "particules_mort_scarabee.prefab";
+	private const string fichierMortFN			= "particules_mort_fourmi.prefab";
+	private const string fichierMortFO			= "particules_mort_fourmi.prefab";
 	#endregion
 
 	#region Bonbons
@@ -206,6 +210,10 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageScarabees;
 				nomFichier = fichierScara;
 				break;
+			case Invocations.EAU:
+				cheminPackage = packageEau;
+				nomFichier = fichierEau;
+				break;
 			case Invocations.EAU3D:
 				cheminPackage = packageEau;
 				nomFichier = fichierEau3D;
@@ -225,6 +233,10 @@ public class InvocateurObjetsScript : MonoBehaviour {
 			case Invocations.PARTICULES_ECLOSION:
 				cheminPackage = packageFourmis;
 				nomFichier = fichierPartEclosions;
+				break;
+			case Invocations.PARTICULES_MORT_BESTIOLE:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortFO; // Meme fichier pour toutes les bestioles
 				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);

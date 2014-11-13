@@ -51,12 +51,14 @@
      <Compile Include="Assets\Scripts\Debug\PresentationScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DetectionFourmisScript.cs" />
+     <Compile Include="Assets\Scripts\Fourmis\FourmiScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\OeufScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\ParticulesOeufScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\TypesFourmis.cs" />
      <Compile Include="Assets\Scripts\IA\Cible.cs" />
      <Compile Include="Assets\Scripts\Interactions\PointAndClickScript.cs" />
      <Compile Include="Assets\Scripts\Pheromones\PheromonesScript.cs" />
+     <Compile Include="Assets\Scripts\Scarabées\ScarabeeScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\CivGridUtils.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />

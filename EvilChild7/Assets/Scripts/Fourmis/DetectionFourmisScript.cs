@@ -188,7 +188,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 				viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
 				break;
 		}
-		Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une visee de "+viseeAppliquee);
+		//Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une visee de "+viseeAppliquee);
 	}
 #endregion
 

@@ -302,7 +302,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				typePheromone = Invocations.RIEN;
 				break;
 		}
-		Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
+		//Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
 	}
 
 	/// <summary>

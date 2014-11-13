@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -135,9 +135,17 @@ public enum Invocations : int {
 	/// </summary>
 	EAU3D = 72,
 	/// <summary>
+	/// Une game object "case d'eau" plat
+	/// </summary>
+	EAU = 73,
+	/// <summary>
 	/// Des particules d'éclosions
 	/// </summary>
-	PARTICULES_ECLOSION = 73,
+	PARTICULES_ECLOSION = 74,
+	/// <summary>
+	/// Des particules de mort pour des bestioles
+	/// </summary>
+	PARTICULES_MORT_BESTIOLE = 75,
 	/// <summary>
 	/// Un objet de debug
 	/// </summary>
