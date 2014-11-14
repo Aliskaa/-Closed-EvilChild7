@@ -1,9 +1,9 @@
 /// <summary>
-/// CheatCode.cs
+/// CheatCodeScript.cs
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 4.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -11,7 +11,7 @@ using UnityEngine;
 /// <summary>
 /// Des cheats code. Et ouais.
 /// </summary>
-public class CheatCode : MonoBehaviour {
+public class CheatCodeScript : MonoBehaviour {
 
 	/* ********* *
 	 * Attributs * 
@@ -325,43 +325,39 @@ public class CheatCode : MonoBehaviour {
 		};
 		indiceToucheActuelleKonami = 0;
 		codesTouchesRakayou = new KeyCode[]{
+			KeyCode.DownArrow,
+			KeyCode.DownArrow,
+			KeyCode.UpArrow,
+			KeyCode.DownArrow,
 			KeyCode.R,
-			KeyCode.A,
 			KeyCode.K,
-			KeyCode.A,
-			KeyCode.Y,
-			KeyCode.O,
 			KeyCode.U,
 		};
 		indiceToucheActuelleSsqd = 0;
 		codesTouchesSsqd = new KeyCode[]{
-			KeyCode.S,
-			KeyCode.U,
-			KeyCode.I,
-			KeyCode.C,
-			KeyCode.I,
-			KeyCode.D,
-			KeyCode.E,
+			KeyCode.LeftArrow,
+			KeyCode.RightArrow,
+			KeyCode.LeftArrow,
+			KeyCode.RightArrow,
+			KeyCode.LeftArrow,
+			KeyCode.RightArrow,
+			KeyCode.UpArrow,
+			KeyCode.DownArrow,
 			KeyCode.S,
 			KeyCode.Q,
-			KeyCode.U,
-			KeyCode.A,
 			KeyCode.D
 		};
 		indiceToucheActuelleKs = 0;
 		codesTouchesKs = new KeyCode[]{
+			KeyCode.UpArrow,
+			KeyCode.LeftArrow,
+			KeyCode.DownArrow,
+			KeyCode.RightArrow,
+			KeyCode.UpArrow,
+			KeyCode.LeftArrow,
+			KeyCode.DownArrow,
+			KeyCode.RightArrow,
 			KeyCode.K,
-			KeyCode.I,
-			KeyCode.N,
-			KeyCode.D,
-			KeyCode.E,
-			KeyCode.R,
-			KeyCode.S,
-			KeyCode.U,
-			KeyCode.R,
-			KeyCode.P,
-			KeyCode.R,
-			KeyCode.I,
 			KeyCode.Z
 		};
 	}

@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\TODO.txt">
     <Files>
-      <File FileName="Assets\Dev_py\changelog.txt" Line="1" Column="20" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="1" Column="1" />
       <File FileName="Assets\Dev_py\TODO.txt" Line="27" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
