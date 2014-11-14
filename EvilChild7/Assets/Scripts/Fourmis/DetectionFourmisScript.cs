@@ -114,7 +114,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 
 		// Création du rayon qui va partir dans le bonne direction
 		Vector3 positionRayon = transform.position;
-		positionRayon.y += 1f;
+		positionRayon.y += 0.5f;
 
 		Vector3 directionRayon = transform.TransformDirection(directionV);
 		directionRayon.Normalize();
@@ -124,11 +124,23 @@ public class DetectionFourmisScript : MonoBehaviour {
 
 		//if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee*30) ){ // DEBUG
 		if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) ){
-			string nomObjetProche = hit.transform.gameObject.name;
+			GameObject objetRencontre = hit.transform.gameObject;
+			string nomObjetProche = objetRencontre.name;
 			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);
 			//Debug.Log("Détecté : "+objetSurChemin);
 			Debug.DrawLine(charles.origin, hit.point, debugRayColor);
-			Cible objetRepere = new Cible(objetSurChemin, hit.distance, direction);
+			int codeObjet = (int) objetSurChemin;
+			IAappel iaObjet = null;
+			// L'objet vu est une fourmi
+			if ( (codeObjet >= 20 && codeObjet <= 24) || (codeObjet >= 30 && codeObjet <= 34) ){
+				FourmiScript fs = objetRencontre.GetComponent<FourmiScript>();
+				iaObjet = fs.iaBestiole;
+			// L'objet sur le chemin est un scarabéé
+			} else if ( codeObjet == 40 ){
+				ScarabeeScript ss = objetRencontre.GetComponent<ScarabeeScript>();
+				iaObjet = ss.iaBestiole;
+			}
+			Cible objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
 			objetsDetectes.Add(objetRepere);
 		}/* else {
 			Debug.Log("Rien de détecté");
@@ -141,11 +153,6 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Vide la liste stockant ces objets une fois l'IA avertie.
 	/// </summary>
 	private void SignalerDetections(){
-		/*
-		 * TODO
-		 * Envoyer tous les objets vus/sentis à l'IA
-		 * et vider la liste
-		 */
 		if (objetsDetectes.Count > 0) {
 			System.Text.StringBuilder sb = new System.Text.StringBuilder ();
 			sb.Append("Objets detectés :\n");
@@ -154,6 +161,10 @@ public class DetectionFourmisScript : MonoBehaviour {
 			}
 			//Debug.Log(sb.ToString());
 			// TODO Pousser la liste à l'IA afin qu'elle soit avertie
+			FourmiScript fs = gameObject.GetComponent<FourmiScript>();
+			IAappel aTartes = fs.iaBestiole;
+			IAreaction meMyselfAndI = (IAreaction) fs;
+			aTartes.signaler(meMyselfAndI, objetsDetectes);
 			objetsDetectes = new List<Cible>();
 		}
 	}

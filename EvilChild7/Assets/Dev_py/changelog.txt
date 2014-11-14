@@ -526,7 +526,10 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
+	Travail sur cablage avec l'IA [en cours]
+		- Ajout des fichiers
+		- Cablage code IA pour les fourmis
+	Correction rayon des rayons de détections qui étaient trop bas;
 
 __________________________________
 

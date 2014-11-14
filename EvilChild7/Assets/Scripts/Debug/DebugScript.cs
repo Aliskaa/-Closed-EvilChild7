@@ -60,26 +60,8 @@ public class DebugScript : MonoBehaviour {
 			flagOKPop = true;
 			GameObject bacAsable = GameObject.Find("Bac à sable");
 			InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-			//scriptInvoc.InvoquerObjet(Invocations.DEBUG_FOURMIS, new Vector3(65f, 0.1f, 75f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(65f, 0.1f, 75f));
-//			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(135, 0.1f, 95f));
-			scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, new Vector3(65f, 0.1f, 75f));
-			//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, new Vector3(135, 0.1f, 95f));
-			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(85f, 0.1f, 95f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(150f, 0.1f, 120f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(85f, 0.1f, 135f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(105f, 0.1f, 105f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, new Vector3(105f, 0.1f, 105f));
-			/*
-			GameObject go = scriptInvoc.InvoquerObjetAvecOffset(Invocations.FOURMI_BLANCHE_OUVRIERE, 
-			                                    new Vector3(125f, 0.1f, 75f),
-			                                    new Vector3(0,0,0));
-			go.transform.Translate(0,0,5);
-			*/
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, new Vector3(150f, 0.1f, 95f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(65f, 0.1f, 105f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, new Vector3(150f, 0.1f, 120f));
-			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, new Vector3(85f, 0.1f, 135f));
+
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(85f, 0.1f, 95f));
 		
 		}
 
@@ -96,9 +78,14 @@ public class DebugScript : MonoBehaviour {
 				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-				tms.ConvertirCaseEau(click);
-				//InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
+				//tms.ConvertirCaseEau(click);
+				InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
 				//ios.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+				//ios.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
+				//ios.InvoquerObjet(Invocations.CAILLOU, click);
+				//ios.InvoquerObjet(Invocations.BONBON_MURE, click);
+				//ios.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+				ios.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
 				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
 			}
 		}

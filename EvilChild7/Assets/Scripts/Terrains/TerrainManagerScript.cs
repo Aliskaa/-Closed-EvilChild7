@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -27,6 +27,11 @@ public class TerrainManagerScript : MonoBehaviour {
 	/* ********* *
 	 * Attributs *
 	 * ********* */
+
+#region Attributs privés
+	//private Vector3
+
+#endregion
 
 #region Attributs publics
 
@@ -192,6 +197,24 @@ public class TerrainManagerScript : MonoBehaviour {
 		scriptInvoc.InvoquerObjet(Invocations.EAU, hexagoneClick.positionLocaleSurTerrain);
 		scriptInvoc.InvoquerObjet(Invocations.EAU3D, hexagoneClick.positionLocaleSurTerrain);
 	}
+
+/*
+	/// <summary>
+	/// Retourne la position de la reine blanche
+	/// </summary>
+	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
+	public static Vector3 PositionReineBlanche(){
+		
+	}
+		
+	/// <summary>
+	/// Retourne la position de la reine noire
+	/// </summary>
+	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
+	public static Vector3 PositionReineNoire(){
+		
+	}
+*/
 #endregion
 	
 #region Méthodes privées
@@ -569,7 +592,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		//Debug.Log("Création du terrain : "+type);
 		CreerMap(type);
 		CreerMap3D();
-		PlacerReines();
+		//PlacerReines();
 	}
 #endregion
 	

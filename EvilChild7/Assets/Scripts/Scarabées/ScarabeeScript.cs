@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -27,7 +27,7 @@ public class ScarabeeScript : MonoBehaviour {
 	/// Les points de vie
 	/// </summary>
 	// FIXME Voir avec l'IA
-	private int pointsDeVie;
+	private int chrono;
 #endregion
 
 #region Constantes privées
@@ -43,6 +43,11 @@ public class ScarabeeScript : MonoBehaviour {
 	/// </summary>
 	[HideInInspector]
 	public TypesCamps camps;
+
+	/// <summary>
+	/// L'IA
+	/// </summary>
+	public IAappel iaBestiole;
 #endregion
 
 
@@ -55,7 +60,7 @@ public class ScarabeeScript : MonoBehaviour {
 	/// Appliquer le vieillissemnt sur le scarabée
 	/// </summary>
 	private void Vieillir(){
-		pointsDeVie -= 100;
+		chrono -= 100;
 	}
 
 	/// <summary>
@@ -78,8 +83,8 @@ public class ScarabeeScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		camps = TypesCamps.AUCUN;
-		pointsDeVie = NOMBRE_CYCLES_VIEILLISSEMENT;
-		pointsDeVie = 2500; // FIXME Voir avec l'IA
+		chrono = NOMBRE_CYCLES_VIEILLISSEMENT;
+		chrono = 2500; // FIXME Voir avec l'IA
 		InvokeRepeating("Vieillir", 1 /* départ*/, 1 /*intervalle en secondes*/);
 	}
 
@@ -87,7 +92,7 @@ public class ScarabeeScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity à chaque frame.
 	/// </summary>
 	void Update(){
-		if ( pointsDeVie <= 0 ){ // FIXME Voir avec l'IA
+		if ( chrono <= 0 ){ // FIXME Voir avec l'IA
 			Mourrir();
 		}
 	}

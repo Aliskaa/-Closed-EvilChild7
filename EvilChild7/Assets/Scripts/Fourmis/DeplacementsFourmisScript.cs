@@ -73,9 +73,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	private int vitesseAppliquee;
 
 	/// <summary>
-	/// La distance pour aller du centre d'une case à un autre
+	/// La distance pour aller du centre d'une case à un autre, égale à 5
 	/// </summary>
-	private const int DISTANCE_CASE = 5;
+	public static /*const*/ int DISTANCE_CASE = 5;
 
 	/// <summary>
 	/// Le nombre de case maximum que peut parcourir la fourmi en une traite
