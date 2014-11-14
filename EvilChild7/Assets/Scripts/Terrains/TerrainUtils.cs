@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.4.0
+/// PY Lapersonne - Version 1.5.0
 /// </remarks>
 
 using UnityEngine;
@@ -128,6 +128,17 @@ public static class TerrainUtils {
 	/// </summary>
 	public static void SupprimerHexagones(){
 		hexagones = new List<HexagoneInfo>();
+	}
+
+	/// <summary>
+	/// Retourne le ième hexagone, null si positon <= 0 ou  position > nombres total d'hexagones
+	/// </summary>
+	/// <returns>Le <see cref="HexagoneInfo"/>.</returns>
+	/// <param name="position">Position : entre 0 et hexagones.Count()-1</param>
+	public static HexagoneInfo GetHexagoneAt( int position ){
+		int indice = position - 1;
+		if (indice < 0 || indice >= hexagones.Count) return null;
+		return hexagones[indice];
 	}
 
 	/// <summary>

@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.6.0
+/// PY Lapersonne - Version 1.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -105,9 +105,9 @@ public class TerrainManagerScript : MonoBehaviour {
 	public TypesMaps type;
 
 	/// <summary>
-	/// Flag indiquant s'il faut masquer les hexagones ou non
+	/// Flag indiquant s'il faut afficher les hexagones ou non
 	/// </summary>
-	public bool masquerHexagones;
+	public bool afficherHexagones;
 #endregion
 
 #region Attributs package
@@ -143,7 +143,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		Texture2D texture;
 		switch (type) {
 			case TypesTerrains.SABLE:
-				texture = (masquerHexagones ? textureTerrainSable : textureTerrainSableHexagones);
+				texture = (afficherHexagones ? textureTerrainSable : textureTerrainSableHexagones);
 				break;
 			case TypesTerrains.EAU:
 				texture = textureTerrainEau;
@@ -505,6 +505,59 @@ public class TerrainManagerScript : MonoBehaviour {
 			scriptInvoc.InvoquerObjet(Invocations.DEBUG_OBJECT, h.positionLocaleSurTerrain);
 		}
 	}
+
+	/// <summary>
+	/// Va placer les reines sur le terrain
+	/// </summary>
+	private void PlacerReines(){
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		HexagoneInfo h;
+		switch (type){
+			case TypesMaps.NIVEAU_1:
+				// Reine blanche dans le 37ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(37);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+				// Reine noire dans le 360ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(360);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+				break;
+			case TypesMaps.NIVEAU_2:
+				// Reine blanche dans le 37ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(37);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+				// Reine noire dans le 360ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(360);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+				break;
+			case TypesMaps.NIVEAU_3:
+				// Reine blanche dans le 37ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(37);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+				// Reine noire dans le 360ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(360);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+				break;
+			case TypesMaps.NIVEAU_4:
+				// Reine blanche dans le 61ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(61);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+				// Reine noire dans le 384ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(384);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+				break;
+			case TypesMaps.RANDOM:
+				// Reine blanche en random
+				int caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
+				h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+				// Reine noire en random
+				caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
+				h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+				break;
+		}
+	}
 #endregion
 
 #region Méthodes package
@@ -516,6 +569,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		//Debug.Log("Création du terrain : "+type);
 		CreerMap(type);
 		CreerMap3D();
+		PlacerReines();
 	}
 #endregion
 	

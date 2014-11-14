@@ -512,11 +512,13 @@ Commentaire...:
 	Tache 110 terminée : Ajout d'une méthode pour créer une case d'eau;
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  45;
+Date..........:  14/11/2014 10h49;
 Auteur........:  py;
 Commentaire...:
-	;
+	Tache 111 terminée : Placement automatique des reines
+	Ajout d'une méthode pour choper un hexagone donné
+	Mise à jour prefab des reines (blocages en X/Y/Z rotation/position);
 
 __________________________________
 
