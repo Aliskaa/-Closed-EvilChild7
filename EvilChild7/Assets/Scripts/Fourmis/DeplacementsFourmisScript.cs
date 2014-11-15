@@ -59,9 +59,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// L'orientation courante de l'objet
 	/// </summary>
-	// FIXME pas très propre
 	public TypesRotations orientationCourante;
-
+	
 	/// <summary>
 	/// Flag indiquant que la fourmis doit se stopper à cause d'une collision
 	/// </summary>
@@ -225,7 +224,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
 
 			
-			Debug.Log ("Déambuler");
+	//		Debug.Log ("Déambuler");
 		//	Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 		//	Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
 
@@ -235,7 +234,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				enMouvement = false;
 				objectifAtteint = true;
 				Avancer (-1);
-				Debug.Log("Stop !!");
+				//Debug.Log("Stop !!");
 			}
 
 		}

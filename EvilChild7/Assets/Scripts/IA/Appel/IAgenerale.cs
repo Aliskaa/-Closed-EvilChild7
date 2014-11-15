@@ -25,7 +25,7 @@ public class IAgenerale:IAabstraite
 		maReaction = reaction;
 	}
 	override public void signaler(List<Cible> objetsReperes){
-
+		
 		if (attaque ()) {
 			attaquer (prioriser (attaquants));
 		} else {
@@ -33,10 +33,10 @@ public class IAgenerale:IAabstraite
 			List<Cible> ennemisEloignes = new List<Cible> ();
 			
 			foreach (Cible cible in objetsReperes) {
-				if ( cible.getObjet() != null ){
-					if (((IAabstraite)cible.getObjet()).getCamp()!=getCamp ()) {
-						if (cible.getDistance() <= 1) {
-							ennemisProches.Add ((IAabstraite)cible.getObjet());
+				if ( cible.getMonIAabstraite() != null ){
+					if (cible.getMonIAabstraite().getCamp()==getCamp ()) {
+						if (cible.getDistance() <= DeplacementsFourmisScript.DISTANCE_CASE) {
+							ennemisProches.Add (cible.getMonIAabstraite());
 						} else {
 							ennemisEloignes.Add (cible);
 						}
@@ -64,18 +64,23 @@ public class IAgenerale:IAabstraite
 	}
 	private IAabstraite prioriser(List<IAabstraite> mesEnnemis){
 		
+		List<IAabstraite> listeScarabees = new List<IAabstraite>();
 		List<IAabstraite> listeGenerales = new List<IAabstraite>();
 		List<IAabstraite> listeOuvrieres = new List<IAabstraite>();
 		List<IAabstraite> listeContremaitre = new List<IAabstraite>();
 		List<IAabstraite> listeSoldat = new List<IAabstraite>();
 		
 		foreach (IAabstraite cible in mesEnnemis) {
+			
 			if(cible.retourType() == TypesObjetsRencontres.SCARABEE){
-				return cible;
+				listeScarabees.Add(cible);
 			}
 			
 			if(this.monCamp == TypesCamps.BLANC){
 				
+				if(cible.retourType() == TypesObjetsRencontres.REINE_NOIRE){
+					return cible;
+				}
 				if(cible.retourType() == TypesObjetsRencontres.GENERALE_NOIRE){
 					listeGenerales.Add (cible);
 				}else if(cible.retourType() == TypesObjetsRencontres.COMBATTANTE_NOIRE){
@@ -86,6 +91,12 @@ public class IAgenerale:IAabstraite
 					listeOuvrieres.Add(cible);
 				}
 			}else{
+				
+				if(cible.retourType() == TypesObjetsRencontres.REINE_BLANCHE){
+					return cible;
+					
+				}
+				
 				if(cible.retourType() == TypesObjetsRencontres.GENERALE_BLANCHE){
 					listeGenerales.Add (cible);
 				}else if(cible.retourType() == TypesObjetsRencontres.COMBATTANTE_BLANCHE){
@@ -98,6 +109,9 @@ public class IAgenerale:IAabstraite
 			}
 		}
 		
+		if (listeScarabees.Count > 0) {
+			return listeScarabees[0];
+		} 
 		if (listeGenerales.Count > 0) {
 			return listeGenerales[0];
 		} 
@@ -107,28 +121,17 @@ public class IAgenerale:IAabstraite
 		if (listeContremaitre.Count > 0) {
 			return listeContremaitre[0];	
 		} 
-
 		return listeOuvrieres[0];
-	
+		
 	}
 	
-	override public void attaquer(IAabstraite ennemy){
+	/*override*/ public void attaquer(IAabstraite ennemy){
 		ennemy.ajouterAttaquant (this);
 		if (!victimes.Contains (ennemy)) {
 			victimes.Add (ennemy);
 		}
 		
-		// implémentation attauqe en groupe 
-		int compteurAllies = 0;
-		foreach (IAabstraite attaquant in ennemy.getAttaquants()){
-			if((attaquant.getCamp() != TypesCamps.AUCUN) && (attaquant != this)){
-				compteurAllies++;
-			}
-		}
-		int pvRestants = ennemy.getModele ().enleverPV (modele.getAttaque () + modele.getAttaque ()*compteurAllies);
-		if (pvRestants <= 0) {
-			ennemy.mort();
-		}
+		infligerDegats(ennemy);
 	}
 	
 	override public void mort(){
@@ -143,7 +146,7 @@ public class IAgenerale:IAabstraite
 		maReaction.mourir ();
 	}
 	
-	override public Modele getModele(){
+	override public EntiteApointsDeVie getModele(){
 		return this.modele;
 	}
 	
@@ -155,5 +158,17 @@ public class IAgenerale:IAabstraite
 		return this.monType;
 	}
 	
+	protected void infligerDegats(IAabstraite ennemy){
+		int compteurAllies = 0;
+		foreach (IAabstraite attaquant in ennemy.getAttaquants()){
+			if(attaquant.getCamp() == getCamp ()){
+				compteurAllies++;
+			}
+		}
+		int PVRestants = ennemy.getModele ().enleverPV (modele.getAttaque ()*compteurAllies);
+		if (PVRestants <= 0) {
+			ennemy.mort ();
+		}
+	}
+	
 }
-

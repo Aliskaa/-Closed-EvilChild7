@@ -134,39 +134,64 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <param name="nbCases">Nb cases.</param>
 	public void bouger(TypesAxes direction, int nbCases){
 		if (scriptDeplacement.objectifAtteint) {
-			Debug.Log ("bouger");
-			if ( scriptDeplacement.orientationCourante == TypesRotations.AUCUN ){
-				scriptDeplacement.FaireRotation (TypesRotations.RANDOM);
-			}
-			switch (direction) {
-				case TypesAxes.DEVANT:
-					scriptDeplacement.Avancer (nbCases);
+		
+			TypesRotations rotationCourante = scriptDeplacement.orientationCourante;
+			int indiceRotationCourante;
+			switch(rotationCourante){
+				case TypesRotations.NORD:
+					indiceRotationCourante = 1;
 					break;
-				case TypesAxes.DEVANT_DROITE:
-					scriptDeplacement.FaireRotation (TypesRotations.NORD_EST);
-					scriptDeplacement.Avancer (nbCases);
+				case TypesRotations.NORD_EST:
+					indiceRotationCourante = 2;
 					break;
-				case TypesAxes.DERRIERE_DROITE:
-					scriptDeplacement.FaireRotation (TypesRotations.SUD_EST);
-					scriptDeplacement.Avancer (nbCases);
+				case TypesRotations.SUD_EST:
+					indiceRotationCourante = 3;
 					break;
-				case TypesAxes.DERRIERE:
-					scriptDeplacement.FaireRotation (TypesRotations.SUD);
-					scriptDeplacement.Avancer (nbCases);
+				case TypesRotations.SUD:
+					indiceRotationCourante = 4;
 					break;
-				case TypesAxes.DERRIERE_GAUCHE:
-					scriptDeplacement.FaireRotation (TypesRotations.SUD_OUEST);
-					scriptDeplacement.Avancer (nbCases);
+				case TypesRotations.SUD_OUEST:
+					indiceRotationCourante = 5;
 					break;
-				case TypesAxes.DEVANT_GAUCHE:
-					scriptDeplacement.FaireRotation (TypesRotations.NORD_OUEST);
-					scriptDeplacement.Avancer (nbCases);
+				case TypesRotations.NORD_OUEST:
+					indiceRotationCourante = 6;
 					break;
 				default:
-					Debug.Log("Merde bouger");
+					indiceRotationCourante = 0;
 					break;
 			}
+			int nouvelleRotationInt = (indiceRotationCourante-1)+(int)direction;
+			nouvelleRotationInt = ( nouvelleRotationInt > 6 ? nouvelleRotationInt % 6 : nouvelleRotationInt);
+			TypesRotations nouvelleRotation;
+			switch(nouvelleRotationInt){
+				case 1:
+					nouvelleRotation = TypesRotations.NORD;
+					break;
+				case 2:
+					nouvelleRotation = TypesRotations.NORD_EST;
+					break;
+				case 3:
+					nouvelleRotation = TypesRotations.SUD_EST;
+					break;
+				case 4:
+					nouvelleRotation = TypesRotations.SUD;
+					break;
+				case 5:
+					nouvelleRotation = TypesRotations.SUD_OUEST;
+					break;
+				case 6:
+					nouvelleRotation = TypesRotations.NORD_OUEST;
+					break;
+				default:
+					nouvelleRotation = TypesRotations.AUCUN;
+					break;
+			}
+
+			scriptDeplacement.FaireRotation(nouvelleRotation);
+			scriptDeplacement.Avancer(nbCases);
+
 		}
+		
 	}
 
 	/// <summary>

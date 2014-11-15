@@ -529,10 +529,11 @@ Commentaire...:
 	Travail sur cablage avec l'IA [en cours]
 		- Ajout des fichiers
 		- Cablage code IA pour:
-			- combattante
+			- combattante, générale, contremaitre, ouvrière
 	Correction rayon des rayons de détections qui étaient trop bas
 	Correction du bout de bois : trigger pour le collider
 	Correction du signalement avec l'IAreaction
+	Suivi des phéromones
 
 __________________________________
 

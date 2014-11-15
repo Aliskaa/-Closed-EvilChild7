@@ -6,14 +6,14 @@ public class IAscarabee: IAabstraite
 	protected Scarabee modele;
 	protected IAreaction maReaction = null;
 	
-	public IAscarabee( IAreaction reaction ){
+	public IAscarabee(IAreaction reaction){
 		attaquants = new List<IAabstraite> ();
 		victimes = new List<IAabstraite> ();
 		modele = new Scarabee();
 		maReaction = reaction;
 	}
 	override public void signaler(List<Cible> objetsReperes){
-
+		
 		if (attaque()) {
 			attaquer (attaquants[0]);
 		} else {
@@ -21,10 +21,10 @@ public class IAscarabee: IAabstraite
 			List<Cible> ennemisEloignes = new List<Cible> ();
 			
 			foreach (Cible cible in objetsReperes) {
-				if ( cible.getObjet() != null ){
-					if (cible.getObjet() is IAabstraite && cible.getType()!=TypesObjetsRencontres.SCARABEE) {
-						if (cible.getDistance() <= 1) {
-							ennemisProches.Add ((IAabstraite)cible.getObjet ());
+				if ( cible.getMonIAabstraite() != null ){
+					if (cible.getType() != TypesObjetsRencontres.SCARABEE) {
+						if (cible.getDistance() <= DeplacementsFourmisScript.DISTANCE_CASE) {
+							ennemisProches.Add (cible.getMonIAabstraite());
 						} else {
 							ennemisEloignes.Add (cible);
 						}
@@ -51,7 +51,7 @@ public class IAscarabee: IAabstraite
 		maReaction.deambuler ();
 	}
 	
-	override public void attaquer(IAabstraite ennemy){
+	/*override*/ public void attaquer(IAabstraite ennemy){
 		ennemy.ajouterAttaquant (this);
 		if (!victimes.Contains (ennemy)) {
 			victimes.Add (ennemy);
@@ -74,7 +74,7 @@ public class IAscarabee: IAabstraite
 		maReaction.mourir ();
 	}
 	
-	override public Modele getModele(){
+	override public EntiteApointsDeVie getModele(){
 		return this.modele;
 	}
 	
@@ -86,5 +86,3 @@ public class IAscarabee: IAabstraite
 		return TypesObjetsRencontres.SCARABEE;
 	}
 }
-
-

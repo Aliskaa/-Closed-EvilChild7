@@ -56,13 +56,13 @@ public abstract class IAabstraite:IAappel{
 		var type = objectToCheck.GetType();
 		return type.GetMethod(methodName) != null;
 	}
-	
-	public abstract void attaquer (IAabstraite ennemy);
+
+	//public abstract void attaquer (IAabstraite ennemy);
 	
 	public abstract void mort();
 	
 	public abstract void signaler(List<Cible> objetsReperes);
-	public abstract Modele getModele();
+	public abstract EntiteApointsDeVie getModele();
 	public abstract TypesCamps getCamp();
 	public abstract TypesObjetsRencontres retourType();
 }

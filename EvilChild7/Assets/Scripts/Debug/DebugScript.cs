@@ -62,7 +62,10 @@ public class DebugScript : MonoBehaviour {
 			InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 
 			#region Debogage IA
-			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(85f, 0.1f, 95f));
+			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(85f, 0.1f, 95f));
+			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, new Vector3(85f, 0.1f, 95f));
+			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, new Vector3(85f, 0.1f, 95f));
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, new Vector3(85f, 0.1f, 95f));
 			#endregion
 
 		}
@@ -98,8 +101,12 @@ public class DebugScript : MonoBehaviour {
 				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
 				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
 				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
-				ios.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+				//ios.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
+				//ios.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
 				//ios.InvoquerObjet(Invocations.SCARABEE, click);
+				//ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
+				ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_BLANCHE, click);
 				#endregion 
 
 

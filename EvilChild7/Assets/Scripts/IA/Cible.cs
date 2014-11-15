@@ -3,23 +3,53 @@ using System.Collections;
 
 public class Cible{
 	float distance;
-	IAappel objet;
+	IAobjet iaObject;
 	TypesObjetsRencontres typeObjet;
 	TypesAxes direction;
-	
+	GameObject gameObjectCible;
+
 	public Cible(float distance, IAappel objet, TypesAxes direction, TypesObjetsRencontres typeObjet){
 		this.distance = distance;
-		this.objet = objet;
+		this.iaObject = objet;
 		this.direction = direction;
 		this.typeObjet = typeObjet;
+		gameObjectCible = null;
+	}
+
+	public Cible(float distance, GameObject objet, TypesAxes direction, TypesObjetsRencontres typeObjet){
+		this.distance = distance;
+		this.iaObject = null;
+		this.direction = direction;
+		this.typeObjet = typeObjet;
+		gameObjectCible = objet;
+
 	}
 	
 	public float getDistance(){
 		return this.distance;
 	}
 	
-	public IAappel getObjet(){
-		return this.objet;
+	public IAappel getMonIAappel(){
+		IAappel tmp = null;
+		tmp = iaObject as IAappel;
+		return tmp;
+		
+	}
+	
+	public IAobjet getMonIAobjet(){
+		return this.iaObject;
+		
+	}
+	
+	public IAabstraite getMonIAabstraite(){
+		IAabstraite tmp = null;
+		tmp = iaObject as IAabstraite;
+		return tmp;
+		
+	}
+
+	public GameObject getGameObject(){
+		return gameObjectCible;
 	}
 	
 	public TypesObjetsRencontres getType(){

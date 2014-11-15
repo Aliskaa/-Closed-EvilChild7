@@ -131,6 +131,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 			Debug.DrawLine(charles.origin, hit.point, debugRayColor);
 			int codeObjet = (int) objetSurChemin;
 			IAappel iaObjet = null;
+			Cible objetRepere = null;
 			// L'objet vu est une fourmi
 			if ( (codeObjet >= 20 && codeObjet <= 24) || (codeObjet >= 30 && codeObjet <= 34) ){
 				FourmiScript fs = objetRencontre.GetComponent<FourmiScript>();
@@ -139,8 +140,12 @@ public class DetectionFourmisScript : MonoBehaviour {
 			} else if ( codeObjet == 40 ){
 				ScarabeeScript ss = objetRencontre.GetComponent<ScarabeeScript>();
 				iaObjet = ss.iaBestiole;
+			} else if ( codeObjet == 25 || codeObjet == 26 || codeObjet == 35 || codeObjet == 36 ){
+				objetRepere = new Cible(hit.distance, objetRencontre, direction, objetSurChemin);
+				objetsDetectes.Add(objetRepere);
+				return;
 			}
-			Cible objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
+			objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
 			objetsDetectes.Add(objetRepere);
 		}/* else {
 			Debug.Log("Rien de détecté");
@@ -166,6 +171,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 			aTartes.signaler(objetsDetectes);
 			objetsDetectes = new List<Cible> ();
 		} else {
+			//Debug.Log("Rien de détecté");
 			objetsDetectes = new List<Cible> ();
 			aTartes.signaler(objetsDetectes);
 		}
