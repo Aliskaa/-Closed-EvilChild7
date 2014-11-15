@@ -41,14 +41,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Flag indiquant que l'objet est en mouvement ou non
 	/// Flag mis à jour régulièrement.
 	/// </summary>
-	private bool enMouvement;
+	public bool enMouvement;
 	
 	/// <summary>
 	/// Flag indiquant que l'objectif, i.e. la position de la case à atteindre
 	/// a été atteint.
 	/// Flag mis à jour régulièrement
 	/// </summary>
-	private bool objectifAtteint;
+	public bool objectifAtteint;
 
 	/// <summary>
 	/// La position que doit atteindre l'objet, i.e. le centre d'une case.
@@ -60,7 +60,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// L'orientation courante de l'objet
 	/// </summary>
 	// FIXME pas très propre
-	private TypesRotations orientationCourante;
+	public TypesRotations orientationCourante;
 
 	/// <summary>
 	/// Flag indiquant que la fourmis doit se stopper à cause d'une collision
@@ -93,6 +93,12 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Le type de fourmi auquel doit s'appliquer le script
 	/// </summary>
 	public TypesFourmis typeFourmi;
+
+	/// <summary>
+	/// Flag indiquant qu'il faut déposer des phéromones
+	/// </summary>
+	[HideInInspector]
+	public bool activerDepotPheromone;
 #endregion
 
 
@@ -158,7 +164,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// elles peuvent etre récupérées par transform.rotation.eulerAngles.
 	/// </summary>
 	/// <param name="rotation">Le sens de rotation</param>
-	private void FaireRotation( TypesRotations rotation ){
+	//private void FaireRotation( TypesRotations rotation ){
+	public void FaireRotation( TypesRotations rotation ){
 		TypesRotations r;
 		if (rotation == TypesRotations.RANDOM){
 			// Définition de la rotation : plage de valeur définie dans[-135;+135]
@@ -195,6 +202,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				transform.Rotate(0,-45,0);
 				break;
 			case TypesRotations.AUCUN:
+				Debug.Log("Merde rotation");
 				break;
 			default:
 				Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
@@ -209,17 +217,28 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Pour ce faire, va faire une rotation ou non, et va faire avancer la fourmis
 	/// d'un certain nombre de case.
 	/// </summary>
-	private void Deambuler(){
+	//private void Deambuler(){
+	public void Deambuler(){
 
-		stopCollision = false;
+		if (enMouvement && !objectifAtteint) {
+			stopCollision = false;
+			transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
 
-		transform.position = Vector3.Lerp(transform.position, positionAatteindre, COEFF_VITESSE*vitesseAppliquee);
+			
+			Debug.Log ("Déambuler");
+		//	Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
+		//	Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
 
-		if ( Vector3.Distance(transform.position, positionAatteindre) <= 1 ){
-			enMouvement = false;
-			objectifAtteint = true;
+			//if (Vector3.Distance (transform.position, positionAatteindre) < 1	) {
+			if ( Mathf.Abs(transform.position.x-positionAatteindre.x) < 1
+			    && Mathf.Abs(transform.position.z-positionAatteindre.z) < 1 ) {
+				enMouvement = false;
+				objectifAtteint = true;
+				Avancer (-1);
+				Debug.Log("Stop !!");
+			}
+
 		}
-		
 /*
 /////////////////////////
 // CODE OK, merci de ne pas supprimer pour le moment (Pierre-Yves)
@@ -268,38 +287,47 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			case TypesFourmis.COMBATTANTE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
 				typePheromone = Invocations.RIEN;
+				activerDepotPheromone = false;
 				break;
 			case TypesFourmis.CONTREMAITRE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
 				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_NOIRE;
+				activerDepotPheromone = true;
 				break;
 			case TypesFourmis.GENERALE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
 				typePheromone = Invocations.RIEN;
+				activerDepotPheromone = false;
 				break;
 			case TypesFourmis.OUVRIERE_NOIRE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
 				typePheromone = Invocations.PHEROMONES_OUVRIERE_NOIRE;
+				activerDepotPheromone = false;
 				break;
 			case TypesFourmis.COMBATTANTE_BLANCHE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
 				typePheromone = Invocations.RIEN;
+				activerDepotPheromone = false;
 				break;
 			case TypesFourmis.CONTREMAITRE_BLANCHE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
 				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_BLANCHE;
+				activerDepotPheromone = true;	
 				break;
 			case TypesFourmis.GENERALE_BLANCHE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
 				typePheromone = Invocations.RIEN;	
+				activerDepotPheromone = false;
 				break;
 			case TypesFourmis.OUVRIERE_BLANCHE:
 				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
 				typePheromone = Invocations.PHEROMONES_OUVRIERE_BLANCHE;
+				activerDepotPheromone = false;	
 				break;
 			default:
 				vitesseAppliquee = 0;
 				typePheromone = Invocations.RIEN;
+				activerDepotPheromone = false;	
 				break;
 		}
 		//Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
@@ -321,7 +349,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		enMouvement = false;
-		objectifAtteint = false;
+		objectifAtteint = true;
 		stopCollision = false;
 		InitialiserVariablesFourmi();
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
@@ -332,6 +360,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
+/*
+// CODE OK
+
 		// A chaque frame, continuer la déambulation selon les flags
 		if (enMouvement && !objectifAtteint){
 			//Debug.Log("Déambulation");
@@ -349,6 +380,10 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				//Debug.Log("BAAAAAAAAAAAAAAAAAAAAM");
 			}
 		}
+		
+*/
+		Deambuler();
+
 	}
 #endregion
 
@@ -403,7 +438,12 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
 				break;
 			case TypesRotations.AUCUN:
-				// TODO
+				//Debug.Log("Aucune rotation : pas d'objectif");
+				Debug.Log("Merde avancer");
+				//FIXME
+				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+				positionAatteindre.y = 0;
+				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
 				break;
 			default:
 				Debug.LogError("ERREUR: Valeur pas gérée dans switch : "+orientationCourante);
@@ -414,7 +454,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
 
-		DeposerPheromones(transform.localPosition);
+		if ( activerDepotPheromone ) DeposerPheromones(transform.localPosition);
 
 		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
 

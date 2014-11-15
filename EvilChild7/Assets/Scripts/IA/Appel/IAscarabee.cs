@@ -6,16 +6,14 @@ public class IAscarabee: IAabstraite
 	protected Scarabee modele;
 	protected IAreaction maReaction = null;
 	
-	public IAscarabee(){
+	public IAscarabee( IAreaction reaction ){
 		attaquants = new List<IAabstraite> ();
 		victimes = new List<IAabstraite> ();
 		modele = new Scarabee();
+		maReaction = reaction;
 	}
-	override public void signaler(IAreaction moi, List<Cible> objetsReperes){
-		
-		if (maReaction == null) {
-			maReaction = moi;
-		}
+	override public void signaler(List<Cible> objetsReperes){
+
 		if (attaque()) {
 			attaquer (attaquants[0]);
 		} else {

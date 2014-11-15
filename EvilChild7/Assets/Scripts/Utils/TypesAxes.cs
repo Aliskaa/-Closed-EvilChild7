@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.1
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -14,45 +14,49 @@ using UnityEngine;
 /// Enumeration pour lister les différents types d'axe de visée pour par exemple
 /// détecter des obstacles
 /// </summary>
-public enum TypesAxes {
+public enum TypesAxes : int{
+	/// <summary>
+	/// Vaeur nulle
+	/// </summary>
+	AUCUN = 0,
 	/// <summary>
 	/// Détection par devant
 	/// </summary>
-	DEVANT,
+	DEVANT = 1,
 	/// <summary>
 	/// Détection par derrière
 	/// </summary>
-	DERRIERE,
+	DERRIERE = 2,
 	/// <summary>
 	/// Détection en haut à gauche.
 	/// </summary>
-	DEVANT_GAUCHE,
+	DEVANT_GAUCHE = 3,
 	/// <summary>
 	/// Détection en bas à gauche.
 	/// </summary>
-	DERRIERE_GAUCHE,
+	DERRIERE_GAUCHE = 4,
 	/// <summary>
 	/// Détection en haut à droite.
 	/// </summary>
-	DEVANT_DROITE,
+	DEVANT_DROITE = 5,
 	/// <summary>
 	/// Détection en bas à droite.
 	/// </summary>
-	DERRIERE_DROITE,
+	DERRIERE_DROITE = 6,
 	/// <summary>
 	/// Détection au dessus
 	/// </summary>
-	DESSUS,
+	DESSUS = 7,
 	/// <summary>
 	/// Détection en dessous
 	/// </summary>
-	DESSOUS,
+	DESSOUS = 8,
 	/// <summary>
 	/// Détection à gauche. A éviter.
 	/// </summary>
-	GAUCHE,
+	GAUCHE = 9,
 	/// <summary>
 	/// Détection à droite. A éviter.
 	/// </summary>
-	DROITE
+	DROITE = 10
 }

@@ -22,11 +22,9 @@ public class IAcontremaitre: IAabstraite
 		}
 		maReaction = reaction;
 	}
-	override public void signaler(IAreaction moi, List<Cible> objetsReperes){
+	override public void signaler(List<Cible> objetsReperes){
 		
-		if (maReaction == null) {
-			maReaction = moi;
-		}
+
 		if(attaque()) {
 			
 			attaquer(getAttaquantAt(0));
@@ -54,7 +52,7 @@ public class IAcontremaitre: IAabstraite
 						
 					}
 				}else{
-					maReaction.poserPheromones();
+					maReaction.poserPheromones(true);
 					deambuler();
 				}
 			}

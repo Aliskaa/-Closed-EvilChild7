@@ -528,11 +528,45 @@ Auteur........:  py;
 Commentaire...:
 	Travail sur cablage avec l'IA [en cours]
 		- Ajout des fichiers
-		- Cablage code IA pour les fourmis
-	Correction rayon des rayons de détections qui étaient trop bas;
+		- Cablage code IA pour:
+			- combattante
+	Correction rayon des rayons de détections qui étaient trop bas
+	Correction du bout de bois : trigger pour le collider
+	Correction du signalement avec l'IAreaction
 
 __________________________________
 
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;

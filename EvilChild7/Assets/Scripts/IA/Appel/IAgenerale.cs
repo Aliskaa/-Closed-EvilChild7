@@ -24,11 +24,8 @@ public class IAgenerale:IAabstraite
 		}
 		maReaction = reaction;
 	}
-	override public void signaler(IAreaction moi, List<Cible> objetsReperes){
-		
-		if (maReaction == null) {
-			maReaction = moi;
-		}
+	override public void signaler(List<Cible> objetsReperes){
+
 		if (attaque ()) {
 			attaquer (prioriser (attaquants));
 		} else {

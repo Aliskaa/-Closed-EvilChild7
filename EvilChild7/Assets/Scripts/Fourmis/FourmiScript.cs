@@ -21,6 +21,14 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/* ********* *
 	 * Attributs *
 	 * ********* */
+
+#region Attributés privés
+	/// <summary>
+	/// Une référence vers le script de déplacement
+	/// </summary>
+	private DeplacementsFourmisScript scriptDeplacement;
+#endregion
+
 #region Attributs publics
 	/// <summary>
 	/// Le camps de la fourmi qui sortira de l'oeuf
@@ -68,6 +76,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	void Awake(){
 		IAreaction reaction = (IAreaction) this;
 		DeplacementsFourmisScript dfs = gameObject.GetComponent<DeplacementsFourmisScript>();
+		scriptDeplacement = dfs;
 		TypesFourmis tf = dfs.typeFourmi;
 		switch (tf) {
 			case TypesFourmis.COMBATTANTE_BLANCHE:
@@ -124,14 +133,50 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <param name="direction">Direction.</param>
 	/// <param name="nbCases">Nb cases.</param>
 	public void bouger(TypesAxes direction, int nbCases){
-		Debug.Log("bouger");
+		if (scriptDeplacement.objectifAtteint) {
+			Debug.Log ("bouger");
+			if ( scriptDeplacement.orientationCourante == TypesRotations.AUCUN ){
+				scriptDeplacement.FaireRotation (TypesRotations.RANDOM);
+			}
+			switch (direction) {
+				case TypesAxes.DEVANT:
+					scriptDeplacement.Avancer (nbCases);
+					break;
+				case TypesAxes.DEVANT_DROITE:
+					scriptDeplacement.FaireRotation (TypesRotations.NORD_EST);
+					scriptDeplacement.Avancer (nbCases);
+					break;
+				case TypesAxes.DERRIERE_DROITE:
+					scriptDeplacement.FaireRotation (TypesRotations.SUD_EST);
+					scriptDeplacement.Avancer (nbCases);
+					break;
+				case TypesAxes.DERRIERE:
+					scriptDeplacement.FaireRotation (TypesRotations.SUD);
+					scriptDeplacement.Avancer (nbCases);
+					break;
+				case TypesAxes.DERRIERE_GAUCHE:
+					scriptDeplacement.FaireRotation (TypesRotations.SUD_OUEST);
+					scriptDeplacement.Avancer (nbCases);
+					break;
+				case TypesAxes.DEVANT_GAUCHE:
+					scriptDeplacement.FaireRotation (TypesRotations.NORD_OUEST);
+					scriptDeplacement.Avancer (nbCases);
+					break;
+				default:
+					Debug.Log("Merde bouger");
+					break;
+			}
+		}
 	}
 
 	/// <summary>
 	/// Deambuler this instance.
 	/// </summary>
 	public void deambuler(){
-		Debug.Log("deambuler");
+		//Debug.Log("deambuler");
+		//scriptDeplacement.Deambuler();
+		int axe = Random.Range(1, 6);
+		bouger ((TypesAxes)axe, 1);
 	}
 
 	/// <summary>
@@ -151,8 +196,9 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <summary>
 	/// Posers the pheromones.
 	/// </summary>
-	public void poserPheromones(){
-		Debug.Log("poserPheromones");
+	public void poserPheromones( bool activation ){
+		//Debug.Log("poserPheromones");
+		scriptDeplacement.activerDepotPheromone = activation;
 	}
 #endregion
 

@@ -7,6 +7,6 @@ public interface IAreaction{
 	void deambuler();
 	void mourir();
 	void rentrerBase();
-	void poserPheromones();
+	void poserPheromones( bool activation );
 	
 }

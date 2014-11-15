@@ -61,7 +61,7 @@ public abstract class IAabstraite:IAappel{
 	
 	public abstract void mort();
 	
-	public abstract void signaler(IAreaction moi, List<Cible> objetsReperes);
+	public abstract void signaler(List<Cible> objetsReperes);
 	public abstract Modele getModele();
 	public abstract TypesCamps getCamp();
 	public abstract TypesObjetsRencontres retourType();

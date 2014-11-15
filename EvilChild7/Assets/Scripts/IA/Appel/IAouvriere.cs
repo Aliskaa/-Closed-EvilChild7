@@ -22,11 +22,8 @@ public class IAouvriere: IAabstraite
 		}
 		maReaction = reaction;
 	}
-	override public void signaler(IAreaction moi, List<Cible> objetsReperes){
-		
-		if (maReaction == null) {
-			maReaction = moi;
-		}
+	override public void signaler(List<Cible> objetsReperes){
+
 		if(attaque()) {
 			
 			attaquer(getAttaquantAt(0));
@@ -36,10 +33,12 @@ public class IAouvriere: IAabstraite
 			if (modele.transporteNourriture()) {
 				
 				rentrerBase();
-				maReaction.poserPheromones();
+				maReaction.poserPheromones(true);
 				
 			}else{
-				
+
+				maReaction.poserPheromones(false);
+
 				Cible objetNourriture = repererNourriture(objetsReperes);
 				
 				if(objetNourriture != null){

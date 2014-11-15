@@ -24,11 +24,8 @@ public class IAsoldat:IAabstraite
 		}
 		maReaction = reaction;
 	}
-	override public void signaler(IAreaction moi, List<Cible> objetsReperes){
-		
-		if (maReaction == null) {
-			maReaction = moi;
-		}
+	override public void signaler(List<Cible> objetsReperes){
+
 		if (attaque ()) {
 			attaquer (prioriser (attaquants));
 		} else {
@@ -53,7 +50,8 @@ public class IAsoldat:IAabstraite
 			} else if (ennemisEloignes.Count > 0) {
 				bouger (ennemisEloignes [0].getDirection());
 			} else {
-				maReaction.deambuler ();
+				//maReaction.bouger(TypesAxes.DEVANT, 1);///////////////////////:
+				maReaction.deambuler();
 			}
 		}
 	}
@@ -115,6 +113,7 @@ public class IAsoldat:IAabstraite
 	}
 	
 	override public void attaquer(IAabstraite ennemy){
+
 		ennemy.ajouterAttaquant (this);
 		if (!victimes.Contains (ennemy)) {
 			victimes.Add (ennemy);

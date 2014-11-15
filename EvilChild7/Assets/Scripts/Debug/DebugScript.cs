@@ -61,8 +61,10 @@ public class DebugScript : MonoBehaviour {
 			GameObject bacAsable = GameObject.Find("Bac à sable");
 			InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 
+			#region Debogage IA
 			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(85f, 0.1f, 95f));
-		
+			#endregion
+
 		}
 
 
@@ -79,13 +81,28 @@ public class DebugScript : MonoBehaviour {
 				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
 				//tms.ConvertirCaseEau(click);
+
+				#region Debogage IA
 				InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
 				//ios.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
 				//ios.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
 				//ios.InvoquerObjet(Invocations.CAILLOU, click);
 				//ios.InvoquerObjet(Invocations.BONBON_MURE, click);
+				//ios.InvoquerObjet(Invocations.BONBON_ANGLAIS_BLEU, click);
+				//ios.InvoquerObjet(Invocations.BONBON_ANGLAIS_ROSE, click);
+				//ios.InvoquerObjet(Invocations.BONBON_ORANGE, click);
+				//ios.InvoquerObjet(Invocations.BONBON_VERT, click);
+				//ios.InvoquerObjet(Invocations.BONBON_ROSE, click);
 				//ios.InvoquerObjet(Invocations.OEUF_FOURMI, click);
-				ios.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
+				//ios.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
+				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
+				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
+				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
+				ios.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+				//ios.InvoquerObjet(Invocations.SCARABEE, click);
+				#endregion 
+
+
 				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
 			}
 		}

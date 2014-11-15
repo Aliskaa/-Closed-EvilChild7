@@ -153,19 +153,21 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Vide la liste stockant ces objets une fois l'IA avertie.
 	/// </summary>
 	private void SignalerDetections(){
+		FourmiScript fs = gameObject.GetComponent<FourmiScript>();
+		IAappel aTartes = fs.iaBestiole;
+		IAreaction meMyselfAndI = (IAreaction) fs;
 		if (objetsDetectes.Count > 0) {
 			System.Text.StringBuilder sb = new System.Text.StringBuilder ();
 			sb.Append("Objets detectés :\n");
-			foreach ( Cible c in objetsDetectes ){
-				sb.Append("\t").Append(c).Append("\n");
+			foreach (Cible c in objetsDetectes) {
+				sb.Append ("\t").Append (c).Append ("\n");
 			}
 			//Debug.Log(sb.ToString());
-			// TODO Pousser la liste à l'IA afin qu'elle soit avertie
-			FourmiScript fs = gameObject.GetComponent<FourmiScript>();
-			IAappel aTartes = fs.iaBestiole;
-			IAreaction meMyselfAndI = (IAreaction) fs;
-			aTartes.signaler(meMyselfAndI, objetsDetectes);
-			objetsDetectes = new List<Cible>();
+			aTartes.signaler(objetsDetectes);
+			objetsDetectes = new List<Cible> ();
+		} else {
+			objetsDetectes = new List<Cible> ();
+			aTartes.signaler(objetsDetectes);
 		}
 	}
 

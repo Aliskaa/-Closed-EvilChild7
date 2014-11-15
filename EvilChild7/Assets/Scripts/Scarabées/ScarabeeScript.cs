@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 /// <summary>
 /// Classe pour gérer les scarabées
 /// </summary>
-public class ScarabeeScript : MonoBehaviour {
+public class ScarabeeScript : MonoBehaviour, IAreaction {
 
 
 	/* ********* *
@@ -86,6 +86,8 @@ public class ScarabeeScript : MonoBehaviour {
 		chrono = NOMBRE_CYCLES_VIEILLISSEMENT;
 		chrono = 2500; // FIXME Voir avec l'IA
 		InvokeRepeating("Vieillir", 1 /* départ*/, 1 /*intervalle en secondes*/);
+		IAreaction reaction = (IAreaction) this;
+		iaBestiole = new IAscarabee(reaction);
 	}
 
 	/// <summary>
@@ -95,6 +97,46 @@ public class ScarabeeScript : MonoBehaviour {
 		if ( chrono <= 0 ){ // FIXME Voir avec l'IA
 			Mourrir();
 		}
+	}
+#endregion
+
+#region Méthodes publiques	
+	/// <summary>
+	/// Bouger the specified direction and nbCases.
+	/// </summary>
+	/// <param name="direction">Direction.</param>
+	/// <param name="nbCases">Nb cases.</param>
+	public void bouger(TypesAxes direction, int nbCases){
+		Debug.Log("bouger scarabée");
+	}
+	
+	/// <summary>
+	/// Deambuler this instance.
+	/// </summary>
+	public void deambuler(){
+		Debug.Log("deambuler scarabée");
+	}
+	
+	/// <summary>
+	/// Mourir this instance.
+	/// </summary>
+	public void mourir(){
+		Mourrir();
+	}
+	
+	/// <summary>
+	/// Rentrers the base.
+	/// </summary>
+	public void rentrerBase(){
+		Debug.Log("rentrerBase scarabée");
+	}
+	
+	/// <summary>
+	/// Posers the pheromones.
+	/// </summary>
+	public void poserPheromones( bool activation ){
+		Debug.Log("poserPheromones scarabée");
+		return;
 	}
 #endregion
 
