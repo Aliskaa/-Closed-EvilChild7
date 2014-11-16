@@ -1,12 +1,13 @@
 /// <summary>
 /// DebugScript.cs
+/// 
 /// Script pour faire du débogage, c'est à dire profiter
-/// des routines telles que Awake(), Update() ou autres piur faire des tests
+/// des routines telles que Awake(), Start(), Update() ou autres pour faire des tests
 /// sans squatter des scripts qui n'ont rien à voir.
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.1
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -33,13 +34,26 @@ public class DebugScript : MonoBehaviour {
 	private bool flagOKPop;
 #endregion
 
+
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
+#region Méthodes privées
+	/// <summary>
+	/// Vérifie si le terrain est rempli ou non
+	/// </summary>
+	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
+	private bool VerifierRemplissageTerrain(){
+		GameObject terrain = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		TerrainManagerScript tms = terrain.GetComponent<TerrainManagerScript>();
+		return ( tms != null ? tms.VerifierRemplissageTerrain() : false );
+	}
+#endregion
+
 #region Méthodes package
 	/// <summary>
-	/// 
+	/// Routine appellée automatiquement par Unity au réveil du script
 	/// </summary>
 	void Awake(){
 		terrainRempli = false;
@@ -72,7 +86,7 @@ public class DebugScript : MonoBehaviour {
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, new Vector3(85f, 0.1f, 95f));
-			//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+			//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, new Vector3(85f, 0.1f, 95f));
 			#endregion
 
@@ -128,18 +142,6 @@ public class DebugScript : MonoBehaviour {
 			}
 		}
 
-	}
-#endregion
-
-#region Méthodes privées
-	/// <summary>
-	/// Vérifie si le terrain est rempli ou non
-	/// </summary>
-	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
-	private bool VerifierRemplissageTerrain(){
-		GameObject terrain = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-		TerrainManagerScript tms = terrain.GetComponent<TerrainManagerScript>();
-		return ( tms != null ? tms.VerifierRemplissageTerrain() : false );
 	}
 #endregion
 

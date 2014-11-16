@@ -23,8 +23,9 @@ public class NourrituresScript : MonoBehaviour, IAreaction {
 
 #region Attributs publics
 	/// <summary>
-	///
+	/// Une référence vers l'IA gérant la nourriture
 	/// </summary>
+	[HideInInspector]
 	public IAobjet iaNourriture;
 #endregion
 
@@ -41,39 +42,42 @@ public class NourrituresScript : MonoBehaviour, IAreaction {
 	}
 #endregion
 
-#region Méthodes publics
+#region Méthodes publics venant de IAreaction
 	/// <summary>
-	/// Bouger the specified direction and nbCases.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
-	/// <param name="direction">Direction.</param>
-	/// <param name="nbCases">Nb cases.</param>
 	public void bouger(TypesAxes direction, int nbCases){
 		return;		
 	}
 	
 	/// <summary>
-	/// Deambuler this instance.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public TypesAxes deambuler(){
 		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
-	/// Mourir this instance.
+	/// Fait disparaitre le bonbon
 	/// </summary>
 	public void mourir(){
-	//	Mourrir();
+		//	Disparition();
+		return;
 	}
 	
 	/// <summary>
-	/// Rentrers the base.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public TypesAxes rentrerBase(){
 		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
-	/// Posers the pheromones.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public void poserPheromones( bool activation ){
 		return;

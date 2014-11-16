@@ -1,11 +1,50 @@
 /// <summary>
-/// CheatCodeScript.cs
+/// CheatCodeScript.cs.
+/// Parfois les développeurs se font plaisir.
+/// Quand meme, l'easter egg et le cheat code sont des choses auxquelels tout bon dev qui se respecte
+/// doit songer !
 /// </summary>
 /// 
 /// <remarks>
 /// PY Lapersonne - Version 4.0.0
 /// </remarks>
 
+/*
+// Ce poro est d'accord !
+
+                                                                                                   
+                                                    `                                               
+                                                ```.`  `           ``                               
+                                             `..`     ``   `.-ooossyhs:-`                           
+                        ``             ::.```               :/+hh/:+yosh+-`                         
+                   ````---.           `+.`                  ./sdo/odysyysyy`                        
+                  `:::-----           `                     `/ydhhhssossyhhs:`                      
+                   .:::---`         ``                       `.so//:::--:::-::.                     
+                    ``...          `           ``.``         `..--.`    ``````...`                  
+                                 -`           `+sy/-.                         `..:-                 
+                                ``            .dhNd:-.                          `.::                
+                                              `syyy:-.`                           `::               
+                                               `.--..`                             `+:              
+                              `                         `.`                         .+.             
+                             `                           .-`                         `-.`           
+                            ``-                        `.`..``                        `.-.          
+                            ``.`-`   ` `-    --```  ````....``                         .:`          
+                              `-/-` `:`-/-```-::---`----.```                          ``-           
+                               +-..`.`..:.......---:+--.`                          ```-/.           
+                               /.```````-````````.-:+..``                      ```.--:/.            
+                               -.``   ``.````` ``.-:+.````                  ``....-:+o`             
+                               ..``    `````   ``.-:o..``    ```       ````..----//os:              
+                               `-.````````     ``.-//..`````.```  ```....---::/+++oo/               
+                                ./-`````````````.-:/....-----....----:://///++:.`.:+.               
+                                 `----.........----.``  `.:oyso:://++o+:--oo/.`` .-+`               
+                                      `.s+/osssddhsyy+/.`-+sdddsyo/+:.   :dh/+ys/+/:                
+                                        syoydhhdhdydmhdd/...//+++/-``````-oysydhs/+`                
+                                         ````..``:::::--``...............``..----.`                 
+                                         ``````````..```````........```````......```                
+                                              ```````````````````````````````````                   
+                                              ````````````````                                      
+                                              
+*/
 using UnityEngine;
 
 /// <summary>
@@ -71,7 +110,7 @@ public class CheatCodeScript : MonoBehaviour {
 	private void Bonbongedon(){
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		int nombreBonbons = UnityEngine.Random.Range (10, 50);
+		int nombreBonbons = UnityEngine.Random.Range(3, 10);
 		for ( int i = 0; i < nombreBonbons; i++ ){
 			int bonbon =  UnityEngine.Random.Range(50,55);
 			Invocations bonbonInvoc = (Invocations)bonbon;
@@ -112,7 +151,7 @@ public class CheatCodeScript : MonoBehaviour {
 	private void Allblacksgedon(){
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		int nombreFourmisNoires = UnityEngine.Random.Range (10, 50);
+		int nombreFourmisNoires = UnityEngine.Random.Range(3, 10);
 		for ( int i = 0; i < nombreFourmisNoires; i++ ){
 			int fourmi =  UnityEngine.Random.Range(20,23);
 			Invocations fourmiInvoc = (Invocations)fourmi;
@@ -132,7 +171,7 @@ public class CheatCodeScript : MonoBehaviour {
 	private void Eboulement(){
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		int nbCailloux = UnityEngine.Random.Range(20, 80);
+		int nbCailloux = UnityEngine.Random.Range(3, 10);
 		for ( int i = 0; i < nbCailloux; i++ ){
 			int caillou =  UnityEngine.Random.Range(11,13);
 			Invocations caillouInvoc = (Invocations)caillou;
@@ -147,13 +186,13 @@ public class CheatCodeScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Armageddon version fourmis rouges : des rouges tombent
+	/// Armageddon version fourmis blanches : des blanches tombent
 	/// du ciel et atterissent sur le terrain.
 	/// </summary>
-	private void Rednecksgedon(){
+	private void Ghostsgedon(){
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		int nombreFourmisRouges = UnityEngine.Random.Range (10, 50);
+		int nombreFourmisRouges = UnityEngine.Random.Range(3, 10);
 		for ( int i = 0; i < nombreFourmisRouges; i++ ){
 			int fourmi =  UnityEngine.Random.Range(30,23);
 			Invocations fourmiInvoc = (Invocations)fourmi;
@@ -208,7 +247,7 @@ public class CheatCodeScript : MonoBehaviour {
 	private void KinderSurpriz(){
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		int nombreOeufs = UnityEngine.Random.Range (10, 50);
+		int nombreOeufs = UnityEngine.Random.Range(2, 5);
 		for ( int i = 0; i < nombreOeufs; i++ ){
 			int randomX = UnityEngine.Random.Range(55,148);    // Limites en X du terrain
 			//int randomY = UnityEngine.Random.Range(15,100);    // Altitudes min et max
@@ -236,7 +275,7 @@ public class CheatCodeScript : MonoBehaviour {
 				} else if ( random == 9 ){
 					Allblacksgedon();
 				} else if ( random == 10 ){
-					Rednecksgedon();
+					Ghostsgedon();
 				} else {
 					Bonbongedon();
 				}

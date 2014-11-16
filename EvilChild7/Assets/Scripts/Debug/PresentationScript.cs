@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -31,13 +31,26 @@ public class PresentationScript : MonoBehaviour {
 	private bool flagOKPop;
 #endregion
 
+
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 
+#region Méthodes privées
+	/// <summary>
+	/// Vérifie si le terrain est rempli ou non
+	/// </summary>
+	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
+	private bool VerifierRemplissageTerrain(){
+		GameObject terrain = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		TerrainManagerScript tms = terrain.GetComponent<TerrainManagerScript>();
+		return ( tms != null ? tms.VerifierRemplissageTerrain() : false );
+	}
+#endregion
+
 #region Méthodes package
 	/// <summary>
-	/// 
+	/// Routine appellée automatiquement par Unity au réveil du script
 	/// </summary>
 	void Awake(){
 		terrainRempli = false;
@@ -109,18 +122,6 @@ public class PresentationScript : MonoBehaviour {
 
 		}
 
-	}
-#endregion
-
-#region Méthodes privées
-	/// <summary>
-	/// Vérifie si le terrain est rempli ou non
-	/// </summary>
-	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
-	private bool VerifierRemplissageTerrain(){
-		GameObject terrain = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-		TerrainManagerScript tms = terrain.GetComponent<TerrainManagerScript>();
-		return ( tms != null ? tms.VerifierRemplissageTerrain() : false );
 	}
 #endregion
 

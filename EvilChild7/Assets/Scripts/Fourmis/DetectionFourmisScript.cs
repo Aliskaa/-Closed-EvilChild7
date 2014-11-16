@@ -38,8 +38,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// </summary>
 	private int viseeAppliquee;
 #endregion
-
-
+	
 #region Constantes privées
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre
@@ -122,41 +121,86 @@ public class DetectionFourmisScript : MonoBehaviour {
 		Ray charles = new Ray(positionRayon, directionRayon);
 		RaycastHit hit;
 
+		/*
+		 * Détection en lançant un rayon calculant précédemment en fonction d'une direction
+		 */
 		//if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee*30) ){ // DEBUG
 		if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) ){
+
+			/*
+			 * Etape 1 : Récupération des données de l'objet repéré
+			 */
 			GameObject objetRencontre = hit.transform.gameObject;
 			string nomObjetProche = objetRencontre.name;
 			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);
 			//Debug.Log("Détecté : "+objetSurChemin);
+
 			Debug.DrawLine(charles.origin, hit.point, debugRayColor);
+
 			int codeObjet = (int) objetSurChemin;
 			IAobjet iaObjet = null;
 			Cible objetRepere = null;
+
+			/*
+			 * Etape 2 : Récuépration d'autres donénes utiles en fonction de l'objet repéré.
+			 * Ces données utiles seront à transmettre à l'IA
+			 */
+
 			// L'objet vu est une fourmi
-			if ( (codeObjet >= 20 && codeObjet <= 23) || (codeObjet >= 30 && codeObjet <= 33) ){
+			if ( (codeObjet >= (int)TypesObjetsRencontres.OUVRIERE_NOIRE 
+			      && codeObjet <= (int)TypesObjetsRencontres.GENERALE_NOIRE)
+			    || (codeObjet >= (int)TypesObjetsRencontres.OUVRIERE_BLANCHE
+			    	&& codeObjet <=  (int)TypesObjetsRencontres.GENERALE_BLANCHE) ){
+
 				FourmiScript fs = objetRencontre.GetComponent<FourmiScript>();
 				iaObjet = fs.iaBestiole;
-			} else if ( codeObjet == 24 || codeObjet == 34 ){
+				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
+				objetsDetectes.Add(objetRepere);
+				return;
+
+			} 
+
+			// L'objet vu est une des reines
+			if ( objetSurChemin == TypesObjetsRencontres.REINE_NOIRE 
+			    || objetSurChemin == TypesObjetsRencontres.REINE_BLANCHE ){
+
 				ReineScript rs = objetRencontre.GetComponent<ReineScript>();
 				iaObjet = rs.iaReine;
+				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
+				objetsDetectes.Add(objetRepere);
+				return;
+
+			}
+
 			// L'objet sur le chemin est un scarabéé
-			} else if ( codeObjet == 40 ){
+			 if ( objetSurChemin == TypesObjetsRencontres.SCARABEE ){
 				ScarabeeScript ss = objetRencontre.GetComponent<ScarabeeScript>();
 				iaObjet = ss.iaBestiole;
-			} else if ( codeObjet == 25 || codeObjet == 26 || codeObjet == 35 || codeObjet == 36 ){
+				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
+				objetsDetectes.Add(objetRepere);
+				return;
+			} 
+
+			// L'objet rencontré est une phéromone noire (cm ou ouv) ou blanche (cm ou ouv)
+			if ( codeObjet == 25 || codeObjet == 26 || codeObjet == 35 || codeObjet == 36 ){
 				objetRepere = new Cible(hit.distance, objetRencontre, direction, objetSurChemin);
 				objetsDetectes.Add(objetRepere);
 				return;
-			} else if ( codeObjet >= ((int)TypesObjetsRencontres.BONBON_ANGLAIS_BLEU) 
+			} 
+
+			// L'objet rencontré est de la nourriture
+			if ( codeObjet >= ((int)TypesObjetsRencontres.BONBON_ANGLAIS_BLEU) 
 			           && codeObjet <= ((int)TypesObjetsRencontres.BONBON_VERT) ){
+
 				NourrituresScript ns = objetRencontre.GetComponent<NourrituresScript>();
 				iaObjet = ns.iaNourriture;
+				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
+				objetsDetectes.Add(objetRepere);
+				return;
+
 			}
-			objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
-			objetsDetectes.Add(objetRepere);
-		}/* else {
-			Debug.Log("Rien de détecté");
-		}*/
+		
+		} // End if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) )
 
 	}
 

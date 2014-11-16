@@ -132,18 +132,21 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	}
 #endregion
 
-#region Méthodes publiques
+#region Méthodes publiques venant de IAreaction
 
 	/// <summary>
-	/// Bouger the specified direction and nbCases.
+	/// Fait bouger la fourmi.
 	/// </summary>
-	/// <param name="direction">Direction.</param>
-	/// <param name="nbCases">Nb cases.</param>
-	public void bouger(TypesAxes direction, int nbCases){
-		if (scriptDeplacement.objectifAtteint) {
+	/// <param name="direction">Direction de la fourmi.</param>
+	/// <param name="nbCases">Nombre de cases à avancer.</param>
+	public void bouger( TypesAxes direction, int nbCases ){
+
+		if ( scriptDeplacement.objectifAtteint ){
 		
 			dernierAxeUtilise = direction;
 
+			// Récupération de la rotation courante afin
+			// d'en obtenir un indice
 			TypesRotations rotationCourante = scriptDeplacement.orientationCourante;
 			int indiceRotationCourante;
 			switch(rotationCourante){
@@ -169,6 +172,9 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 					indiceRotationCourante = 0;
 					break;
 			}
+
+			// Calcul de la nouvelle rotation avec l'indice trouvé précedemment
+			// et la direction demandée
 			int nouvelleRotationInt = (indiceRotationCourante-1)+(int)direction;
 			nouvelleRotationInt = ( nouvelleRotationInt > 6 ? nouvelleRotationInt % 6 : nouvelleRotationInt);
 			TypesRotations nouvelleRotation;
@@ -196,6 +202,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 					break;
 			}
 
+			// Action ! On se déplace
 			scriptDeplacement.FaireRotation(nouvelleRotation);
 			scriptDeplacement.Avancer(nbCases);
 
@@ -204,38 +211,35 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	}
 
 	/// <summary>
-	/// Deambuler this instance.
+	/// Provoque la déambulation de la fourmi
 	/// </summary>
 	public TypesAxes deambuler(){
-		//Debug.Log("deambuler");
-		//scriptDeplacement.Deambuler();
 		TypesAxes axe = (TypesAxes) Random.Range(1, 6);
 		dernierAxeUtilise = axe;
-		bouger (axe, 1);
+		bouger(axe, 1);
 		return axe;
 	}
 
 	/// <summary>
-	/// Mourir this instance.
+	/// Provuqe la mort de la fourmi
 	/// </summary>
 	public void mourir(){
 		Mourrir();
 	}
 
 	/// <summary>
-	/// Rentrers the base.
+	/// Fait rentrer la fourmi à la base
 	/// </summary>
 	public TypesAxes rentrerBase(){
 		Debug.Log("rentrerBase");
-		// FIXME
+		// TODO
 		return TypesAxes.AUCUN;
 	}
 
 	/// <summary>
-	/// Posers the pheromones.
+	/// Active le dépot de phéromones
 	/// </summary>
 	public void poserPheromones( bool activation ){
-		//Debug.Log("poserPheromones");
 		scriptDeplacement.activerDepotPheromone = activation;
 	}
 #endregion

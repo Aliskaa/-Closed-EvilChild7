@@ -31,7 +31,7 @@ public class ParticulesOeufScript : MonoBehaviour {
 	
 #region Constantes privées
 	/// <summary>
-	/// La duréer d'incubation avant éclosion
+	/// La durée d'incubation avant éclosion
 	/// </summary>
 	private const int DUREE_ATTENTE_AVANT_SUPPR = 20+5;	// OeufScript.DUREE_INCUBATION + delai
 #endregion

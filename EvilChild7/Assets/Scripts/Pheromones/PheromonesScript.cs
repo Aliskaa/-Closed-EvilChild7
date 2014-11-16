@@ -39,6 +39,7 @@ public class PheromonesScript : MonoBehaviour {
 	/// <summary>
 	/// The direction.
 	/// </summary>
+	[HideInInspector]
 	public TypesAxes direction;
 #endregion
 

@@ -64,7 +64,7 @@ public class Reine:EntiteApointsDeVie{
 	}
 	
 	override public void setPointsDeVie(int HP){
-		Debug.Log("Points de vie reine : "+HP);
+		//Debug.Log("Points de vie reine : "+HP);
 		this.pointsDeVie = HP;
 	}
 }

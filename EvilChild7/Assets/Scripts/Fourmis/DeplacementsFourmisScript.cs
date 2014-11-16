@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.1.0
+/// PY Lapersonne - Version 3.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -33,7 +33,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	private InvocateurObjetsScript scriptInvocation;
 
 	/// <summary>
-	/// Le type de phéromones à invoquer
+	/// Le type de phéromones à invoquer selon la fourmi
 	/// </summary>
 	private Invocations typePheromone;
 
@@ -60,17 +60,15 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// L'orientation courante de l'objet
 	/// </summary>
 	public TypesRotations orientationCourante;
-	
-	/// <summary>
-	/// Flag indiquant que la fourmis doit se stopper à cause d'une collision
-	/// </summary>
-	private bool stopCollision;
 
 	/// <summary>
 	/// La vitesse qui est appliquée à la fourmis, en fonction de sa caste
 	/// </summary>
 	private int vitesseAppliquee;
 
+#endregion
+
+#region Constantes privées
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre, égale à 5
 	/// </summary>
@@ -201,7 +199,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				transform.Rotate(0,-45,0);
 				break;
 			case TypesRotations.AUCUN:
-				Debug.Log("Merde rotation");
+				//Debug.LogError("Aucune rotation ?");
 				break;
 			default:
 				Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
@@ -220,20 +218,17 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	public void Deambuler(){
 
 		if (enMouvement && !objectifAtteint) {
-			stopCollision = false;
 			transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
 
-	//		Debug.Log ("Déambuler");
+		//		Debug.Log ("Déambuler");
 		//	Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 		//	Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
 
-			//if (Vector3.Distance (transform.position, positionAatteindre) < 1	) {
 			if ( Mathf.Abs(transform.position.x-positionAatteindre.x) < 1
 			    && Mathf.Abs(transform.position.z-positionAatteindre.z) < 1 ) {
 				enMouvement = false;
 				objectifAtteint = true;
 				Avancer (-1);
-				//Debug.Log("Stop !!");
 			}
 
 		}
@@ -314,7 +309,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	void Awake(){
 		enMouvement = false;
 		objectifAtteint = true;
-		stopCollision = false;
 		InitialiserVariablesFourmi();
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		scriptInvocation = bacAsable.GetComponent<InvocateurObjetsScript>();
@@ -324,30 +318,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void Update(){
-/*
-// CODE OK
-
-		// A chaque frame, continuer la déambulation selon les flags
-		if (enMouvement && !objectifAtteint){
-			//Debug.Log("Déambulation");
-			Deambuler();
-		// Ou en relancer une nouvelle (si la fourmis ne bouge plus)
-		} else {
-			if ( ! stopCollision ){
-				// FIXME Coupler ça avec l'IA
-				//Debug.Log("Plus de déambulation, redémarrage");
-				FaireRotation(TypesRotations.RANDOM);
-				Avancer(AVANCEMENT_CASE);
-				//Recentrer();
-				//Stopper();
-			} else {
-				//Debug.Log("BAAAAAAAAAAAAAAAAAAAAM");
-			}
-		}
-		
-*/
 		Deambuler();
-
 	}
 #endregion
 
@@ -361,7 +332,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 		// Arret de l'objet
 		if  (nbCases <= 0 ){
-			//Debug.Log("STOP !");
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.angularVelocity = Vector3.zero;
 			enMouvement = false;
@@ -402,15 +372,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
 				break;
 			case TypesRotations.AUCUN:
-				//Debug.Log("Aucune rotation : pas d'objectif");
-				Debug.Log("Merde avancer");
-				//FIXME
+				//Debug.LogError("Aucune rotation ?");
+				//FIXME : Cas ne devant jamais apapraitre normalement
 				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
 				positionAatteindre.y = 0;
 				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
 				break;
 			default:
-				Debug.LogError("ERREUR: Valeur pas gérée dans switch : "+orientationCourante);
+				Debug.LogError("ERREUR: Valeur non gérée dans switch : "+orientationCourante);
 				break;
 		}
 
@@ -439,7 +408,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// bouge différement (ex: ne pas s'acharner à aller sur un coté du bac à sable)
 	/// </param>
 	public void StopperParCollision( TypesObjetsRencontres causeCollision ){
-		stopCollision = true;
 		// Arret de l'objet
 		Avancer(-1);
 		// Changement de direction su on tape dans un coté du bac à sable

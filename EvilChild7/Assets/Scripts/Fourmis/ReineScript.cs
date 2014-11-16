@@ -23,12 +23,13 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	
 #region Attributs publics
 	/// <summary>
-	///
+	/// Une référence vers l'IA de la reine
 	/// </summary>
+	[HideInInspector]
 	public IAappel iaReine;
 
 	/// <summary>
-	/// The camp.
+	/// Le camp de la reine (blanc ou noir)
 	/// </summary>
 	public TypesCamps camp;
 #endregion
@@ -52,56 +53,52 @@ public class ReineScript : MonoBehaviour, IAreaction {
 			default:
 				Debug.LogError("Une reine ne peut avoir aucun camp");
 				break;
-			
 		}
-
 	}
-	
-	/// <summary>
-	/// Routine appellée automatiquement par Unity à chaque frame.
-	/// </summary>
-	void Update(){
 
-	}
 #endregion
-
-
+	
+#region Méthodes public : Héritage de IAreaction.
 	/// <summary>
-	/// Bouger the specified direction and nbCases.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
-	/// <param name="direction">Direction.</param>
-	/// <param name="nbCases">Nb cases.</param>
 	public void bouger(TypesAxes direction, int nbCases){
 		return;		
 	}
 	
 	/// <summary>
-	/// Deambuler this instance.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public TypesAxes deambuler(){
 		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
-	/// Mourir this instance.
+	/// Provoque la mort de la reine
 	/// </summary>
 	public void mourir(){
-
-	//	Mourrir();
+		//	Mourrir();
+		return;
 	}
 	
 	/// <summary>
-	/// Rentrers the base.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public TypesAxes rentrerBase(){
 		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
-	/// Posers the pheromones.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public void poserPheromones( bool activation ){
 		return;
 	}
+#endregion
+
 }
 

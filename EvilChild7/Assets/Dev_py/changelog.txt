@@ -545,11 +545,18 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  47;
+Date..........:  16/11/2014 19h48;
 Auteur........:  py;
 Commentaire...:
-	;
+	Tache 112 terminée :
+		- Ajout de particules sur la reine blanche
+		- Ajout de particules sur la reine noire
+	Tache 117 terminée :
+		- Ajout de particules pour la mort de l'oeuf
+	Tache 119 terminée :
+		- Nettoyage du code de py (faut pax exagérer quand meme)
+	Rééquilibrage cheats code;
 
 __________________________________
 

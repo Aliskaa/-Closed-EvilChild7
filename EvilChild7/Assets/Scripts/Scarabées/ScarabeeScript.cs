@@ -27,7 +27,7 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// Les points de vie
 	/// </summary>
 	// FIXME Voir avec l'IA
-	private int chrono;
+	private int timerDisparition;
 #endregion
 
 #region Constantes privées
@@ -45,8 +45,9 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	public TypesCamps camps;
 
 	/// <summary>
-	/// L'IA
+	/// Une référence vers l'IA du scarabée
 	/// </summary>
+	[HideInInspector]
 	public IAappel iaBestiole;
 #endregion
 
@@ -60,7 +61,7 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// Appliquer le vieillissemnt sur le scarabée
 	/// </summary>
 	private void Vieillir(){
-		chrono -= 100;
+		timerDisparition -= 100;
 	}
 
 	/// <summary>
@@ -83,8 +84,8 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// </summary>
 	void Awake(){
 		camps = TypesCamps.AUCUN;
-		chrono = NOMBRE_CYCLES_VIEILLISSEMENT;
-		chrono = 2500; // FIXME Voir avec l'IA
+		timerDisparition = NOMBRE_CYCLES_VIEILLISSEMENT;
+		timerDisparition = 2500; // FIXME Voir avec l'IA
 		InvokeRepeating("Vieillir", 1 /* départ*/, 1 /*intervalle en secondes*/);
 		IAreaction reaction = (IAreaction) this;
 		iaBestiole = new IAscarabee(reaction);
@@ -94,52 +95,53 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// Routine appellée automatiquement par Unity à chaque frame.
 	/// </summary>
 	void Update(){
-		if ( chrono <= 0 ){ // FIXME Voir avec l'IA
+		if ( timerDisparition <= 0 ){ // FIXME Voir avec l'IA
 			Mourrir();
 		}
 	}
 #endregion
 
-#region Méthodes publiques	
+#region Méthodes publiques venant de IAreaction
 	/// <summary>
-	/// Bouger the specified direction and nbCases.
+	/// Fait bouger le scarabée
 	/// </summary>
-	/// <param name="direction">Direction.</param>
-	/// <param name="nbCases">Nb cases.</param>
-	public void bouger(TypesAxes direction, int nbCases){
+	/// <param name="direction">Direction à prendre</param>
+	/// <param name="nbCases">Nombre de case à avancer</param>
+	public void bouger( TypesAxes direction, int nbCases ){
 		Debug.Log("bouger scarabée");
+		// TODO
+		return;
 	}
 	
 	/// <summary>
-	/// Deambuler this instance.
+	/// Fait déambuler le scarabée
 	/// </summary>
 	public TypesAxes deambuler(){
 		Debug.Log("deambuler scarabée");
-		// FIXME
+		// TODO
 		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
-	/// Mourir this instance.
+	/// Fait mourrir le scarabée
 	/// </summary>
 	public void mourir(){
 		Mourrir();
 	}
 	
 	/// <summary>
-	/// Rentrers the base.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public TypesAxes rentrerBase(){
-		Debug.Log("rentrerBase scarabée");
-		// FIXME
 		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
-	/// Posers the pheromones.
+	/// Ne fait rien (!). Obligation d'implémentation d'après
+	/// la conception de l'IA
 	/// </summary>
 	public void poserPheromones( bool activation ){
-		Debug.Log("poserPheromones scarabée");
 		return;
 	}
 #endregion

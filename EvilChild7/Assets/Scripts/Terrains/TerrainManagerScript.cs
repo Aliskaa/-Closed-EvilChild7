@@ -592,7 +592,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		//Debug.Log("Création du terrain : "+type);
 		CreerMap(type);
 		CreerMap3D();
-		//PlacerReines();
+		PlacerReines();
 	}
 #endregion
 	

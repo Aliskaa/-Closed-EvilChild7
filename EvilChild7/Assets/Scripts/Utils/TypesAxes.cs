@@ -43,28 +43,6 @@ public enum TypesAxes : int{
 	/// Détection en haut à gauche.
 	/// </summary>
 	DEVANT_GAUCHE = 6,
-/*
-	/// <summary>
-	/// Détection par derrière
-	/// </summary>
-	DERRIERE = 2,
-	/// <summary>
-	/// Détection en haut à gauche.
-	/// </summary>
-	DEVANT_GAUCHE = 3,
-	/// <summary>
-	/// Détection en bas à gauche.
-	/// </summary>
-	DERRIERE_GAUCHE = 4,
-	/// <summary>
-	/// Détection en haut à droite.
-	/// </summary>
-	DEVANT_DROITE = 5,
-	/// <summary>
-	/// Détection en bas à droite.
-	/// </summary>
-	DERRIERE_DROITE = 6,
-*/	
 	/// <summary>
 	/// Détection au dessus
 	/// </summary>

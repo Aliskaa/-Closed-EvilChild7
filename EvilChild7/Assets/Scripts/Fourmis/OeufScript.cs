@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -40,7 +40,6 @@ public class OeufScript : MonoBehaviour {
 	/// <summary>
 	/// Le type de fourmis qui va éclore
 	/// </summary>
-	[HideInInspector]
 	public Invocations fourmi;
 	
 	/// <summary>
@@ -70,6 +69,22 @@ public class OeufScript : MonoBehaviour {
 		MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
 		meshRender.enabled = false;
 		scriptInvoc.InvoquerObjet(fourmi, position);
+		Destroy(gameObject);
+	}
+
+	/// <summary>
+	/// Provoque la mort de l'oeuf et de son contenu.
+	/// Pour celà, va masquer l'oeuf, invoquer des particules, et va ensuite
+	/// se détruire.
+	/// </summary>
+	private void Mourir(){
+		//Debug.Log("Eclosion de "+fourmi);
+		Vector3 position = transform.localPosition;
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
+		MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
+		meshRender.enabled = false;
 		Destroy(gameObject);
 	}
 #endregion

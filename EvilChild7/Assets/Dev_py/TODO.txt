@@ -17,14 +17,9 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 104				 	annulé					Barre de vie
 105					non lancé	[py]		Collider/mesh sur objets (cailloux, eau3D, ..), cf Gwendal	
 106		1		>>	non lancé	[py]		Retour à la base (reine = position fixe)
-112		1		>>>	lancé		[py]		Particules sur les reines
 113		1		>>>	lancé		[py]		Méthode pour récupérer position des reines
-114		1		>>>	lancé		[py]		Remplir les callbacks des IA
-115		1		>	non lancé	[py]		Collison caillou et bords : demi-tour, collision eau : noyage
-117		1		>>>	non lancé	[py]		Mort des oeufs : explosions avec particules
-119		1		>>>	non lancé	[py]		Nettoyer le code
-121		1		>>>	non lancé	[py]		Particules disparition bouffe
-122					annulé				Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
+115		1		>>	non lancé	[py]		Collison caillou et bords : demi-tour, collision eau : noyage
+122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
 
 les oeufs
 explosion mort reine
