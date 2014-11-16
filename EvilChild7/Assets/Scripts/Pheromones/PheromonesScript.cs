@@ -52,7 +52,7 @@ public class PheromonesScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		this.Timer = DUREE_DE_VIE;
-		direction = TypesAxes.AUCUN:
+		direction = TypesAxes.AUCUN;
 	}
 	
 	/// <summary>

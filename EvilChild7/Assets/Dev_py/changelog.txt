@@ -522,19 +522,26 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  46;
+Date..........:  16/11/2014 18h26;
 Auteur........:  py;
 Commentaire...:
-	Travail sur cablage avec l'IA [en cours]
+	Travail sur cablage avec l'IA
 		- Ajout des fichiers
 		- Cablage code IA pour:
 			- combattante, générale, contremaitre, ouvrière
 	Correction rayon des rayons de détections qui étaient trop bas
 	Correction du bout de bois : trigger pour le collider
 	Correction du signalement avec l'IAreaction
-	Suivi des phéromones
+	Suivi des phéromones : pas parfait mais pas trop minable
 	Ajout classe modele Reine
+	Correction bug des géénrales qui s'attaquent entre-elles
+	Ajout NourritureScript, corrections IA nourriture et prefabs nourritures
+	Corrections sur Cible
+	Taches 65, 66, 67, 69, 70, 71, 118, 120 terminées
+	Globalement:
+			- intégration des IA et débogage des IA via les objets physiques
+			- corrections de bugs dievrs (rayons trops bas, bout de bois sans trigger, phéromones)
 
 __________________________________
 

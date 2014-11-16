@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class EntiteApointsDeVie
 {
 	protected int pointsDeVie;
@@ -11,9 +13,8 @@ public abstract class EntiteApointsDeVie
 		return this.pointsDeVie;
 	}
 	
-	public void setPointsDeVie(int HP){
+	virtual public void setPointsDeVie(int HP){
 		this.pointsDeVie = HP;
-		
 	}
 }
 

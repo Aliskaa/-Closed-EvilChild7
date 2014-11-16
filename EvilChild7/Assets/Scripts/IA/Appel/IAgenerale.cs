@@ -34,7 +34,7 @@ public class IAgenerale:IAabstraite
 			
 			foreach (Cible cible in objetsReperes) {
 				if ( cible.getMonIAabstraite() != null ){
-					if (cible.getMonIAabstraite().getCamp()==getCamp ()) {
+					if (cible.getMonIAabstraite().getCamp()!= getCamp ()) {
 						if (cible.getDistance() <= DeplacementsFourmisScript.DISTANCE_CASE) {
 							ennemisProches.Add (cible.getMonIAabstraite());
 						} else {

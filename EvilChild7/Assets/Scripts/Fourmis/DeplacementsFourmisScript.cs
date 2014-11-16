@@ -300,9 +300,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <param name="position"></param>
 	private void DeposerPheromones( Vector3 position ){
 		//Debug.Log("Dépot de phéromones "+typePheromone+" en "+position);
-		GameObject go = scriptInvocation.InvoquerObjet(typePheromone, position);
-		PheromonesScript ps = go.GetComponent<PheromonesScript>();
-		FourmiScript fs = go.GetComponent<FourmiScript>();
+		GameObject goPhero	 = scriptInvocation.InvoquerObjet(typePheromone, position);
+		PheromonesScript ps = goPhero.GetComponent<PheromonesScript>();
+		FourmiScript fs = this.gameObject.GetComponent<FourmiScript>();
 		ps.direction = fs.dernierAxeUtilise;
 	}
 #endregion

@@ -5,10 +5,10 @@ public class Cible{
 	float distance;
 	IAobjet iaObject;
 	TypesObjetsRencontres typeObjet;
-	TypesAxes direction;
+	public TypesAxes direction;
 	GameObject gameObjectCible;
 
-	public Cible(float distance, IAappel objet, TypesAxes direction, TypesObjetsRencontres typeObjet){
+	public Cible(float distance, IAobjet objet, TypesAxes direction, TypesObjetsRencontres typeObjet){
 		this.distance = distance;
 		this.iaObject = objet;
 		this.direction = direction;

@@ -2,37 +2,31 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
 4					annulé					Mottes de terres
 39		1			lancé		[py]		Tester la fourmis dans tous les sens		
-64				>>>				[py]		Configurer tous les prefabs concernant les IA :
-65				>				[py]			- fourmis blanche combattante et ouvriere
-66				>				[py]			- fourmis blanche générale
-67				>				[py]			- fourmis blanche contremaitre
+64					lancé		[py]		Configurer tous les prefabs concernant les IA :
 68				>				[py]			- fourmis blanche reine
-69				>				[py]			- fourmis noire combattante et ouvriere
-70				>				[py]			- fourmis noire générale
-71				>				[py]			- fourmis noire contremaitre
 72				>				[py]			- fourmis noire reine
+123				>				[py]			- oeufs
 84				>				[py]			Configuration des scarabées
 														- IA
 														- déplacements
 														- collisions
 														- attaque des oeufs
 91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
-98		1			non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
-100		2			non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
+98					non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
+100					non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
 104				 	annulé					Barre de vie
-105		1		>	non lancé	[py]		Collider/mesh sur objets (cailloux, eau3D, ..), cf Gwendal	
+105					non lancé	[py]		Collider/mesh sur objets (cailloux, eau3D, ..), cf Gwendal	
 106		1		>>	non lancé	[py]		Retour à la base (reine = position fixe)
-112		1		>> 	lancé		[py]		Particules sur les reines
-113		1		>> 	lancé		[py]		Méthode pour récupérer position des reines
-114		1		>>	lancé		[py]		Remplir les callbacks des IA
+112		1		>>>	lancé		[py]		Particules sur les reines
+113		1		>>>	lancé		[py]		Méthode pour récupérer position des reines
+114		1		>>>	lancé		[py]		Remplir les callbacks des IA
 115		1		>	non lancé	[py]		Collison caillou et bords : demi-tour, collision eau : noyage
-116		1			non lancé	[py]		La détection de la nourriture semble imprécise
-117		1		>>	non lancé	[py]		Mort des oeufs : explosions avec particules
-118		1		>>>	lancé		[py]		Problèmes détection phéromones : non suivies
-119		1			non lancé	[py]		Nettoyer le code
-120		1			non lancé	[py]		Vérifier / Corriger bug recup nourriture
+117		1		>>>	non lancé	[py]		Mort des oeufs : explosions avec particules
+119		1		>>>	non lancé	[py]		Nettoyer le code
 121		1		>>>	non lancé	[py]		Particules disparition bouffe
+122					annulé				Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
 
+les oeufs
+explosion mort reine
 
-
-[Dernier ID utilisé : 117]
+[Dernier ID utilisé : 123]

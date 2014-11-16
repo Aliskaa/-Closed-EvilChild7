@@ -1,14 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\IA\Appel\IAouvriere.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
     <Files>
-      <File FileName="Assets\Scripts\Pheromones\PheromonesScript.cs" Line="71" Column="2" />
-      <File FileName="Assets\Dev_py\changelog.txt" Line="533" Column="44" />
-      <File FileName="Assets\Dev_py\TODO.txt" Line="1" Column="1" />
-      <File FileName="c:\Users\plaperso\Documents\IMR_3\GL\Unity\academical_Enssat_EvilChild7\EvilChild7\Assets\Scripts\Fourmis\FourmiScript.cs" Line="143" Column="21" />
-      <File FileName="Assets\Scripts\IA\Reaction\IAreaction.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\IA\Appel\IAouvriere.cs" Line="97" Column="23" />
-      <File FileName="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" Line="306" Column="15" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="526" Column="34" />
+      <File FileName="Assets\Dev_py\TODO.txt" Line="21" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

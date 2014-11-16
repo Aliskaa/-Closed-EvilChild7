@@ -33,16 +33,18 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <summary>
 	/// Le camps de la fourmi qui sortira de l'oeuf
 	/// </summary>
-	public TypesCamps camps;
+	//public TypesCamps camps;
 
 	/// <summary>
 	/// L'IA
 	/// </summary>
+	[HideInInspector]
 	public IAappel iaBestiole;
 	
 	/// <summary>
 	/// Le dernier axe utilisé
 	/// </summary>
+	[HideInInspector]
 	public TypesAxes dernierAxeUtilise;
 #endregion
 

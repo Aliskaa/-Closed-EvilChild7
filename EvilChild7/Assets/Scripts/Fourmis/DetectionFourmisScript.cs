@@ -130,12 +130,15 @@ public class DetectionFourmisScript : MonoBehaviour {
 			//Debug.Log("Détecté : "+objetSurChemin);
 			Debug.DrawLine(charles.origin, hit.point, debugRayColor);
 			int codeObjet = (int) objetSurChemin;
-			IAappel iaObjet = null;
+			IAobjet iaObjet = null;
 			Cible objetRepere = null;
 			// L'objet vu est une fourmi
-			if ( (codeObjet >= 20 && codeObjet <= 24) || (codeObjet >= 30 && codeObjet <= 34) ){
+			if ( (codeObjet >= 20 && codeObjet <= 23) || (codeObjet >= 30 && codeObjet <= 33) ){
 				FourmiScript fs = objetRencontre.GetComponent<FourmiScript>();
 				iaObjet = fs.iaBestiole;
+			} else if ( codeObjet == 24 || codeObjet == 34 ){
+				ReineScript rs = objetRencontre.GetComponent<ReineScript>();
+				iaObjet = rs.iaReine;
 			// L'objet sur le chemin est un scarabéé
 			} else if ( codeObjet == 40 ){
 				ScarabeeScript ss = objetRencontre.GetComponent<ScarabeeScript>();
@@ -144,6 +147,10 @@ public class DetectionFourmisScript : MonoBehaviour {
 				objetRepere = new Cible(hit.distance, objetRencontre, direction, objetSurChemin);
 				objetsDetectes.Add(objetRepere);
 				return;
+			} else if ( codeObjet >= ((int)TypesObjetsRencontres.BONBON_ANGLAIS_BLEU) 
+			           && codeObjet <= ((int)TypesObjetsRencontres.BONBON_VERT) ){
+				NourrituresScript ns = objetRencontre.GetComponent<NourrituresScript>();
+				iaObjet = ns.iaNourriture;
 			}
 			objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
 			objetsDetectes.Add(objetRepere);

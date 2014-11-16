@@ -27,7 +27,7 @@ public class IAouvriere: IAabstraite
 		
 	}
 	override public void signaler(List<Cible> objetsReperes){
-		
+
 		if(attaque()) {
 			
 			attaquer(getAttaquantAt(0));
@@ -42,7 +42,7 @@ public class IAouvriere: IAabstraite
 					modele.nourriturePosee();
 					
 				}else{
-					maReaction.poserPheromones(false);
+					//maReaction.poserPheromones(false);
 					rentrerBase();
 					
 				}
@@ -68,6 +68,7 @@ public class IAouvriere: IAabstraite
 				}else{
 					Cible objetPheromone = repererPheromones(objetsReperes);
 					if(objetPheromone != null){
+						//Debug.Log("Je vais en "+objetPheromone.getDirection());
 						bouger(objetPheromone.getDirection());
 					}else{
 						deambuler();
@@ -79,22 +80,18 @@ public class IAouvriere: IAabstraite
 	}
 	
 	void bouger(TypesAxes direction){
-		int intDirection = (int)direction;
 		maReaction.bouger(direction,modele.getMouvement());
-		ajusterRepere(direction);
-		derniereDirection = axes[intDirection -1];
+		derniereDirection = direction;
 	}
 	
 	void deambuler(){
 		TypesAxes dir = maReaction.deambuler ();
-		ajusterRepere (dir);
-		derniereDirection = axes[(int)dir -1];
+		derniereDirection = dir;
 	}
 	
 	void rentrerBase(){
 		TypesAxes dir = maReaction.rentrerBase ();
-		ajusterRepere(dir);
-		derniereDirection = axes[(int)dir -1];
+		derniereDirection = dir;
 	}
 	
 	public void attaquer(IAabstraite ennemy){
@@ -146,151 +143,175 @@ public class IAouvriere: IAabstraite
 		}
 		return false;
 	}
-	
+
 	private Cible repererPheromones(List<Cible> objetsReperes){
-		Cible pheromoneOuv = null;
-		Cible pheromoneCm = null;
-		
+
+		/*
+		 * Etape 0 : Séparer les phéromones par couleurs
+		 */
+		List<Cible> pheromonesNoires = new List<Cible> ();
+		List<Cible> pheromonesBlanches = new List<Cible> ();
+
 		foreach (Cible cible in objetsReperes) {
-			
-			if(cible.getMonIAobjet() == null){
-				
-				if(!tourneEnRond(cible)){
-					
-					if(this.getCamp() == TypesCamps.BLANC){
-						
-						if(cible.getType () == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE){
-							
-							if(pheromoneCm ==null){
-								
-								pheromoneCm = cible;
-								
-							}else{
-								
-								if(pheromoneCm.getDistance() > cible.getDistance()){
-									
-									pheromoneCm = cible;
-									
-								}
-							}
-						}
-						
-						if(cible.getType () == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE){
-							
-							if(pheromoneOuv ==null){
-								
-								pheromoneOuv = cible;
-								
-							}else{
-								
-								if(pheromoneOuv.getDistance() > cible.getDistance()){
-									
-									pheromoneOuv = cible;
-								}
-							}
-						}
-					}else{
-						
-						if(cible.getType () == TypesObjetsRencontres.PHEROMONES_CM_NOIRE){
-							
-							if(pheromoneCm ==null){
-								
-								pheromoneCm = cible;
-								
-							}else{
-								
-								if(pheromoneCm.getDistance() > cible.getDistance()){
-									
-									pheromoneCm = cible;
-									
-								}
-							}
-						}
-						
-						if(cible.getType () == TypesObjetsRencontres.PHEROMONES_OUV_NOIRE){
-							
-							if(pheromoneOuv ==null){
-								
-								pheromoneOuv = cible;
-								
-							}else{
-								
-								if(pheromoneOuv.getDistance() > cible.getDistance()){
-									
-									pheromoneOuv = cible;
-								}
-							}
-						}
+			if (cible.getMonIAobjet () == null) {
+				TypesObjetsRencontres tor = cible.getType ();
+				if (tor == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE || tor == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE) {
+						pheromonesBlanches.Add (cible);
+				} else {
+						pheromonesNoires.Add (cible);
+				}
+			}
+		}
+
+		/*
+		 * Etape 1 : Séparer les phéromones d'ouvrières des phéormones de contremaitre
+		 */
+		List<Cible> pheromonesNoiresCm = new List<Cible>();
+		List<Cible> pheromonesNoiresOuv = new List<Cible>();
+		List<Cible> pheromonesBlanchesCm = new List<Cible>();
+		List<Cible> pheromonesBlanchesOuv = new List<Cible>();
+
+		foreach ( Cible c in pheromonesNoires ){
+			TypesObjetsRencontres tor = c.getType();
+			if (tor == TypesObjetsRencontres.PHEROMONES_CM_NOIRE) {
+				pheromonesNoiresCm.Add(c);
+			} else {
+				pheromonesNoiresOuv.Add(c);
+			}
+		}
+		pheromonesNoires.Clear();
+		pheromonesNoires = null;
+
+		foreach (Cible c in pheromonesBlanches) {
+			TypesObjetsRencontres tor = c.getType ();
+			if (tor == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE) {
+				pheromonesBlanchesCm.Add (c);
+			} else {
+				pheromonesBlanchesOuv.Add (c);
+			}
+		}
+		pheromonesBlanches.Clear();
+		pheromonesBlanches = null;
+
+		Cible pheroPlusProche = null;
+
+		/*
+		* Etape 2 : Traiter d'abord les phéromones de contremaitre : on choisir une à la fin
+		* 			Prendre la phéromone qui :
+		* 				- est la plus proche
+		* 				- n'a pas déjà été prise
+		* 					- donc pour ce cas, on ne change pas de sens
+		*/
+		if (this.getCamp () == TypesCamps.BLANC) {
+			pheroPlusProche = chercherPlusProche(pheromonesBlanchesCm);
+		} else {
+			pheroPlusProche = chercherPlusProche(pheromonesNoiresCm);
+		}
+
+		if (pheroPlusProche != null) return pheroPlusProche;
+
+		/*
+		 * Etape 3 : Si pas de phéromone de contremaitre trouvées, on traite les phéromones des ouvrières
+		 */
+		if (this.getCamp () == TypesCamps.BLANC) {
+			pheroPlusProche = chercherPlusProche(pheromonesBlanchesOuv);
+		} else {
+			pheroPlusProche = chercherPlusProche(pheromonesNoiresOuv);
+		}
+
+		/*
+		 * Etape 3.2 : Suivre la direction de la phéromone.
+		 * Attention, il faut prendre l'inverse de la direction de cette phéromone pour les ouvrières (bouffe dans l'autre sens)
+		 */
+		// TODO
+
+		/*
+		 * Etape 3.3 : Cas où plusieurs directions
+		 */
+		// TODO
+
+		/*
+		 * Etape 4 : Aller vers la phéromone désirée
+		 */
+		return pheroPlusProche;
+
+	}
+
+	private Cible chercherPlusProche( List<Cible> liste ){
+
+		if (liste == null || liste.Count <= 0)	return null;
+		Cible pheroPlusProche = null;
+
+		// S'il n'y a que des phéromones derrière
+		if (rienDevant (liste)) {
+			foreach (Cible c in liste) {
+				if ((pheroPlusProche == null || c.getDistance () < pheroPlusProche.getDistance ())) {
+					pheroPlusProche = c;
+				}
+			}
+		// Il y a des phéromones devants
+		} else {
+			foreach (Cible c in liste) {
+				// Il y a des phéromones devant
+				if (! demiTour (c)) {
+					if ((pheroPlusProche == null || c.getDistance () < pheroPlusProche.getDistance ())) {
+						pheroPlusProche = c;
 					}
 				}
 			}
 		}
-		
-		if (pheromoneCm != null) {
-			return pheromoneCm;
-		}
-		
-		if (pheromoneOuv != null) {
-			return pheromoneOuv;
-		}
-		
-		return null;
+
+		return pheroPlusProche;
+
 	}
+
+	private bool rienDevant(List<Cible> liste){
+		foreach (Cible c in liste) {
+			if ( c.getDirection() == TypesAxes.DEVANT ) return false;
+			if ( c.getDirection() == TypesAxes.DEVANT_DROITE ) return false;
+			if ( c.getDirection() == TypesAxes.DEVANT_DROITE ) return false;
+		}
+		return true;
+	}
+
+	private bool demiTour( Cible c ){
+		TypesAxes directionReperageCible = c.getDirection();
+		return ( directionReperageCible == TypesAxes.DERRIERE || directionReperageCible == TypesAxes.DERRIERE_DROITE
+		        || directionReperageCible == TypesAxes.DERRIERE_GAUCHE);
+	}	
+
+
 	
 	override public TypesObjetsRencontres retourType(){
 		return this.monType;
 	}
 	
-	protected bool tourneEnRond(Cible cible){
-		Debug.Log("===> cible : "+cible.getDirection()+", derniere :"+derniereDirection);
-		TypesAxes direction = cible.getDirection ();
-		if (derniereDirection == TypesAxes.AUCUN) {
-			return false;
+	protected TypesAxes oppose(TypesAxes direction){
+		
+		if(direction == TypesAxes.DEVANT){
+			return TypesAxes.DERRIERE;
+		}
+
+		if(direction == TypesAxes.DERRIERE){
+			return TypesAxes.DEVANT;
+		}
+
+		if(direction == TypesAxes.DEVANT_GAUCHE){
+			return TypesAxes.DERRIERE_DROITE;
 		}
 		
-		if(this.derniereDirection == TypesAxes.DEVANT){
-			if(direction == TypesAxes.DERRIERE){
-				return true;
-			}
-			return false;
+		if(direction == TypesAxes.DERRIERE_DROITE){
+			return TypesAxes.DEVANT_GAUCHE;
+		}
+
+		if(direction == TypesAxes.DEVANT_DROITE){
+			return TypesAxes.DERRIERE_GAUCHE;
 		}
 		
-		if(this.derniereDirection == TypesAxes.DERRIERE){
-			if(direction == TypesAxes.DEVANT){
-				return true;
-			}
-			return false;
+		if(direction == TypesAxes.DERRIERE_GAUCHE){
+			return TypesAxes.DEVANT_DROITE;
 		}
-		
-		if(this.derniereDirection == TypesAxes.DEVANT_GAUCHE){
-			if(direction == TypesAxes.DERRIERE_DROITE){
-				return true;
-			}
-			return false;
-		}
-		
-		if(this.derniereDirection == TypesAxes.DEVANT_DROITE){
-			if(direction == TypesAxes.DERRIERE_GAUCHE){
-				return true;
-			}
-			return false;
-		}
-		
-		if(this.derniereDirection == TypesAxes.DERRIERE_GAUCHE){
-			if(direction == TypesAxes.DEVANT_DROITE){
-				return true;
-			}
-			return false;
-		}
-		
-		if(this.derniereDirection == TypesAxes.DERRIERE_DROITE){
-			if(direction == TypesAxes.DEVANT_GAUCHE){
-				return true;
-			}
-			return false;
-		}
-		return false;
-		
+		return TypesAxes.AUCUN;
 	}
 	/*
 	protected bool tourneEnRond(Cible pheromone){

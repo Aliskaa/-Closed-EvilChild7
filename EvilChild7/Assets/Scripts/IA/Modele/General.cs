@@ -9,5 +9,6 @@ public class Generale:Modele{
 		this.mouvement = 1;
 		this.pointsDeVie = 400;
 	}
+
 }
 

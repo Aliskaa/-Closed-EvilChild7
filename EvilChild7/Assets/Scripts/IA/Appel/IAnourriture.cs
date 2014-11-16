@@ -6,6 +6,7 @@ public class IAnourriture:IAobjet
 	
 	public IAnourriture (IAreaction maReaction)
 	{
+		modele = new Nourriture ();
 		this.maReaction = maReaction;
 	}
 	
