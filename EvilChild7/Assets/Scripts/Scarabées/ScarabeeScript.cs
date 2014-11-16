@@ -113,8 +113,10 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// <summary>
 	/// Deambuler this instance.
 	/// </summary>
-	public void deambuler(){
+	public TypesAxes deambuler(){
 		Debug.Log("deambuler scarabée");
+		// FIXME
+		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>
@@ -127,8 +129,10 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// <summary>
 	/// Rentrers the base.
 	/// </summary>
-	public void rentrerBase(){
+	public TypesAxes rentrerBase(){
 		Debug.Log("rentrerBase scarabée");
+		// FIXME
+		return TypesAxes.AUCUN;
 	}
 	
 	/// <summary>

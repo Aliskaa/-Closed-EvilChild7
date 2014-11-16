@@ -39,6 +39,11 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// L'IA
 	/// </summary>
 	public IAappel iaBestiole;
+	
+	/// <summary>
+	/// Le dernier axe utilisé
+	/// </summary>
+	public TypesAxes dernierAxeUtilise;
 #endregion
 
 
@@ -135,6 +140,8 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	public void bouger(TypesAxes direction, int nbCases){
 		if (scriptDeplacement.objectifAtteint) {
 		
+			dernierAxeUtilise = direction;
+
 			TypesRotations rotationCourante = scriptDeplacement.orientationCourante;
 			int indiceRotationCourante;
 			switch(rotationCourante){
@@ -197,11 +204,13 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <summary>
 	/// Deambuler this instance.
 	/// </summary>
-	public void deambuler(){
+	public TypesAxes deambuler(){
 		//Debug.Log("deambuler");
 		//scriptDeplacement.Deambuler();
-		int axe = Random.Range(1, 6);
-		bouger ((TypesAxes)axe, 1);
+		TypesAxes axe = (TypesAxes) Random.Range(1, 6);
+		dernierAxeUtilise = axe;
+		bouger (axe, 1);
+		return axe;
 	}
 
 	/// <summary>
@@ -214,8 +223,10 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <summary>
 	/// Rentrers the base.
 	/// </summary>
-	public void rentrerBase(){
+	public TypesAxes rentrerBase(){
 		Debug.Log("rentrerBase");
+		// FIXME
+		return TypesAxes.AUCUN;
 	}
 
 	/// <summary>

@@ -223,7 +223,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			stopCollision = false;
 			transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
 
-			
 	//		Debug.Log ("Déambuler");
 		//	Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 		//	Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
@@ -238,43 +237,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			}
 
 		}
-/*
-/////////////////////////
-// CODE OK, merci de ne pas supprimer pour le moment (Pierre-Yves)
-
-		/*
-		 * Déplacement de la fourmis
-		 * http://answers.unity3d.com/questions/195698/stopping-a-rigidbody-at-target.html
-		 * /
-
-		float velocityFinale = 2.5f;	// Pour convertir la distance restant pour avoir la velocité finale (= façon de stopper)
-		float forceMax = 40.0f;
-		float gain = 5f; 				// Gain par rapport à la position finale à atteindre
-
-		//Debug.Log ("Je suis en :" + transform.position + ", et dois aller en :" + positionAatteindre);
-		Vector3 distance = positionAatteindre - transform.position;
-		distance.y = 0;
-		// Calcul de la vitesse à atteindre proportionnellement à la distance, bornée par vietsseMax
-		Vector3 vitesseVoulue = Vector3.ClampMagnitude(velocityFinale * distance, vitesseMax);
-		// Calcul de l'erreur que l'on a avec la vitesse
-		Vector3 correctionVitesse = vitesseVoulue - rigidbody.velocity;
-		// Calcul d'une force proporitonnele à l'erreur, bornée par maxForce
-		Vector3 force = Vector3.ClampMagnitude(gain * correctionVitesse, forceMax);
-		rigidbody.AddForce(force);
-
-		if (System.Math.Round(Vector3.Distance(transform.position,positionAatteindre)) == 0){
-			//Debug.Log ("Objectif atteint");
-			enMouvement = false;
-			objectifAtteint = true;
-			Recentrer();
-		}/* else {
-			Debug.Log ("Objectif pas encore atteint : "+Vector3.Distance(transform.position,positionAatteindre));
-		}* /
-
-		//Recentrer();
-		
-/////////////////////////
-*/
 
 	}
 
@@ -338,7 +300,10 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <param name="position"></param>
 	private void DeposerPheromones( Vector3 position ){
 		//Debug.Log("Dépot de phéromones "+typePheromone+" en "+position);
-		scriptInvocation.InvoquerObjet(typePheromone, position);
+		GameObject go = scriptInvocation.InvoquerObjet(typePheromone, position);
+		PheromonesScript ps = go.GetComponent<PheromonesScript>();
+		FourmiScript fs = go.GetComponent<FourmiScript>();
+		ps.direction = fs.dernierAxeUtilise;
 	}
 #endregion
 

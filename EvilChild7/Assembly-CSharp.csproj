@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\IA\Modele\Modele.cs" />
      <Compile Include="Assets\Scripts\IA\Modele\Nourriture.cs" />
      <Compile Include="Assets\Scripts\IA\Modele\Ouvriere.cs" />
+     <Compile Include="Assets\Scripts\IA\Modele\Reine.cs" />
      <Compile Include="Assets\Scripts\IA\Modele\Scarabee.cs" />
      <Compile Include="Assets\Scripts\IA\Modele\Soldat.cs" />
      <Compile Include="Assets\Scripts\IA\Reaction\IAreaction.cs" />

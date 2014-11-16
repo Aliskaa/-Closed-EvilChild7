@@ -4,9 +4,11 @@ using System.Collections.Generic;
 public interface IAreaction{
 	
 	void bouger(TypesAxes direction, int nbCases);
-	void deambuler();
+	TypesAxes deambuler();
 	void mourir();
-	void rentrerBase();
-	void poserPheromones( bool activation );
+	TypesAxes rentrerBase();
+	void poserPheromones(bool poser);
 	
 }
+
+

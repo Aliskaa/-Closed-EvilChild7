@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -35,6 +35,13 @@ public class PheromonesScript : MonoBehaviour {
 	private const int DUREE_DE_VIE = 25;
 #endregion
 
+#region Attributs publics
+	/// <summary>
+	/// The direction.
+	/// </summary>
+	public TypesAxes direction;
+#endregion
+
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
@@ -45,6 +52,7 @@ public class PheromonesScript : MonoBehaviour {
 	/// </summary>
 	void Awake(){
 		this.Timer = DUREE_DE_VIE;
+		direction = TypesAxes.AUCUN:
 	}
 	
 	/// <summary>

@@ -534,6 +534,7 @@ Commentaire...:
 	Correction du bout de bois : trigger pour le collider
 	Correction du signalement avec l'IAreaction
 	Suivi des phéromones
+	Ajout classe modele Reine
 
 __________________________________
 

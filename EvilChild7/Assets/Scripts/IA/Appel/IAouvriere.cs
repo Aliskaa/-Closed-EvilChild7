@@ -9,10 +9,8 @@ public class IAouvriere: IAabstraite
 	protected TypesCamps monCamp;
 	protected TypesObjetsRencontres monType;
 	protected TypesAxes derniereDirection = TypesAxes.AUCUN;
-	protected GameObject dernierePheromone = null;
-
-	public List<GameObject> dernieresPheromonesVUes = new List<GameObject> ();
-
+	protected TypesAxes[] axes = new TypesAxes[6]{TypesAxes.DEVANT,TypesAxes.DEVANT_DROITE,TypesAxes.DERRIERE_DROITE,TypesAxes.DERRIERE,TypesAxes.DERRIERE_GAUCHE,TypesAxes.DEVANT_GAUCHE};
+	
 	public IAouvriere(TypesObjetsRencontres monType, IAreaction reaction){
 		attaquants = new List<IAabstraite> ();
 		victimes = new List<IAabstraite> ();
@@ -26,7 +24,7 @@ public class IAouvriere: IAabstraite
 		}
 		
 		maReaction = reaction;
-
+		
 	}
 	override public void signaler(List<Cible> objetsReperes){
 		
@@ -57,8 +55,7 @@ public class IAouvriere: IAabstraite
 				if(objetNourriture != null){
 					
 					if(objetNourriture.getDistance()<=DeplacementsFourmisScript.DISTANCE_CASE){
-						derniereDirection = TypesAxes.AUCUN;
-						dernierePheromone = null;
+						//derniereDirection = TypesAxes.AUCUN;
 						modele.nourriturePrise();
 						prendreNourriture((IAnourriture)objetNourriture.getMonIAobjet());
 						maReaction.poserPheromones(true);
@@ -71,13 +68,8 @@ public class IAouvriere: IAabstraite
 				}else{
 					Cible objetPheromone = repererPheromones(objetsReperes);
 					if(objetPheromone != null){
-						derniereDirection = objetPheromone.getDirection();
-						dernierePheromone = objetPheromone.getGameObject();
-						dernieresPheromonesVUes.Add(dernierePheromone);
 						bouger(objetPheromone.getDirection());
 					}else{
-						dernieresPheromonesVUes.Clear();
-						dernierePheromone = null;
 						deambuler();
 					}
 				}
@@ -87,18 +79,25 @@ public class IAouvriere: IAabstraite
 	}
 	
 	void bouger(TypesAxes direction){
+		int intDirection = (int)direction;
 		maReaction.bouger(direction,modele.getMouvement());
+		ajusterRepere(direction);
+		derniereDirection = axes[intDirection -1];
 	}
 	
 	void deambuler(){
-		maReaction.deambuler ();
+		TypesAxes dir = maReaction.deambuler ();
+		ajusterRepere (dir);
+		derniereDirection = axes[(int)dir -1];
 	}
 	
 	void rentrerBase(){
-		maReaction.rentrerBase ();
+		TypesAxes dir = maReaction.rentrerBase ();
+		ajusterRepere(dir);
+		derniereDirection = axes[(int)dir -1];
 	}
 	
-	/*override*/ public void attaquer(IAabstraite ennemy){
+	public void attaquer(IAabstraite ennemy){
 		ennemy.ajouterAttaquant (this);
 		if (!victimes.Contains (ennemy)) {
 			victimes.Add (ennemy);
@@ -151,43 +150,13 @@ public class IAouvriere: IAabstraite
 	private Cible repererPheromones(List<Cible> objetsReperes){
 		Cible pheromoneOuv = null;
 		Cible pheromoneCm = null;
-
-		List<Cible> ciblesGOok = new List<Cible> ();
-
-		bool flagDejaVu = false;
+		
 		foreach (Cible cible in objetsReperes) {
+			
 			if(cible.getMonIAobjet() == null){
-				GameObject goCourant = cible.getGameObject();
-				foreach (GameObject go in dernieresPheromonesVUes ){
-					if ( go == goCourant ){
-						flagDejaVu = true;
-					}
-				}
-				if (!flagDejaVu) {
-					Debug.Log("Ajouté nouvelle cible :"+ciblesGOok.Count);
-					ciblesGOok.Add(cible); 
-				}
-			}
-			flagDejaVu = false;
-		}
-
-		Debug.Log("Nombre de cibles : "+ciblesGOok.Count);
-		//foreach (Cible cible in objetsReperes) {
-		foreach (Cible cible in ciblesGOok) {	
-
-
-			if(cible.getMonIAobjet() == null){
-
-				/*
-				// Le cas où c'est la dernière trouvé
-				if ( cible.getGameObject() == dernierePheromone){
-					Debug.Log("Dernière : merde");
-					continue;
-				}
-*/
-
-				//if(!tourneEnRond(cible)){
-
+				
+				if(!tourneEnRond(cible)){
+					
 					if(this.getCamp() == TypesCamps.BLANC){
 						
 						if(cible.getType () == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE){
@@ -253,7 +222,7 @@ public class IAouvriere: IAabstraite
 							}
 						}
 					}
-				//}
+				}
 			}
 		}
 		
@@ -271,33 +240,33 @@ public class IAouvriere: IAabstraite
 	override public TypesObjetsRencontres retourType(){
 		return this.monType;
 	}
-
-	/*
-	protected bool tourneEnRond(TypesAxes direction){
-
-		
+	
+	protected bool tourneEnRond(Cible cible){
+		Debug.Log("===> cible : "+cible.getDirection()+", derniere :"+derniereDirection);
+		TypesAxes direction = cible.getDirection ();
 		if (derniereDirection == TypesAxes.AUCUN) {
 			return false;
 		}
 		
-		//TypesAxes direction = pheromone.getDirection ();
 		if(this.derniereDirection == TypesAxes.DEVANT){
 			if(direction == TypesAxes.DERRIERE){
 				return true;
 			}
-			
+			return false;
 		}
 		
 		if(this.derniereDirection == TypesAxes.DERRIERE){
 			if(direction == TypesAxes.DEVANT){
 				return true;
 			}
+			return false;
 		}
 		
 		if(this.derniereDirection == TypesAxes.DEVANT_GAUCHE){
 			if(direction == TypesAxes.DERRIERE_DROITE){
 				return true;
 			}
+			return false;
 		}
 		
 		if(this.derniereDirection == TypesAxes.DEVANT_DROITE){
@@ -311,48 +280,25 @@ public class IAouvriere: IAabstraite
 			if(direction == TypesAxes.DEVANT_DROITE){
 				return true;
 			}
+			return false;
 		}
 		
 		if(this.derniereDirection == TypesAxes.DERRIERE_DROITE){
 			if(direction == TypesAxes.DEVANT_GAUCHE){
 				return true;
 			}
+			return false;
 		}
 		return false;
-
+		
 	}
-	*/
-
-//	protected bool tourneEnRond(GameObject pheromone){
-
-		//if (pheromone == null)return false;
-
-		/*
-		if (dernierePheromone == pheromone.getMonIAobjet()) {
-			Debug.Log("pheros pareil tourne en rond patapon");
-			return true;
+	/*
+	protected bool tourneEnRond(Cible pheromone){
+		if(derniereDirection == pheromone.getDirection()){
+				return true;
 		}
 		return false;
-*
-
-
-		if(dernierePheromone !=null){
-			if ( pheromone.getDistance ()<= DeplacementsFourmisScript.DISTANCE_CASE/2){
-				Debug.Log("Trop proche : merde");
-				return true;
-			}else{
-				if(dernierePheromone == pheromone.getGameObject()){
-					return true;
-				}
-			}
-		}
-		return false;	
-*/
-
-
-//	}
-
-
+	}*/
 	protected Cible repererReine(List<Cible> objetsReperes){
 		foreach (Cible cible in objetsReperes) {
 			if ( cible.getMonIAabstraite() != null ){
@@ -383,5 +329,22 @@ public class IAouvriere: IAabstraite
 		if (PVRestants <= 0) {
 			ennemy.mort ();
 		}
+	}
+	
+	protected void ajusterRepere(TypesAxes direction){
+		int pas = (int)direction - (int)TypesAxes.DEVANT;
+		if (pas > 0) {
+			TypesAxes[] tmp = axes;
+			for(int i = 0; i<tmp.Length; i++){
+				int index = pas + i;
+				if(index >= 6){
+					index = pas + i - 6;
+					
+				}
+				tmp[index] = axes[i];
+			}
+			axes = tmp;
+		}
+		
 	}
 }
