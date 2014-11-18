@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 3.1.0
+/// PY Lapersonne - Version 3.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -71,6 +71,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierMortScara		= "particules_mort_scarabee.prefab";
 	private const string fichierMortFN			= "particules_mort_fourmi.prefab";
 	private const string fichierMortFO			= "particules_mort_fourmi.prefab";
+	private const string fichierMortReine		= "particules_mort_reine.prefab";
 	#endregion
 
 	#region Bonbons
@@ -237,6 +238,10 @@ public class InvocateurObjetsScript : MonoBehaviour {
 			case Invocations.PARTICULES_MORT_BESTIOLE:
 				cheminPackage = packageFourmis;
 				nomFichier = fichierMortFO; // Meme fichier pour toutes les bestioles
+				break;
+			case Invocations.PARTICULES_MORT_REINE:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortReine; // Meme fichier pour toutes les bestioles
 				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);

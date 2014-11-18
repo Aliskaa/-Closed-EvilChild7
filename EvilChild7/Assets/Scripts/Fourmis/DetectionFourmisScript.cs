@@ -182,7 +182,10 @@ public class DetectionFourmisScript : MonoBehaviour {
 			} 
 
 			// L'objet rencontré est une phéromone noire (cm ou ouv) ou blanche (cm ou ouv)
-			if ( codeObjet == 25 || codeObjet == 26 || codeObjet == 35 || codeObjet == 36 ){
+			if ( objetSurChemin == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE
+			    || objetSurChemin == TypesObjetsRencontres.PHEROMONES_CM_NOIRE
+			    || objetSurChemin == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE
+			    || objetSurChemin == TypesObjetsRencontres.PHEROMONES_OUV_NOIRE){
 				objetRepere = new Cible(hit.distance, objetRencontre, direction, objetSurChemin);
 				objetsDetectes.Add(objetRepere);
 				return;
@@ -199,6 +202,19 @@ public class DetectionFourmisScript : MonoBehaviour {
 				return;
 
 			}
+
+			// L'objet rencontré et de l'eau ou un caillou
+			if ( (direction == TypesAxes.DEVANT
+			      /*|| direction == TypesAxes.DEVANT_DROITE 
+			      || direction == TypesAxes.DEVANT_GAUCHE*/)
+			    && ( objetSurChemin == TypesObjetsRencontres.EAU 
+			    || objetSurChemin == TypesObjetsRencontres.EAU3D
+			    || objetSurChemin == TypesObjetsRencontres.CAILLOU
+			    || objetSurChemin == TypesObjetsRencontres.TRES_GROS_CAILLOUX
+			    || objetSurChemin == TypesObjetsRencontres.PETIT_CAILLOU)){
+				DeplacementsFourmisScript dfs = gameObject.GetComponent<DeplacementsFourmisScript>();
+				dfs.StopperParCollision( objetSurChemin );
+			}
 		
 		} // End if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) )
 
@@ -211,7 +227,6 @@ public class DetectionFourmisScript : MonoBehaviour {
 	private void SignalerDetections(){
 		FourmiScript fs = gameObject.GetComponent<FourmiScript>();
 		IAappel aTartes = fs.iaBestiole;
-		IAreaction meMyselfAndI = (IAreaction) fs;
 		if (objetsDetectes.Count > 0) {
 			System.Text.StringBuilder sb = new System.Text.StringBuilder ();
 			sb.Append("Objets detectés :\n");
@@ -281,7 +296,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 		if (objetTouche == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE) return;
 		if (objetTouche == TypesObjetsRencontres.PHEROMONES_OUV_NOIRE) 	 return;
 		//Debug.Log ("Collision OnCollisionEnter avec : " + objetTouche + " / " + nomObjetTouche);
-		scriptDeplacement.StopperParCollision (objetTouche);
+		scriptDeplacement.StopperParCollision(objetTouche);
 	}
 
 	/// <summary>
@@ -292,7 +307,14 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// </summary>
 	/// <param name="coll">Le collider de l'objet entrain en collision avec soit</param>
 	void OnTriggerEnter( Collider coll ){
-		//Debug.Log ("Collision OnCollisionEnter avec : " + coll);
+		//Debug.Log ("Collision OnTriggerEnter avec : " + coll);
+		string nomObjetTouche = coll.gameObject.name;
+		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType (nomObjetTouche);
+		if ( objetTouche == TypesObjetsRencontres.EAU3D 
+		    || objetTouche == TypesObjetsRencontres.EAU ){
+			FourmiScript fs = gameObject.GetComponent<FourmiScript>();
+			fs.Noyade();
+		}
 	}
 
 	/// <summary>

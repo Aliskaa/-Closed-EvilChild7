@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -37,7 +37,22 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
-	
+
+#region Méthodes privées
+	/// <summary>
+	/// Mort "visible" de l'objet. Mort de la reine !
+	/// </summary>
+	public void Mourrir(){
+		Vector3 position = transform.localPosition;
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_REINE, position);
+		//MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
+		//meshRender.enabled = false;
+		Destroy(gameObject);
+	}
+#endregion
+
 #region Méthodes package
 	/// <summary>
 	/// Routine appellée automatiquement par Unity au lancement du script
@@ -79,8 +94,7 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	/// Provoque la mort de la reine
 	/// </summary>
 	public void mourir(){
-		//	Mourrir();
-		return;
+		Mourrir();
 	}
 	
 	/// <summary>

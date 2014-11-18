@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.2.0
+/// PY Lapersonne - Version 1.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -146,6 +146,10 @@ public enum Invocations : int {
 	/// Des particules de mort pour des bestioles
 	/// </summary>
 	PARTICULES_MORT_BESTIOLE = 75,
+	/// <summary>
+	/// Des particules de mort pour les reines
+	/// </summary>
+	PARTICULES_MORT_REINE = 76,
 	/// <summary>
 	/// Un objet de debug
 	/// </summary>

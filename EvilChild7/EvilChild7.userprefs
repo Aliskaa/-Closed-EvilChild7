@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Terrains\InvocateurObjetsScript.cs">
     <Files>
-      <File FileName="Assets\Dev_py\changelog.txt" Line="549" Column="34" />
       <File FileName="Assets\Dev_py\TODO.txt" Line="21" Column="11" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="578" Column="7" />
+      <File FileName="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" Line="431" Column="19" />
+      <File FileName="Assets\Scripts\Debug\DebugScript.cs" Line="143" Column="5" />
+      <File FileName="Assets\Scripts\Terrains\InvocateurObjetsScript.cs" Line="70" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

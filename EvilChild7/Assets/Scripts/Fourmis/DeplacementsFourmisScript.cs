@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.2.0
+/// PY Lapersonne - Version 3.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -426,6 +426,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				break;
 			case TypesObjetsRencontres.COTE_BAC_4:
 				FaireRotation(TypesRotations.NORD);
+				Avancer(AVANCEMENT_CASE);
+				break;
+			case TypesObjetsRencontres.PETIT_CAILLOU:
+			case TypesObjetsRencontres.CAILLOU:
+			case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
+			case TypesObjetsRencontres.EAU:
+			case TypesObjetsRencontres.EAU3D:
+				FaireRotation(TypesRotations.RANDOM);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			default:

@@ -564,8 +564,18 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
-
+	Tache 113 terminée : Création de méhode pour récupérer les positions des reines
+	Corrections des prefabs des cotés du bac : plus de triggers sur les box colliders
+	Mise à jour script de debug
+	Mise à jour prefab bac à sable sur la génération de terrain en random
+	Maintenant le terrain est généré de façon random
+	Tache 115 terminée 
+			- Collisions avec les cotés du bac prises en charge (changement de direction)
+			- Collisions avec l'eau : noyade
+			- Détection de l'eau (changement de direction)
+			- Collisons avec les cailloux (changement de direction)
+	Tache 125 terminée : mort de la reine
+	Mise à jour du prefab scarabée
 __________________________________
 
 Numero........:  ??;

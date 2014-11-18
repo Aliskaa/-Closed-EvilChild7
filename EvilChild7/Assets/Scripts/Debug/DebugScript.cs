@@ -32,6 +32,21 @@ public class DebugScript : MonoBehaviour {
 	/// 
 	/// </summary>
 	private bool flagOKPop;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	private GameObject bacAsable;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	private InvocateurObjetsScript scriptInvoc;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	private TerrainManagerScript tms;
 #endregion
 
 
@@ -58,6 +73,9 @@ public class DebugScript : MonoBehaviour {
 	void Awake(){
 		terrainRempli = false;
 		flagOKPop = false;
+		bacAsable = GameObject.Find("Bac à sable");
+		scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		tms = bacAsable.GetComponent<TerrainManagerScript>();
 	}
 
 	/// <summary>
@@ -72,8 +90,6 @@ public class DebugScript : MonoBehaviour {
 
 			terrainRempli = true;
 			flagOKPop = true;
-			GameObject bacAsable = GameObject.Find("Bac à sable");
-			InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 
 			#region Debogage IA
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, new Vector3(85f, 0.1f, 95f));
@@ -82,7 +98,7 @@ public class DebugScript : MonoBehaviour {
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, new Vector3(85f, 0.1f, 95f));
-			scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(85f, 0.1f, 95f));
+			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, new Vector3(85f, 0.1f, 95f));
 			//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, new Vector3(85f, 0.1f, 95f));
@@ -92,11 +108,63 @@ public class DebugScript : MonoBehaviour {
 
 		}
 
-
 		/*
-		 * Debogage click / convertion coordonnées
+		 * 
 		 */
 		if ( Input.GetMouseButtonDown(1/*CLIC_DROIT_SOURIS*/) ){
+			Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
+			float distance;
+			Plane planDuSol = new Plane(Vector3.up, transform.position);
+			if ( planDuSol.Raycast(rayon, out distance) ){ 
+				Vector3 pointImpact = rayon.GetPoint(distance);
+				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
+				//tms.ConvertirCaseEau(click);
+
+				#region Debogage IA
+				//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+				//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
+				//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BONBON_MURE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_BLEU, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_ROSE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ORANGE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BONBON_VERT, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ROSE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+				//scriptInvoc.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, click);
+				scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
+				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_BLANCHE, click);
+				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
+				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_NOIRE, click);
+				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_NOIRE, click);
+				//bite.GetComponent<PheromonesScript>().direction = TypesAxes.DEVANT;
+				#endregion 
+
+				#region Debogage collision
+				//tms.ConvertirCaseEau(click);
+				//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+				//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
+				//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
+				#endregion
+
+				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
+			}
+
+		}
+
+		/*
+		 * 
+		 */
+		if ( Input.GetMouseButtonDown (0/*CLIC_GAUCHE_SOURIS*/) ){
 			Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
 			float distance;
 			Plane planDuSol = new Plane(Vector3.up, transform.position);
@@ -105,40 +173,7 @@ public class DebugScript : MonoBehaviour {
 				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-				//tms.ConvertirCaseEau(click);
-
-				#region Debogage IA
-				InvocateurObjetsScript ios = terrainGo.GetComponent<InvocateurObjetsScript>();
-				//ios.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
-				//ios.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
-				//ios.InvoquerObjet(Invocations.CAILLOU, click);
-				//ios.InvoquerObjet(Invocations.BONBON_MURE, click);
-				//ios.InvoquerObjet(Invocations.BONBON_ANGLAIS_BLEU, click);
-				//ios.InvoquerObjet(Invocations.BONBON_ANGLAIS_ROSE, click);
-				//ios.InvoquerObjet(Invocations.BONBON_ORANGE, click);
-				//ios.InvoquerObjet(Invocations.BONBON_VERT, click);
-				//ios.InvoquerObjet(Invocations.BONBON_ROSE, click);
-				//ios.InvoquerObjet(Invocations.OEUF_FOURMI, click);
-				//ios.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
-				ios.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
-				//ios.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, click);
-				//ios.InvoquerObjet(Invocations.SCARABEE, click);
-				//ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_BLANCHE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_NOIRE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_NOIRE, click);
-				//bite.GetComponent<PheromonesScript>().direction = TypesAxes.DEVANT;
-				#endregion 
-
-
-				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
 			}
 		}
 

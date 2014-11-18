@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 2.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -29,8 +29,14 @@ public class TerrainManagerScript : MonoBehaviour {
 	 * ********* */
 
 #region Attributs privés
-	//private Vector3
-
+	/// <summary>
+	/// Les coordonnées 3D locales au terrain de la reine noire
+	/// </summary>
+	private Vector3 positionReineNoire;
+	/// <summary>
+	/// Les coordonnées 3D locales au terrain de la reine blanche
+	/// </summary>
+	private Vector3 positionReineBlanche;
 #endregion
 
 #region Attributs publics
@@ -127,96 +133,6 @@ public class TerrainManagerScript : MonoBehaviour {
 	 * Méthodes *
 	 * ******** */
 
-#region Méthodes publics
-	/// <summary>
-	/// Créé une nouvelle pièce
-	/// </summary>
-	/// <param name="x">La largeur entre les morceaux</param>
-	/// <param name="y">La hauteur entre les pièces</param>
-	/// <param name="type">Le type de terrain</param>
-	/// <returns>The new chunk's script</returns>
-	public HexagonesVueScript CreerPiece( int x, int y, TypesTerrains type ){
-
-		// Création du GameObject et ajout au parent
-		if ( x == 0 && y == 0 && chunkHolder == null ){
-			chunkHolder = GameObject.Find("Terrain");
-			chunkHolder.transform.parent = parentTerrain.transform;
-		}
-
-		GameObject chunkObj = new GameObject("BlocTerrain[" + x + "," + y + "]");
-		chunkObj.AddComponent<HexagonesVueScript>();
-		Texture2D texture;
-		switch (type) {
-			case TypesTerrains.SABLE:
-				texture = (afficherHexagones ? textureTerrainSable : textureTerrainSableHexagones);
-				break;
-			case TypesTerrains.EAU:
-				texture = textureTerrainEau;
-				break;
-			default:
-				texture = textureTerrainSableHexagones;
-				break;
-		}
-		chunkObj.AddComponent<MeshRenderer>().material.mainTexture = texture;
-		chunkObj.AddComponent<MeshFilter>();
-		chunkObj.transform.parent = chunkHolder.transform;
-
-		return chunkObj.GetComponent<HexagonesVueScript>();
-
-	}
-
-	/// <summary>
-	/// Vérifie si le terrain est rempli, i.e. si tous les hexagones sont créés
-	/// </summary>
-	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
-	public bool VerifierRemplissageTerrain(){
-		float nombreHexagonesAttendus = tailleMap.x * tailleMap.y;
-		return TerrainUtils.GetHexagones().Count == nombreHexagonesAttendus;
-	}
-
-	/// <summary>
-	/// Va convertir des coordonées 3D GLOBALES (typqiuement venant d'un clic de souris ou autres)
-	/// en coordonnées 3D LOCALES au terrain.
-	/// </summary>
-	/// <param name="coord">Des coordonnées globales</param>
-	public Vector3 ConvertirCoordonnes( Vector3 coord ){
-		chunkHolder = GameObject.Find("Terrain");
-		Vector3 coordLocalesTerrain = chunkHolder.transform.worldToLocalMatrix.MultiplyPoint(coord);
-		//Debug.Log("Coordonnées locales calculées : " + coordLocalesTerrain);
-		return coordLocalesTerrain;
-	}
-
-	/// <summary>
-	/// Converti une case de sable en une case d'eau
-	/// </summary>
-	/// <param name="coordonnees">Les coordonnées de l'hexagone ciblé (locales au terrain)</param>
-	public void ConvertirCaseEau( Vector3 coordonnees ){
-		HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordonnees);
-		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjet(Invocations.EAU, hexagoneClick.positionLocaleSurTerrain);
-		scriptInvoc.InvoquerObjet(Invocations.EAU3D, hexagoneClick.positionLocaleSurTerrain);
-	}
-
-/*
-	/// <summary>
-	/// Retourne la position de la reine blanche
-	/// </summary>
-	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
-	public static Vector3 PositionReineBlanche(){
-		
-	}
-		
-	/// <summary>
-	/// Retourne la position de la reine noire
-	/// </summary>
-	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
-	public static Vector3 PositionReineNoire(){
-		
-	}
-*/
-#endregion
-	
 #region Méthodes privées
 	/// <summary>
 	/// Créé des meshes pour les hexagones 
@@ -481,21 +397,48 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <param name="typeMap">Le type de terrain</param>
 	private void CreerMap( TypesMaps typeMap ){
 //		Debug.Log("Création du terrain : "+typeMap);
-		switch (typeMap){
+		TypesMaps tm = typeMap;
+		if ( tm == TypesMaps.RANDOM ){
+			int indice = UnityEngine.Random.Range(1,6);
+			switch ( indice ){
+				case 1:
+					tm = TypesMaps.NIVEAU_1;
+					break;
+				case 2:
+					tm = TypesMaps.NIVEAU_2;
+					break;
+				case 3:
+					tm = TypesMaps.NIVEAU_3;
+					break;
+				case 4:
+					tm = TypesMaps.NIVEAU_4;
+					break;
+				case 5:
+				case 6:
+					tm = TypesMaps.RANDOM;
+					break;
+			}
+		}
+		switch (tm){
 			case TypesMaps.NIVEAU_1:
 				CreerMapDesert();
+				PlacerReines(tm);
 				break;
 			case TypesMaps.NIVEAU_2:
 				CreerMapLac();
+				PlacerReines(tm);
 				break;
 			case TypesMaps.NIVEAU_3:
 				CreerMapTraversees();
+				PlacerReines(tm);
 				break;
 			case TypesMaps.NIVEAU_4:
 				CreerMapEtranglement();
+				PlacerReines(tm);
 				break;
 			case TypesMaps.RANDOM:
-				CreerMapRandom();
+				CreerMapRandom();	
+				PlacerReines(tm);
 				break;
 		}
 		// FIXME : Valeur en dur, Translate() non relatif, sale
@@ -532,50 +475,61 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Va placer les reines sur le terrain
 	/// </summary>
-	private void PlacerReines(){
+	/// <param name="tm">Le type de map</param>
+	private void PlacerReines( TypesMaps tm ){
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 		HexagoneInfo h;
-		switch (type){
+		switch (tm){
 			case TypesMaps.NIVEAU_1:
 				// Reine blanche dans le 37ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(37);
+				positionReineBlanche = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
 				// Reine noire dans le 360ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(360);
+				positionReineNoire = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
 			case TypesMaps.NIVEAU_2:
 				// Reine blanche dans le 37ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(37);
+				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
 				// Reine noire dans le 360ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(360);
+				positionReineNoire = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
 			case TypesMaps.NIVEAU_3:
 				// Reine blanche dans le 37ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(37);
+				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
 				// Reine noire dans le 360ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(360);
+				positionReineNoire = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
 			case TypesMaps.NIVEAU_4:
 				// Reine blanche dans le 61ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(61);
+				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
 				// Reine noire dans le 384ème hexagone (sur 400)
 				h = TerrainUtils.GetHexagoneAt(384);
+				positionReineNoire = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
 			case TypesMaps.RANDOM:
 				// Reine blanche en random
 				int caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
 				h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
+				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
 				// Reine noire en random
 				caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
+				positionReineNoire = h.positionLocaleSurTerrain;	
 				h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
@@ -592,10 +546,97 @@ public class TerrainManagerScript : MonoBehaviour {
 		//Debug.Log("Création du terrain : "+type);
 		CreerMap(type);
 		CreerMap3D();
-		PlacerReines();
 	}
 #endregion
+
+#region Méthodes publics
+	/// <summary>
+	/// Créé une nouvelle pièce
+	/// </summary>
+	/// <param name="x">La largeur entre les morceaux</param>
+	/// <param name="y">La hauteur entre les pièces</param>
+	/// <param name="type">Le type de terrain</param>
+	/// <returns>The new chunk's script</returns>
+	public HexagonesVueScript CreerPiece( int x, int y, TypesTerrains type ){
+		
+		// Création du GameObject et ajout au parent
+		if ( x == 0 && y == 0 && chunkHolder == null ){
+			chunkHolder = GameObject.Find("Terrain");
+			chunkHolder.transform.parent = parentTerrain.transform;
+		}
+		
+		GameObject chunkObj = new GameObject("BlocTerrain[" + x + "," + y + "]");
+		chunkObj.AddComponent<HexagonesVueScript>();
+		Texture2D texture;
+		switch (type) {
+		case TypesTerrains.SABLE:
+			texture = (afficherHexagones ? textureTerrainSable : textureTerrainSableHexagones);
+			break;
+		case TypesTerrains.EAU:
+			texture = textureTerrainEau;
+			break;
+		default:
+			texture = textureTerrainSableHexagones;
+			break;
+		}
+		chunkObj.AddComponent<MeshRenderer>().material.mainTexture = texture;
+		chunkObj.AddComponent<MeshFilter>();
+		chunkObj.transform.parent = chunkHolder.transform;
+		
+		return chunkObj.GetComponent<HexagonesVueScript>();
+		
+	}
 	
+	/// <summary>
+	/// Vérifie si le terrain est rempli, i.e. si tous les hexagones sont créés
+	/// </summary>
+	/// <returns><c>true</c>, si le terrain est rempli, <c>false</c> sinon.</returns>
+	public bool VerifierRemplissageTerrain(){
+		float nombreHexagonesAttendus = tailleMap.x * tailleMap.y;
+		return TerrainUtils.GetHexagones().Count == nombreHexagonesAttendus;
+	}
+	
+	/// <summary>
+	/// Va convertir des coordonées 3D GLOBALES (typqiuement venant d'un clic de souris ou autres)
+	/// en coordonnées 3D LOCALES au terrain.
+	/// </summary>
+	/// <param name="coord">Des coordonnées globales</param>
+	public Vector3 ConvertirCoordonnes( Vector3 coord ){
+		chunkHolder = GameObject.Find("Terrain");
+		Vector3 coordLocalesTerrain = chunkHolder.transform.worldToLocalMatrix.MultiplyPoint(coord);
+		//Debug.Log("Coordonnées locales calculées : " + coordLocalesTerrain);
+		return coordLocalesTerrain;
+	}
+	
+	/// <summary>
+	/// Converti une case de sable en une case d'eau
+	/// </summary>
+	/// <param name="coordonnees">Les coordonnées de l'hexagone ciblé (locales au terrain)</param>
+	public void ConvertirCaseEau( Vector3 coordonnees ){
+		HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordonnees);
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptInvoc.InvoquerObjet(Invocations.EAU, hexagoneClick.positionLocaleSurTerrain);
+		scriptInvoc.InvoquerObjet(Invocations.EAU3D, hexagoneClick.positionLocaleSurTerrain);
+	}
+
+	/// <summary>
+	/// Retourne la position de la reine blanche
+	/// </summary>
+	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
+	public Vector3 PositionReineBlanche(){
+		return positionReineBlanche;	
+	}
+		
+	/// <summary>
+	/// Retourne la position de la reine noire
+	/// </summary>
+	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
+	public Vector3 PositionReineNoire(){
+		return positionReineNoire;
+	}
+#endregion
+
 }
 #endregion
 

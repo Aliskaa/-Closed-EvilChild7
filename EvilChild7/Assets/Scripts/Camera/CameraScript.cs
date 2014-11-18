@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 3.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -153,6 +153,7 @@ public class CameraScript : MonoBehaviour {
 			}
 			return;
 		}
+
 		/*
 		 * Touche a : aller à gauche
 		 */
@@ -162,6 +163,7 @@ public class CameraScript : MonoBehaviour {
 			}
 			return;
 		}
+	
 		/*
 		 * Touche z : aller devant / monter
 		 */
@@ -172,6 +174,7 @@ public class CameraScript : MonoBehaviour {
 			}
 			return;
 		}
+
 		/*
 		 * Touche s : aller derrière / descendre
 		 */
@@ -182,6 +185,7 @@ public class CameraScript : MonoBehaviour {
 			}
 			return;
 		}  
+
 		/*
 		 * Touche a : rotation gauche
 		 */
@@ -192,6 +196,7 @@ public class CameraScript : MonoBehaviour {
 			}
 			return;
 		}
+
 		/*
 		 * Touche e : rotation droite
 		 */
@@ -202,6 +207,7 @@ public class CameraScript : MonoBehaviour {
 			}
 			return;
 		}
+
 		/*
 		 * Touche espace : réinitialisation de la caméra
 		 */
@@ -223,7 +229,7 @@ public class CameraScript : MonoBehaviour {
 			}
 		}
 		/*
-		 * Rase cielle : ctrl + souris molette haut
+		 * Rase ciel : ctrl + souris molette haut
 		 */
 		//zoom = Input.GetAxis(MOLETTE_ZOOM);
 		if ( Input.GetKey(TOUCHE_RAZMOT) && zoom > 0 ){

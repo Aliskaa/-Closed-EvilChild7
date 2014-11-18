@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -54,19 +54,6 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	 * ******** */
 	
 #region Méthodes privées
-	/// <summary>
-	/// Mort de l'objet
-	/// </summary>
-	private void Mourrir(){
-		Vector3 position = transform.localPosition;
-		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
-		//MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
-		//meshRender.enabled = false;
-		Destroy(gameObject);
-	}
-
 	/// <summary>
 	/// Pour des besoins de debug
 	/// </summary>
@@ -121,18 +108,28 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 		yield return StartCoroutine(AttendreEtMourrir());
 	}
 	*/
-
-	/// <summary>
-	/// Routine appellée automatiquement par Unity à chaque frame.
-	/// </summary>
-	void Update(){
-		//if ( pointsDeVie <= 0 ){ // FIXME Voir avec l'IA
-		//	Mourrir();
-		//}
-	}
 #endregion
 
 #region Méthodes publiques venant de IAreaction
+	/// <summary>
+	/// Mort "visible" de l'objet. Mort à cause d'une bestiole ou d'un objet.
+	/// </summary>
+	public void Mourrir(){
+		Vector3 position = transform.localPosition;
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
+		//MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
+		//meshRender.enabled = false;
+		Destroy(gameObject);
+	}
+
+	/// <summary>
+	/// Mort "visible" de l'objet. Mort par noyade.
+	/// </summary>
+	public void Noyade(){
+		Destroy(gameObject);
+	}
 
 	/// <summary>
 	/// Fait bouger la fourmi.
