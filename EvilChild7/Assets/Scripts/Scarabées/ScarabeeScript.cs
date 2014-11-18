@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 1.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -28,6 +28,11 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// </summary>
 	// FIXME Voir avec l'IA
 	private int timerDisparition;
+
+	/// <summary>
+	/// Référence vers le script de déplacement de l'objet
+	/// </summary>
+	private DeplacementsScarabeeScript scriptDeplacement;
 #endregion
 
 #region Constantes privées
@@ -39,7 +44,7 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 
 #region Attributs publics
 	/// <summary>
-	/// Le camps de la fourmi qui sortira de l'oeuf
+	/// Le camps du scarabée
 	/// </summary>
 	[HideInInspector]
 	public TypesCamps camps;
@@ -49,6 +54,12 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// </summary>
 	[HideInInspector]
 	public IAappel iaBestiole;
+
+	/// <summary>
+	/// Le dernier axe utilisé
+	/// </summary>
+	[HideInInspector]
+	public TypesAxes dernierAxeUtilise;
 #endregion
 
 
@@ -72,8 +83,6 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
-		MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
-		meshRender.enabled = false;
 		Destroy(gameObject);
 	}
 #endregion
@@ -83,6 +92,7 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// Routine appellée automatiquement par Unity au lancement du script
 	/// </summary>
 	void Awake(){
+		scriptDeplacement = (DeplacementsScarabeeScript)gameObject.GetComponent<DeplacementsScarabeeScript> ();
 		camps = TypesCamps.AUCUN;
 		timerDisparition = NOMBRE_CYCLES_VIEILLISSEMENT;
 		timerDisparition = 2500; // FIXME Voir avec l'IA
@@ -108,18 +118,84 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	/// <param name="direction">Direction à prendre</param>
 	/// <param name="nbCases">Nombre de case à avancer</param>
 	public void bouger( TypesAxes direction, int nbCases ){
-		Debug.Log("bouger scarabée");
-		// TODO
-		return;
+
+		if ( scriptDeplacement.objectifAtteint ){
+			
+			dernierAxeUtilise = direction;
+			
+			// Récupération de la rotation courante afin
+			// d'en obtenir un indice
+			TypesRotations rotationCourante = scriptDeplacement.orientationCourante;
+			int indiceRotationCourante;
+			switch(rotationCourante){
+			case TypesRotations.NORD:
+				indiceRotationCourante = 1;
+				break;
+			case TypesRotations.NORD_EST:
+				indiceRotationCourante = 2;
+				break;
+			case TypesRotations.SUD_EST:
+				indiceRotationCourante = 3;
+				break;
+			case TypesRotations.SUD:
+				indiceRotationCourante = 4;
+				break;
+			case TypesRotations.SUD_OUEST:
+				indiceRotationCourante = 5;
+				break;
+			case TypesRotations.NORD_OUEST:
+				indiceRotationCourante = 6;
+				break;
+			default:
+				indiceRotationCourante = 0;
+				break;
+			}
+			
+			// Calcul de la nouvelle rotation avec l'indice trouvé précedemment
+			// et la direction demandée
+			int nouvelleRotationInt = (indiceRotationCourante-1)+(int)direction;
+			nouvelleRotationInt = ( nouvelleRotationInt > 6 ? nouvelleRotationInt % 6 : nouvelleRotationInt);
+			TypesRotations nouvelleRotation;
+			switch(nouvelleRotationInt){
+			case 1:
+				nouvelleRotation = TypesRotations.NORD;
+				break;
+			case 2:
+				nouvelleRotation = TypesRotations.NORD_EST;
+				break;
+			case 3:
+				nouvelleRotation = TypesRotations.SUD_EST;
+				break;
+			case 4:
+				nouvelleRotation = TypesRotations.SUD;
+				break;
+			case 5:
+				nouvelleRotation = TypesRotations.SUD_OUEST;
+				break;
+			case 6:
+				nouvelleRotation = TypesRotations.NORD_OUEST;
+				break;
+			default:
+				nouvelleRotation = TypesRotations.AUCUN;
+				break;
+			}
+			
+			// Action ! On se déplace
+			scriptDeplacement.FaireRotation(nouvelleRotation);
+			scriptDeplacement.Avancer(nbCases);
+			
+		}
+
 	}
 	
 	/// <summary>
 	/// Fait déambuler le scarabée
 	/// </summary>
 	public TypesAxes deambuler(){
-		Debug.Log("deambuler scarabée");
-		// TODO
-		return TypesAxes.AUCUN;
+		TypesAxes axe = (TypesAxes) Random.Range(1, 6);
+		dernierAxeUtilise = axe;
+		bouger(axe, 1);
+		return axe;
 	}
 	
 	/// <summary>
@@ -146,4 +222,12 @@ public class ScarabeeScript : MonoBehaviour, IAreaction {
 	}
 #endregion
 
+#region Autres méthodes publiques
+	/// <summary>
+	/// Mort "visible" de l'objet. Mort par noyade.
+	/// </summary>
+	public void Noyade(){
+		Destroy(gameObject);
+	}
+#endregion
 }

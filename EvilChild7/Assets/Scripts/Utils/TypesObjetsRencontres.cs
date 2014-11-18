@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -66,6 +66,10 @@ public enum TypesObjetsRencontres : int {
 	/// Collision avec une partie du terrain
 	/// </summary>
 	BLOC_TERRAIN = 7,
+	/// <summary>
+	/// Collision avec le fond du bac
+	/// </summary>
+	FOND = 7,
 	/// <summary>
 	/// Collision / détection avec un petit caillou
 	/// </summary>

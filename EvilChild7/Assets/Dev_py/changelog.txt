@@ -560,8 +560,8 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  48;
+Date..........:  18/11/2014 18h10;
 Auteur........:  py;
 Commentaire...:
 	Tache 113 terminée : Création de méhode pour récupérer les positions des reines
@@ -576,6 +576,13 @@ Commentaire...:
 			- Collisons avec les cailloux (changement de direction)
 	Tache 125 terminée : mort de la reine
 	Mise à jour du prefab scarabée
+	Configuration du scarabée
+		- Déplacement
+		- Détection
+		- Lien avec l'IA
+	Prise en charge dans les collisons à oublier du fond du bac à sable
+	Changement méthode de Lerp pour le translation des scarabées
+	Utilsiation du FixedUpdate plus que de Update pour le déplacement des fourmis et scarabées;
 __________________________________
 
 Numero........:  ??;

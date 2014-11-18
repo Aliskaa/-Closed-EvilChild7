@@ -1,10 +1,10 @@
 /// <summary>
-/// DetectionFourmisScript.cs
-/// Script pour gérer les détections d'objets avec l'odorat et la vue ains que les collisions des fourmis
+/// DetectionScarabeeScript.cs
+/// Script pour gérer les détections d'objets par le scarabée.
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 4.0.0
+/// PY Lapersonne - Version 1.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -13,9 +13,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Classe pour gérer les détections d'objets avec l'odorat et la vue ains que les collisions des fourmis
+/// Classe pour gérer les détections d'objets par le scarabée
 /// </summary>
-public class DetectionFourmisScript : MonoBehaviour {
+public class DetectionScarabeeScript : MonoBehaviour {
 
 
 	/* ********* *
@@ -26,17 +26,17 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// Référence vers le script de déplacement de l'objet
 	/// </summary>
-	private DeplacementsFourmisScript scriptDeplacement;
+	private DeplacementsScarabeeScript scriptDeplacement;
 
 	/// <summary>
-	/// Une lite d'objets qui ont été vus et qui n'ont pas encore été signalé à "l'IA"
+	/// Référence vers le script du scarabée
+	/// </summary>
+	private ScarabeeScript scarabeeScript;
+
+	/// <summary>
+	/// Une liste d'objets qui ont été vus et qui n'ont pas encore été signalé à "l'IA"
 	/// </summary>
 	private List<Cible> objetsDetectes;
-
-	/// <summary>
-	/// La visée qui est appliquée à la fourmis, en fonction de sa caste
-	/// </summary>
-	private int viseeAppliquee;
 #endregion
 	
 #region Constantes privées
@@ -44,13 +44,11 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// La distance pour aller du centre d'une case à un autre
 	/// </summary>
 	private const int DISTANCE_CASE = 5;
-#endregion
 
-#region Attributs publics
 	/// <summary>
-	/// Le type de fourmi auquel doit s'appliquer le script
+	/// La visée max du scarabée
 	/// </summary>
-	public TypesFourmis typeFourmi;
+	private const int VISEE = 2;
 #endregion
 
 	/* ******** *
@@ -172,37 +170,6 @@ public class DetectionFourmisScript : MonoBehaviour {
 
 			}
 
-			// L'objet sur le chemin est un scarabéé
-			 if ( objetSurChemin == TypesObjetsRencontres.SCARABEE ){
-				ScarabeeScript ss = objetRencontre.GetComponent<ScarabeeScript>();
-				iaObjet = ss.iaBestiole;
-				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
-				objetsDetectes.Add(objetRepere);
-				return;
-			} 
-
-			// L'objet rencontré est une phéromone noire (cm ou ouv) ou blanche (cm ou ouv)
-			if ( objetSurChemin == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE
-			    || objetSurChemin == TypesObjetsRencontres.PHEROMONES_CM_NOIRE
-			    || objetSurChemin == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE
-			    || objetSurChemin == TypesObjetsRencontres.PHEROMONES_OUV_NOIRE){
-				objetRepere = new Cible(hit.distance, objetRencontre, direction, objetSurChemin);
-				objetsDetectes.Add(objetRepere);
-				return;
-			} 
-
-			// L'objet rencontré est de la nourriture
-			if ( codeObjet >= ((int)TypesObjetsRencontres.BONBON_ANGLAIS_BLEU) 
-			           && codeObjet <= ((int)TypesObjetsRencontres.BONBON_VERT) ){
-
-				NourrituresScript ns = objetRencontre.GetComponent<NourrituresScript>();
-				iaObjet = ns.iaNourriture;
-				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
-				objetsDetectes.Add(objetRepere);
-				return;
-
-			}
-
 			// L'objet rencontré et de l'eau ou un caillou
 			if ( (direction == TypesAxes.DEVANT
 			      /*|| direction == TypesAxes.DEVANT_DROITE 
@@ -212,8 +179,8 @@ public class DetectionFourmisScript : MonoBehaviour {
 			    || objetSurChemin == TypesObjetsRencontres.CAILLOU
 			    || objetSurChemin == TypesObjetsRencontres.TRES_GROS_CAILLOUX
 			    || objetSurChemin == TypesObjetsRencontres.PETIT_CAILLOU)){
-				DeplacementsFourmisScript dfs = gameObject.GetComponent<DeplacementsFourmisScript>();
-				dfs.StopperParCollision( objetSurChemin );
+				scriptDeplacement = gameObject.GetComponent<DeplacementsScarabeeScript>();
+				scriptDeplacement.StopperParCollision( objetSurChemin );
 			}
 		
 		} // End if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) )
@@ -225,10 +192,9 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Vide la liste stockant ces objets une fois l'IA avertie.
 	/// </summary>
 	private void SignalerDetections(){
-		FourmiScript fs = gameObject.GetComponent<FourmiScript>();
-		IAappel aTartes = fs.iaBestiole;
+		IAappel aTartes = scarabeeScript.iaBestiole;
 		if (objetsDetectes.Count > 0) {
-			System.Text.StringBuilder sb = new System.Text.StringBuilder ();
+			System.Text.StringBuilder sb = new System.Text.StringBuilder();
 			sb.Append("Objets detectés :\n");
 			foreach (Cible c in objetsDetectes) {
 				sb.Append ("\t").Append (c).Append ("\n");
@@ -241,39 +207,6 @@ public class DetectionFourmisScript : MonoBehaviour {
 			objetsDetectes = new List<Cible> ();
 			aTartes.signaler(objetsDetectes);
 		}
-	}
-
-	/// <summary>
-	/// Initialise les variables qui dépendent de la caste de la fourmis
-	/// </summary>
-	private void InitialiserVariablesFourmi(){
-		switch ( typeFourmi ){
-			case TypesFourmis.COMBATTANTE_NOIRE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_COMBATTANTE;
-				break;
-			case TypesFourmis.CONTREMAITRE_NOIRE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_CONTREMAITRE;	
-				break;
-			case TypesFourmis.GENERALE_NOIRE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_GENERALE;	
-				break;
-			case TypesFourmis.OUVRIERE_NOIRE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
-				break;
-			case TypesFourmis.COMBATTANTE_BLANCHE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_COMBATTANTE;
-				break;
-			case TypesFourmis.CONTREMAITRE_BLANCHE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_CONTREMAITRE;	
-				break;
-			case TypesFourmis.GENERALE_BLANCHE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_GENERALE;	
-				break;
-			case TypesFourmis.OUVRIERE_BLANCHE:
-				viseeAppliquee = (int) ViseesFourmis.VISEE_OUVRIERE;	
-				break;
-		}
-		//Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une visee de "+viseeAppliquee);
 	}
 #endregion
 
@@ -313,8 +246,8 @@ public class DetectionFourmisScript : MonoBehaviour {
 		TypesObjetsRencontres objetTouche = GameObjectUtils.parseToType (nomObjetTouche);
 		if ( objetTouche == TypesObjetsRencontres.EAU3D 
 		    || objetTouche == TypesObjetsRencontres.EAU ){
-			FourmiScript fs = gameObject.GetComponent<FourmiScript>();
-			fs.Noyade();
+			ScarabeeScript ss = gameObject.GetComponent<ScarabeeScript>();
+			ss.Noyade();
 		}
 	}
 
@@ -322,48 +255,25 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Routine appellée automatiquement par Unity au lancement du script
 	/// </summary>
 	void Awake(){
-		scriptDeplacement = (DeplacementsFourmisScript) gameObject.GetComponent(typeof(DeplacementsFourmisScript));
+		scriptDeplacement = (DeplacementsScarabeeScript) gameObject.GetComponent<DeplacementsScarabeeScript>();
+		scarabeeScript = (ScarabeeScript) gameObject.GetComponent<ScarabeeScript>();
 		objetsDetectes = new List<Cible>();
-		InitialiserVariablesFourmi();
 	}
 
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame.
-	/// Va vérifier ce qu'il y a autour de la fourmis dans les 6 sens possibles/
+	/// Va vérifier ce qu'il y a autour du scarabee dans les 6 sens possibles.
 	/// </summary>
 	void Update(){
-		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DEVANT_DROITE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DERRIERE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DERRIERE_DROITE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, viseeAppliquee * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DEVANT, VISEE * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DEVANT_DROITE, VISEE * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, VISEE * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DERRIERE, VISEE * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DERRIERE_DROITE, VISEE * DISTANCE_CASE);
+		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, VISEE * DISTANCE_CASE);
 		SignalerDetections();
 	}
-#endregion
 
 }
-
-#region VitessesFourmis
-/// <summary>
-/// Les visées des différentes castes de fourmis (vue et odorat confondues)
-/// </summary>
-public enum ViseesFourmis : int { 
-	/// <summary>
-	/// La visée de l'ouvrière, à 5/4 = 1
-	/// </summary>
-	VISEE_OUVRIERE = 1,
-	/// <summary>
-	/// La visée de la contremaitre, à 20/4 = 5
-	/// </summary>
-	VISEE_CONTREMAITRE = 5,
-	/// <summary>
-	/// La visée de la combattante, à 5/4 = 1
-	/// </summary>
-	VISEE_COMBATTANTE = 1,
-	/// <summary>
-	/// La visée de la générale, à 20/4 = 5
-	/// </summary>
-	VISEE_GENERALE = 5,
-}
 #endregion
+

@@ -6,11 +6,11 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 68				>				[py]			- fourmis blanche reine
 72				>				[py]			- fourmis noire reine
 123				>				[py]			- oeufs
-84				>>>	lancé			[py]			Configuration des scarabées
-														- IA
-														- déplacements
-														- collisions
-														- attaque des oeufs
+84				>>>	lancé		[py]		Configuration des scarabées
+												- IA
+												- déplacements
+												- collisions
+												- attaque des oeufs
 91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
 98					non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
 100					non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
@@ -19,6 +19,10 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 106		1		>>	non lancé	[py]		Retour à la base (reine = position fixe)
 122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
 124		1		>>	non lancé	[py]		Dès qu'un objet touche l'eau, il disparait
-126		1			non lancé	[py] 		Matériaux/texture eau case
+126		1		>	non lancé	[py] 		Matériaux/texture eau case
+127		1		>	non lancé	[py]		Mode bac à sable : scène Unity avec des touches+clics gauche pour pop, clic droit pour delete
+128		1		>>	non lancé	[py]		Refaire particules de mort, plutot façon "eclosion oeuf" gris/noir/blanc
+129		1		>>	non lancé	[py]		Rectifier monde de jeu : des objets/décos sont en l'air
+130		1		>>>	non lancé	[py]		Les scarabées se déplacent en crabe
 
-[Dernier ID utilisé : 126]
+[Dernier ID utilisé : 130]

@@ -1,22 +1,22 @@
 /// <summary>
-/// DeplacementsFourmisScript.cs
-/// Script pour gérer les déplacements des fourmis sur le terrain avec entre autres
+/// DeplacementsScarabeeScript.cs
+/// Script pour gérer les déplacements des scarabée sur le terrain avec entre autres
 /// 	- le déplacement à proprement parler
 /// 	- la connaissance du terrain de la fourmis et de la place qu'elle a
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.4.0
+/// PY Lapersonne - Version 1.0.0
 /// </remarks>
 
 using UnityEngine;
 using System.Collections;
 
-#region DeplacementsFourmisScript
+#region DeplacementsScarabeeScript
 /// <summary>
-/// Script pour gérer le déplacement d'une fourmis
+/// Script pour gérer le déplacement d'un scarabée
 /// </summary>
-public class DeplacementsFourmisScript : MonoBehaviour {
+public class DeplacementsScarabeeScript : MonoBehaviour {
 
 
 	/* ********* *
@@ -25,16 +25,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 #region Attributs privés
 	/// <summary>
-	/// Référence vers un script permettant de faire apapraitre des objets
-	/// </summary>
-	private InvocateurObjetsScript scriptInvocation;
-
-	/// <summary>
-	/// Le type de phéromones à invoquer selon la fourmi
-	/// </summary>
-	private Invocations typePheromone;
-
-	/// <summary>
 	/// La position que doit atteindre l'objet, i.e. le centre d'une case.
 	/// Position mise à jour régulièrement.
 	/// </summary>
@@ -42,19 +32,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 	/// <summary>
 	/// Distance de la translation à effectuer de la positon courante de départ
-	/// à la positon finale à atteindre
+    /// à la positon finale à atteindre
 	/// </summary>
 	private float distanceTranslation;
-	
+
 	/// <summary>
 	/// Le début au début de la translation
 	/// </summary>
 	private float tempsDebutTranslation;
-
-	/// <summary>
-	/// La vitesse qui est appliquée à la fourmis, en fonction de sa caste
-	/// </summary>
-	private int vitesseAppliquee;
 #endregion
 
 #region Constantes privées
@@ -71,27 +56,15 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// Un coefficient pour la vitesse de déplacement l'objet
 	/// </summary>
-	private const float COEFF_VITESSE = 1f;
+	private const float COEFF_VITESSE = 0.5f;
+
+	/// <summary>
+	/// La vitesse du scarabée
+	/// </summary>
+	private const int VITESSE = 2;
 #endregion
 
 #region Attributs publics
-	/// <summary>
-	/// Le type de fourmi auquel doit s'appliquer le script
-	/// </summary>
-	public TypesFourmis typeFourmi;
-
-	/// <summary>
-	/// Flag indiquant qu'il faut déposer des phéromones
-	/// </summary>
-	[HideInInspector]
-	public bool activerDepotPheromone;
-
-	/// <summary>
-	/// L'orientation courante de l'objet
-	/// </summary>
-	[HideInInspector]
-	public TypesRotations orientationCourante;
-
 	/// <summary>
 	/// Flag indiquant que l'objet est en mouvement ou non
 	/// Flag mis à jour régulièrement.
@@ -106,8 +79,13 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	[HideInInspector]
 	public bool objectifAtteint;
+	
+	/// <summary>
+	/// L'orientation courante de l'objet
+	/// </summary>
+	[HideInInspector]
+	public TypesRotations orientationCourante;
 #endregion
-
 
 	/* ******** *
 	 * Méthodes *
@@ -115,7 +93,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 #region Méthodes privées
 	/// <summary>
-	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée la fourmis,
+	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée le scarabée,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
 	/// </summary>
 	/// <returns>Le bloc de terrain en tant que GameObject, null si aucun objet en dessous</returns>
@@ -131,7 +109,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée la fourmis,
+	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée le scarabée,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
 	/// </summary>
 	/// <returns>Le bloc de terrain en tant que string, au format JSON</returns>
@@ -157,7 +135,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// un multiple de la distance entre deux centres d'hexagones afin d'avoir un objet toujours centré.
 	/// </summary>
 	/// <remarks>
-	/// Il vaut mieu appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
+	/// Il vaut mieux appeler cette fonction un minimum de fois car l'opéraiton est gourmande.
 	/// </remarks>
 	private void Recentrer(){
 		HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(transform.localPosition);
@@ -166,7 +144,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Effectue une rotation de la fourmis.
+	/// Effectue une rotation du scarabée.
 	/// Les valeurs utilisées pour la rotation sont des valeurs euleriennes,
 	/// elles peuvent etre récupérées par transform.rotation.eulerAngles.
 	/// </summary>
@@ -220,97 +198,31 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 	/// <summary>
 	/// Routine appelée par la routine Unity Update().
-	/// Fait déambuler la fourmis.
-	/// Pour ce faire, va faire une rotation ou non, et va faire avancer la fourmis
+	/// Fait déambuler le scarabée.
+	/// Pour ce faire, va faire une rotation ou non, et va faire avancer le scarabée
 	/// d'un certain nombre de case.
 	/// </summary>
 	//private void Deambuler(){
 	public void Deambuler(){
 		if (enMouvement && !objectifAtteint) {
 
-			//transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
-			float distCovered = (Time.time - tempsDebutTranslation) * COEFF_VITESSE * vitesseAppliquee;/*speed*/;
+			//transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * VITESSE);
+			float distCovered = (Time.time - tempsDebutTranslation) * COEFF_VITESSE * VITESSE;/*speed*/;
 			float fracJourney = distCovered / distanceTranslation;
 			transform.position = Vector3.Lerp(transform.position, positionAatteindre, fracJourney);
 
-			//Debug.Log ("Déambuler");
+			//Debug.Log("Déambuler");
 			//Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 			//Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
 
 			if ( Mathf.Abs(transform.position.x-positionAatteindre.x) < 1
-			    && Mathf.Abs(transform.position.z-positionAatteindre.z) < 1 ) {
+			    && Mathf.Abs(transform.position.z-positionAatteindre.z) < 1 ){
 				enMouvement = false;
 				objectifAtteint = true;
 				Avancer(-1);
 			}
 
 		}
-	}
-
-	/// <summary>
-	/// Initialise les variables qui dépendent de la caste de la fourmis
-	/// </summary>
-	private void InitialiserVariablesFourmi(){
-		switch ( typeFourmi ){
-			case TypesFourmis.COMBATTANTE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.CONTREMAITRE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
-				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_NOIRE;
-				activerDepotPheromone = true;
-				break;
-			case TypesFourmis.GENERALE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.OUVRIERE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
-				typePheromone = Invocations.PHEROMONES_OUVRIERE_NOIRE;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.COMBATTANTE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.CONTREMAITRE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
-				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_BLANCHE;
-				activerDepotPheromone = true;	
-				break;
-			case TypesFourmis.GENERALE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
-				typePheromone = Invocations.RIEN;	
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.OUVRIERE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
-				typePheromone = Invocations.PHEROMONES_OUVRIERE_BLANCHE;
-				activerDepotPheromone = false;	
-				break;
-			default:
-				vitesseAppliquee = 0;
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;	
-				break;
-		}
-		//Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
-	}
-
-	/// <summary>
-	/// Dépose des phéromones
-	/// </summary>
-	/// <param name="position"></param>
-	private void DeposerPheromones( Vector3 position ){
-		//Debug.Log("Dépot de phéromones "+typePheromone+" en "+position);
-		GameObject goPhero	 = scriptInvocation.InvoquerObjet(typePheromone, position);
-		PheromonesScript ps = goPhero.GetComponent<PheromonesScript>();
-		FourmiScript fs = this.gameObject.GetComponent<FourmiScript>();
-		ps.direction = fs.dernierAxeUtilise;
 	}
 #endregion
 
@@ -321,9 +233,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	void Awake(){
 		enMouvement = false;
 		objectifAtteint = true;
-		InitialiserVariablesFourmi();
-		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-		scriptInvocation = bacAsable.GetComponent<InvocateurObjetsScript>();
 	}
 
 	/// <summary>
@@ -336,7 +245,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 #region Méthodes publiques
 	/// <summary>
-	/// Fait avancer la fourmis de nbCases cases.
+	/// Fait avancer le scarabée de nbCases cases.
 	/// Si nbCases est à <= 0, l'objet ne bouge plus
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
@@ -401,9 +310,6 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 		distanceTranslation = Vector3.Distance(transform.position, positionAatteindre);
 		tempsDebutTranslation = Time.time;
-
-		if ( activerDepotPheromone ) DeposerPheromones(transform.localPosition);
-
 		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
 
 	}
@@ -423,6 +329,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// bouge différement (ex: ne pas s'acharner à aller sur un coté du bac à sable)
 	/// </param>
 	public void StopperParCollision( TypesObjetsRencontres causeCollision ){
+		//Debug.Log("Stop par collision");
 		// Arret de l'objet
 		Avancer(-1);
 		// Changement de direction su on tape dans un coté du bac à sable
@@ -457,9 +364,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Retourne l'hexagone sur lequel est la fourmis
+	/// Retourne l'hexagone sur lequel est le scarabée
 	/// </summary>
-	/// <returns>L'hexagone sur lequel est la fourmis</returns>
+	/// <returns>L'hexagone sur lequel est le scarabée</returns>
 	public HexagoneInfo HexagoneCourant(){
 		HexagoneInfo hexagoneCourant = TerrainUtils.HexagonePlusProche(transform.localPosition);
 		//Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTypeTerrain());
@@ -467,7 +374,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Retourne les infos 3D de la fourmis à savoir sa rotation en (x,y,z) et sa position en (x,y,z).
+	/// Retourne les infos 3D du scarabée à savoir sa rotation en (x,y,z) et sa position en (x,y,z).
 	/// String de  la forme :
 	/// 
 	/// 	{position:{x:XXX,y:YYY,z:ZZZ},rotation:{x:UUU,y:VVV,z:WWW}}
@@ -481,31 +388,3 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 
 }
 #endregion 
-
-#region VitessesFourmis
-/// <summary>
-/// Les vitesses des différentes castes de fourmis
-/// </summary>
-public enum VitessesFourmis : int { 
-	/// <summary>
-	/// La vitesse de l'ouvrière, à 1
-	/// </summary>
-	VITESSE_OUVRIERE = 1,
-	/// <summary>
-	/// La vitesse de la contremaitre, à 1
-	/// </summary>
-	VITESSE_CONTREMAITRE = 1,
-	/// <summary>
-	/// La vitesse de la combattante, à 1
-	/// </summary>
-	VITESSE_COMBATTANTE = 1,
-	/// <summary>
-	/// La vitesse de la générale, à 1
-	/// </summary>
-	VITESSE_GENERALE = 1,
-	/// <summary>
-	/// La vitesse du scarabée, à 2
-	/// </summary>
-	VITESSE_SCARABEE = 2
-}
-#endregion

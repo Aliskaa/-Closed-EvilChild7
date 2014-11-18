@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.5.0
+/// PY Lapersonne - Version 1.6.0
 /// </remarks>
 
 using UnityEngine;
@@ -46,6 +46,11 @@ public class GameObjectUtils {
 	/// Regex pour repérer si c'est le coté 4 du bac à sable (en +X)
 	/// </summary>
 	private static Regex regexCoteBac4 = new Regex(@"Coté 4");
+
+	/// <summary>
+	/// Regex pour repérer si c'est le fond du bac
+	/// </summary>
+	private static Regex regexFondBac = new Regex(@"Fond");
 
 	/// <summary>
 	/// Regex pour voir si c'est soi
@@ -224,6 +229,7 @@ public class GameObjectUtils {
 		if (regexCoteBac2.IsMatch(nomGo))		return TypesObjetsRencontres.COTE_BAC_2;
 		if (regexCoteBac3.IsMatch(nomGo)) 		return TypesObjetsRencontres.COTE_BAC_3;
 		if (regexCoteBac4.IsMatch(nomGo))		return TypesObjetsRencontres.COTE_BAC_4;
+		if (regexFondBac.IsMatch (nomGo))		return TypesObjetsRencontres.FOND;
 		if (regexSoi.IsMatch(nomGo)) 			return TypesObjetsRencontres.SOIT_MEME;
 		if (regexSable.IsMatch(nomGo)) 			return TypesObjetsRencontres.SABLE;
 		if (regexEauSol.IsMatch(nomGo)) 		return TypesObjetsRencontres.EAU;
