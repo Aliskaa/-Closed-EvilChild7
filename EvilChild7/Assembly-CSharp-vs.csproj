@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BacAsable\BacAsableScript.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Debug\DebugScript.cs" />
      <Compile Include="Assets\Scripts\Debug\PresentationScript.cs" />
@@ -126,6 +127,7 @@
      <None Include="Assets\Scripts\Serveurs\readme.txt" />
      <None Include="Assets\Textures\Nourritures\readme.txt" />
      <None Include="Assets\Scripts\Fourmis\readme.txt" />
+     <None Include="Assets\Dev_py\presentation_20112014.txt" />
      <None Include="Assets\Scripts\Cailloux\readme.txt" />
      <None Include="Assets\Textures\Scarabées\readme.txt" />
      <None Include="Assets\Scripts\Scarabées\readme.txt" />

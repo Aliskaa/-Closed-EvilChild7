@@ -1,0 +1,27 @@
+************************
+* ?? / Les cheats code *
+************************
+----- Le code Konami 
+			* haut haut bas bas gauche droite gauche droite b a
+			* effets aléatoires
+				- nourritures, cailloux, fourmis noires, fourmis blanches
+----- Le code Rakayou
+			* bas bas haut bas r k u
+			* faire apparaitre des cailloux sur le terrain
+----- Le code Kinder Surpriz
+			* haut gauche bas droite haut gauche bas droite k z
+			* fait apparaitre des oeufs
+			
+
+******************
+* ?? / La caméra *
+******************
+----- z, q, s, d, a, e, zoom, dezoom, ctrl molette, espace
+
+
+******************
+* ?? / Les oeufs *
+******************
+----- Oeufs
+			* temps d'éclosion
+			* effet lors de l'éclosion

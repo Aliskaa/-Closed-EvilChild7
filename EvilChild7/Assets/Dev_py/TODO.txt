@@ -16,6 +16,6 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 127		0		>>	non lancé	[py]		Mode bac à sable : scène Unity avec des touches+clics gauche pour pop, clic droit pour delete
 134		1			non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trovuée
 135		1			non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
-136		0		>>	non lancé	[py]		Scéne(s) de présentation
+136		0		>>	lancé		[py]		Scéne(s) de présentation via le mode de bac à sable
 
 [Dernier ID utilisé : 136]
