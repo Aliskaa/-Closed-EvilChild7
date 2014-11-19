@@ -2,11 +2,11 @@
 /// DeplacementsScarabeeScript.cs
 /// Script pour gérer les déplacements des scarabée sur le terrain avec entre autres
 /// 	- le déplacement à proprement parler
-/// 	- la connaissance du terrain de la fourmis et de la place qu'elle a
+/// 	- la connaissance du terrain du scarabée et de la place qu'il a
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -51,7 +51,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 	/// <summary>
 	/// Le nombre de case maximum que peut parcourir la fourmi en une traite
 	/// </summary>
-	private const int AVANCEMENT_CASE = 1;
+	private const int AVANCEMENT_CASE = 3;
 
 	/// <summary>
 	/// Un coefficient pour la vitesse de déplacement l'objet
@@ -167,6 +167,8 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		}
 		orientationCourante = r;
 		transform.rotation = Quaternion.identity;
+		transform.Rotate(0,-90,0);
+
 		switch (r){
 			case TypesRotations.NORD:
 				transform.Rotate(0,-90,0);

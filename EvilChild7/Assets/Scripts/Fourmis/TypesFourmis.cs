@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -14,38 +14,41 @@ using UnityEngine;
 /// Les différentes castes de fourmis que peut prendre en charge le script.
 /// Enumération utilisée entre autres dans des variables publiques pour des scripts
 /// affectés aux fourmis
+/// 
+/// [1; 10] : Fourmis noires
+/// [11; 20] : Fourmis blanches 
 /// </summary>
-public enum TypesFourmis {
+public enum TypesFourmis : int {
 	/// <summary>
 	/// Une fourmi noire avec une marque evrte
 	/// </summary>
-	OUVRIERE_NOIRE,
+	OUVRIERE_NOIRE = 1,
 	/// <summary>
 	/// Une fourmi noire avec une marque rouge et un anneau rouge sur la tete
 	/// </summary>
-	COMBATTANTE_NOIRE,
+	COMBATTANTE_NOIRE = 2,
 	/// <summary>
 	/// Une fourmi noire avec une marque jaune et un casque jaune sur la tete
 	/// </summary>
-	CONTREMAITRE_NOIRE,
+	CONTREMAITRE_NOIRE = 3,
 	/// <summary>
 	/// Une fourmi noire avec une marque bleu et un képi bleu sur la tete
 	/// </summary>
-	GENERALE_NOIRE,
+	GENERALE_NOIRE = 4,
 	/// <summary>
 	/// Une fourmi blanche avec une marque evrte
 	/// </summary>
-	OUVRIERE_BLANCHE,
+	OUVRIERE_BLANCHE = 11,
 	/// <summary>
 	/// Une fourmi blanche avec une marque rouge et un anneau rouge sur la tete
 	/// </summary>
-	COMBATTANTE_BLANCHE,
+	COMBATTANTE_BLANCHE = 12,
 	/// <summary>
 	/// Une fourmi blanche avec une marque jaune et un casque jaune sur la tete
 	/// </summary>
-	CONTREMAITRE_BLANCHE,
+	CONTREMAITRE_BLANCHE = 13,
 	/// <summary>
 	/// Une fourmi blanche avec une marque bleu et un képi bleu sur la tete
 	/// </summary>
-	GENERALE_BLANCHE
+	GENERALE_BLANCHE = 14
 }

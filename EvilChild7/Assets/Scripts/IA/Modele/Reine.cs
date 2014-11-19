@@ -14,7 +14,7 @@ public class Reine:EntiteApointsDeVie{
 	public static float MIN_OUV= 0.20f;
 	
 	public Reine(){
-		this.pointsDeVie = 1000;
+		this.pointsDeVie = 10000;
 		this.quantiteNourriture = 2;
 		this.ratioOuvriere = 0.8f;
 	}

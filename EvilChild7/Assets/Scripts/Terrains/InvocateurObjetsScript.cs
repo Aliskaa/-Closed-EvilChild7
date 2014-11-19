@@ -10,7 +10,7 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 3.3.0
+/// PY Lapersonne - Version 3.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -68,10 +68,14 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierPCN 			= "pheromones_contremaitre_noire.prefab";
 	private const string fichierPCB	 			= "pheromones_contremaitre_blanche.prefab";
 	private const string fichierScara 			= "scarabee.prefab";
-	private const string fichierMortScara		= "particules_mort_scarabee.prefab";
-	private const string fichierMortFN			= "particules_mort_fourmi.prefab";
-	private const string fichierMortFO			= "particules_mort_fourmi.prefab";
-	private const string fichierMortReine		= "particules_mort_reine.prefab";
+	private const string fichierMortBestiole	= "particules_mort_sans_camp.prefab";
+	private const string fichierMortFNTrash		= "particules_mort_fourmi_trash.prefab";
+	private const string fichierMortFOTrash		= "particules_mort_fourmi_trash.prefab";
+	private const string fichierMortReineTrash	= "particules_mort_reine_trash.prefab";
+	private const string fichierMortFN			= "particules_mort_fourmi_noire.prefab";
+	private const string fichierMortFO			= "particules_mort_fourmi_blanche.prefab";
+	private const string fichierMortReineNoire	= "particules_mort_reine_noire.prefab";
+	private const string fichierMortReineBlanche= "particules_mort_reine_blanche.prefab";
 	#endregion
 
 	#region Bonbons
@@ -90,6 +94,13 @@ public class InvocateurObjetsScript : MonoBehaviour {
 
 	private const string fichierSelectionCase 	= "Selection case.prefab";
 
+#endregion
+
+#region Attributs publics
+	/// <summary>
+	/// YOLO
+	/// </summary>
+	public static bool MODE_TRASH = false;
 #endregion
 
 
@@ -237,17 +248,38 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				break;
 			case Invocations.PARTICULES_MORT_BESTIOLE:
 				cheminPackage = packageFourmis;
-				nomFichier = fichierMortFO; // Meme fichier pour toutes les bestioles
+				nomFichier = fichierMortBestiole;
 				break;
-			case Invocations.PARTICULES_MORT_REINE:
+			case Invocations.PARTICULES_MORT_BESTIOLE_TRASH:
 				cheminPackage = packageFourmis;
-				nomFichier = fichierMortReine; // Meme fichier pour toutes les bestioles
+				nomFichier = fichierMortFNTrash;
+				break;
+			case Invocations.PARTICULES_MORT_REINE_TRASH:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortReineTrash;
+				break;
+			case Invocations.PARTICULES_MORT_REINE_BLANCHE:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortReineBlanche;
+				break;
+			case Invocations.PARTICULES_MORT_REINE_NOIRE:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortReineNoire;
+				break;
+			case Invocations.PARTICULES_MORT_FOURMI_BLANCHE:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortFO;
+				break;
+			case Invocations.PARTICULES_MORT_FOURMI_NOIRE:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierMortFN;
 				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);
 				return null;
 		}
 		string cheminComplet = cheminPackage + nomFichier;
+		//Debug.Log("Chemin complet du prefab : "+cheminComplet);
 		GameObject invoc = Resources.LoadAssetAtPath<GameObject>(cheminComplet);
 		if (invoc == null) {
 			Debug.LogError("Impossible de créer l'objet avec :"+cheminComplet);

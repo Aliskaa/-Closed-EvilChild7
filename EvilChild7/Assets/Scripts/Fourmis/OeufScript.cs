@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -82,7 +82,10 @@ public class OeufScript : MonoBehaviour {
 		Vector3 position = transform.localPosition;
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
+		Invocations i = (InvocateurObjetsScript.MODE_TRASH
+		                 ? Invocations.PARTICULES_MORT_BESTIOLE_TRASH
+		                 : Invocations.PARTICULES_MORT_BESTIOLE);
+		scriptInvoc.InvoquerObjet(i, position);
 		MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
 		meshRender.enabled = false;
 		Destroy(gameObject);

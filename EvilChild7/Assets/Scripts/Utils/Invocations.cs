@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -143,13 +143,33 @@ public enum Invocations : int {
 	/// </summary>
 	PARTICULES_ECLOSION = 74,
 	/// <summary>
-	/// Des particules de mort pour des bestioles
+	/// Des particules de mort pour les bestioles non fourmi
 	/// </summary>
 	PARTICULES_MORT_BESTIOLE = 75,
 	/// <summary>
-	/// Des particules de mort pour les reines
+	/// Des particules de mort pour les fourmis noires
 	/// </summary>
-	PARTICULES_MORT_REINE = 76,
+	PARTICULES_MORT_FOURMI_NOIRE = 76,
+	/// <summary>
+	/// Des particules de mort pour les fourmis blanches
+	/// </summary>
+	PARTICULES_MORT_FOURMI_BLANCHE = 77,
+	/// <summary>
+	/// Des particules de mort pour les reines blanches
+	/// </summary>
+	PARTICULES_MORT_REINE_BLANCHE = 78,
+	/// <summary>
+	/// Des particules de mort pour les reines noire
+	/// </summary>
+	PARTICULES_MORT_REINE_NOIRE = 79,
+	/// <summary>
+	/// Des particules de mort pour des bestioles. Sanglant.
+	/// </summary>
+	PARTICULES_MORT_BESTIOLE_TRASH = 80,
+	/// <summary>
+	/// Des particules de mort pour des reines. Sanglant.
+	/// </summary>
+	PARTICULES_MORT_REINE_TRASH = 81,
 	/// <summary>
 	/// Un objet de debug
 	/// </summary>

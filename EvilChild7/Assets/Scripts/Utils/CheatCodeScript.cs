@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 4.0.0
+/// PY Lapersonne - Version 4.1.0
 /// </remarks>
 
 /*
@@ -78,6 +78,11 @@ public class CheatCodeScript : MonoBehaviour {
 	private KeyCode[] codesTouchesKs;
 
 	/// <summary>
+	/// Les codes pour les touches du code trash
+	/// </summary>
+	private KeyCode[] codesTouchesTrash;
+
+	/// <summary>
 	/// Un indice pour le tableau du konami code
 	/// </summary>
 	private int indiceToucheActuelleKonami = 0;
@@ -96,6 +101,11 @@ public class CheatCodeScript : MonoBehaviour {
 	/// Un indice pour le tableau du code kinder surpriz
 	/// </summary>
 	private int indiceToucheActuelleKs = 0;
+
+	/// <summary>
+	/// Un indice pour le tableau du code trash
+	/// </summary>
+	private int indiceToucheActuelleTrash = 0;
 #endregion
 
 	/* ******** *
@@ -260,12 +270,20 @@ public class CheatCodeScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Saucisse
+	/// </summary>
+	private void Trash(){
+		InvocateurObjetsScript.MODE_TRASH = true;
+	}
+
+	/// <summary>
 	/// Code pour égrer le konami code
 	/// </summary>
 	/// <returns><c>true</c>, si c'est bien en rapport avec le konami <c>false</c> sinon.</returns>
 	/// <param name="touche">La ouche appuyée qui peut etre en rapport avec le konami code</param>
 	private bool GererKonami( KeyCode touche ){
-		if ( touche == codesTouchesKonami[indiceToucheActuelleKonami] ){
+		if ( indiceToucheActuelleKonami < codesTouchesKonami.Length 
+		    && touche == codesTouchesKonami[indiceToucheActuelleKonami] ){
 			indiceToucheActuelleKonami++;
 			if ( indiceToucheActuelleKonami+1 > codesTouchesKonami.Length ){
 				indiceToucheActuelleKonami = 0;
@@ -293,7 +311,8 @@ public class CheatCodeScript : MonoBehaviour {
 	/// <returns><c>true</c>, si c'est bien en rapport avec le code rakayou <c>false</c> sinon.</returns>
 	/// <param name="touche">La touche appuyée qui peut etre en rapport avec le rakayou code</param>
 	private bool GererRakayou( KeyCode touche ){
-		if ( touche == codesTouchesRakayou[indiceToucheActuelleRakayou] ){
+		if ( indiceToucheActuelleRakayou < codesTouchesRakayou.Length
+		    && touche == codesTouchesRakayou[indiceToucheActuelleRakayou] ){
 			indiceToucheActuelleRakayou++;
 			if ( indiceToucheActuelleRakayou+1 > codesTouchesRakayou.Length ){
 				indiceToucheActuelleRakayou = 0;
@@ -312,7 +331,8 @@ public class CheatCodeScript : MonoBehaviour {
 	/// <returns><c>true</c>, si c'est bien en rapport avec le code suicide squad <c>false</c> sinon.</returns>
 	/// <param name="touche">La touche appuyée qui peut etre en rapport avec le suicide squad code</param>
 	private bool GererSuicideSquad( KeyCode touche ){
-		if ( touche == codesTouchesSsqd[indiceToucheActuelleSsqd] ){
+		if ( indiceToucheActuelleSsqd < codesTouchesSsqd.Length
+		    && touche == codesTouchesSsqd[indiceToucheActuelleSsqd] ){
 			indiceToucheActuelleSsqd++;
 			if ( indiceToucheActuelleSsqd+1 > codesTouchesSsqd.Length ){
 				indiceToucheActuelleSsqd = 0;
@@ -331,7 +351,8 @@ public class CheatCodeScript : MonoBehaviour {
 	/// <returns><c>true</c>, si c'est bien en rapport avec le code kinder surpriz <c>false</c> sinon.</returns>
 	/// <param name="touche">La touche appuyée qui peut etre en rapport avec le kinder surpriz code</param>
 	private bool GererKinderSupriz( KeyCode touche ){
-		if ( touche == codesTouchesKs[indiceToucheActuelleKs] ){
+		if ( indiceToucheActuelleKs < codesTouchesKs.Length
+		    && touche == codesTouchesKs[indiceToucheActuelleKs] ){
 			indiceToucheActuelleKs++;
 			if ( indiceToucheActuelleKs+1 > codesTouchesKs.Length ){
 				indiceToucheActuelleKs = 0;
@@ -340,6 +361,26 @@ public class CheatCodeScript : MonoBehaviour {
 			}
 		} else {
 			indiceToucheActuelleKs = 0;
+		}
+		return false;
+	}
+
+	/// <summary>
+	/// Code pour gérer le code trash
+	/// </summary>
+	/// <returns><c>true</c>, si c'est bien en rapport avec le code trash <c>false</c> sinon.</returns>
+	/// <param name="touche">La touche appuyée qui peut etre en rapport avec le trash code</param>
+	private bool GererTrash( KeyCode touche ){
+		if ( indiceToucheActuelleTrash < codesTouchesTrash.Length
+		    && touche == codesTouchesTrash[indiceToucheActuelleTrash] ){
+			indiceToucheActuelleTrash++;
+			if ( indiceToucheActuelleTrash+1 > codesTouchesTrash.Length ){
+				indiceToucheActuelleKs = 0;
+				Trash();
+				return true;
+			}
+		} else {
+			indiceToucheActuelleTrash = 0;
 		}
 		return false;
 	}
@@ -399,6 +440,16 @@ public class CheatCodeScript : MonoBehaviour {
 			KeyCode.K,
 			KeyCode.Z
 		};
+		codesTouchesTrash = new KeyCode[]{
+			KeyCode.S,
+			KeyCode.A,
+			KeyCode.U,
+			KeyCode.C,
+			KeyCode.I,
+			KeyCode.S,
+			KeyCode.S,
+			KeyCode.E
+		}; 
 	}
 
 	/// <summary>
@@ -409,10 +460,11 @@ public class CheatCodeScript : MonoBehaviour {
 		Event e = Event.current;
 		if ( e!= null && e.isKey & Input.anyKeyDown && e.keyCode.ToString () != "None" ){
 			KeyCode touche = e.keyCode;
-			GererKonami(touche);
-			GererRakayou(touche);
-			GererSuicideSquad(touche);
-			GererKinderSupriz(touche);
+			if (GererKonami(touche)) return;
+			if (GererRakayou(touche)) return;
+			if (GererSuicideSquad(touche)) return;
+			if (GererKinderSupriz(touche)) return;
+			if (GererTrash(touche)) return;
 		}
 	}
 #endregion

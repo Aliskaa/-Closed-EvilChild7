@@ -7,7 +7,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.3.0
+/// PY Lapersonne - Version 1.4.0
 /// </remarks>
 
 using UnityEngine;
@@ -134,13 +134,13 @@ public class DebugScript : MonoBehaviour {
 				//scriptInvoc.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, click);
-				scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
+				//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
 				//scriptInvoc.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
 				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_BLANCHE, click);
 				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
@@ -164,7 +164,7 @@ public class DebugScript : MonoBehaviour {
 		/*
 		 * 
 		 */
-		if ( Input.GetMouseButtonDown (0/*CLIC_GAUCHE_SOURIS*/) ){
+		if ( Input.GetMouseButtonDown(0/*CLIC_GAUCHE_SOURIS*/) ){
 			Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
 			float distance;
 			Plane planDuSol = new Plane(Vector3.up, transform.position);
@@ -173,7 +173,7 @@ public class DebugScript : MonoBehaviour {
 				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
+				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
 			}
 		}
 

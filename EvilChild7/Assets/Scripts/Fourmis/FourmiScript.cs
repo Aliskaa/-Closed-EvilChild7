@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -27,6 +27,11 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Une référence vers le script de déplacement
 	/// </summary>
 	private DeplacementsFourmisScript scriptDeplacement;
+
+	/// <summary>
+	/// Une référence vers le type de la fourmi
+	/// </summary>
+	private TypesFourmis typeFourmi;
 #endregion
 
 #region Attributs publics
@@ -71,8 +76,8 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 		IAreaction reaction = (IAreaction) this;
 		DeplacementsFourmisScript dfs = gameObject.GetComponent<DeplacementsFourmisScript>();
 		scriptDeplacement = dfs;
-		TypesFourmis tf = dfs.typeFourmi;
-		switch (tf) {
+		typeFourmi = dfs.typeFourmi;
+		switch (typeFourmi) {
 			case TypesFourmis.COMBATTANTE_BLANCHE:
 				iaBestiole = new IAsoldat(TypesObjetsRencontres.COMBATTANTE_BLANCHE, reaction);
 				break;
@@ -118,7 +123,20 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 		Vector3 position = transform.localPosition;
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_BESTIOLE, position);
+		Invocations i;
+		int codeTypeFourmi = (int)typeFourmi;
+		// Si on est une fourmi noire
+		if (codeTypeFourmi >= 1 && codeTypeFourmi <= 10) {
+			i = (InvocateurObjetsScript.MODE_TRASH
+			                 ? Invocations.PARTICULES_MORT_BESTIOLE_TRASH
+			                 : Invocations.PARTICULES_MORT_FOURMI_NOIRE);
+		// Cas om on est une fourmi blanche
+		} else {
+			i = (InvocateurObjetsScript.MODE_TRASH
+			     ? Invocations.PARTICULES_MORT_BESTIOLE_TRASH
+			     : Invocations.PARTICULES_MORT_FOURMI_BLANCHE);
+		}
+		scriptInvoc.InvoquerObjet(i, position);
 		//MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
 		//meshRender.enabled = false;
 		Destroy(gameObject);

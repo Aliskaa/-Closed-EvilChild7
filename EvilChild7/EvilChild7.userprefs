@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\TODO.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
     <Files>
-      <File FileName="Assets\Dev_py\TODO.txt" Line="26" Column="64" />
-      <File FileName="Assets\Dev_py\changelog.txt" Line="585" Column="93" />
-      <File FileName="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" Line="9" Column="34" />
+      <File FileName="Assets\Dev_py\TODO.txt" Line="16" Column="7" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="589" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

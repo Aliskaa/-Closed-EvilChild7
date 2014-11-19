@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 2.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -46,7 +46,23 @@ public class ReineScript : MonoBehaviour, IAreaction {
 		Vector3 position = transform.localPosition;
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
-		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_MORT_REINE, position);
+		Invocations i;
+		switch (camp){
+			case TypesCamps.BLANC:
+				i = (InvocateurObjetsScript.MODE_TRASH
+				     ?Invocations.PARTICULES_MORT_REINE_TRASH
+				     :Invocations.PARTICULES_MORT_REINE_BLANCHE);
+				break;
+			case TypesCamps.NOIR:
+				i = (InvocateurObjetsScript.MODE_TRASH
+				     ?Invocations.PARTICULES_MORT_REINE_TRASH
+				     :Invocations.PARTICULES_MORT_REINE_NOIRE);
+				break;
+			default:
+				i = Invocations.PARTICULES_MORT_REINE_TRASH;
+				break;
+		}
+		scriptInvoc.InvoquerObjet(i, position);
 		//MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
 		//meshRender.enabled = false;
 		Destroy(gameObject);

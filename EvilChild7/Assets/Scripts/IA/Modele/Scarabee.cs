@@ -1,8 +1,8 @@
-public class Scarabee:Modele
+	public class Scarabee:Modele
 {
 	public Scarabee ()
 	{
-		this.pointsDattaque = 5;
+		this.pointsDattaque = 8;
 		this.mouvement = 2;
 		this.pointsDeVie = 500;
 	}

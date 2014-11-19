@@ -1,28 +1,21 @@
 ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
 4					annulé					Mottes de terres
-39		1			lancé		[py]		Tester la fourmis dans tous les sens		
 64					lancé		[py]		Configurer tous les prefabs concernant les IA :
 68				>				[py]			- fourmis blanche reine
 72				>				[py]			- fourmis noire reine
 123				>				[py]			- oeufs
-84				>>>	lancé		[py]		Configuration des scarabées
-												- IA
-												- déplacements
-												- collisions
-												- attaque des oeufs
-91		1		>	lancé		[py]		Tester les détections et les collisions avec tous les objets
-98					non lancé	[py]		Voir si nécessité de bloquer les positions x/y/z des objets
+84		1		>	lancé		[py]		Configuration des scarabées
+												- attaque des oeufs [attente]
 100					non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
 104				 	annulé					Barre de vie
-105					non lancé	[py]		Collider/mesh sur objets (cailloux, eau3D, ..), cf Gwendal	
-106		1		>>	non lancé	[py]		Retour à la base (reine = position fixe)
+106		0		>>	non lancé	[py]		Retour à la base (reine = position fixe)
 122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
-124		1		>>	non lancé	[py]		Dès qu'un objet touche l'eau, il disparait
+124		1			non lancé	???			Dès qu'un objet touche l'eau, il disparait
 126		1		>	non lancé	[py] 		Matériaux/texture eau case
-127		1		>	non lancé	[py]		Mode bac à sable : scène Unity avec des touches+clics gauche pour pop, clic droit pour delete
-128		1		>>	non lancé	[py]		Refaire particules de mort, plutot façon "eclosion oeuf" gris/noir/blanc
-129		1		>>	non lancé	[py]		Rectifier monde de jeu : des objets/décos sont en l'air
-130		1		>>>	non lancé	[py]		Les scarabées se déplacent en crabe
+127		0		>>	non lancé	[py]		Mode bac à sable : scène Unity avec des touches+clics gauche pour pop, clic droit pour delete
+134		1			non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trovuée
+135		1			non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
+136		0		>>	non lancé	[py]		Scéne(s) de présentation
 
-[Dernier ID utilisé : 130]
+[Dernier ID utilisé : 136]

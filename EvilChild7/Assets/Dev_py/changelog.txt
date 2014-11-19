@@ -585,11 +585,30 @@ Commentaire...:
 	Utilsiation du FixedUpdate plus que de Update pour le déplacement des fourmis et scarabées;
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  49;
+Date..........:  19/11/2014 11h15;
 Auteur........:  py;
 Commentaire...:
-	;
+	Tache 130 terminée : 
+		- Correction prefab scarabée (rotation en Y de -90) pour éviter déplacement en crabe
+	Tache 131 terminée :
+		- Définition des poids des bestioles (valeurs de la RAO * 10, reines à 10)
+	Tache 129 terminée :
+		- Corrections sur le monde de jeu où des plantes étaient en l'air
+		- Mise à jours du prefab du monde de jeu et de toutes les scènes
+	Tache 84 partiellement terminée :
+		Test du scarabée :
+			- Déplacement
+			- Détection
+			- IA
+	Tache 132 terminée : révision des points de vie, des points d'attaques, des distances de détection
+		- Corrections des points de vie, de force pour scrabées, reine, générale
+	Tache 128 terminée :
+		- Nouveaux effets graphiques lors de la mort des bestioles : moins sanglant
+	Tache 133 terminée :
+		- Cheat code saucise pour le mode trash ou pas
+	Tache 91 terminée : collison/detection avec les objets
+	Tache 39 close;
 
 __________________________________
 
