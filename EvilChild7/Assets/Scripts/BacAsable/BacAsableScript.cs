@@ -8,7 +8,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 1.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -137,11 +137,15 @@ public class BacAsableScript : MonoBehaviour {
 	private const KeyCode toucheGrosCaillou = KeyCode.P;
 
 	/// <summary>
+	/// La touche pour avoir un oeuf
+	/// Touche k du clavier
+	/// </summary>
+	private const KeyCode toucheOeuf = KeyCode.K;
+	/// <summary>
 	/// La touche pour avoir de la nourriture
 	/// Touche l du clavier
 	/// </summary>
 	private const KeyCode toucheNourriture = KeyCode.L;
-
 	/// <summary>
 	/// La touche pour avoir un scarabée
 	/// Touche m du clavier
@@ -305,6 +309,14 @@ public class BacAsableScript : MonoBehaviour {
 		objetAmettre = Invocations.RIEN;
 	}
 
+	/// <summary>
+	/// Prépare un oeuf
+	/// </summary>
+	private void PreparerOeuf(){
+		//Debug.Log("Préparation d'un oeuf");
+		objetAmettre = Invocations.OEUF_FOURMI;
+	}
+	
 	/// <summary>
 	/// Prépare une ouvrière blanche qui apparaitra au clic
 	/// </summary>
@@ -564,6 +576,10 @@ public class BacAsableScript : MonoBehaviour {
 			}
 			if ( touche == touchePheroCMNoire ){
 				PreparerPheroCmNoire();
+				return;
+			}
+			if ( touche == toucheOeuf ){
+				PreparerOeuf();
 				return;
 			}
 		}

@@ -624,11 +624,14 @@ Commentaire...:
 	Taches 100 et 137 réalisées : Correction du bug où un click en dehors du terrain faisant quand meme apapraitre un objet;
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  51;
+Date..........:  20/11/2014 00h01;
 Auteur........:  py;
 Commentaire...:
-	;
+(　ﾟ∀ﾟ)っ由
+	Préparation démonstration réunion clients
+		- amélioration du monde bac à sable avec invocation d'oeufs
+		- scénario
 
 __________________________________
 Numero........:  ??;
