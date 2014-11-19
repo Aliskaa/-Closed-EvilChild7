@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 4.1.0
+/// PY Lapersonne - Version 4.2.0
 /// </remarks>
 
 /*
@@ -83,6 +83,11 @@ public class CheatCodeScript : MonoBehaviour {
 	private KeyCode[] codesTouchesTrash;
 
 	/// <summary>
+	/// Les codes pour les touches du code untrash
+	/// </summary>
+	private KeyCode[] codesTouchesUntrash;
+
+	/// <summary>
 	/// Un indice pour le tableau du konami code
 	/// </summary>
 	private int indiceToucheActuelleKonami = 0;
@@ -106,6 +111,11 @@ public class CheatCodeScript : MonoBehaviour {
 	/// Un indice pour le tableau du code trash
 	/// </summary>
 	private int indiceToucheActuelleTrash = 0;
+
+	/// <summary>
+	/// Un indice pour le tableau du code untrash
+	/// </summary>
+	private int indiceToucheActuelleUntrash = 0;
 #endregion
 
 	/* ******** *
@@ -277,6 +287,13 @@ public class CheatCodeScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Merguez
+	/// </summary>
+	private void Untrash(){
+		InvocateurObjetsScript.MODE_TRASH = false;
+	}
+
+	/// <summary>
 	/// Code pour égrer le konami code
 	/// </summary>
 	/// <returns><c>true</c>, si c'est bien en rapport avec le konami <c>false</c> sinon.</returns>
@@ -384,6 +401,26 @@ public class CheatCodeScript : MonoBehaviour {
 		}
 		return false;
 	}
+
+	/// <summary>
+	/// Code pour gérer le code tunrash
+	/// </summary>
+	/// <returns><c>true</c>, si c'est bien en rapport avec le code untrash <c>false</c> sinon.</returns>
+	/// <param name="touche">La touche appuyée qui peut etre en rapport avec le untrash code</param>
+	private bool GererUntrash( KeyCode touche ){
+		if ( indiceToucheActuelleUntrash < codesTouchesUntrash.Length
+		    && touche == codesTouchesUntrash[indiceToucheActuelleUntrash] ){
+			indiceToucheActuelleUntrash++;
+			if ( indiceToucheActuelleUntrash+1 > codesTouchesUntrash.Length ){
+				indiceToucheActuelleUntrash = 0;
+				Untrash();
+				return true;
+			}
+		} else {
+			indiceToucheActuelleUntrash = 0;
+		}
+		return false;
+	}
 #endregion
 
 #region Méthodes package
@@ -413,7 +450,7 @@ public class CheatCodeScript : MonoBehaviour {
 			KeyCode.K,
 			KeyCode.U,
 		};
-		indiceToucheActuelleSsqd = 0;
+		indiceToucheActuelleRakayou = 0;
 		codesTouchesSsqd = new KeyCode[]{
 			KeyCode.LeftArrow,
 			KeyCode.RightArrow,
@@ -427,7 +464,7 @@ public class CheatCodeScript : MonoBehaviour {
 			KeyCode.Q,
 			KeyCode.D
 		};
-		indiceToucheActuelleKs = 0;
+		indiceToucheActuelleSsqd = 0;
 		codesTouchesKs = new KeyCode[]{
 			KeyCode.UpArrow,
 			KeyCode.LeftArrow,
@@ -440,6 +477,7 @@ public class CheatCodeScript : MonoBehaviour {
 			KeyCode.K,
 			KeyCode.Z
 		};
+		indiceToucheActuelleKs = 0;
 		codesTouchesTrash = new KeyCode[]{
 			KeyCode.S,
 			KeyCode.A,
@@ -450,6 +488,17 @@ public class CheatCodeScript : MonoBehaviour {
 			KeyCode.S,
 			KeyCode.E
 		}; 
+		indiceToucheActuelleTrash = 0;
+		codesTouchesUntrash = new KeyCode[]{
+			KeyCode.M,
+			KeyCode.E,
+			KeyCode.R,
+			KeyCode.G,
+			KeyCode.U,
+			KeyCode.E,
+			KeyCode.Z
+		}; 
+		indiceToucheActuelleUntrash = 0;
 	}
 
 	/// <summary>
@@ -465,6 +514,7 @@ public class CheatCodeScript : MonoBehaviour {
 			if (GererSuicideSquad(touche)) return;
 			if (GererKinderSupriz(touche)) return;
 			if (GererTrash(touche)) return;
+			if (GererUntrash(touche)) return;
 		}
 	}
 #endregion

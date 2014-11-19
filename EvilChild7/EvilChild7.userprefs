@@ -1,11 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BacAsable\BacAsableScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
     <Files>
-      <File FileName="Assets\Dev_py\TODO.txt" Line="1" Column="1" />
-      <File FileName="Assets\Dev_py\changelog.txt" Line="1" Column="1" />
-      <File FileName="Assets\Dev_py\presentation_20112014.txt" Line="27" Column="30" />
-      <File FileName="Assets\Scripts\BacAsable\BacAsableScript.cs" Line="22" Column="1" />
+      <File FileName="Assets\Dev_py\TODO.txt" Line="10" Column="1" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="610" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

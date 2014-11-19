@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.2.0
+/// PY Lapersonne - Version 2.3.0
 /// </remarks>
 
 using UnityEngine;
@@ -119,6 +119,11 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// Flag indiquant s'il faut afficher les hexagones ou non
 	/// </summary>
 	public bool afficherHexagones;
+
+	/// <summary>
+	/// Flag indiquant qu'il faut placer les reines
+	/// </summary>
+	public bool placerReines;
 #endregion
 
 #region Attributs package
@@ -422,23 +427,23 @@ public class TerrainManagerScript : MonoBehaviour {
 		switch (tm){
 			case TypesMaps.NIVEAU_1:
 				CreerMapDesert();
-				PlacerReines(tm);
+				if ( placerReines) PlacerReines(tm);
 				break;
 			case TypesMaps.NIVEAU_2:
 				CreerMapLac();
-				PlacerReines(tm);
+				if ( placerReines) PlacerReines(tm);
 				break;
 			case TypesMaps.NIVEAU_3:
 				CreerMapTraversees();
-				PlacerReines(tm);
+				if ( placerReines) PlacerReines(tm);
 				break;
 			case TypesMaps.NIVEAU_4:
 				CreerMapEtranglement();
-				PlacerReines(tm);
+				if ( placerReines) PlacerReines(tm);
 				break;
 			case TypesMaps.RANDOM:
 				CreerMapRandom();	
-				PlacerReines(tm);
+				if ( placerReines) PlacerReines(tm);
 				break;
 		}
 		// FIXME : Valeur en dur, Translate() non relatif, sale

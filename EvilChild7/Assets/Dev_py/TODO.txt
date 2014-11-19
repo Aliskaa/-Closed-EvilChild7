@@ -7,15 +7,12 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 123				>				[py]			- oeufs
 84		1		>	lancé		[py]		Configuration des scarabées
 												- attaque des oeufs [attente]
-100					non lancé	[py]		Corriger bug : si click en dehors du terrain, pop de l'objet dans terrain en bordure
 104				 	annulé					Barre de vie
 106		0		>>	non lancé	[py]		Retour à la base (reine = position fixe)
 122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
 124		1			non lancé	???			Dès qu'un objet touche l'eau, il disparait
 126		1		>	non lancé	[py] 		Matériaux/texture eau case
-127		0		>>	non lancé	[py]		Mode bac à sable : scène Unity avec des touches+clics gauche pour pop, clic droit pour delete
 134		1			non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trovuée
 135		1			non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
-136		0		>>	lancé		[py]		Scéne(s) de présentation via le mode de bac à sable
 
-[Dernier ID utilisé : 136]
+[Dernier ID utilisé : 138]

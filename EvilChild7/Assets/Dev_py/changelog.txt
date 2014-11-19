@@ -612,11 +612,16 @@ Commentaire...:
 
 __________________________________
 
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  50;
+Date..........:  19/11/2014 16h45;
 Auteur........:  py;
 Commentaire...:
-	Tache 136 lancée : scène de présentation client;
+	Taches 127, 136 et 138 terminées : Scène de présentation client via le mode bac à sable, testée...
+	Création du mode bac à sable : nouvelle scène avec des raccourcis clavier
+	Ajout d'un code pour désactiver le mode sanglant
+	Ajout d'un flag pour placer les reines ou pas (sur le TerrainManagerScript)
+	Mise à jour des scènes
+	Taches 100 et 137 réalisées : Correction du bug où un click en dehors du terrain faisant quand meme apapraitre un objet;
 
 __________________________________
 Numero........:  ??;

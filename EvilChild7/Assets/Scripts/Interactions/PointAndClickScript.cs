@@ -7,7 +7,7 @@
 /// http://mteys.com/detection-des-clics-sur-les-objets-unity/
 /// </remarks>
 /// <remarks>
-/// PY Lapersonne - Version 1.1.3
+/// PY Lapersonne - Version 1.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -93,11 +93,13 @@ public class PointAndClickScript : MonoBehaviour {
 			Plane planDuSol = new Plane(Vector3.up, transform.position);
 			if ( planDuSol.Raycast(rayon, out distance) ){ 
 				Vector3 pointImpact = rayon.GetPoint(distance);
-				//Debug.Log("Coordonnées de la souris sur le plan  = " + pointImpact );
-				Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
-				//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
-				/*HexagoneInfo hexagoneClick = */TerrainUtils.HexagonePlusProche(coordLocales);
-				//Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
+				if ( IsSourisSurTerrain(pointImpact) ){
+					//Debug.Log("Coordonnées de la souris sur le plan  = " + pointImpact );
+					Vector3 coordLocales = transform.worldToLocalMatrix.MultiplyPoint(pointImpact);
+					//Debug.Log("Coordonnées locales p/r au terrain = " + coordLocales );
+					/*HexagoneInfo hexagoneClick = */TerrainUtils.HexagonePlusProche(coordLocales);
+					//Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
+				}
 			}
 		}
 	}

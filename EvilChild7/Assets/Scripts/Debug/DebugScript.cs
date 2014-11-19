@@ -64,6 +64,23 @@ public class DebugScript : MonoBehaviour {
 		TerrainManagerScript tms = terrain.GetComponent<TerrainManagerScript>();
 		return ( tms != null ? tms.VerifierRemplissageTerrain() : false );
 	}
+
+	/// <summary>
+	/// Indique si la souris pointe sur le terrain
+	/// </summary>
+	/// <remarks>
+	/// L'angle -x/-z du terrain : x=-98 et z=-94.
+	/// L'angle +x/+z du terrain : x=0 et z=-8
+	/// </remarks>
+	/// <returns><c>true</c> Si la souris pointe vers le terrain, <c>false</c> sinon</returns>
+	/// <param name="position">La position de la souris</param>
+	private bool IsSourisSurTerrain( Vector3 position ){
+		if (position.x < -98) return false;
+		if (position.x > 0) return false;
+		if (position.z < -94) return false;
+		if (position.z > -8) return false;
+		return true;
+	}
 #endregion
 
 #region Méthodes package
@@ -117,46 +134,48 @@ public class DebugScript : MonoBehaviour {
 			Plane planDuSol = new Plane(Vector3.up, transform.position);
 			if ( planDuSol.Raycast(rayon, out distance) ){ 
 				Vector3 pointImpact = rayon.GetPoint(distance);
-				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-				//tms.ConvertirCaseEau(click);
+				if ( IsSourisSurTerrain(pointImpact) ){
+					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
+					//tms.ConvertirCaseEau(click);
 
-				#region Debogage IA
-				//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
-				//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
-				//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BONBON_MURE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_BLEU, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_ROSE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ORANGE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BONBON_VERT, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BONBON_ROSE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
-				//scriptInvoc.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
-				//scriptInvoc.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_BLANCHE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_NOIRE, click);
-				//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_NOIRE, click);
-				//bite.GetComponent<PheromonesScript>().direction = TypesAxes.DEVANT;
-				#endregion 
+					#region Debogage IA
+					//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_MURE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_BLEU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_ROSE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ORANGE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_VERT, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ROSE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
+					scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
+					//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_BLANCHE, click);
+					//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_BLANCHE, click);
+					//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_OUVRIERE_NOIRE, click);
+					//GameObject bite =  ios.InvoquerObjet(Invocations.PHEROMONES_CONTREMAITRE_NOIRE, click);
+					//bite.GetComponent<PheromonesScript>().direction = TypesAxes.DEVANT;
+					#endregion 
 
-				#region Debogage collision
-				//tms.ConvertirCaseEau(click);
-				//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
-				//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
-				//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
-				#endregion
+					#region Debogage collision
+					//tms.ConvertirCaseEau(click);
+					//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
+					#endregion
 
-				//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
+					//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
+				}
 			}
 
 		}
@@ -170,10 +189,12 @@ public class DebugScript : MonoBehaviour {
 			Plane planDuSol = new Plane(Vector3.up, transform.position);
 			if ( planDuSol.Raycast(rayon, out distance) ){ 
 				Vector3 pointImpact = rayon.GetPoint(distance);
-				GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-				TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
-				Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
+				if ( IsSourisSurTerrain(pointImpact) ){
+					GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+					TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
+					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
+					scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
+				}
 			}
 		}
 
