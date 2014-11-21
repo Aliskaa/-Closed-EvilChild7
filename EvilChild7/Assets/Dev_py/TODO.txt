@@ -16,8 +16,6 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 135		1		>	non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
 139		1		>>>	non lancé	[py]		Voir si meilleur suivi des phéromones avec juste détection DEVANT (et pas DG et DD)
 141		1		>>>	non lancé	[py]		Mettre son qui convient bien aux critères Unity (pb son "Angello")
-146		1		>>>	non lancé	[py]		Intégrer novueaux prefabs reines
-147		1		>>> non lancé	[py]		Bug des oeufs qui bougent tous seuls
 
 
 [Dernier ID utilisé : 147]

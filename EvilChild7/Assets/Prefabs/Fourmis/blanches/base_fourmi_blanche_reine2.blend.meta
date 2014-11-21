@@ -1,25 +1,20 @@
 fileFormatVersion: 2
-guid: 8825baa7807081e4184d3a5eea9e9d82
+guid: a3e173c9824414a41b7b2e7c572a8af3
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     100002: Cube_001
     100004: Cube_003
-    100006: Sphere
     400000: //RootNode
     400002: Cube_001
     400004: Cube_003
-    400006: Sphere
     2300000: Cube_001
     2300002: Cube_003
-    2300004: Sphere
     3300000: Cube_001
     3300002: Cube_003
-    3300004: Sphere
-    4300000: Cube_003
-    4300002: Sphere
-    4300004: Cube_001
+    4300000: Cube_001
+    4300002: Cube_003
     7400000: Default Take
     9500000: //RootNode
   materials:

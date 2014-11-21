@@ -7,7 +7,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.4.0
+/// PY Lapersonne - Version 1.5.0
 /// </remarks>
 
 using UnityEngine;
@@ -148,11 +148,11 @@ public class DebugScript : MonoBehaviour {
 					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ORANGE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.BONBON_VERT, click);
 					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ROSE, click);
-					//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+					scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
 					//scriptInvoc.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
-					scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
