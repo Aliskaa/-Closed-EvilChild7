@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\TODO.txt">
     <Files>
-      <File FileName="Assets\Dev_py\changelog.txt" Line="638" Column="34" />
-      <File FileName="Assets\Dev_py\TODO.txt" Line="15" Column="11" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="1" Column="1" />
+      <File FileName="Assets\Dev_py\TODO.txt" Line="23" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
