@@ -634,6 +634,37 @@ Commentaire...:
 		- scénario
 
 __________________________________
+Numero........:  52;
+Date..........:  21/11/2014 14h20;
+Auteur........:  py;
+Commentaire...:
+	Intégration travail Ivan
+		- Nouvelles scènes, nouvelles textures, nouveaux guiskins
+		- Scène d'accueil
+		- Musique
+		- Cablage accueil -> bac à sable, scène JvsIA, scène JvJ
+	Tache 145 terminée : Mise à jour des scènes
+	Taches 143 et 144 terminées : boutons pour arreter la partie et gérer le son;
+	Tache 142 terminée : mise à jour des prefabs :
+		- Monde(s) de jeu : bac à sable, JvIA, JvJ
+		- Caméra(s) : bac à sable, JvJ, JvIA
+		- Accueil...
+	Tache 140 terminée : plus de colliders sur les plantes vers près des reines, réduction des tailles
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;

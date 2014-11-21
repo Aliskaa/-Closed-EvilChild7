@@ -80,11 +80,16 @@
      <Compile Include="Assets\Scripts\IA\Modele\Soldat.cs" />
      <Compile Include="Assets\Scripts\IA\Reaction\IAreaction.cs" />
      <Compile Include="Assets\Scripts\Interactions\PointAndClickScript.cs" />
+     <Compile Include="Assets\Scripts\Menus\AccueilScript.cs" />
+     <Compile Include="Assets\Scripts\Menus\BoutonSonScript.cs" />
+     <Compile Include="Assets\Scripts\Menus\MenusJeu.cs" />
+     <Compile Include="Assets\Scripts\Menus\QuitterJeuScript.cs" />
      <Compile Include="Assets\Scripts\Nourritures\NourrituresScript.cs" />
      <Compile Include="Assets\Scripts\Pheromones\PheromonesScript.cs" />
      <Compile Include="Assets\Scripts\Scarabées\DeplacementsScarabeeScript.cs" />
      <Compile Include="Assets\Scripts\Scarabées\DetectionScarabeeScript.cs" />
      <Compile Include="Assets\Scripts\Scarabées\ScarabeeScript.cs" />
+     <Compile Include="Assets\Scripts\Serveurs\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Terrains\CivGridUtils.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagoneInfo.cs" />
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />
