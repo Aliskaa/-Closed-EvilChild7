@@ -638,7 +638,7 @@ Numero........:  52;
 Date..........:  21/11/2014 14h20;
 Auteur........:  py;
 Commentaire...:
-	Intégration travail Ivan
+	Intégration travaux Soukaina et Ivan
 		- Nouvelles scènes, nouvelles textures, nouveaux guiskins
 		- Scène d'accueil
 		- Musique
@@ -660,12 +660,17 @@ Commentaire...:
 	Ajout modifications d'Ivan sur MenusJeu.cs;
 	
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  54;
+Date..........:  21/11/2014 19h39;
 Auteur........:  py;
 Commentaire...:
-	;
-
+	ლ(ಠ益ಠლ) Ce code de qualité... Much bordel... Very crade... Very dépité !
+	Intégration des travaux de Sophie et d'Ivan :
+		- Prefabs eau, prefabs fleches, prefabs pistolets
+		- Script cailloux, scritps eaux, scripts pistolets;
+		- Invocations nouvelles...
+		- Lancers de betises;
+	
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;

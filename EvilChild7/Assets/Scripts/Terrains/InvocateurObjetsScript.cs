@@ -10,7 +10,11 @@
 ///			scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, new Vector3(141.5f, 0.1f, 128.4f));
 /// </code>
 /// <remarks>
-/// PY Lapersonne - Version 3.4.0
+/// PY Lapersonne
+/// Sophie Réthoré
+/// Gwendal Pollet
+/// 
+/// Version 4.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -37,7 +41,9 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string packagePheromones 		= "Assets/Prefabs/Pheromones/";
 	private const string packageScarabees 		= "Assets/Prefabs/Scarabees/";
 	private const string packageEau				= "Assets/Prefabs/Eau/";
+	private const string packagePistolet		= "Assets/Prefabs/Pistolet/";
 	private const string packageTerrain 		= "Assets/Prefabs/Terrains/";
+	private const string packageFleche 			= "Assets/Prefabs/FlecheDirection/";
 	private const string packageDebug	 		= "Assets/Prefabs/Debug/";
 	#endregion
 
@@ -48,6 +54,11 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierTresGrosCaillou = "tres_gros_caillou.prefab";
 	private const string fichierEau3D 			= "Eau3D.prefab";
 	private const string fichierEau 			= "eau.dae";
+	private const string fichierPistolet	    = "pistolet.prefab";
+	private const string fichierMissileEau	    = "missile_eau.prefab";
+	private const string fichierGoutte 			= "goute.prefab";
+	private const string fichierBombeEau 		= "BombeAeau.prefab";
+	private const string fichierFleche	 		= "fleche.prefab";
 	#endregion
 
 	#region Bestioles
@@ -274,6 +285,18 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageFourmis;
 				nomFichier = fichierMortFN;
 				break;
+			case Invocations.GOUTTE:
+				cheminPackage = packageEau;
+				nomFichier = fichierGoutte;
+				break;
+			case Invocations.MISSILE_EAU:
+				cheminPackage = packageEau;
+				nomFichier = fichierMissileEau;
+				break; 
+			case Invocations.BOMBE_EAU:
+				cheminPackage = packageEau;
+				nomFichier = fichierBombeEau;
+				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);
 				return null;
@@ -343,6 +366,41 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Invoque l'objet demandé
+	/// </summary>
+	/// <returns>Le game object n'est pas rattaché au terrain</returns>
+	/// <param name="objet">Le type d'objet à créer</param>
+	public GameObject InvoquerObjetCamera(Invocations objet, Vector3 position){
+		string cheminPackage = "";
+		string nomFichier = "";
+		switch ( objet ){
+		case Invocations.PISTOLET:
+			cheminPackage = packagePistolet;
+			nomFichier = fichierPistolet;
+			break;
+		case Invocations.FLECHE:
+			cheminPackage = packageFleche;
+			nomFichier = fichierFleche;
+			break;
+		default:
+			Debug.LogError("Impossible de créer l'objet :"+objet);
+			return null;
+		}
+		string cheminComplet = cheminPackage + nomFichier;
+		GameObject invoc = Resources.LoadAssetAtPath<GameObject>(cheminComplet);
+		if (invoc == null) {
+			Debug.LogError("Impossible de créer l'objet avec :"+cheminComplet);
+			return null;
+		} else {
+			invoc.name = "Invoc:"+nomFichier.Split(new char[]{'.'})[0];
+		}
+		
+		invoc = (GameObject)Instantiate(invoc,position,Quaternion.identity);
+		
+		return invoc;
+	}
+
+	/// <summary>
 	/// Invoque l'objet demandé et le recentre automatiquement
 	/// </summary>
 	/// <remarks>Il faut que le gameobject "Terrain" soit initlaisé avec tous ses game objets
@@ -359,6 +417,18 @@ public class InvocateurObjetsScript : MonoBehaviour {
 			invoc.transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 		}
 		//Debug.Log("Ma nouvelle position :" + invoc.transform.position);
+		return invoc;
+	}
+	
+	/// <summary>
+	/// Invoque l'objet demandé devant la caméra de l'utilisateur pour simuler un lancé
+	/// </summary>
+	public GameObject InvoquerDevantCamera( Invocations objet, Vector3 position){	
+		if (objet == Invocations.RIEN) return null;
+		//GameObject terrainGo = GameObject.FindGameObjectWithTag ("BAC_A_SABLE");
+		//TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript> ();
+		//Vector3 p = tms.ConvertirCoordonnes (position);
+		GameObject invoc = InvoquerObjetCamera(objet, position);
 		return invoc;
 	}
 #endregion

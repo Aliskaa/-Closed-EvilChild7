@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.4.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -170,6 +170,26 @@ public enum Invocations : int {
 	/// Des particules de mort pour des reines. Sanglant.
 	/// </summary>
 	PARTICULES_MORT_REINE_TRASH = 81,
+	/// <summary>
+	/// Une game object de type pistolet 
+	/// </summary>
+	PISTOLET = 82,
+	/// <summary>
+	/// missile d'eau envoyé par le pistolet à eau
+	/// </summary>
+	MISSILE_EAU = 83,
+	/// <summary>
+	/// Une game object "case d'eau" plat
+	/// </summary>
+	GOUTTE = 84,
+	/// <summary>
+	/// fleche indiquant la force te la direction de lancer de betises
+	/// </summary>
+	FLECHE = 85,
+	/// <summary>
+	/// Bombe a eau
+	/// </summary>
+	BOMBE_EAU = 86,
 	/// <summary>
 	/// Un objet de debug
 	/// </summary>

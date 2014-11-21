@@ -102,11 +102,15 @@ public class MenusJeu : MonoBehaviour {
 	bool flagAutorisationLancer;
 	bool flagAutorisationFinDeTour;
 	bool flagAutorisationOeufLancer;
-	
-	
+
+	GameObject bacASable;
+	Betises betise;
+
 	private void Start()
 	{
-		
+
+		bacASable = GameObject.FindGameObjectWithTag ("BAC_A_SABLE");
+
 		//Initialisation variable temps
 		tempsJoueur = 0;
 		tempsJoueurfin = 45;
@@ -483,6 +487,8 @@ public class MenusJeu : MonoBehaviour {
 				Debug.Log("Betise 1");
 				//Debug.Log(listBetiseJoueur[1]);
 				SupprimeBetiseSac(listBetiseJoueur,1);
+				betise = bacASable.AddComponent<Betises>();
+				betise.nom_betise = Invocations.CAILLOU;
 			}
 		}
 		if(GUI.Button(new Rect(70, 40, 50, 50),betiseTexture(listBetiseJoueur[2]))) {
@@ -492,6 +498,8 @@ public class MenusJeu : MonoBehaviour {
 				Debug.Log("Betise 2");
 				//Debug.Log(listBetiseJoueur[2]);
 				SupprimeBetiseSac(listBetiseJoueur,2);
+				betise = bacASable.AddComponent<Betises>();
+				betise.nom_betise = Invocations.MISSILE_EAU;
 			}
 		}
 		if(GUI.Button(new Rect(130, 40, 50, 50),betiseTexture(listBetiseJoueur[3]))) {
@@ -501,6 +509,10 @@ public class MenusJeu : MonoBehaviour {
 				Debug.Log("Betise 3");
 				//Debug.Log(listBetiseJoueur[3]);
 				SupprimeBetiseSac(listBetiseJoueur,3);
+				betise = bacASable.AddComponent<Betises>();
+				NourritureBonbons n = new NourritureBonbons ();
+				Invocations nom_bonbon = n.ListeNourriture();
+				betise.nom_betise = nom_bonbon;	
 			}
 		}
 		if(GUI.Button(new Rect(10, 100, 50, 50),betiseTexture(listBetiseJoueur[4]))) {
@@ -510,6 +522,9 @@ public class MenusJeu : MonoBehaviour {
 				Debug.Log("Betise 4");
 				//Debug.Log(listBetiseJoueur[4]);
 				SupprimeBetiseSac(listBetiseJoueur,4);
+
+				betise = bacASable.AddComponent<Betises>();
+				betise.nom_betise = Invocations.BOUT_DE_BOIS;
 			}
 		}
 		
@@ -520,6 +535,8 @@ public class MenusJeu : MonoBehaviour {
 				Debug.Log("Betise 5");
 				//Debug.Log(listBetiseJoueur[5]);
 				SupprimeBetiseSac(listBetiseJoueur,5);
+				betise = bacASable.AddComponent<Betises>();
+				betise.nom_betise = Invocations.SCARABEE;
 			}
 		}
 		
@@ -530,6 +547,8 @@ public class MenusJeu : MonoBehaviour {
 				Debug.Log("Betise 6");
 				//Debug.Log(listBetiseJoueur[6]);
 				SupprimeBetiseSac(listBetiseJoueur,6);
+				betise = bacASable.AddComponent<Betises>();
+				betise.nom_betise = Invocations.BOMBE_EAU;
 			}
 		}
 		GUI.EndGroup();

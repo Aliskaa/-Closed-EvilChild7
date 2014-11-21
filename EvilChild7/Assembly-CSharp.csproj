@@ -47,9 +47,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BacAsable\BacAsableScript.cs" />
+     <Compile Include="Assets\Scripts\Cailloux\CaillouxScript.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Debug\DebugScript.cs" />
      <Compile Include="Assets\Scripts\Debug\PresentationScript.cs" />
+     <Compile Include="Assets\Scripts\Eau\BombeEauScript.cs" />
+     <Compile Include="Assets\Scripts\Eau\GoutteScript.cs" />
+     <Compile Include="Assets\Scripts\Eau\MissileEau.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\DetectionFourmisScript.cs" />
      <Compile Include="Assets\Scripts\Fourmis\FourmiScript.cs" />
@@ -79,13 +83,16 @@
      <Compile Include="Assets\Scripts\IA\Modele\Scarabee.cs" />
      <Compile Include="Assets\Scripts\IA\Modele\Soldat.cs" />
      <Compile Include="Assets\Scripts\IA\Reaction\IAreaction.cs" />
+     <Compile Include="Assets\Scripts\Interactions\Betises.cs" />
      <Compile Include="Assets\Scripts\Interactions\PointAndClickScript.cs" />
      <Compile Include="Assets\Scripts\Menus\AccueilScript.cs" />
      <Compile Include="Assets\Scripts\Menus\BoutonSonScript.cs" />
      <Compile Include="Assets\Scripts\Menus\MenusJeu.cs" />
      <Compile Include="Assets\Scripts\Menus\QuitterJeuScript.cs" />
+     <Compile Include="Assets\Scripts\Nourritures\NourritureBonbons.cs" />
      <Compile Include="Assets\Scripts\Nourritures\NourrituresScript.cs" />
      <Compile Include="Assets\Scripts\Pheromones\PheromonesScript.cs" />
+     <Compile Include="Assets\Scripts\Pistolet\pistolet.cs" />
      <Compile Include="Assets\Scripts\Scarabées\DeplacementsScarabeeScript.cs" />
      <Compile Include="Assets\Scripts\Scarabées\DetectionScarabeeScript.cs" />
      <Compile Include="Assets\Scripts\Scarabées\ScarabeeScript.cs" />
