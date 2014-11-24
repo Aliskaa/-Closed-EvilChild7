@@ -672,11 +672,17 @@ Commentaire...:
 		- Lancers de betises;
 	
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  55;
+Date..........:  24/11/2014 21h40;
 Auteur........:  py;
 Commentaire...:
-	;
+	Tache 124 terminée : objets qui coulent dans l'eau
+		- Création du script SubmersibleScript et ajout à tous les prefabs
+			pour les faire disparaitre en cas de collision avec l'eau
+	Ajout des tags REINE_BLANCHE et REINE_NOIRE aux reines
+	Taches 64, 68 et 72 closes
+	Tache 123 terminée :
+		- Debouchonnage des oeufs pour que l'IA définisse ce qu'il y aura dedans;
 
 __________________________________
 Numero........:  ??;

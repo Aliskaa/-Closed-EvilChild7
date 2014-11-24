@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -43,7 +43,8 @@ public class OeufScript : MonoBehaviour {
 	public Invocations fourmi;
 	
 	/// <summary>
-	/// Le camps de la fourmi qui sortira de l'oeuf
+	/// Le camps de la fourmi qui sortira de l'oeuf.
+	/// Pour des besoins de bouchonnage.
 	/// </summary>
 	[HideInInspector]
 	public TypesCamps camps;
@@ -90,16 +91,12 @@ public class OeufScript : MonoBehaviour {
 		meshRender.enabled = false;
 		Destroy(gameObject);
 	}
-#endregion
-	
-#region Méthodes package
+
 	/// <summary>
-	/// Routine appellée automatiquement par Unity au lancement du script
+	/// Bouchonne cette instance
 	/// </summary>
-	void Awake(){
-		this.Timer = DUREE_INCUBATION;
-		// FIXME : Voir avec l'IA pour les ratios et le camps
-		int campsInt = Random.Range (1, 2);
+	private void Bouchonner(){
+		int campsInt = Random.Range(1, 2);
 		camps = (TypesCamps)campsInt;
 		int fourmiInt;
 		if ( camps == TypesCamps.BLANC ){
@@ -108,6 +105,17 @@ public class OeufScript : MonoBehaviour {
 			fourmiInt = Random.Range(20,23);
 		}
 		fourmi = (Invocations)fourmiInt;
+	}
+#endregion
+	
+#region Méthodes package
+	/// <summary>
+	/// Routine appellée automatiquement par Unity au lancement du script
+	/// </summary>
+	void Awake(){
+		this.Timer = DUREE_INCUBATION;
+		//Bouchonner();
+		fourmi = Invocations.RIEN;
 		//Debug.Log("Fourmi de type : "+fourmi);
 	}
 	

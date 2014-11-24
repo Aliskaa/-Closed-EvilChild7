@@ -102,6 +102,7 @@
      <Compile Include="Assets\Scripts\Terrains\HexagonesVueScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\InvocateurObjetsScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\Rendoring3DCasesScript.cs" />
+     <Compile Include="Assets\Scripts\Terrains\SubmersibleScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\TerrainManagerScript.cs" />
      <Compile Include="Assets\Scripts\Terrains\TerrainUtils.cs" />
      <Compile Include="Assets\Scripts\Utils\CheatCodeScript.cs" />

@@ -1,22 +1,15 @@
 ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
 4					annulé					Mottes de terres
-64					attente		[py]		Configurer tous les prefabs concernant les IA :
-68								[py]			- fourmis blanche reine
-72								[py]			- fourmis noire reine
-123								[py]			- oeufs
 84					attente		[py]		Configuration des scarabées
 												- attaque des oeufs [attente]
-104				 	attente					Barre de vie
 106		0		>>>	non lancé	[py]		Retour à la base (reine = position fixe)
 122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
-124		1		>	non lancé	???			Dès qu'un objet touche l'eau, il disparait
-126		3		>	non lancé	[py] 		Matériaux/texture eau case
-134		2		>>	non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trouvée
-135		2			non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
-139		1		>>>	non lancé	[py]		Voir si meilleur suivi des phéromones avec juste détection DEVANT (et pas DG et DD)
-141		1		>>>	non lancé	[py]		Mettre son qui convient bien aux critères Unity (pb son "Angello")
-148		3			non lancé	[py]		Voir si les cailloux et objets jetables sont bien freezés
+126					annulé			 		Matériaux/texture eau case
+134		1		>>	non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trouvée
+135		1		>	non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
+141		2		>>>	non lancé	[py]		Mettre son qui convient bien aux critères Unity (pb son "Angello")
+148		3			attente		???			Voir si les cailloux et objets jetables sont bien freezés
 149		1		>>>	non lancé	[py]		Reine noire mal positionnée
 
 

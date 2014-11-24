@@ -7,7 +7,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.5.0
+/// PY Lapersonne - Version 1.6.0
 /// </remarks>
 
 using UnityEngine;
@@ -148,7 +148,7 @@ public class DebugScript : MonoBehaviour {
 					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ORANGE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.BONBON_VERT, click);
 					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ROSE, click);
-					scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+					//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
 					//scriptInvoc.InvoquerObjet(Invocations.BOUT_DE_BOIS, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
@@ -170,8 +170,26 @@ public class DebugScript : MonoBehaviour {
 					#region Debogage collision
 					//tms.ConvertirCaseEau(click);
 					//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
-					//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
 					//scriptInvoc.InvoquerObjet(Invocations.CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.PETIT_CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_BLEU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ANGLAIS_ROSE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_MURE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ORANGE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_ROSE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.BONBON_VERT, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_COMBATTANTE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE	, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_COMBATTANTE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_GENERALE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+					scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
 					#endregion
 
 					//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
@@ -193,7 +211,15 @@ public class DebugScript : MonoBehaviour {
 					GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 					TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-					scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_GENERALE, click);
+
+					#region Débogage oeufs
+					GameObject noeunoeuf = scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+					OeufScript os = noeunoeuf.GetComponent<OeufScript>();
+					int tirageTypeFourmi = Random.Range(20, 23);
+					int tirageCamps = Random.Range(0,1);
+					os.fourmi = (Invocations)(tirageTypeFourmi + tirageCamps*10);
+					#endregion
+
 				}
 			}
 		}
