@@ -7,10 +7,6 @@ ID		PRIORITE	STATUT		QUI			DESCRIPTION
 122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
 126					annulé			 		Matériaux/texture eau case
 134		1		>>	non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trouvée
-135		1		>	non	lancé	???			Cabler bétises -> bestioles : perte PDV et mort cailloux, eau, etc
-141		3			non lancé	???			Mettre son qui convient bien aux critères Unity (pb son "Angello")
-148		3			attente		???			Voir si les cailloux et objets jetables sont bien freezés
 149		2		>>>	non lancé	[py]		Reine noire mal positionnée
-150		0		>>	non lancé	[py]		Bug build and run : le terrain est mal positionné
 
 [Dernier ID utilisé : 150]
