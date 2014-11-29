@@ -689,6 +689,45 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
+	Tache 149 terminée : reine noire mal positionnée (à cheval sur un coté du bac)
+	Tache 151 terminée : correction bug où les fourmis ne repéraient pas les reines s'il y avat des phéromones devant
+	Lancement tache 106 : retour à la base;
+	Réduction des visées des fourmis;
+	Nouveaux bugs repérés;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
 	;
 
 __________________________________

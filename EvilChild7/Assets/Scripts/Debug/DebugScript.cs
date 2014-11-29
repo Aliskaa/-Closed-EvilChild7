@@ -7,7 +7,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.6.0
+/// PY Lapersonne - Version 1.7.0
 /// </remarks>
 
 using UnityEngine;
@@ -189,7 +189,14 @@ public class DebugScript : MonoBehaviour {
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
-					scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.SCARABEE, click);
+					#endregion
+
+					#region Débogage retour à la base
+					scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
 					#endregion
 
 					//Debug.Log("Coordonnées converties : "+tms.ConvertirCoordonnes(pointImpact));
@@ -213,13 +220,35 @@ public class DebugScript : MonoBehaviour {
 					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
 
 					#region Débogage oeufs
-					GameObject noeunoeuf = scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
-					OeufScript os = noeunoeuf.GetComponent<OeufScript>();
-					int tirageTypeFourmi = Random.Range(20, 23);
-					int tirageCamps = Random.Range(0,1);
-					os.fourmi = (Invocations)(tirageTypeFourmi + tirageCamps*10);
+					//GameObject noeunoeuf = scriptInvoc.InvoquerObjet(Invocations.OEUF_FOURMI, click);
+					//OeufScript os = noeunoeuf.GetComponent<OeufScript>();
+					//int tirageTypeFourmi = Random.Range(20, 23);
+					//int tirageCamps = Random.Range(0,1);
+					//os.fourmi = (Invocations)(tirageTypeFourmi + tirageCamps*10);
 					#endregion
 
+					#region Débogage retour à la base
+					scriptInvoc.InvoquerObjet(Invocations.BONBON_MURE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+					#endregion
+				}
+			}
+		}
+
+		/*
+		 * 
+		 */
+		if ( Input.GetMouseButtonDown(2/*CLIC_MOLETTE*/) ){
+			Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
+			float distance;
+			Plane planDuSol = new Plane(Vector3.up, transform.position);
+			if ( planDuSol.Raycast(rayon, out distance) ){ 
+				Vector3 pointImpact = rayon.GetPoint(distance);
+				if ( IsSourisSurTerrain(pointImpact) ){
+					GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+					TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
+					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
+					scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
 				}
 			}
 		}

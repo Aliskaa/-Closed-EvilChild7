@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.1.0
+/// PY Lapersonne - Version 3.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -150,11 +150,15 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	}
 
 	/// <summary>
-	/// Fait bouger la fourmi.
+	/// Fait bouger la fourmi, c'est à dire qu'elle va bouger
+	/// sans chercher à rentrer à la base.
 	/// </summary>
 	/// <param name="direction">Direction de la fourmi.</param>
 	/// <param name="nbCases">Nombre de cases à avancer.</param>
 	public void bouger( TypesAxes direction, int nbCases ){
+
+		Debug.Log("Reçu ordre : bouger()");
+		scriptDeplacement.retourBaseEnCours = false;	
 
 		if ( scriptDeplacement.objectifAtteint ){
 		
@@ -226,9 +230,12 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	}
 
 	/// <summary>
-	/// Provoque la déambulation de la fourmi
+	/// Provoque la déambulation de la fourmi, c'est à dire qu'elle va bouger
+	/// sans chercher à rentrer à la base.
 	/// </summary>
 	public TypesAxes deambuler(){
+		Debug.Log("Reçu ordre : déambuler()");
+		scriptDeplacement.retourBaseEnCours = false;	
 		TypesAxes axe = (TypesAxes) Random.Range(1, 6);
 		dernierAxeUtilise = axe;
 		bouger(axe, 1);
@@ -239,6 +246,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Provuqe la mort de la fourmi
 	/// </summary>
 	public void mourir(){
+		Debug.Log("Reçu ordre : mourir()");
 		Mourrir();
 	}
 
@@ -246,9 +254,9 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Fait rentrer la fourmi à la base
 	/// </summary>
 	public TypesAxes rentrerBase(){
-		Debug.Log("rentrerBase");
-		// TODO
-		return TypesAxes.AUCUN;
+		Debug.Log("Reçu ordre : rentrerBase()");
+		scriptDeplacement.retourBaseEnCours = true;	
+		return TypesAxes.AUCUN; // FIXME vraiment utile ?
 	}
 
 	/// <summary>

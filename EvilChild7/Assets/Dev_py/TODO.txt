@@ -1,12 +1,13 @@
 ID		PRIORITE	STATUT		QUI			DESCRIPTION
 
-4					annulé					Mottes de terres
-84					attente		[py]		Configuration des scarabées
-												- attaque des oeufs [attente]
 106		0		>>>	non lancé	[py]		Retour à la base (reine = position fixe)
-122					annulé					Système pour savoir s'il y a déjà une phéromone sur une case pour éviter d'en remettre
-126					annulé			 		Matériaux/texture eau case
+												- terrain random
 134		1		>>	non lancé	[py]		Vérifier dépot des phéromones par les ouvrières quand nourriture trouvée
-149		2		>>>	non lancé	[py]		Reine noire mal positionnée
-
-[Dernier ID utilisé : 150]
+152		?			non lancé	?			BUG : La fourmi donne à manger à la reine à distance :
+												- Si une fourmi détecte la reine à 2 cases, l'IA semble cosindérer qu'elle est 
+													suffisaement proche pour donner la nourriture
+153		?			non lancé	?			BUG : Les CM ne retournent pas vers la nourriture une fois vu la reine
+155		1			lancé		[py]		Animation pour voir que la reine a bien reçu la nourriture
+156		2			non lancé	[py]		Implémenter un meilleur retour à la base pour éviter les obstacles
+																										
+[Dernier ID utilisé : 156]

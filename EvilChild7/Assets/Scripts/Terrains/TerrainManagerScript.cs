@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.3.0
+/// PY Lapersonne - Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -491,8 +491,8 @@ public class TerrainManagerScript : MonoBehaviour {
 				h = TerrainUtils.GetHexagoneAt(37);
 				positionReineBlanche = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 360ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(360);
+				// Reine noire dans le 359ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(359);
 				positionReineNoire = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
@@ -501,8 +501,8 @@ public class TerrainManagerScript : MonoBehaviour {
 				h = TerrainUtils.GetHexagoneAt(37);
 				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 360ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(360);
+				// Reine noire dans le 359ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(359);
 				positionReineNoire = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
@@ -511,8 +511,8 @@ public class TerrainManagerScript : MonoBehaviour {
 				h = TerrainUtils.GetHexagoneAt(37);
 				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 360ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(360);
+				// Reine noire dans le 359ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(359);
 				positionReineNoire = h.positionLocaleSurTerrain;
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
@@ -521,8 +521,8 @@ public class TerrainManagerScript : MonoBehaviour {
 				h = TerrainUtils.GetHexagoneAt(61);
 				positionReineBlanche = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 384ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(384);
+				// Reine noire dans le 380ème hexagone (sur 400)
+				h = TerrainUtils.GetHexagoneAt(380);
 				positionReineNoire = h.positionLocaleSurTerrain;	
 				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
 				break;
@@ -636,7 +636,7 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// <summary>
 	/// Retourne la position de la reine noire
 	/// </summary>
-	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
+	/// <returns>Coordonnées 3D, repère local au terrain</returns>
 	public Vector3 PositionReineNoire(){
 		return positionReineNoire;
 	}

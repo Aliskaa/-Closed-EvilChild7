@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 4.0.0
+/// PY Lapersonne - Version 4.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -62,9 +62,13 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Méthode pour détecter des objets sur un axe donné.
 	/// Equivaut à la vue et à l'odorat
 	/// </summary>
+	/// <remarks>Pour détecter la reine, qui est un GO plus grand que els autres tels
+	/// que les phéromones, les fourmis ou le sbétises, il faut lancer des rayons assez hauts
+	/// pour ne pas détecter les petits objets comme les phéromones</remarks>
 	/// <param name="direction">La direction de détection.</param>
 	/// <param name="visee">La longueur du raydon de visée</param>
-	private void VoirEtSentir( TypesAxes direction, float visee ){
+	/// <param name="offsetY">Un offset à apliquer sur le rayon lancé, offset vertical</param>
+	private void VoirEtSentir( TypesAxes direction, float visee, float offsetY ){
 
 		// Convertion direction <-> vecteur
 		Color debugRayColor = Color.black;
@@ -113,7 +117,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 
 		// Création du rayon qui va partir dans le bonne direction
 		Vector3 positionRayon = transform.position;
-		positionRayon.y += 0.5f;
+		positionRayon.y += offsetY;
 
 		Vector3 directionRayon = transform.TransformDirection(directionV);
 		directionRayon.Normalize();
@@ -332,12 +336,23 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// Va vérifier ce qu'il y a autour de la fourmis dans les 6 sens possibles/
 	/// </summary>
 	void Update(){
-		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DEVANT_DROITE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DERRIERE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DERRIERE_DROITE, viseeAppliquee * DISTANCE_CASE);
-		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, viseeAppliquee * DISTANCE_CASE);
+		const float hauteurDetection = 0.5f;
+		const float hauteurDetectionReine = 1.5f;
+		// FIXME : Bourrin comme c'est pas permi...
+		// Détecter presque tout
+		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
+		VoirEtSentir(TypesAxes.DEVANT_DROITE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
+		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
+		VoirEtSentir(TypesAxes.DERRIERE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
+		VoirEtSentir(TypesAxes.DERRIERE_DROITE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
+		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
+		// Détecter la reine (sans détecter els phéromones qui peuvent etre entre l'objet courant et la reine
+		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
+		VoirEtSentir(TypesAxes.DEVANT_DROITE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
+		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
+		VoirEtSentir(TypesAxes.DERRIERE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
+		VoirEtSentir(TypesAxes.DERRIERE_DROITE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
+		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
 		SignalerDetections();
 	}
 #endregion
@@ -356,7 +371,7 @@ public enum ViseesFourmis : int {
 	/// <summary>
 	/// La visée de la contremaitre, à 20/4 = 5
 	/// </summary>
-	VISEE_CONTREMAITRE = 5,
+	VISEE_CONTREMAITRE = 2,
 	/// <summary>
 	/// La visée de la combattante, à 5/4 = 1
 	/// </summary>
@@ -364,6 +379,6 @@ public enum ViseesFourmis : int {
 	/// <summary>
 	/// La visée de la générale, à 20/4 = 5
 	/// </summary>
-	VISEE_GENERALE = 5,
+	VISEE_GENERALE = 2,
 }
 #endregion

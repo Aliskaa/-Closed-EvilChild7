@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.5.0
+/// PY Lapersonne - Version 4.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -55,6 +55,21 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// La vitesse qui est appliquée à la fourmis, en fonction de sa caste
 	/// </summary>
 	private int vitesseAppliquee;
+
+	/// <summary>
+	/// Flag indiquant que la fourmi s'est prise un obstacle de type bétise
+	/// </summary>
+	private bool collisionFrontaleBetise;
+
+	/// <summary>
+	/// Une références vers l'objet gérant le terrain
+	/// </summary>
+	private TerrainManagerScript scriptTerrainManager;
+
+	/// <summary>
+	/// Les coordonnées de la reine
+	/// </summary>
+	private Vector3 positionReine;
 #endregion
 
 #region Constantes privées
@@ -106,6 +121,18 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	[HideInInspector]
 	public bool objectifAtteint;
+
+	/// <summary>
+	/// Flag indiquant que le retour à la base est en cours
+	/// </summary>
+	[HideInInspector]
+	public bool retourBaseEnCours;
+
+	/// <summary>
+	/// Flag indiquant qu'il faut commencer le retour
+	/// </summary>
+	[HideInInspector]
+	public bool retourCommence;
 #endregion
 
 
@@ -226,7 +253,14 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	//private void Deambuler(){
 	public void Deambuler(){
-		if (enMouvement && !objectifAtteint) {
+
+		if ( retourBaseEnCours && (objectifAtteint || retourCommence) ){
+			RetourBase();
+			Avancer(AVANCEMENT_CASE);
+		}
+
+		// Cas de déambulation classique
+		if ( enMouvement && !objectifAtteint ){
 
 			//transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
 			float distCovered = (Time.time - tempsDebutTranslation) * COEFF_VITESSE * vitesseAppliquee;/*speed*/;
@@ -237,14 +271,16 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			//Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 			//Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
 
-			if ( Mathf.Abs(transform.position.x-positionAatteindre.x) < 1
-			    && Mathf.Abs(transform.position.z-positionAatteindre.z) < 1 ) {
+			if ( Mathf.Abs(Mathf.Abs(transform.position.x)-Mathf.Abs(positionAatteindre.x)) <= 1
+			    && Mathf.Abs(Mathf.Abs(transform.position.z)-Mathf.Abs(positionAatteindre.z)) <= 1 ){
 				enMouvement = false;
 				objectifAtteint = true;
 				Avancer(-1);
+				return;
 			}
 
 		}
+
 	}
 
 	/// <summary>
@@ -321,9 +357,15 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	void Awake(){
 		enMouvement = false;
 		objectifAtteint = true;
+		retourBaseEnCours = false;
+		collisionFrontaleBetise = false;
 		InitialiserVariablesFourmi();
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		scriptInvocation = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptTerrainManager = bacAsable.GetComponent<TerrainManagerScript>();
+		int type = (int)typeFourmi;
+		TypesCamps monCamps = (type >= 1 && type <= 4 ? TypesCamps.NOIR : TypesCamps.BLANC);
+		positionReine = (monCamps == TypesCamps.NOIR ? scriptTerrainManager.PositionReineNoire() : scriptTerrainManager.PositionReineBlanche());
 	}
 
 	/// <summary>
@@ -428,18 +470,22 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		// Changement de direction su on tape dans un coté du bac à sable
 		switch (causeCollision){
 			case TypesObjetsRencontres.COTE_BAC_1:
+				collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.SUD_EST);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_2:
+				collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.SUD_OUEST);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_3:
+				collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.SUD);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_4:
+				collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.NORD);
 				Avancer(AVANCEMENT_CASE);
 				break;
@@ -448,8 +494,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
 			case TypesObjetsRencontres.EAU:
 			case TypesObjetsRencontres.EAU3D:
-				FaireRotation(TypesRotations.RANDOM);
-				Avancer(AVANCEMENT_CASE);
+				collisionFrontaleBetise = true;
 				break;
 			default:
 				break;
@@ -476,6 +521,53 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <returns>Un string au format JSON</returns>
 	public string Get3dInfos(){
 		return JSONUtils.parseInfos3D(gameObject.transform.position, gameObject.transform.rotation);
+	}
+
+	/// <summary>
+	/// Retour à la base d'une fourmi.
+	/// Typiquement, va changer l'orientation de la fourmi puisque le déplacement
+	/// à proprement parler est géré ailleurs.
+	/// </summary>
+	public void RetourBase(){
+
+		// Calculer la distance entre la reine et la fourmi en X
+		float distanceEnX = positionReine.x - transform.localPosition.z;
+		// Calculer la distance entre la reine et la fourmi en Z
+		float distanceEnZ = positionReine.z - transform.localPosition.z;
+
+		//Debug.Log("Ma reine est en "+positionReine+", je suis en "+transform.localPosition +", distance en X de "+distanceEnX+", distance en Z de "+distanceEnZ);
+
+		// Déterminer en fonction des résultats la direction à prendre pour rejoindra la reine
+		TypesRotations directionReine;
+		// Distance en X positive : la reine est plus en bas sous la fourmi qui doit descendre
+		// Distance en X négative : la reine est plus en haut, au dessus de la fourmi qui doit monter
+		if ( distanceEnX > 0 ){
+			directionReine = TypesRotations.SUD;
+		} else {//if ( distanceEnX < 0 ){
+			directionReine = TypesRotations.NORD;
+		}
+		// Distance en Z positive : la reine est sur la droite
+		// Distance en Z négative : la reine est sur la gauche
+		if ( distanceEnZ > 0 ){
+			if ( directionReine == TypesRotations.SUD ){
+				directionReine = TypesRotations.SUD_EST;
+			} else { // Reine au nord
+				directionReine = TypesRotations.NORD_EST;
+			}
+		} else { //if ( distanceEnZ < 0 ){
+			if ( directionReine == TypesRotations.SUD ){
+				directionReine = TypesRotations.SUD_OUEST;
+			} else { // Reine au nord
+				directionReine = TypesRotations.NORD_OUEST;
+			}
+		}
+
+		// Effectuer le déplacement
+		// Je tourne si je suis pas dans le bon sens
+		if ( orientationCourante != directionReine ){
+			FaireRotation(directionReine);
+		}
+
 	}
 #endregion
 
