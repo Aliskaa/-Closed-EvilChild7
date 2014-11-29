@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -190,6 +190,10 @@ public enum Invocations : int {
 	/// Bombe a eau
 	/// </summary>
 	BOMBE_EAU = 86,
+	/// <summary>
+	/// Des particules roses à utiliser dès qu'une reine reçoit de la nourriture
+	/// </summary>
+	PARTICULES_RECEP_NOURRI = 87,
 	/// <summary>
 	/// Un objet de debug
 	/// </summary>

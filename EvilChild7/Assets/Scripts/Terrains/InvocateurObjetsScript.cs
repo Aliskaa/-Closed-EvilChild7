@@ -14,7 +14,7 @@
 /// Sophie Réthoré
 /// Gwendal Pollet
 /// 
-/// Version 4.0.0
+/// Version 4.1.0
 /// </remarks>
 
 using UnityEngine;
@@ -87,6 +87,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 	private const string fichierMortFO			= "particules_mort_fourmi_blanche.prefab";
 	private const string fichierMortReineNoire	= "particules_mort_reine_noire.prefab";
 	private const string fichierMortReineBlanche= "particules_mort_reine_blanche.prefab";
+	private const string fichierReceptionNourri = "particules_reception_nourriture.prefab";
 	#endregion
 
 	#region Bonbons
@@ -297,6 +298,10 @@ public class InvocateurObjetsScript : MonoBehaviour {
 				cheminPackage = packageEau;
 				nomFichier = fichierBombeEau;
 				break;
+			case Invocations.PARTICULES_RECEP_NOURRI:
+				cheminPackage = packageFourmis;
+				nomFichier = fichierReceptionNourri;
+				break;
 			default:
 				Debug.LogError("Impossible de créer l'objet :"+objet);
 				return null;
@@ -304,7 +309,7 @@ public class InvocateurObjetsScript : MonoBehaviour {
 		string cheminComplet = cheminPackage + nomFichier;
 		//Debug.Log("Chemin complet du prefab : "+cheminComplet);
 		GameObject invoc = Resources.LoadAssetAtPath<GameObject>(cheminComplet);
-		if (invoc == null) {
+		if ( invoc == null ){
 			Debug.LogError("Impossible de créer l'objet avec :"+cheminComplet);
 			return null;
 		} else {

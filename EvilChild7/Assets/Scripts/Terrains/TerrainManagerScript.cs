@@ -28,17 +28,6 @@ public class TerrainManagerScript : MonoBehaviour {
 	 * Attributs *
 	 * ********* */
 
-#region Attributs privés
-	/// <summary>
-	/// Les coordonnées 3D locales au terrain de la reine noire
-	/// </summary>
-	private Vector3 positionReineNoire;
-	/// <summary>
-	/// Les coordonnées 3D locales au terrain de la reine blanche
-	/// </summary>
-	private Vector3 positionReineBlanche;
-#endregion
-
 #region Attributs publics
 
 	/// <summary>
@@ -124,6 +113,18 @@ public class TerrainManagerScript : MonoBehaviour {
 	/// Flag indiquant qu'il faut placer les reines
 	/// </summary>
 	public bool placerReines;
+
+	/// <summary>
+	/// Les coordonnées 3D locales au terrain de la reine noire
+	/// </summary>
+	[HideInInspector]
+	public Vector3 positionReineNoire;
+
+	/// <summary>
+	/// Les coordonnées 3D locales au terrain de la reine blanche
+	/// </summary>
+	[HideInInspector]
+	public Vector3 positionReineBlanche;
 #endregion
 
 #region Attributs package
@@ -623,22 +624,6 @@ public class TerrainManagerScript : MonoBehaviour {
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 		scriptInvoc.InvoquerObjet(Invocations.EAU, hexagoneClick.positionLocaleSurTerrain);
 		scriptInvoc.InvoquerObjet(Invocations.EAU3D, hexagoneClick.positionLocaleSurTerrain);
-	}
-
-	/// <summary>
-	/// Retourne la position de la reine blanche
-	/// </summary>
-	/// <returns>Coordonnées 3D, repère locale au terrain</returns>
-	public Vector3 PositionReineBlanche(){
-		return positionReineBlanche;	
-	}
-		
-	/// <summary>
-	/// Retourne la position de la reine noire
-	/// </summary>
-	/// <returns>Coordonnées 3D, repère local au terrain</returns>
-	public Vector3 PositionReineNoire(){
-		return positionReineNoire;
 	}
 #endregion
 

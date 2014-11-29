@@ -8,7 +8,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -34,9 +34,24 @@ public class BacAsableScript : MonoBehaviour {
 	private InvocateurObjetsScript scriptInvoc;
 
 	/// <summary>
+	/// Une référence vers le script gérant le terrain
+	/// </summary>
+	private TerrainManagerScript scriptTerrain;
+
+	/// <summary>
 	/// Le type d'objets à invoquer
 	/// </summary>
 	private Invocations objetAmettre;
+
+	/// <summary>
+	/// Flag indiquant qu'une reine noire, unique, a été posée
+	/// </summary>
+	private bool reineNoirePosee;
+
+	/// <summary>
+	/// Flag indiquant qu'une reine blanche, unique, a été posée
+	/// </summary>
+	private bool reineBlanchePosee;
 #endregion
 
 #region Constantes privées pour les touches du clavier
@@ -228,6 +243,22 @@ public class BacAsableScript : MonoBehaviour {
 					HexagoneInfo hexagoneClick = TerrainUtils.HexagonePlusProche(coordLocales);
 					//Debug.Log("Clic sur hexagone : " + hexagoneClick.positionLocaleSurTerrain );
 					// Création d'un nouveau gameobject
+					if ( objetAmettre == Invocations.FOURMI_NOIRE_REINE){
+						if ( ! reineNoirePosee ){
+							scriptInvoc.InvoquerObjet(objetAmettre, hexagoneClick.positionLocaleSurTerrain);
+							reineNoirePosee = true;
+							scriptTerrain.positionReineNoire = hexagoneClick.positionLocaleSurTerrain;
+						}
+						return;
+					}
+					if ( objetAmettre == Invocations.FOURMI_BLANCHE_REINE ){
+						if ( ! reineBlanchePosee ){
+							scriptInvoc.InvoquerObjet(objetAmettre, hexagoneClick.positionLocaleSurTerrain);
+							reineBlanchePosee = true;
+							scriptTerrain.positionReineBlanche = hexagoneClick.positionLocaleSurTerrain;
+						}
+						return;
+					}
 					scriptInvoc.InvoquerObjet(objetAmettre, hexagoneClick.positionLocaleSurTerrain);
 				}
 			}
@@ -242,7 +273,15 @@ public class BacAsableScript : MonoBehaviour {
 			if(Physics.Raycast(rayon, out hit)){
 				GameObject go = hit.transform.gameObject;
 				if ( go != null && IsObjetSupprimable(go) ){
-					Destroy (hit.transform.gameObject);
+					TypesObjetsRencontres tor = GameObjectUtils.parseToType(go.name);
+					if ( tor == TypesObjetsRencontres.REINE_BLANCHE ){
+						reineBlanchePosee = false;
+						scriptTerrain.positionReineBlanche = Vector3.zero;
+					} else if ( tor == TypesObjetsRencontres.REINE_NOIRE ){
+						reineNoirePosee = false;
+						scriptTerrain.positionReineNoire = Vector3.zero;
+					}
+					Destroy(hit.transform.gameObject);
 				}
 			}
 			return;
@@ -479,7 +518,10 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Mode Bac à Sable activé !");
 		bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
+		scriptTerrain = bacAsable.GetComponent<TerrainManagerScript>();
 		objetAmettre = Invocations.RIEN;
+		reineBlanchePosee = false;
+		reineNoirePosee = false;
 	}
 
 	/// <summary>
@@ -535,11 +577,13 @@ public class BacAsableScript : MonoBehaviour {
 				return;
 			}
 			if ( touche == toucheReineBlanche ){
-				PreparerReineBlanche();
+				if ( reineBlanchePosee ) ViderObjet();
+				else PreparerReineBlanche();
 				return;
 			}
 			if ( touche == toucheReineNoire ){
-				PreparerReineNoire();
+				if ( reineNoirePosee ) ViderObjet();
+				else PreparerReineNoire();
 				return;
 			}
 			if ( touche == toucheNourriture ){

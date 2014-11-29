@@ -157,7 +157,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// <param name="nbCases">Nombre de cases à avancer.</param>
 	public void bouger( TypesAxes direction, int nbCases ){
 
-		Debug.Log("Reçu ordre : bouger()");
+		//Debug.Log("Reçu ordre : bouger()");
 		scriptDeplacement.retourBaseEnCours = false;	
 
 		if ( scriptDeplacement.objectifAtteint ){
@@ -234,7 +234,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// sans chercher à rentrer à la base.
 	/// </summary>
 	public TypesAxes deambuler(){
-		Debug.Log("Reçu ordre : déambuler()");
+		//Debug.Log("Reçu ordre : déambuler()");
 		scriptDeplacement.retourBaseEnCours = false;	
 		TypesAxes axe = (TypesAxes) Random.Range(1, 6);
 		dernierAxeUtilise = axe;
@@ -246,7 +246,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Provuqe la mort de la fourmi
 	/// </summary>
 	public void mourir(){
-		Debug.Log("Reçu ordre : mourir()");
+		//Debug.Log("Reçu ordre : mourir()");
 		Mourrir();
 	}
 
@@ -254,7 +254,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Fait rentrer la fourmi à la base
 	/// </summary>
 	public TypesAxes rentrerBase(){
-		Debug.Log("Reçu ordre : rentrerBase()");
+		//Debug.Log("Reçu ordre : rentrerBase()");
 		scriptDeplacement.retourBaseEnCours = true;	
 		return TypesAxes.AUCUN; // FIXME vraiment utile ?
 	}

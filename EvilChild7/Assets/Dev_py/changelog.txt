@@ -685,36 +685,22 @@ Commentaire...:
 		- Debouchonnage des oeufs pour que l'IA définisse ce qu'il y aura dedans;
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  56;
+Date..........:  29/11/2014 20h12;
 Auteur........:  py;
 Commentaire...:
 	Tache 149 terminée : reine noire mal positionnée (à cheval sur un coté du bac)
 	Tache 151 terminée : correction bug où les fourmis ne repéraient pas les reines s'il y avat des phéromones devant
-	Lancement tache 106 : retour à la base;
-	Réduction des visées des fourmis;
-	Nouveaux bugs repérés;
-
-__________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
-Auteur........:  py;
-Commentaire...:
-	;
-
-__________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
-Auteur........:  py;
-Commentaire...:
-	;
-
-__________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
-Auteur........:  py;
-Commentaire...:
-	;
+	Tache 106 terminée : retour à la base
+	Tache 134 terminée : les ouvrières posent bien leurs phéromones aprèsa voir trouvé de la nourriture
+	TAche 159 terminée : le bac à sable prend en compte la gestion unique des reines
+	Lancement tache 155
+		- dès que la reine reçoit de la nourriture, une animation rose émanera d'elle afin d'avertir
+			le joueur du chagement d'état de la reine
+		- attente conception IA pour voir un callback appelé coté IAreaction dès que la reine reçoit la nourriture
+	Réduction des visées des fourmis
+	Correction bac à sable: le seul terrain utilisé est le terrain 1
+	Nouveaux bugs repérés à affecter aux gens de la conception IA ou à d'autres devs pour l'instant;
 
 __________________________________
 Numero........:  ??;

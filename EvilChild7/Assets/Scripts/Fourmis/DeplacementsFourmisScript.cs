@@ -365,7 +365,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		scriptTerrainManager = bacAsable.GetComponent<TerrainManagerScript>();
 		int type = (int)typeFourmi;
 		TypesCamps monCamps = (type >= 1 && type <= 4 ? TypesCamps.NOIR : TypesCamps.BLANC);
-		positionReine = (monCamps == TypesCamps.NOIR ? scriptTerrainManager.PositionReineNoire() : scriptTerrainManager.PositionReineBlanche());
+		positionReine = (monCamps == TypesCamps.NOIR ? scriptTerrainManager.positionReineNoire : scriptTerrainManager.positionReineBlanche);
 	}
 
 	/// <summary>
@@ -531,7 +531,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	public void RetourBase(){
 
 		// Calculer la distance entre la reine et la fourmi en X
-		float distanceEnX = positionReine.x - transform.localPosition.z;
+		float distanceEnX = positionReine.x - transform.localPosition.x;
 		// Calculer la distance entre la reine et la fourmi en Z
 		float distanceEnZ = positionReine.z - transform.localPosition.z;
 

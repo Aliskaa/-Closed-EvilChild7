@@ -193,8 +193,8 @@ public class DebugScript : MonoBehaviour {
 					#endregion
 
 					#region Débogage retour à la base
-					scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
-					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_CONTREMAITRE, click);
+					scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_CONTREMAITRE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
 					#endregion
@@ -248,7 +248,8 @@ public class DebugScript : MonoBehaviour {
 					GameObject terrainGo = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 					TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
-					scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
+					scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
 				}
 			}
 		}
