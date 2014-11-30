@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.2.0
+/// PY Lapersonne - Version 2.2.1
 /// </remarks>
 
 using UnityEngine;
@@ -94,6 +94,7 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	/// Ne fait rien (!). Obligation d'implémentation d'après
 	/// la conception de l'IA
 	/// </summary>
+	/// <remarks>Doit etre refait !</remarks>
 	public void bouger(TypesAxes direction, int nbCases){
 		return;		
 	}
@@ -102,6 +103,7 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	/// Ne fait rien (!). Obligation d'implémentation d'après
 	/// la conception de l'IA
 	/// </summary>
+	/// <remarks>Doit etre refait !</remarks>
 	public TypesAxes deambuler(){
 		return TypesAxes.AUCUN;
 	}
@@ -117,6 +119,7 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	/// Ne fait rien (!). Obligation d'implémentation d'après
 	/// la conception de l'IA
 	/// </summary>
+	/// <remarks>Doit etre refait !</remarks>
 	public TypesAxes rentrerBase(){
 		return TypesAxes.AUCUN;
 	}
@@ -125,6 +128,7 @@ public class ReineScript : MonoBehaviour, IAreaction {
 	/// Ne fait rien (!). Obligation d'implémentation d'après
 	/// la conception de l'IA
 	/// </summary>
+	/// <remarks>Doit etre refait !</remarks>
 	public void poserPheromones( bool activation ){
 		return;
 	}

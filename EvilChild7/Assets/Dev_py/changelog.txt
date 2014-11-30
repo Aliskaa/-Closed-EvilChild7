@@ -710,8 +710,8 @@ Commentaire...:
 	ᕕ( ᐛ )ᕗ Noix de cocomit : Le lead-dev que je suis se met en vacances avec son quota horaire ayant dépassé largement les 150h;
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  58;
+Date..........:  30/11/2014 14h06;
 Auteur........:  py;
 Commentaire...:
 	Augmentation taille en hauteur des box colliders de
@@ -720,7 +720,12 @@ Commentaire...:
 		- les bestioles
 		pour qu'elle soit détectée par les fourmis sans etre bloqué par les phéromones
 	Correction des noms des bestioles (suppression des prefixes "Invoc:"
-	Tache 160 terminée : bug où la fourmi se bloque devant un obstacle en rentrant à la base;
+	Corrections des IA sur la distance à la reine et la transmission de bouffe
+		(IAcontremaitre, IAouvriere, IAreine)
+	Tache 155 terminée : particules pour signaler la réception de bouffe
+	Tache 153 close : pas un bug
+	Tache 157 terminée : bug résolu (blocage des bestioles façe à des obstacles)
+	Tache 152 terminée : la fourmi donne à manger à la reine en étant proche, pas à distance;
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;

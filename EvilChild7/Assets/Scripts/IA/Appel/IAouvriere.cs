@@ -1,17 +1,16 @@
-using UnityEngine;
 using System.Collections.Generic;
 
 public class IAouvriere: IAabstraite
 {
 	
-	protected IAreaction maReaction = null;
+	protected IAreactionOuvriere maReaction = null;
 	protected Ouvriere modele;
 	protected TypesCamps monCamp;
 	protected TypesObjetsRencontres monType;
 	protected TypesAxes derniereDirection = TypesAxes.AUCUN;
 	protected TypesAxes[] axes = new TypesAxes[6]{TypesAxes.DEVANT,TypesAxes.DEVANT_DROITE,TypesAxes.DERRIERE_DROITE,TypesAxes.DERRIERE,TypesAxes.DERRIERE_GAUCHE,TypesAxes.DEVANT_GAUCHE};
 	
-	public IAouvriere(TypesObjetsRencontres monType, IAreaction reaction){
+	public IAouvriere(TypesObjetsRencontres monType, IAreactionOuvriere reaction){
 		attaquants = new List<IAabstraite> ();
 		victimes = new List<IAabstraite> ();
 		modele = new Ouvriere();
@@ -27,7 +26,7 @@ public class IAouvriere: IAabstraite
 		
 	}
 	override public void signaler(List<Cible> objetsReperes){
-
+		
 		if(attaque()) {
 			
 			attaquer(getAttaquantAt(0));
@@ -38,8 +37,12 @@ public class IAouvriere: IAabstraite
 				Cible reine = repererReine(objetsReperes);
 				
 				if(reine!=null){
-					
-					modele.nourriturePosee();
+					if(reine.getDistance() <= DeplacementsFourmisScript.DISTANCE_CASE){
+						modele.nourriturePosee();
+						maReaction.donnerNourritureReine();
+					}else{
+						rentrerBase();
+					}
 					
 				}else{
 					//maReaction.poserPheromones(false);
@@ -143,26 +146,26 @@ public class IAouvriere: IAabstraite
 		}
 		return false;
 	}
-
+	
 	private Cible repererPheromones(List<Cible> objetsReperes){
-
+		
 		/*
 		 * Etape 0 : Séparer les phéromones par couleurs
 		 */
 		List<Cible> pheromonesNoires = new List<Cible> ();
 		List<Cible> pheromonesBlanches = new List<Cible> ();
-
+		
 		foreach (Cible cible in objetsReperes) {
 			if (cible.getMonIAobjet () == null) {
 				TypesObjetsRencontres tor = cible.getType ();
 				if (tor == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE || tor == TypesObjetsRencontres.PHEROMONES_OUV_BLANCHE) {
-						pheromonesBlanches.Add (cible);
+					pheromonesBlanches.Add (cible);
 				} else {
-						pheromonesNoires.Add (cible);
+					pheromonesNoires.Add (cible);
 				}
 			}
 		}
-
+		
 		/*
 		 * Etape 1 : Séparer les phéromones d'ouvrières des phéormones de contremaitre
 		 */
@@ -170,7 +173,7 @@ public class IAouvriere: IAabstraite
 		List<Cible> pheromonesNoiresOuv = new List<Cible>();
 		List<Cible> pheromonesBlanchesCm = new List<Cible>();
 		List<Cible> pheromonesBlanchesOuv = new List<Cible>();
-
+		
 		foreach ( Cible c in pheromonesNoires ){
 			TypesObjetsRencontres tor = c.getType();
 			if (tor == TypesObjetsRencontres.PHEROMONES_CM_NOIRE) {
@@ -181,7 +184,7 @@ public class IAouvriere: IAabstraite
 		}
 		pheromonesNoires.Clear();
 		pheromonesNoires = null;
-
+		
 		foreach (Cible c in pheromonesBlanches) {
 			TypesObjetsRencontres tor = c.getType ();
 			if (tor == TypesObjetsRencontres.PHEROMONES_CM_BLANCHE) {
@@ -192,9 +195,9 @@ public class IAouvriere: IAabstraite
 		}
 		pheromonesBlanches.Clear();
 		pheromonesBlanches = null;
-
+		
 		Cible pheroPlusProche = null;
-
+		
 		/*
 		* Etape 2 : Traiter d'abord les phéromones de contremaitre : on choisir une à la fin
 		* 			Prendre la phéromone qui :
@@ -207,9 +210,9 @@ public class IAouvriere: IAabstraite
 		} else {
 			pheroPlusProche = chercherPlusProche(pheromonesNoiresCm);
 		}
-
+		
 		if (pheroPlusProche != null) return pheroPlusProche;
-
+		
 		/*
 		 * Etape 3 : Si pas de phéromone de contremaitre trouvées, on traite les phéromones des ouvrières
 		 */
@@ -218,30 +221,30 @@ public class IAouvriere: IAabstraite
 		} else {
 			pheroPlusProche = chercherPlusProche(pheromonesNoiresOuv);
 		}
-
+		
 		/*
 		 * Etape 3.2 : Suivre la direction de la phéromone.
 		 * Attention, il faut prendre l'inverse de la direction de cette phéromone pour les ouvrières (bouffe dans l'autre sens)
 		 */
 		// TODO
-
+		
 		/*
 		 * Etape 3.3 : Cas où plusieurs directions
 		 */
 		// TODO
-
+		
 		/*
 		 * Etape 4 : Aller vers la phéromone désirée
 		 */
 		return pheroPlusProche;
-
+		
 	}
-
+	
 	private Cible chercherPlusProche( List<Cible> liste ){
-
+		
 		if (liste == null || liste.Count <= 0)	return null;
 		Cible pheroPlusProche = null;
-
+		
 		// S'il n'y a que des phéromones derrière
 		if (rienDevant (liste)) {
 			foreach (Cible c in liste) {
@@ -249,7 +252,7 @@ public class IAouvriere: IAabstraite
 					pheroPlusProche = c;
 				}
 			}
-		// Il y a des phéromones devants
+			// Il y a des phéromones devants
 		} else {
 			foreach (Cible c in liste) {
 				// Il y a des phéromones devant
@@ -260,11 +263,11 @@ public class IAouvriere: IAabstraite
 				}
 			}
 		}
-
+		
 		return pheroPlusProche;
-
+		
 	}
-
+	
 	private bool rienDevant(List<Cible> liste){
 		foreach (Cible c in liste) {
 			if ( c.getDirection() == TypesAxes.DEVANT ) return false;
@@ -273,14 +276,14 @@ public class IAouvriere: IAabstraite
 		}
 		return true;
 	}
-
+	
 	private bool demiTour( Cible c ){
 		TypesAxes directionReperageCible = c.getDirection();
 		return ( directionReperageCible == TypesAxes.DERRIERE || directionReperageCible == TypesAxes.DERRIERE_DROITE
 		        || directionReperageCible == TypesAxes.DERRIERE_GAUCHE);
 	}	
-
-
+	
+	
 	
 	override public TypesObjetsRencontres retourType(){
 		return this.monType;
@@ -291,11 +294,11 @@ public class IAouvriere: IAabstraite
 		if(direction == TypesAxes.DEVANT){
 			return TypesAxes.DERRIERE;
 		}
-
+		
 		if(direction == TypesAxes.DERRIERE){
 			return TypesAxes.DEVANT;
 		}
-
+		
 		if(direction == TypesAxes.DEVANT_GAUCHE){
 			return TypesAxes.DERRIERE_DROITE;
 		}
@@ -303,7 +306,7 @@ public class IAouvriere: IAabstraite
 		if(direction == TypesAxes.DERRIERE_DROITE){
 			return TypesAxes.DEVANT_GAUCHE;
 		}
-
+		
 		if(direction == TypesAxes.DEVANT_DROITE){
 			return TypesAxes.DERRIERE_GAUCHE;
 		}

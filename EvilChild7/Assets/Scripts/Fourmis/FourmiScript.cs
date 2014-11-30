@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.1.0
+/// PY Lapersonne - Version 4.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 /// <summary>
 /// Classe pour gérer les fourmis
 /// </summary>
-public class FourmiScript : MonoBehaviour, IAreaction {
+public class FourmiScript : MonoBehaviour, IAreaction, IAreactionOuvriere {
 
 
 	/* ********* *
@@ -28,6 +28,11 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// </summary>
 	private DeplacementsFourmisScript scriptDeplacement;
 
+	/// <summary>
+	/// Une référence evrs le script d'invocation
+	/// </summary>
+	private InvocateurObjetsScript scriptInvoc;
+	
 	/// <summary>
 	/// Une référence vers le type de la fourmi
 	/// </summary>
@@ -85,10 +90,10 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 				iaBestiole = new IAsoldat(TypesObjetsRencontres.COMBATTANTE_NOIRE, reaction);
 				break;
 			case TypesFourmis.CONTREMAITRE_BLANCHE:
-				iaBestiole = new IAcontremaitre(TypesObjetsRencontres.CONTREMAITRE_BLANCHE, reaction);
+				iaBestiole = new IAcontremaitre(TypesObjetsRencontres.CONTREMAITRE_BLANCHE, (IAreactionOuvriere) reaction);
 				break;
 			case TypesFourmis.CONTREMAITRE_NOIRE:
-				iaBestiole = new IAcontremaitre(TypesObjetsRencontres.CONTREMAITRE_NOIRE, reaction);
+				iaBestiole = new IAcontremaitre(TypesObjetsRencontres.CONTREMAITRE_NOIRE, (IAreactionOuvriere) reaction);
 				break;
 			case TypesFourmis.GENERALE_BLANCHE:
 				iaBestiole = new IAgenerale(TypesObjetsRencontres.GENERALE_BLANCHE, reaction);
@@ -97,12 +102,14 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 				iaBestiole = new IAgenerale(TypesObjetsRencontres.GENERALE_NOIRE, reaction);
 				break;
 			case TypesFourmis.OUVRIERE_BLANCHE:
-				iaBestiole = new IAouvriere(TypesObjetsRencontres.OUVRIERE_BLANCHE, reaction);
+				iaBestiole = new IAouvriere(TypesObjetsRencontres.OUVRIERE_BLANCHE, (IAreactionOuvriere) reaction);
 				break;
 			case TypesFourmis.OUVRIERE_NOIRE:
-				iaBestiole = new IAouvriere(TypesObjetsRencontres.OUVRIERE_NOIRE, reaction);
+				iaBestiole = new IAouvriere(TypesObjetsRencontres.OUVRIERE_NOIRE, (IAreactionOuvriere) reaction);
 				break;
 		}
+		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 	}
 
 	/// <summary>
@@ -120,9 +127,6 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Mort "visible" de l'objet. Mort à cause d'une bestiole ou d'un objet.
 	/// </summary>
 	public void Mourrir(){
-		Vector3 position = transform.localPosition;
-		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
-		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 		Invocations i;
 		int codeTypeFourmi = (int)typeFourmi;
 		// Si on est une fourmi noire
@@ -136,6 +140,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 			     ? Invocations.PARTICULES_MORT_BESTIOLE_TRASH
 			     : Invocations.PARTICULES_MORT_FOURMI_BLANCHE);
 		}
+		Vector3 position = transform.localPosition;
 		scriptInvoc.InvoquerObjet(i, position);
 		//MeshRenderer meshRender = gameObject.GetComponent<MeshRenderer>();
 		//meshRender.enabled = false;
@@ -243,7 +248,7 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	}
 
 	/// <summary>
-	/// Provuqe la mort de la fourmi
+	/// Provoque la mort de la fourmi
 	/// </summary>
 	public void mourir(){
 		//Debug.Log("Reçu ordre : mourir()");
@@ -263,8 +268,25 @@ public class FourmiScript : MonoBehaviour, IAreaction {
 	/// Active le dépot de phéromones
 	/// </summary>
 	public void poserPheromones( bool activation ){
+		//Debug.Log("Reçu ordre : poserPheromones()");
 		scriptDeplacement.activerDepotPheromone = activation;
 	}
+
+	/// <summary>
+	/// Donne la nourriture à la reine.
+	/// Et ça dépend de la fourmi.
+	/// </summary>
+	/// <remarks>Doit etre refait !</remarks>
+	public void donnerNourritureReine(){
+		//Debug.Log("Reçu ordre : donnerNourritureReine()");
+		int numeroTypeFourmi = (int)typeFourmi;
+		TypesCamps monCamp = (numeroTypeFourmi >= 1 && numeroTypeFourmi <= 4 ? TypesCamps.NOIR : TypesCamps.BLANC);
+		GameObject goBacASable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
+		TerrainManagerScript tms = goBacASable.GetComponent<TerrainManagerScript>();
+		Vector3 positionReine = (monCamp == TypesCamps.NOIR ? tms.positionReineNoire : tms.positionReineBlanche);
+		scriptInvoc.InvoquerObjet(Invocations.PARTICULES_RECEP_NOURRI,positionReine);
+	}
+
 #endregion
 
 }

@@ -21,8 +21,7 @@ public class IAreine:IAabstraite
 			monCamp = TypesCamps.NOIR;
 			this.monType = TypesObjetsRencontres.REINE_NOIRE;
 		}
-
-		modele = new Reine ();
+		
 		maReaction = reaction;
 		
 	}
@@ -90,7 +89,6 @@ public class IAreine:IAabstraite
 	}
 	public Oeuf genererOeuf(){
 		float limiteOuvriere = modele.getRatioOuvriere ();
-		float limiteSoldat = modele.getRatioOuvriere ();
 		System.Random random = new System.Random ();
 		float resultat = (float)random.NextDouble();
 		
@@ -128,6 +126,15 @@ public class IAreine:IAabstraite
 		}
 		
 	}
+	
+	public void recevoirNourriture(){
+		this.modele.augmenterQuantiteNourriture ();
+	}
+	
+	public void recevoirNourriture(int quantite){
+		this.modele.augmenterQuantiteNourriture (quantite);
+	}
+	
 	
 	public void ratiosLineaires(){
 		modele.setRatioOuvriere (modele.getRatioOuvriere () - Reine.BAISSER_RATIO );

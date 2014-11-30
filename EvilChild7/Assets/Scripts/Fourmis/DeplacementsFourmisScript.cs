@@ -59,7 +59,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// <summary>
 	/// Flag indiquant que la fourmi s'est prise un obstacle de type bétise
 	/// </summary>
-	private bool collisionFrontaleBetise;
+	//private bool collisionFrontaleBetise;
 
 	/// <summary>
 	/// Une références vers l'objet gérant le terrain
@@ -358,7 +358,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		enMouvement = false;
 		objectifAtteint = true;
 		retourBaseEnCours = false;
-		collisionFrontaleBetise = false;
+		//collisionFrontaleBetise = false;
 		InitialiserVariablesFourmi();
 		GameObject bacAsable = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
 		scriptInvocation = bacAsable.GetComponent<InvocateurObjetsScript>();
@@ -470,22 +470,22 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		// Changement de direction su on tape dans un coté du bac à sable
 		switch (causeCollision){
 			case TypesObjetsRencontres.COTE_BAC_1:
-				collisionFrontaleBetise = false;
+				//collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.SUD_EST);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_2:
-				collisionFrontaleBetise = false;
+				//collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.SUD_OUEST);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_3:
-				collisionFrontaleBetise = false;
+				//collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.SUD);
 				Avancer(AVANCEMENT_CASE);
 				break;
 			case TypesObjetsRencontres.COTE_BAC_4:
-				collisionFrontaleBetise = false;
+				//collisionFrontaleBetise = false;
 				FaireRotation(TypesRotations.NORD);
 				Avancer(AVANCEMENT_CASE);
 				break;
@@ -494,7 +494,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
 			case TypesObjetsRencontres.EAU:
 			case TypesObjetsRencontres.EAU3D:
-				collisionFrontaleBetise = true;
+				//collisionFrontaleBetise = true;
 				FaireRotation(TypesRotations.RANDOM);
 				Avancer(AVANCEMENT_CASE);
 				break;

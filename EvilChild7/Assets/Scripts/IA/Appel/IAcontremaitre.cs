@@ -4,12 +4,12 @@ using System.Collections.Generic;
 public class IAcontremaitre: IAabstraite
 {
 	
-	protected IAreaction maReaction = null;
+	protected IAreactionOuvriere maReaction = null;
 	protected Contremaitre modele;
 	protected TypesCamps monCamp;
 	protected TypesObjetsRencontres monType;
 	
-	public IAcontremaitre(TypesObjetsRencontres monType, IAreaction reaction){
+	public IAcontremaitre(TypesObjetsRencontres monType, IAreactionOuvriere reaction){
 		attaquants = new List<IAabstraite> ();
 		victimes = new List<IAabstraite> ();
 		modele = new Contremaitre();
@@ -36,11 +36,15 @@ public class IAcontremaitre: IAabstraite
 				Cible reine = repererReine(objetsReperes);
 				
 				if(reine!=null){
-					
-					modele.nourriturePosee();
+					if(reine.getDistance() <= DeplacementsFourmisScript.DISTANCE_CASE){
+						modele.nourriturePosee();
+						maReaction.donnerNourritureReine();
+					}else{
+						rentrerBase();
+					}
 					
 				}else{
-					
+					//maReaction.poserPheromones(false);
 					rentrerBase();
 					
 				}
@@ -166,5 +170,3 @@ public class IAcontremaitre: IAabstraite
 		}
 	}
 }
-
-
