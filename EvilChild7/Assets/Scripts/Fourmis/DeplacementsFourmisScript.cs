@@ -495,6 +495,8 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			case TypesObjetsRencontres.EAU:
 			case TypesObjetsRencontres.EAU3D:
 				collisionFrontaleBetise = true;
+				FaireRotation(TypesRotations.RANDOM);
+				Avancer(AVANCEMENT_CASE);
 				break;
 			default:
 				break;

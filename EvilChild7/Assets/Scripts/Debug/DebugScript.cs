@@ -7,7 +7,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.7.0
+/// PY Lapersonne - Version 1.8.0
 /// </remarks>
 
 using UnityEngine;
@@ -249,7 +249,8 @@ public class DebugScript : MonoBehaviour {
 					TerrainManagerScript tms = terrainGo.GetComponent<TerrainManagerScript>();
 					Vector3 click = tms.ConvertirCoordonnes(pointImpact);
 					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_OUVRIERE, click);
-					scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
+					//scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_OUVRIERE, click);
+					scriptInvoc.InvoquerObjet(Invocations.TRES_GROS_CAILLOU, click);
 				}
 			}
 		}

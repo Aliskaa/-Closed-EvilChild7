@@ -8,7 +8,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.1.0
 /// </remarks>
 
 using UnityEngine;

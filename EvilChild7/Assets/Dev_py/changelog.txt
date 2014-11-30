@@ -714,8 +714,13 @@ Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;
 Commentaire...:
-	;
-
+	Augmentation taille en hauteur des box colliders de
+		- la nourriture
+		- les bétises 
+		- les bestioles
+		pour qu'elle soit détectée par les fourmis sans etre bloqué par les phéromones
+	Correction des noms des bestioles (suppression des prefixes "Invoc:"
+	Tache 160 terminée : bug où la fourmi se bloque devant un obstacle en rentrant à la base;
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;

@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 4.1.0
+/// PY Lapersonne - Version 4.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -208,9 +208,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 			}
 
 			// L'objet rencontré et de l'eau ou un caillou
-			if ( (direction == TypesAxes.DEVANT
-			      /*|| direction == TypesAxes.DEVANT_DROITE 
-			      || direction == TypesAxes.DEVANT_GAUCHE*/)
+			if ( direction == TypesAxes.DEVANT
 			    && ( objetSurChemin == TypesObjetsRencontres.EAU 
 			    || objetSurChemin == TypesObjetsRencontres.EAU3D
 			    || objetSurChemin == TypesObjetsRencontres.CAILLOU
@@ -337,7 +335,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 	/// </summary>
 	void Update(){
 		const float hauteurDetection = 0.5f;
-		const float hauteurDetectionReine = 1.5f;
+		const float hauteurDetectionReine = 2f;
 		// FIXME : Bourrin comme c'est pas permi...
 		// Détecter presque tout
 		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
@@ -346,7 +344,7 @@ public class DetectionFourmisScript : MonoBehaviour {
 		VoirEtSentir(TypesAxes.DERRIERE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
 		VoirEtSentir(TypesAxes.DERRIERE_DROITE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
 		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, viseeAppliquee * DISTANCE_CASE, hauteurDetection);
-		// Détecter la reine (sans détecter els phéromones qui peuvent etre entre l'objet courant et la reine
+		// Détecter ce qui peut etre bloqué par les phéromones
 		VoirEtSentir(TypesAxes.DEVANT, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
 		VoirEtSentir(TypesAxes.DEVANT_DROITE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
 		VoirEtSentir(TypesAxes.DEVANT_GAUCHE, viseeAppliquee * DISTANCE_CASE, hauteurDetectionReine);
