@@ -703,11 +703,11 @@ Commentaire...:
 	Nouveaux bugs repérés à affecter aux gens de la conception IA ou à d'autres devs pour l'instant;
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  57;
+Date..........:  30/11/2014 01h00;
 Auteur........:  py;
 Commentaire...:
-	;
+	ᕕ( ᐛ )ᕗ Noix de cocomit : Le lead-dev que je suis se met en vacances avec son quota horaire ayant dépassé largement les 150h;
 
 __________________________________
 Numero........:  ??;
