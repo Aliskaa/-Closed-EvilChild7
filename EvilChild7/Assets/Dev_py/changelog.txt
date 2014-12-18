@@ -1,0 +1,726 @@
+Numero........:  1;
+Date..........:  15/10/2014;
+Auteur........:  py;
+Commentaire...:  Ajout changelog.txt et TODO.txt;
+
+__________________________________
+
+Numero........:  2;
+Date..........:  16/10/2014;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le terrain :
+		- 4 terrain différents de difficultés croissantes
+		- génération aléatoire du terrain;
+
+__________________________________
+
+Numero........:  3;
+Date..........:  17/10/2014 22h43;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le terrain :
+		- Possibilité de définir le G.O. embarquant le terrain
+		- Ajout du script dans le G.O. du bac à sable au lieu d'avoir un G.O. exprès
+		- Configuration de la caméra : angle de vue, position
+		- Ajout de la lumière sur le bac à sable;
+
+__________________________________
+
+Numero........:  4;
+Date..........:  18/10/2014 00h15;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le déplacement des fourmis sur le terrain :
+		- Prototypages des méthodes;
+
+__________________________________
+
+Numero........:  5;
+Date..........:  18/10/2014;
+Auteur........:  py;
+Commentaire...:  
+	Ajout classe utilitaire pour traiter du JSON
+	Travail sur le déplacement des fourmis sur le terrain :
+		- La position de la fourmis : morceau de terrain et infos3D
+		- Ajout d'un CharacterController pour faire bouger la fourmis
+	Ajouts des nouveaux prefabs : bout de bois, cailloux gros/petits, scarabee, bonbon, mure
+	Créations dossiers pour les bouts de bois, la lumière et les caméras
+	Scène de débug pour voir les mises à échelle;
+__________________________________
+
+Numero........:  6;
+Date..........:  19/10/2014;
+Auteur........:  py;
+Commentaire...:  
+	Ajout classe utilitaire pour choper un type en fonction d'un nom de game object
+	Correction sur le game object du bac à sable : pb position en Y des cotés
+	Correction bug sur vitesse de déplacement qui explose
+	Travail sur la fourmis, le terrain, les collisions des GO/fourmis
+		- Complétion du readme pour décrire le GO "fourmis noire"
+		- Ajout des rigid body et des colliders pour la fourmis et les bords du bac à sable
+		- Détection des collisions et anticipation;
+
+__________________________________
+
+Numero........:  7;
+Date..........:  20/10/2014 12h20;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le positionnement et le déplacement d'une fourmis par rapport à un hexagone
+		- Ajout d'un meilleur déplacement, moins de déviation en Z;
+
+__________________________________
+
+Numero........:  8;
+Date..........:  21/10/2014 15h40;
+Auteur........:  py;
+Commentaire...:  
+	Travail sur le positionnement et le déplacement d'une fourmis par rapprot à un hexagone
+		- Tests pour des solutions "propres", abandon CharacterController;
+
+__________________________________
+
+Numero........:  9;
+Date..........:  23/10/2014 19h00;
+Auteur........:  py;
+Commentaire...:  
+	Nettoyage code/logs
+	Travail sur le positionnement et le déplacement d'une fourmis/d'un objet par rapport à un hexagone
+		- Maintenant un système a été fait pour centrer l'objet sur l'hexagone le plus proche.;
+
+__________________________________
+
+Numero........:  10;
+Date..........:  24/10/2014 23h50;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le déplacement d'un objet
+		- Changement de méthode, suppression CharacterController, travail sur système de force qui décroit;
+
+__________________________________
+
+Numero........:  11;
+Date..........:  25/10/2014 17h43;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le déplacement d'une fourmis
+			- Maintenant la fourmis se déplace proprement pour aller d'une case à une autre, en fonction d'un nombre de case
+			La fourmis accelère au début et ralentis à la fin;
+
+__________________________________
+
+Numero........:  12;
+Date..........:  25/10/2014 20h38;
+Auteur........:  py;
+Commentaire...:
+	Correction des warnings dans DeplacementsFourmisScript
+	Travail sur la collision d'une fourmis
+			- Code plus propre pour la distance de vue
+	Travail sur le déplacement d'une fourmis
+			- Dès qu'il ya une collison, la fourmis bouge ailleurs : A REGLER;
+
+__________________________________
+
+Numero........:  13;
+Date..........:  26/10/2014 18h18;
+Auteur........:  py;
+Commentaire...:
+	Nettoyage des sources : log, code inutile, séparation des enums, constantes
+	Amélioration de GameObjectUtils
+	Correction des rotations prises en charges dans les switchs
+	Travail sur le déplacement d'une fourmis et les collisions
+			- L'orientation/rotation de la fourmis est relativement propre et fonctionnelle
+			- La fourmis bouge n'importe où sur le terrain et a des bonnes orientations
+			- La fourmis change de sens quand elle rencontre un coté de bac à sable
+			- Meilleur recentrage mais pas encore parfait (déplacement pas très propre, à cheval sur plusieurs cases)
+	(Bien sur on peut toujours extraire ces scripts (Collisions, Déplacements) pour d'autres objets);
+
+__________________________________
+
+Numero........:  14;
+Date..........:  26/10/2014 18h30;
+Auteur........:  py;
+Commentaire...:
+	Thumb'up commit : avant copie vers preprod;
+
+__________________________________
+
+Numero........:  15;
+Date..........:  26/10/2014 19h10;
+Auteur........:  py;
+Commentaire...:
+	Git : je t'emmerde en toute cordialité avec tes merges chiants;
+
+__________________________________
+
+Numero........:  16;
+Date..........:  26/10/2014 19h47;
+Auteur........:  py;
+Commentaire...:
+	Correction du fichier git_pensebete.txt
+	Correction erreur déplacement trop long de la fourmis;
+
+__________________________________
+
+Numero........:  17;
+Date..........:  27/10/2014 22h02;
+Auteur........:  py;
+Commentaire...:
+	Mise à jour TODO liste suite aux réunions
+	Ajouts de nouveaux prefabs;
+
+__________________________________
+
+Numero........:  18;
+Date..........:  27/10/2014 22h35;
+Auteur........:  py;
+Commentaire...:
+	Nettoyage avant config terrain/bac à sable;
+
+__________________________________
+
+Numero........:  19;
+Date..........:  28/10/2014 11h54;
+Auteur........:  py;
+Commentaire...:
+	Changement de la texture de l'herbe pour une autre de type "tuile"
+	Ajout de deux packages pour de sprefabs de bonbons et d'univers enfantin;
+
+__________________________________
+
+Numero........:  20;
+Date..........:  29/10/2014 18h22;
+Auteur........:  py;
+Commentaire...:
+	Nettoyage des packages
+	Nettoyage des scenes de debug
+	Ajouts des nouveaux prefabs de Sophie
+	Création du monde de jeu
+		- Nouveaux éléments
+		- Ajout du prefab du monde de jeu
+		- Correction en conséquence de la positon du terrain
+		- Adaptation de la caméra
+		- Ajout d'une skybox
+		- Ajout des particules féériques
+	Tache 33 terminée;
+
+__________________________________
+
+Numero........:  21;
+Date..........:  29/10/2014 18h30;
+Auteur........:  py;
+Commentaire...:  (ノ^_^)ノ ⌨      JU57 4 1337 C0MM17;
+
+__________________________________
+
+Numero........:  22;
+Date..........:  31/10/2014 21h52;
+Auteur........:  py;
+Commentaire...:
+	Correction de la dénomination des prefabs
+	Création du script "InvocateurObjetsScripts" permettant de faire apparaitre des objets
+	Mise à jour des gameobjets du monde de jeu suite au refactoring des prefabs
+		- Particules
+		- Monde de jeu
+	Mise à jour des scenes de debug
+	Enrichissement du monde de jeu
+	Simplification du script TerrainManagerScript
+	Travail sur le recentrage des objets :
+		- lors des invocations selon position la plus proche [en cours]
+		- lors des déplacements des fourmis [en cours]
+ʕノ•ᴥ•ʔノ︵ ●～*
+	
+
+__________________________________
+
+Numero........:  23;
+Date..........:  01/11/2014 19h48;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le recentrage des objets :
+		- lors des invocations selon position la plus proche [en cours]
+		- lors des déplacements des fourmis [en cours]
+
+__________________________________
+
+Numero........:  24;
+Date..........:  02/11/2014 17h55;
+Auteur........:  py;
+Commentaire...:
+(ˆڡˆ) 
+	Les modèles d'hexagones en mémoire servant aux mesh ont été revus
+		- Nettoyage de code
+		- Position LOCALE par rapport au GameObjet grand-parent TERRAIN
+	Le recentrage d'un objet invoqué a été revu
+		- Prise en compte de la position locale par rapport au terrain de l'hexagone
+	Revision du système pour choper l'hexagone le plus proche d'un point donné
+	Nettoyage du code avec masquage des variables publics inutiles dans l'inspecteur
+	Taches 86 et 87 terminées;
+
+__________________________________
+
+Numero........:  25;
+Date..........:  04/11/2014 17h25;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le typage des hexagones pour qu'une fourmis sache où elle est et ce qu'elle a devant elle
+		- Sauvegarde du type de terrain appliqué dans l'hexagone
+		- Améliorations API : possibilité de savoir où est une fourmis ayant le DeplacementsFourmisScripts;
+
+__________________________________
+
+Numero........:  26;
+Date..........:  05/11/2014 00h17;
+Auteur........:  py;
+Commentaire...:
+    ლ(o◡oლ)﻿﻿
+	Travail sur les hexagones :
+		- Corrections de leurs positions locales avec des offsets pour tout centrer nickel
+		- Methode de debug pour placer un objet à chaque hexagone afin d'avoir un débogage visuel
+		- Ajouts d'objets de debugs
+
+__________________________________
+
+Numero........:  27;
+Date..........:  05/11/2014 18h15;
+Auteur........:  py;
+Commentaire...:
+	\(-ㅂ-)/ 
+	Travail sur la détection de l'eau
+		- Bug corrigé : la direction du rayon était incorrecte, maintant le rayon de détection est OK
+		- Maintenant les fourmis détectent l'eau
+		- Les gameobjects des cases d'eau ont un rendu visuel
+
+__________________________________
+
+Numero........:  28;
+Date..........:  06/11/2014 09h49;
+Auteur........:  py;
+Commentaire...:
+	Travail sur la récupération de coordonnées 3D locales via un clic 2D
+		- Création du dossier Interactions dans le dossier Script pour tous les scripts
+		(clic, drag, ...)
+		- Ajout d'une nouvelle scene de debug pour les clics
+		- Maintenant un clic repère un hexagone;
+
+__________________________________
+
+Numero........:  29;
+Date..........:  07/11/2014 00h04;
+Auteur........:  py;
+Commentaire...:
+*⁂((✪⥎✪))⁂*
+	*Travail sur le pointage/click d'un hexagone :
+		- Survol d'un hexagone
+		- Couleur qui change si survol souris
+		- Amélioration du script d'invocations d'objets pour les mises en évidences d'hexagonres
+		- Nouveau prefab pour le survol de la souris
+	*Correction InvocateurObjectsScripts (problème de chemin vers le package des objets de debug)
+	*Travail sur config de tous les prefabs (colliders et rigidbody), MAJ des readme
+	*Changement de prefab pour le bout de bois
+	*Correction sur l'invocation d'objet (bug si coordonnées en paramètres = coord hexagones)
+	*Mise jour de la classe GameObjectUtils pour parser les noms des objets
+	*Correction TypesObjetsRencontres pour prendre en charge tous les types d'objets
+	*Création d'un script de debug pour éviter de squatter d'autres scripts pour faire des tests
+	*Creation méthode pour savoir si le terrain est rempli
+	*Taches 89 et 88 terminées
+	*Taches 44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62 et 63 terminées;
+
+__________________________________
+
+Numero........:  30;
+Date..........:  07/11/2014 01h02;
+Auteur........:  py;
+Commentaire...:
+	Ajout d'une scène de présentation avec des captures d'écrans;
+
+__________________________________
+
+Numero........:  31;
+Date..........:  07/11/2014 11h42;
+Auteur........:  py;
+Commentaire...:
+	Travail et correctifs en rapport avec la présentation client :
+		- Correction de la génération du terrain pour le niveau 4
+		- Ajouts de captures d'écran;
+
+__________________________________
+
+Numero........:  32;
+Date..........:  07/11/2014 17h40;
+Auteur........:  py;
+Commentaire...:
+	Mise à jour TODOList suite à réunion client
+	Correction bug invocation scarabee
+	Mise en place d'un konami code faisant apparaitre des bonbons et des scarabées
+	Taches 94 et 97 terminées;
+
+__________________________________
+
+Numero........:  33;
+Date..........:  09/11/2014 17h15;
+Auteur........:  py;
+Commentaire...:
+	Correction convertion coordoonées globales <--> locales terrain;
+
+__________________________________
+
+Numero........:  34;
+Date..........:  10/11/2014 15h56;
+Auteur........:  py;
+Commentaire...:
+	Travail sur détection/vue/ordorat dans les 6 sens :
+		- maintenant la vue/l'odorat sont implémentés dans els 6 sens (rayons implémentés)
+	Amélioration konami code: all blacks et red necks !
+	Taches 41 et 90 terminées
+	Tache 38 re-ouverte;
+
+__________________________________
+
+Numero........:  35;
+Date..........:  11/11/2014 15h16;
+Auteur........:  py;
+Commentaire...:
+	Nettoyage et debogage
+	Mise à jours de fihciers suite à commit/push defectueux
+	Fin du travail sur la conception des 3 cheat codes;
+
+__________________________________
+
+Numero........:  36;
+Date..........:  11/11/2014 18h37;
+Auteur........:  py;
+Commentaire...:
+	Renommage de "CollisionsFourmisScripts" en "DétectionFourmisScript"
+	Travail sur une version plus propre/modulaire/fonctionnelle de la vue et de l'odorat d'une fourmis
+		- Création de la classe "IA/Cible" représentant un objet detecté
+		- La signalisation des objets reprérés est partielement implémentée [attente de la conception de l'IA sur la preprod...]
+	Modification de l'univers de jeu pour appliquer les remaraques du client
+		- monde moins vide
+		- chemin de la grande maison et grande maison supprimés car fausse affordance
+		- changement de la texture du sable
+		- suppressions des fourmis et cailloux de déco car fausse affordance
+	Mise à jour des scènes
+	Nettoyage du dossier de dev
+	Tache 95 terminée	
+	Tache 99 terminée [atente conception IA];
+
+__________________________________
+
+Numero........:  37;
+Date..........:  11/11/2014 23h20;
+Auteur........:  py;
+Commentaire...:
+	Mise à jour des prefabs et des game objects du terrain
+	Relancement des taches 42 à 63 : les prefabs ont été revus (fourmis noirs et blanches)
+	Travail sur le déplacement de la caméra (fichier CameraScript);
+
+__________________________________
+
+Numero........:  38;
+Date..........:  12/11/2014 17h25;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le déplacement de la caméra
+		- Zoom avant, zoom arrière, rotation gauche et droite, haut, bas, gauche, droite
+		- Limitation des mouvements de la caméra
+	Tache 101 terminée;
+
+__________________________________
+
+Numero........:  39;
+Date..........:  12/11/2014 18h23;
+Auteur........:  py;
+Commentaire...:
+	Travail sur déplacements de fourmis :
+		- recentrage enlevé
+		- meilleur déplacement (lerp)
+		- arret aux collisons
+	Taches 85 et 38 traitées;
+
+__________________________________
+
+Numero........:  40;
+Date..........:  12/11/2014 22h19;
+Auteur........:  py;
+Commentaire...:
+	Finalisation caméra
+		- Ajout de ctrl+molette haut et bas
+	Mise à jour du prefab caméra
+	Mise à jours des scènes;
+
+__________________________________
+
+Numero........:  41;
+Date..........:  13/11/2014 00h26;
+
+Auteur........:  py;
+Commentaire...:
+	Prise en charge des derniers prefabs des fourmsi (noires et blanches)
+		- Ajout des prefabs
+		- Config positions
+		- Mise à jour invocateur
+	Mise à jour rpefab de débogage
+	Mise à jour des classes utilisant les anciennes fourmis rouges (TypesObjetsRencontrés, GameObjectUtils, Invocateur, ...)
+	Mise à jour des classes utilisant les phéromones (TypesObjetsRencontrés, GameObjectUtils, Invocateur, ...)
+	Correction bug collision fourmis avec terrain
+	Création des phéromones
+	Scène de présentation du client réalisée
+	Ajouts captures pour dossier de dev
+	Tache 32 terminée
+	Tache 93 terminée;
+
+__________________________________
+
+Numero........:  42;
+Date..........:  13/11/2014 11h26;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le scripting de chaque prefab (déplacements, détections, ...)
+		- le script de déplacement s'adapte en fonction du type de fourmi
+		- correction du déplacement : maximum 1 case
+		- le script de détection s'adapte en fonction du type de fourmi
+		- config de toutes les fourmis pour le déplacement et la detection	[en cours];
+
+__________________________________
+
+Numero........:  43;
+Date..........:  13/11/2014 20h37;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le script des obets mouvants (déplacements, détections)
+		- attente prefabs corrigés pour reines et ouvrières, autres castes faites
+	Tache 103 terminée : ajout d'une option pour le terrain pour afficher les hexagones de sable
+	Tache 107 terminée : Création des phéromones par les fourmis et suppresion au bout de 25 secondes
+	Eclosion des oeufs avec particules
+	Correction bug de pheromones déposées alords qu'airent pas dut l'etre (Invocateur mis à jour : fait rien si invoc "rien");
+
+__________________________________
+
+Numero........:  44;
+Date..........:  14/11/2014 00h33;
+Auteur........:  py;
+Commentaire...:
+	Travail sur le scarabée : script de mort
+	Tache 102 terminée : durées devie et d'incubation des  scarabées et des oeufs
+	Tache 109 terminée : Ajout de particules dispersées à la mort d'une bestiole (fourmis blanches et noires, scarabées)
+	Ajout des prefabs corrigés de Sophie (reines et ouvrières)
+	Mises à jour de totues les scènes et des prefabs de la scène
+	Tache 92 terminée : éclosion des oeufs
+	Tache 108 terminée : kinder surprise
+	Tache 110 terminée : Ajout d'une méthode pour créer une case d'eau;
+__________________________________
+
+Numero........:  45;
+Date..........:  14/11/2014 10h49;
+Auteur........:  py;
+Commentaire...:
+	Tache 111 terminée : Placement automatique des reines
+	Ajout d'une méthode pour choper un hexagone donné
+	Mise à jour prefab des reines (blocages en X/Y/Z rotation/position);
+
+__________________________________
+
+Numero........:  46;
+Date..........:  16/11/2014 18h26;
+Auteur........:  py;
+Commentaire...:
+	Travail sur cablage avec l'IA
+		- Ajout des fichiers
+		- Cablage code IA pour:
+			- combattante, générale, contremaitre, ouvrière
+	Correction rayon des rayons de détections qui étaient trop bas
+	Correction du bout de bois : trigger pour le collider
+	Correction du signalement avec l'IAreaction
+	Suivi des phéromones : pas parfait mais pas trop minable
+	Ajout classe modele Reine
+	Correction bug des géénrales qui s'attaquent entre-elles
+	Ajout NourritureScript, corrections IA nourriture et prefabs nourritures
+	Corrections sur Cible
+	Taches 65, 66, 67, 69, 70, 71, 118, 120 terminées
+	Globalement:
+			- intégration des IA et débogage des IA via les objets physiques
+			- corrections de bugs dievrs (rayons trops bas, bout de bois sans trigger, phéromones)
+
+__________________________________
+
+Numero........:  47;
+Date..........:  16/11/2014 19h48;
+Auteur........:  py;
+Commentaire...:
+	Tache 112 terminée :
+		- Ajout de particules sur la reine blanche
+		- Ajout de particules sur la reine noire
+	Tache 117 terminée :
+		- Ajout de particules pour la mort de l'oeuf
+	Tache 119 terminée :
+		- Nettoyage du code de py (faut pax exagérer quand meme)
+	Rééquilibrage cheats code;
+
+__________________________________
+
+Numero........:  48;
+Date..........:  18/11/2014 18h10;
+Auteur........:  py;
+Commentaire...:
+	Tache 113 terminée : Création de méhode pour récupérer les positions des reines
+	Corrections des prefabs des cotés du bac : plus de triggers sur les box colliders
+	Mise à jour script de debug
+	Mise à jour prefab bac à sable sur la génération de terrain en random
+	Maintenant le terrain est généré de façon random
+	Tache 115 terminée 
+			- Collisions avec les cotés du bac prises en charge (changement de direction)
+			- Collisions avec l'eau : noyade
+			- Détection de l'eau (changement de direction)
+			- Collisons avec les cailloux (changement de direction)
+	Tache 125 terminée : mort de la reine
+	Mise à jour du prefab scarabée
+	Configuration du scarabée
+		- Déplacement
+		- Détection
+		- Lien avec l'IA
+	Prise en charge dans les collisons à oublier du fond du bac à sable
+	Changement méthode de Lerp pour le translation des scarabées
+	Utilsiation du FixedUpdate plus que de Update pour le déplacement des fourmis et scarabées;
+__________________________________
+
+Numero........:  49;
+Date..........:  19/11/2014 11h15;
+Auteur........:  py;
+Commentaire...:
+	Tache 130 terminée : 
+		- Correction prefab scarabée (rotation en Y de -90) pour éviter déplacement en crabe
+	Tache 131 terminée :
+		- Définition des poids des bestioles (valeurs de la RAO * 10, reines à 10)
+	Tache 129 terminée :
+		- Corrections sur le monde de jeu où des plantes étaient en l'air
+		- Mise à jours du prefab du monde de jeu et de toutes les scènes
+	Tache 84 partiellement terminée :
+		Test du scarabée :
+			- Déplacement
+			- Détection
+			- IA
+	Tache 132 terminée : révision des points de vie, des points d'attaques, des distances de détection
+		- Corrections des points de vie, de force pour scrabées, reine, générale
+	Tache 128 terminée :
+		- Nouveaux effets graphiques lors de la mort des bestioles : moins sanglant
+	Tache 133 terminée :
+		- Cheat code saucise pour le mode trash ou pas
+	Tache 91 terminée : collison/detection avec les objets
+	Tache 39 close;
+
+__________________________________
+
+Numero........:  50;
+Date..........:  19/11/2014 16h45;
+Auteur........:  py;
+Commentaire...:
+	Taches 127, 136 et 138 terminées : Scène de présentation client via le mode bac à sable, testée...
+	Création du mode bac à sable : nouvelle scène avec des raccourcis clavier
+	Ajout d'un code pour désactiver le mode sanglant
+	Ajout d'un flag pour placer les reines ou pas (sur le TerrainManagerScript)
+	Mise à jour des scènes
+	Taches 100 et 137 réalisées : Correction du bug où un click en dehors du terrain faisant quand meme apapraitre un objet;
+
+__________________________________
+Numero........:  51;
+Date..........:  20/11/2014 00h01;
+Auteur........:  py;
+Commentaire...:
+(　ﾟ∀ﾟ)っ由
+	Préparation démonstration réunion clients
+		- amélioration du monde bac à sable avec invocation d'oeufs
+		- scénario
+
+__________________________________
+Numero........:  52;
+Date..........:  21/11/2014 14h20;
+Auteur........:  py;
+Commentaire...:
+	Intégration travaux Soukaina et Ivan
+		- Nouvelles scènes, nouvelles textures, nouveaux guiskins
+		- Scène d'accueil
+		- Musique
+		- Cablage accueil -> bac à sable, scène JvsIA, scène JvJ
+	Tache 145 terminée : Mise à jour des scènes
+	Taches 143 et 144 terminées : boutons pour arreter la partie et gérer le son;
+	Tache 142 terminée : mise à jour des prefabs :
+		- Monde(s) de jeu : bac à sable, JvIA, JvJ
+		- Caméra(s) : bac à sable, JvJ, JvIA
+		- Accueil...
+	Tache 140 terminée : plus de colliders sur les plantes vers près des reines, réduction des tailles
+__________________________________
+Numero........:  53;
+Date..........:  21/11/2014 17h34;
+Auteur........:  py;
+Commentaire...:
+	Tache 147 terminée : le soeufs ne bougent plus (freeze en X/Y/Z position et rotation);
+	Tache 146 terminée : nouveaux prefabs pour les reines
+	Ajout modifications d'Ivan sur MenusJeu.cs;
+	
+__________________________________
+Numero........:  54;
+Date..........:  21/11/2014 19h39;
+Auteur........:  py;
+Commentaire...:
+	ლ(ಠ益ಠლ) Ce code de qualité... Much bordel... Very crade... Very dépité !
+	Intégration des travaux de Sophie et d'Ivan :
+		- Prefabs eau, prefabs fleches, prefabs pistolets
+		- Script cailloux, scritps eaux, scripts pistolets;
+		- Invocations nouvelles...
+		- Lancers de betises;
+	
+__________________________________
+Numero........:  55;
+Date..........:  24/11/2014 21h40;
+Auteur........:  py;
+Commentaire...:
+	Tache 124 terminée : objets qui coulent dans l'eau
+		- Création du script SubmersibleScript et ajout à tous les prefabs
+			pour les faire disparaitre en cas de collision avec l'eau
+	Ajout des tags REINE_BLANCHE et REINE_NOIRE aux reines
+	Taches 64, 68 et 72 closes
+	Tache 123 terminée :
+		- Debouchonnage des oeufs pour que l'IA définisse ce qu'il y aura dedans;
+
+__________________________________
+Numero........:  56;
+Date..........:  29/11/2014 20h12;
+Auteur........:  py;
+Commentaire...:
+	Tache 149 terminée : reine noire mal positionnée (à cheval sur un coté du bac)
+	Tache 151 terminée : correction bug où les fourmis ne repéraient pas les reines s'il y avat des phéromones devant
+	Tache 106 terminée : retour à la base
+	Tache 134 terminée : les ouvrières posent bien leurs phéromones aprèsa voir trouvé de la nourriture
+	TAche 159 terminée : le bac à sable prend en compte la gestion unique des reines
+	Lancement tache 155
+		- dès que la reine reçoit de la nourriture, une animation rose émanera d'elle afin d'avertir
+			le joueur du chagement d'état de la reine
+		- attente conception IA pour voir un callback appelé coté IAreaction dès que la reine reçoit la nourriture
+	Réduction des visées des fourmis
+	Correction bac à sable: le seul terrain utilisé est le terrain 1
+	Nouveaux bugs repérés à affecter aux gens de la conception IA ou à d'autres devs pour l'instant;
+
+__________________________________
+Numero........:  57;
+Date..........:  30/11/2014 01h00;
+Auteur........:  py;
+Commentaire...:
+	ᕕ( ᐛ )ᕗ Noix de cocomit : Le lead-dev que je suis se met en vacances avec son quota horaire ayant dépassé largement les 150h;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2014 ??h??;
+Auteur........:  py;
+Commentaire...:
+	;
+
+__________________________________

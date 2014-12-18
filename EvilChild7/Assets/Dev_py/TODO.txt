@@ -1,0 +1,15 @@
+ID		PRIORITE	STATUT		QUI			DESCRIPTION
+
+152		?			non lancé	?			BUG : La fourmi donne à manger à la reine à distance :
+												- Si une fourmi détecte la reine à 2 cases, l'IA semble considérer qu'elle est 
+													assez proche pour donner la nourriture											
+153		?			non lancé	?			BUG : Les CM ne retournent pas vers la nourriture une fois vu la reine
+157		?			non lancé	?			BUG : Les CM se bloquent dès qu'elles voient un obstable en rentrant à la base
+158		?			non lancé	?			BUG : Le suivi des phéromones est pas top : les OUV tournent en rond parfois
+
+156		2			non lancé	[py]		Implémenter un meilleur retour à la base pour éviter les obstacles
+
+155		2		>>	attente		[py]		LA reine reçoit de ma bouffe : particules roses	
+
+
+[Dernier ID utilisé : 159]

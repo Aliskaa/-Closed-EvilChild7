@@ -1,0 +1,63 @@
+*********************
+* 01 / Monde de jeu *
+*********************
+----- Suppression des éléments ayant une fausse affordance
+		- maison champigon, chemin vers le terrain, fourmis et nourriture
+		- davantage d'éléments décoratifs propres à l'univers du jeu
+----- Skybox
+
+
+******************
+* 02 / La caméra *
+******************
+----- z, q, s, d, a, e, zoom, dezoom, ctrl molette, espace
+
+
+***********************
+* 03 / Les deux camps *
+***********************
+----- Fourmis blanches			
+----- Fourmis noires
+----- Code couleur pour les castes
+		- vert : ouvrière
+		- jaune : contremaitre
+		- rouge : soldate
+		- bleu : générale
+		- reine : rapidement détectable par l'utilisateur avec son aura
+----- Oeuf
+		- effet pour l'éclosion
+----- Mort d'une bestiole
+		- particules d'explosions de la couleur du camp (plus facilement reperable)
+----- Les scarabées
+
+*************
+* 04 / L'IA *
+*************
+----- Suivi des ennemis
+----- Changer de chemin si obstacle (caillou, eau, cotés du bac à sable)
+----- Suivi des ennemis (générale, ...)
+----- Suivi de phéromones
+
+
+******************
+* 05 / Les oeufs *
+******************
+----- Oeufs
+			* temps d'éclosion
+			* effet lors de l'éclosion
+			
+			
+************************
+* 06 / Les cheats code *
+************************
+----- Le code Konami 
+			* haut haut bas bas gauche droite gauche droite b a
+			* effets aléatoires
+				- nourritures, cailloux, fourmis noires, fourmis blanches
+----- Le code Rakayou
+			* bas bas haut bas r k u
+			* faire apparaitre des cailloux sur le terrain
+----- Le code Kinder Surpriz
+			* haut gauche bas droite haut gauche bas droite k z
+			* fait apparaitre des oeufs
+			

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 99bf9971b4027c548bae39dec2ea7aa1
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - betise: {instanceID: 0}
+  - skin_test: {fileID: 11400000, guid: 8b9c31573f2e4494cac7770f54959d43, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
