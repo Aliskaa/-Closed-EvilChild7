@@ -8,7 +8,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.0.0
+/// PY Lapersonne - Version 2.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -17,45 +17,45 @@ using UnityEngine;
 /// Classe pour manipuler le mode bac à sable avec entre autres les touches à utiliser
 /// </summary>
 public class BacAsableScript : MonoBehaviour {
-
+	
 	/* ********* *
 	 * Attributs * 
 	 * ********** */
-
-#region Attributs privés
+	
+	#region Attributs privés
 	/// <summary>
 	/// Une référence vers le bac à sable
 	/// </summary>
 	private GameObject bacAsable;
-
+	
 	/// <summary>
 	/// Une référence vers le script eprmettant de faire invoquer des objets
 	/// </summary>
 	private InvocateurObjetsScript scriptInvoc;
-
+	
 	/// <summary>
 	/// Une référence vers le script gérant le terrain
 	/// </summary>
 	private TerrainManagerScript scriptTerrain;
-
+	
 	/// <summary>
 	/// Le type d'objets à invoquer
 	/// </summary>
 	private Invocations objetAmettre;
-
+	
 	/// <summary>
 	/// Flag indiquant qu'une reine noire, unique, a été posée
 	/// </summary>
 	private bool reineNoirePosee;
-
+	
 	/// <summary>
 	/// Flag indiquant qu'une reine blanche, unique, a été posée
 	/// </summary>
 	private bool reineBlanchePosee;
-#endregion
-
-#region Constantes privées pour les touches du clavier
-
+	#endregion
+	
+	#region Constantes privées pour les touches du clavier
+	
 	/// <summary>
 	/// La touche pour faire apparaitre une ouvrière blanche.
 	/// Touche 1 du clavier (hors pavé numérique)
@@ -81,7 +81,7 @@ public class BacAsableScript : MonoBehaviour {
 	/// Touche 5 du clavier (hors pavé numérique)
 	/// </summary>
 	private const KeyCode toucheReineBlanche = KeyCode.Alpha5;
-
+	
 	/// <summary>
 	/// La touche pour faire apparaitre une ouvrière noire.
 	/// Touche 6 du clavier (hors pavé numérique)
@@ -107,7 +107,7 @@ public class BacAsableScript : MonoBehaviour {
 	/// Touche 0 du clavier (hors pavé numérique)
 	/// </summary>
 	private const KeyCode toucheReineNoire = KeyCode.Alpha0;
-
+	
 	/// <summary>
 	/// La touche pour faire apparaitre une phéromone d'ouvrière blanche
 	/// Touche w du clavier
@@ -128,13 +128,13 @@ public class BacAsableScript : MonoBehaviour {
 	/// Touche v du clavier
 	/// </summary>
 	private const KeyCode touchePheroCMNoire = KeyCode.V;
-
+	
 	/// <summary>
 	/// La touche pour ne plus faire apparaitre d'objet
 	/// Touche * du clavier
 	/// </summary>
 	private const KeyCode toucheRien = KeyCode.Asterisk;
-
+	
 	/// <summary>
 	/// La touche pour avoir un petit caillou
 	/// Touche i du clavier
@@ -150,7 +150,7 @@ public class BacAsableScript : MonoBehaviour {
 	/// Touche p du clavier
 	/// </summary>
 	private const KeyCode toucheGrosCaillou = KeyCode.P;
-
+	
 	/// <summary>
 	/// La touche pour avoir un oeuf
 	/// Touche k du clavier
@@ -166,9 +166,9 @@ public class BacAsableScript : MonoBehaviour {
 	/// Touche m du clavier
 	/// </summary>
 	private const KeyCode toucheScarabee = KeyCode.M;
-#endregion
-
-#region Constantes privées pour la souris
+	#endregion
+	
+	#region Constantes privées pour la souris
 	/// <summary>
 	/// Clic gauche de la souris
 	/// </summary>
@@ -181,13 +181,13 @@ public class BacAsableScript : MonoBehaviour {
 	/// Clic millieu de la souris
 	/// </summary>
 	private const int CLIC_CENTRE_SOURIS = 2;
-#endregion
-
+	#endregion
+	
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
-
-#region Méthodes privées pour la gestion de la souris
+	
+	#region Méthodes privées pour la gestion de la souris
 	/// <summary>
 	/// Méthode pour détecter le survol de la souris pour convertir ces coordonnées
 	/// x/y en coordonnées x/y/z locales au terrain.
@@ -267,7 +267,7 @@ public class BacAsableScript : MonoBehaviour {
 		/*
 		 * Clic droit de l'objet : faire disparaitre l'objet
 		 */
-		if ( Input.GetMouseButtonDown(CLIC_DROIT_SOURIS) ){
+		if ( Input.GetMouseButtonDown(CLIC_CENTRE_SOURIS) ){
 			Ray rayon = Camera.main.ScreenPointToRay(Input.mousePosition); 
 			RaycastHit hit;
 			if(Physics.Raycast(rayon, out hit)){
@@ -306,7 +306,7 @@ public class BacAsableScript : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	/// <summary>
 	/// Indique si la souris pointe sur le terrain
 	/// </summary>
@@ -323,7 +323,7 @@ public class BacAsableScript : MonoBehaviour {
 		if (position.z > -8) return false;
 		return true;
 	}
-
+	
 	/// <summary>
 	/// Indique si l'objet peut etre supprimé
 	/// </summary>
@@ -337,9 +337,9 @@ public class BacAsableScript : MonoBehaviour {
 		// Les valeurs entre deux sont soit sur les betises, soit la nourriture, soit les bestioles
 		return (torInt >= 10 && torInt <= 69);
 	}
-#endregion
-
-#region Méthodes privées pour la création d'objets
+	#endregion
+	
+	#region Méthodes privées pour la création d'objets
 	/// <summary>
 	/// Plus aucun objet n'apparaitra
 	/// </summary>
@@ -347,7 +347,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Plus d'objet à mettre");
 		objetAmettre = Invocations.RIEN;
 	}
-
+	
 	/// <summary>
 	/// Prépare un oeuf
 	/// </summary>
@@ -363,7 +363,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une ouvrière blanche");
 		objetAmettre = Invocations.FOURMI_BLANCHE_OUVRIERE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une ouvrière noire qui apparaitra au clic
 	/// </summary>
@@ -371,7 +371,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une ouvrière noire");
 		objetAmettre = Invocations.FOURMI_NOIRE_OUVRIERE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une soldate blanche qui apparaitra au clic
 	/// </summary>
@@ -379,7 +379,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une soldate blanche");
 		objetAmettre = Invocations.FOURMI_BLANCHE_COMBATTANTE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une soldate noire qui apparaitra au clic
 	/// </summary>
@@ -387,7 +387,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une soldate noire");
 		objetAmettre = Invocations.FOURMI_NOIRE_COMBATTANTE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une contremaitre blanche qui apparaitra au clic
 	/// </summary>
@@ -395,7 +395,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une contremaitre blanche");
 		objetAmettre = Invocations.FOURMI_BLANCHE_CONTREMAITRE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une contremaitre noire qui apparaitra au clic
 	/// </summary>
@@ -403,7 +403,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une contremaitre noire");
 		objetAmettre = Invocations.FOURMI_NOIRE_CONTREMAITRE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une générale blanche qui apparaitra au clic
 	/// </summary>
@@ -411,7 +411,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une générale blanche");
 		objetAmettre = Invocations.FOURMI_BLANCHE_GENERALE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une générale noire qui apparaitra au clic
 	/// </summary>
@@ -419,7 +419,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une générale noire");
 		objetAmettre = Invocations.FOURMI_NOIRE_GENERALE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une reine blanche qui apparaitra au clic
 	/// </summary>
@@ -427,7 +427,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une reine blanche");
 		objetAmettre = Invocations.FOURMI_BLANCHE_REINE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une reine noire qui apparaitra au clic
 	/// </summary>
@@ -435,7 +435,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'une reine noire");
 		objetAmettre = Invocations.FOURMI_NOIRE_REINE;
 	}
-
+	
 	/// <summary>
 	/// Prépare un scarabée qui apparaitra au clic
 	/// </summary>
@@ -443,7 +443,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un scarabée");
 		objetAmettre = Invocations.SCARABEE;
 	}
-
+	
 	/// <summary>
 	/// Prépare un de la nourriture qui apparaitra au clic
 	/// </summary>
@@ -452,7 +452,7 @@ public class BacAsableScript : MonoBehaviour {
 		int n = UnityEngine.Random.Range(50, 55);
 		objetAmettre = (Invocations)n;
 	}
-
+	
 	/// <summary>
 	/// Prépare une phéromone d'ouvrière blanche qui apparaitra au clic
 	/// </summary>
@@ -460,7 +460,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un phéromone d'ouvrière blanche");
 		objetAmettre = Invocations.PHEROMONES_OUVRIERE_BLANCHE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une phéromone d'ouvrière noire qui apparaitra au clic
 	/// </summary>
@@ -468,7 +468,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un phéromone d'ouvrière noire");
 		objetAmettre = Invocations.PHEROMONES_OUVRIERE_NOIRE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une phéromone de contremaitre blanche qui apparaitra au clic
 	/// </summary>
@@ -476,7 +476,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un phéromone de contremaitre blanche");
 		objetAmettre = Invocations.PHEROMONES_CONTREMAITRE_BLANCHE;
 	}
-
+	
 	/// <summary>
 	/// Prépare une phéromone de contremaitre noire qui apparaitra au clic
 	/// </summary>
@@ -484,7 +484,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un phéromone de contremaitre noire");
 		objetAmettre = Invocations.PHEROMONES_CONTREMAITRE_NOIRE;
 	}
-
+	
 	/// <summary>
 	/// Prépare un petit caillou qui apparaitra au clic
 	/// </summary>
@@ -492,7 +492,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un petit caillou");
 		objetAmettre = Invocations.PETIT_CAILLOU;
 	}
-
+	
 	/// <summary>
 	/// Prépare un caillou qui apparaitra au clic
 	/// </summary>
@@ -500,7 +500,7 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un caillou");
 		objetAmettre = Invocations.CAILLOU;
 	}
-
+	
 	/// <summary>
 	/// Prépare un gros caillou qui apparaitra au clic
 	/// </summary>
@@ -508,9 +508,9 @@ public class BacAsableScript : MonoBehaviour {
 		//Debug.Log("Préparation d'un gros caillou");
 		objetAmettre = Invocations.TRES_GROS_CAILLOU;
 	}
-#endregion
-
-#region Méthodes package
+	#endregion
+	
+	#region Méthodes package
 	/// <summary>
 	/// Routine appelée automatiquement par Unity au réveil du script
 	/// </summary>
@@ -523,7 +523,7 @@ public class BacAsableScript : MonoBehaviour {
 		reineBlanchePosee = false;
 		reineNoirePosee = false;
 	}
-
+	
 	/// <summary>
 	/// Routine appellée automatiquement par Unity au lancement du script
 	/// </summary>
@@ -531,7 +531,7 @@ public class BacAsableScript : MonoBehaviour {
 		DetecterSurvol();
 		DetecterClick();
 	}
-
+	
 	/// <summary>
 	/// Routine appelée automatiquement par Unity pour traiter les évènements liés
 	/// à la GUI/UI
@@ -628,6 +628,6 @@ public class BacAsableScript : MonoBehaviour {
 			}
 		}
 	}
-#endregion
-
+	#endregion
+	
 }

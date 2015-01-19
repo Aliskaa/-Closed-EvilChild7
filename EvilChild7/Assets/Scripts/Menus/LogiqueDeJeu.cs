@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 public class LogiqueDeJeu:GroupeRessource
 {
-	
+
+	public GUISkin skinFontes;
+
 	private GameObject bacASable;
 
 	private IAreine iaReineBlanche = null;
@@ -117,6 +119,8 @@ public class LogiqueDeJeu:GroupeRessource
 
 	void OnGUI() 
 	{	
+		GUI.skin = skinFontes;
+
 		if (getTourCourant ().getLevel () > Level.CHOISIR_BETISES) {
 			bool tmp = monInterface.afficherBoutonFinTour(getTourCourant());
 			if(tmp){

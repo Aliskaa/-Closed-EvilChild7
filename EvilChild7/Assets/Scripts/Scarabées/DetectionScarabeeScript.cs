@@ -4,7 +4,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.0.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -16,46 +16,51 @@ using System.Text.RegularExpressions;
 /// Classe pour gérer les détections d'objets par le scarabée
 /// </summary>
 public class DetectionScarabeeScript : MonoBehaviour {
-
-
+	
+	
 	/* ********* *
 	 * Attributs *
 	 * ********* */
-
-#region Attributs privés
+	
+	#region Attributs privés
 	/// <summary>
 	/// Référence vers le script de déplacement de l'objet
 	/// </summary>
 	private DeplacementsScarabeeScript scriptDeplacement;
-
+	
 	/// <summary>
 	/// Référence vers le script du scarabée
 	/// </summary>
 	private ScarabeeScript scarabeeScript;
-
+	
 	/// <summary>
 	/// Une liste d'objets qui ont été vus et qui n'ont pas encore été signalé à "l'IA"
 	/// </summary>
 	private List<Cible> objetsDetectes;
-#endregion
+	#endregion
 	
-#region Constantes privées
+	#region Constantes privées
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre
 	/// </summary>
 	private const int DISTANCE_CASE = 5;
-
+	
 	/// <summary>
 	/// La visée max du scarabée
 	/// </summary>
 	private const int VISEE = 2;
-#endregion
-
+	
+	/// <summary>
+	/// L'intervalle de temps en secondes au bout duquel la vue et l'odorat doivent etre appliqués
+	/// </summary>
+	private const int INTERVALLE_DETECTION = 1;
+	#endregion
+	
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
 	
-#region Méthodes privées
+	#region Méthodes privées
 	/// <summary>
 	/// Méthode pour détecter des objets sur un axe donné.
 	/// Equivaut à la vue et à l'odorat
@@ -63,68 +68,68 @@ public class DetectionScarabeeScript : MonoBehaviour {
 	/// <param name="direction">La direction de détection.</param>
 	/// <param name="visee">La longueur du raydon de visée</param>
 	private void VoirEtSentir( TypesAxes direction, float visee ){
-
+		
 		// Convertion direction <-> vecteur
 		Color debugRayColor = Color.black;
 		Vector3 directionV;
 		switch ( direction ){
-			case TypesAxes.DEVANT:
-				debugRayColor = Color.blue;
-				directionV = Vector3.forward;
-				break;
-			case TypesAxes.DERRIERE:
-				debugRayColor = Color.green;
-				directionV = Vector3.back;
-				break;
-			case TypesAxes.DERRIERE_DROITE:
-				debugRayColor = Color.red;
-				directionV = Vector3.back + Vector3.right;
-				break;
-			case TypesAxes.DERRIERE_GAUCHE:
-				debugRayColor = Color.yellow;
-				directionV = Vector3.back + Vector3.left;
-				break;
-			case TypesAxes.DEVANT_DROITE:
-				debugRayColor = Color.white;
-				directionV = Vector3.forward + Vector3.right;
-				break;
-			case TypesAxes.DEVANT_GAUCHE:
-				debugRayColor = Color.magenta;
-				directionV = Vector3.forward + Vector3.left;
-				break;
-			case TypesAxes.GAUCHE:
-				directionV = Vector3.left;
-				break;
-			case TypesAxes.DROITE:
-				directionV = Vector3.right;
-				break;
-			case TypesAxes.DESSUS:
-				directionV = Vector3.up;
-				break;
-			case TypesAxes.DESSOUS:
-				directionV = Vector3.down;
-				break;
-			default:
-				directionV = Vector3.forward;
-				break;
+		case TypesAxes.DEVANT:
+			debugRayColor = Color.blue;
+			directionV = Vector3.forward;
+			break;
+		case TypesAxes.DERRIERE:
+			debugRayColor = Color.green;
+			directionV = Vector3.back;
+			break;
+		case TypesAxes.DERRIERE_DROITE:
+			debugRayColor = Color.red;
+			directionV = Vector3.back + Vector3.right;
+			break;
+		case TypesAxes.DERRIERE_GAUCHE:
+			debugRayColor = Color.yellow;
+			directionV = Vector3.back + Vector3.left;
+			break;
+		case TypesAxes.DEVANT_DROITE:
+			debugRayColor = Color.white;
+			directionV = Vector3.forward + Vector3.right;
+			break;
+		case TypesAxes.DEVANT_GAUCHE:
+			debugRayColor = Color.magenta;
+			directionV = Vector3.forward + Vector3.left;
+			break;
+		case TypesAxes.GAUCHE:
+			directionV = Vector3.left;
+			break;
+		case TypesAxes.DROITE:
+			directionV = Vector3.right;
+			break;
+		case TypesAxes.DESSUS:
+			directionV = Vector3.up;
+			break;
+		case TypesAxes.DESSOUS:
+			directionV = Vector3.down;
+			break;
+		default:
+			directionV = Vector3.forward;
+			break;
 		}
-
+		
 		// Création du rayon qui va partir dans le bonne direction
 		Vector3 positionRayon = transform.position;
 		positionRayon.y += 0.5f;
-
+		
 		Vector3 directionRayon = transform.TransformDirection(directionV);
 		directionRayon.Normalize();
-
+		
 		Ray charles = new Ray(positionRayon, directionRayon);
 		RaycastHit hit;
-
+		
 		/*
 		 * Détection en lançant un rayon calculant précédemment en fonction d'une direction
 		 */
 		//if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee*30) ){ // DEBUG
 		if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) ){
-
+			
 			/*
 			 * Etape 1 : Récupération des données de l'objet repéré
 			 */
@@ -132,44 +137,44 @@ public class DetectionScarabeeScript : MonoBehaviour {
 			string nomObjetProche = objetRencontre.name;
 			TypesObjetsRencontres objetSurChemin = GameObjectUtils.parseToType(nomObjetProche);
 			//Debug.Log("Détecté : "+objetSurChemin);
-
+			
 			Debug.DrawLine(charles.origin, hit.point, debugRayColor);
-
+			
 			int codeObjet = (int) objetSurChemin;
 			IAobjet iaObjet = null;
 			Cible objetRepere = null;
-
+			
 			/*
 			 * Etape 2 : Récuépration d'autres donénes utiles en fonction de l'objet repéré.
 			 * Ces données utiles seront à transmettre à l'IA
 			 */
-
+			
 			// L'objet vu est une fourmi
 			if ( (codeObjet >= (int)TypesObjetsRencontres.OUVRIERE_NOIRE 
 			      && codeObjet <= (int)TypesObjetsRencontres.GENERALE_NOIRE)
 			    || (codeObjet >= (int)TypesObjetsRencontres.OUVRIERE_BLANCHE
-			    	&& codeObjet <=  (int)TypesObjetsRencontres.GENERALE_BLANCHE) ){
-
+			    && codeObjet <=  (int)TypesObjetsRencontres.GENERALE_BLANCHE) ){
+				
 				FourmiScript fs = objetRencontre.GetComponent<FourmiScript>();
 				iaObjet = fs.iaBestiole;
 				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
 				objetsDetectes.Add(objetRepere);
 				return;
-
+				
 			} 
-
+			
 			// L'objet vu est une des reines
 			if ( objetSurChemin == TypesObjetsRencontres.REINE_NOIRE 
 			    || objetSurChemin == TypesObjetsRencontres.REINE_BLANCHE ){
-
+				
 				ReineScript rs = objetRencontre.GetComponent<ReineScript>();
 				iaObjet = rs.iaReine;
 				objetRepere = new Cible(hit.distance, iaObjet, direction, objetSurChemin);
 				objetsDetectes.Add(objetRepere);
 				return;
-
+				
 			}
-
+			
 			// L'objet rencontré et de l'eau ou un caillou
 			if ( (direction == TypesAxes.DEVANT
 			      /*|| direction == TypesAxes.DEVANT_DROITE 
@@ -182,11 +187,11 @@ public class DetectionScarabeeScript : MonoBehaviour {
 				scriptDeplacement = gameObject.GetComponent<DeplacementsScarabeeScript>();
 				scriptDeplacement.StopperParCollision( objetSurChemin );
 			}
-		
+			
 		} // End if ( Physics.Raycast(charles.origin, charles.direction, out hit, visee) )
-
+		
 	}
-
+	
 	/// <summary>
 	/// Signale les objets repérés à l'IA.
 	/// Vide la liste stockant ces objets une fois l'IA avertie.
@@ -208,10 +213,35 @@ public class DetectionScarabeeScript : MonoBehaviour {
 			aTartes.signaler(objetsDetectes);
 		}
 	}
-#endregion
-
-
-#region Méthodes package
+	
+	/// <summary>
+	/// Coroutine pour que le scarabe voit et sente dans les 6 directions
+	/// </summary>
+	/// <returns>Un enumérateur</returns>
+	/// <param name="intervalle">L'intervalle de temps (en secondes) au bout duquel
+	/// la bestiole doit voir et sentir autour d'elle</param>
+	private IEnumerator VoirEtSentir( int intervalle ){
+		
+		while(true){
+			
+			//Debug.Log("VoirEtSentir() : "+System.DateTime.Now.ToString("dd/mm/yy HH:mm"));
+			VoirEtSentir(TypesAxes.DEVANT, VISEE * DISTANCE_CASE);
+			VoirEtSentir(TypesAxes.DEVANT_DROITE, VISEE * DISTANCE_CASE);
+			VoirEtSentir(TypesAxes.DEVANT_GAUCHE, VISEE * DISTANCE_CASE);
+			VoirEtSentir(TypesAxes.DERRIERE, VISEE * DISTANCE_CASE);
+			VoirEtSentir(TypesAxes.DERRIERE_DROITE, VISEE * DISTANCE_CASE);
+			VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, VISEE * DISTANCE_CASE);
+			SignalerDetections();
+			
+			yield return new WaitForSeconds(intervalle);
+			
+		}
+		
+	}
+	#endregion
+	
+	
+	#region Méthodes package
 	/// <summary>
 	/// Routine appellée automatiquement par Unity
 	/// lorsqu'il y a une collision, i.e. lorsque des rigidbodys avec des colliders
@@ -232,7 +262,7 @@ public class DetectionScarabeeScript : MonoBehaviour {
 		//Debug.Log ("Collision OnCollisionEnter avec : " + objetTouche + " / " + nomObjetTouche);
 		scriptDeplacement.StopperParCollision(objetTouche);
 	}
-
+	
 	/// <summary>
 	/// Routine appellée automatiquement par Unity
 	/// lorsqu'il y a une collision, i.e. lorsque des rigidbodys avec des colliders
@@ -250,7 +280,7 @@ public class DetectionScarabeeScript : MonoBehaviour {
 			ss.Noyade();
 		}
 	}
-
+	
 	/// <summary>
 	/// Routine appellée automatiquement par Unity au lancement du script
 	/// </summary>
@@ -259,11 +289,12 @@ public class DetectionScarabeeScript : MonoBehaviour {
 		scarabeeScript = (ScarabeeScript) gameObject.GetComponent<ScarabeeScript>();
 		objetsDetectes = new List<Cible>();
 	}
-
+	
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame.
 	/// Va vérifier ce qu'il y a autour du scarabee dans les 6 sens possibles.
 	/// </summary>
+	/*
 	void Update(){
 		VoirEtSentir(TypesAxes.DEVANT, VISEE * DISTANCE_CASE);
 		VoirEtSentir(TypesAxes.DEVANT_DROITE, VISEE * DISTANCE_CASE);
@@ -273,7 +304,16 @@ public class DetectionScarabeeScript : MonoBehaviour {
 		VoirEtSentir(TypesAxes.DERRIERE_GAUCHE, VISEE * DISTANCE_CASE);
 		SignalerDetections();
 	}
-
+	*/
+	
+	/// <summary>
+	/// Routine appellée automatiquement par Unity au démrrage du script.
+	/// Va vérifier ce qu'il y a autour de le scarabée dans les 6 sens possibles/
+	/// </summary>
+	void Start(){
+		StartCoroutine(VoirEtSentir(INTERVALLE_DETECTION));
+	}
+	
 }
 #endregion
 

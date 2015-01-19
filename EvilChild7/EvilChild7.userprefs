@@ -1,24 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\IA\Modele\Reine.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
     <Files>
-      <File FileName="Assets\Scripts\Menus\Interface.cs" Line="354" Column="6" />
-      <File FileName="Assets\Scripts\Menus\LogiqueDeJeu.cs" Line="178" Column="12" />
-      <File FileName="Assets\Scripts\Menus\GroupeRessource.cs" Line="103" Column="11" />
-      <File FileName="Assets\Scripts\IA\Modele\Reine.cs" Line="17" Column="27" />
-      <File FileName="Assets\Scripts\Cailloux\CaillouxScript.cs" Line="30" Column="21" />
-      <File FileName="Assets\Scripts\Eau\BombeEauScript.cs" Line="25" Column="5" />
-      <File FileName="Assets\Scripts\Fourmis\DeplacementsFourmisScript.cs" Line="436" Column="7" />
-      <File FileName="Assets\Scripts\Fourmis\ReineScript.cs" Line="85" Column="7" />
-      <File FileName="Assets\Scripts\Interactions\Betises.cs" Line="263" Column="7" />
-      <File FileName="Assets\Scripts\Interactions\Betises2.cs" Line="258" Column="7" />
-      <File FileName="Assets\Scripts\Menus\AccueilScript.cs" Line="170" Column="7" />
-      <File FileName="Assets\Scripts\Parties\Logique Tour\IAjoueur.cs" Line="317" Column="6" />
-      <File FileName="Assets\Scripts\Scarabées\DeplacementsScarabeeScript.cs" Line="305" Column="7" />
-      <File FileName="Assets\Scripts\Terrains\HexagonesVueScript.cs" Line="252" Column="22" />
-      <File FileName="Assets\Scripts\Terrains\InvocateurObjetsScript.cs" Line="447" Column="6" />
-      <File FileName="Assets\Scripts\Terrains\TerrainManagerScript.cs" Line="225" Column="5" />
-      <File FileName="Assets\Scripts\Terrains\TerrainUtils.cs" Line="89" Column="4" />
+      <File FileName="Assets\Dev_py\changelog.txt" Line="714" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

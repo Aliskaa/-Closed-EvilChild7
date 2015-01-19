@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.1.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -17,54 +17,54 @@ using System.Collections;
 /// Script pour gérer le déplacement d'un scarabée
 /// </summary>
 public class DeplacementsScarabeeScript : MonoBehaviour {
-
-
+	
+	
 	/* ********* *
 	 * Attributs *
 	 * ********* */
-
-#region Attributs privés
+	
+	#region Attributs privés
 	/// <summary>
 	/// La position que doit atteindre l'objet, i.e. le centre d'une case.
 	/// Position mise à jour régulièrement.
 	/// </summary>
 	private Vector3 positionAatteindre;
-
+	
 	/// <summary>
 	/// Distance de la translation à effectuer de la positon courante de départ
-    /// à la positon finale à atteindre
+	/// à la positon finale à atteindre
 	/// </summary>
 	private float distanceTranslation;
-
+	
 	/// <summary>
 	/// Le début au début de la translation
 	/// </summary>
 	private float tempsDebutTranslation;
-#endregion
-
-#region Constantes privées
+	#endregion
+	
+	#region Constantes privées
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre, égale à 5
 	/// </summary>
 	public static /*const*/ int DISTANCE_CASE = 5;
-
+	
 	/// <summary>
 	/// Le nombre de case maximum que peut parcourir la fourmi en une traite
 	/// </summary>
 	private const int AVANCEMENT_CASE = 3;
-
+	
 	/// <summary>
 	/// Un coefficient pour la vitesse de déplacement l'objet
 	/// </summary>
-	private const float COEFF_VITESSE = 0.5f;
-
+	private const float COEFF_VITESSE = 0.3f;
+	
 	/// <summary>
 	/// La vitesse du scarabée
 	/// </summary>
 	private const int VITESSE = 2;
-#endregion
-
-#region Attributs publics
+	#endregion
+	
+	#region Attributs publics
 	/// <summary>
 	/// Flag indiquant que l'objet est en mouvement ou non
 	/// Flag mis à jour régulièrement.
@@ -85,13 +85,13 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 	/// </summary>
 	[HideInInspector]
 	public TypesRotations orientationCourante;
-#endregion
-
+	#endregion
+	
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
-
-#region Méthodes privées
+	
+	#region Méthodes privées
 	/// <summary>
 	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée le scarabée,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
@@ -107,7 +107,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 			return null;
 		}
 	}
-
+	
 	/// <summary>
 	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée le scarabée,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
@@ -117,7 +117,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		GameObject goBlocTerrain = GetBlocCourantAsGO();
 		return JSONUtils.parseBlocTerrain(goBlocTerrain);
 	}
-
+	
 	/// <summary>
 	/// Retourne la position courante de l'objet
 	/// </summary>
@@ -126,7 +126,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		//Debug.Log("BlocTerrain :" + GetBlocCourantAsString());
 		//Debug.Log("Infos :" + Get3dInfos());
 	}
-
+	
 	/// <summary>
 	/// Idéalement, dès qu'un objet apparait sur le terrain, il faut le recentrer sur un hexagone.
 	/// Pour cela, la classe utilitaire TerrainUtils permet de trouver l'hexagone le plus proche.
@@ -142,7 +142,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		//Debug.Log("Recentrage de l="+transform.localPosition+" vers "+hexPlusProche.positionGlobale);
 		transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 	}
-
+	
 	/// <summary>
 	/// Effectue une rotation du scarabée.
 	/// Les valeurs utilisées pour la rotation sont des valeurs euleriennes,
@@ -168,36 +168,36 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		orientationCourante = r;
 		transform.rotation = Quaternion.identity;
 		transform.Rotate(0,-90,0);
-
+		
 		switch (r){
-			case TypesRotations.NORD:
-				transform.Rotate(0,-90,0);
-				break;
-			case TypesRotations.NORD_OUEST:
-				transform.Rotate(0,-135,0);
-				break;
-			case TypesRotations.SUD_OUEST:
-				transform.Rotate(0,+135,0);
-				break;
-			case TypesRotations.SUD:
-				transform.Rotate(0,+90,0);
-				break;
-			case TypesRotations.SUD_EST:
-				transform.Rotate(0,+45,0);
-				break;
-			case TypesRotations.NORD_EST:
-				transform.Rotate(0,-45,0);
-				break;
-			case TypesRotations.AUCUN:
-				//Debug.LogError("Aucune rotation ?");
-				break;
-			default:
-				//Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
-				break;
+		case TypesRotations.NORD:
+			transform.Rotate(0,-90,0);
+			break;
+		case TypesRotations.NORD_OUEST:
+			transform.Rotate(0,-135,0);
+			break;
+		case TypesRotations.SUD_OUEST:
+			transform.Rotate(0,+135,0);
+			break;
+		case TypesRotations.SUD:
+			transform.Rotate(0,+90,0);
+			break;
+		case TypesRotations.SUD_EST:
+			transform.Rotate(0,+45,0);
+			break;
+		case TypesRotations.NORD_EST:
+			transform.Rotate(0,-45,0);
+			break;
+		case TypesRotations.AUCUN:
+			//Debug.LogError("Aucune rotation ?");
+			break;
+		default:
+			//Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
+			break;
 		}
 		//Debug.Log("Rotation actuelle en Y : " + r);
 	}
-
+	
 	/// <summary>
 	/// Routine appelée par la routine Unity Update().
 	/// Fait déambuler le scarabée.
@@ -207,28 +207,28 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 	//private void Deambuler(){
 	public void Deambuler(){
 		if (enMouvement && !objectifAtteint) {
-
+			
 			//transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * VITESSE);
 			float distCovered = (Time.time - tempsDebutTranslation) * COEFF_VITESSE * VITESSE;/*speed*/;
 			float fracJourney = distCovered / distanceTranslation;
 			transform.position = Vector3.Lerp(transform.position, positionAatteindre, fracJourney);
-
+			
 			//Debug.Log("Déambuler");
 			//Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 			//Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
-
+			
 			if ( Mathf.Abs(transform.position.x-positionAatteindre.x) < 1
 			    && Mathf.Abs(transform.position.z-positionAatteindre.z) < 1 ){
 				enMouvement = false;
 				objectifAtteint = true;
 				Avancer(-1);
 			}
-
+			
 		}
 	}
-#endregion
-
-#region Méthodes package
+	#endregion
+	
+	#region Méthodes package
 	/// <summary>
 	/// Routine appellée automatiquement par Unity au démarrage du script
 	/// </summary>
@@ -236,23 +236,23 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		enMouvement = false;
 		objectifAtteint = true;
 	}
-
+	
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void FixedUpdate(){
 		Deambuler();
 	}
-#endregion
-
-#region Méthodes publiques
+	#endregion
+	
+	#region Méthodes publiques
 	/// <summary>
 	/// Fait avancer le scarabée de nbCases cases.
 	/// Si nbCases est à <= 0, l'objet ne bouge plus
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	public void Avancer( int nbCases ){
-
+		
 		// Arret de l'objet
 		if  (nbCases <= 0 ){
 			rigidbody.velocity = Vector3.zero;
@@ -261,68 +261,68 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 			objectifAtteint = true;
 			return;
 		}
-
+		
 		//Debug.Log("Dois avancer de "+nbCases+" cases");
 		positionAatteindre = transform.position;
-
+		
 		switch (orientationCourante){
-			case TypesRotations.NORD:
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				break;
-			case TypesRotations.NORD_EST:
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.NORD_OUEST:
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.SUD:
-				positionAatteindre.x += nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				break;
-			case TypesRotations.SUD_EST:
-				positionAatteindre.x += nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.SUD_OUEST:
-				positionAatteindre.x += nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.AUCUN:
-				//Debug.LogError("Aucune rotation ?");
-				//FIXME : Cas ne devant jamais apapraitre normalement
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
-				break;
-			default:
-				//Debug.LogError("ERREUR: Valeur non gérée dans switch : "+orientationCourante);
-				break;
+		case TypesRotations.NORD:
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			break;
+		case TypesRotations.NORD_EST:
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.NORD_OUEST:
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.SUD:
+			positionAatteindre.x += nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			break;
+		case TypesRotations.SUD_EST:
+			positionAatteindre.x += nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.SUD_OUEST:
+			positionAatteindre.x += nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.AUCUN:
+			//Debug.LogError("Aucune rotation ?");
+			//FIXME : Cas ne devant jamais apapraitre normalement
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+			break;
+		default:
+			//Debug.LogError("ERREUR: Valeur non gérée dans switch : "+orientationCourante);
+			break;
 		}
-
+		
 		enMouvement = true;
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
-
+		
 		distanceTranslation = Vector3.Distance(transform.position, positionAatteindre);
 		tempsDebutTranslation = Time.time;
 		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
-
+		
 	}
-
+	
 	/// <summary>
 	/// Stoppe l'objet en mouvement
 	/// </summary>
 	public void Stopper(){
 		Avancer(-1);
 	}
-
+	
 	/// <summary>
 	/// Stoppe l'objet en mouvement à cause d'une collision
 	/// </summary>
@@ -336,35 +336,35 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		Avancer(-1);
 		// Changement de direction su on tape dans un coté du bac à sable
 		switch (causeCollision){
-			case TypesObjetsRencontres.COTE_BAC_1:
-				FaireRotation(TypesRotations.SUD_EST);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.COTE_BAC_2:
-				FaireRotation(TypesRotations.SUD_OUEST);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.COTE_BAC_3:
-				FaireRotation(TypesRotations.SUD);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.COTE_BAC_4:
-				FaireRotation(TypesRotations.NORD);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.PETIT_CAILLOU:
-			case TypesObjetsRencontres.CAILLOU:
-			case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
-			case TypesObjetsRencontres.EAU:
-			case TypesObjetsRencontres.EAU3D:
-				FaireRotation(TypesRotations.RANDOM);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			default:
-				break;
+		case TypesObjetsRencontres.COTE_BAC_1:
+			FaireRotation(TypesRotations.SUD_EST);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.COTE_BAC_2:
+			FaireRotation(TypesRotations.SUD_OUEST);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.COTE_BAC_3:
+			FaireRotation(TypesRotations.SUD);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.COTE_BAC_4:
+			FaireRotation(TypesRotations.NORD);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.PETIT_CAILLOU:
+		case TypesObjetsRencontres.CAILLOU:
+		case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
+		case TypesObjetsRencontres.EAU:
+		case TypesObjetsRencontres.EAU3D:
+			FaireRotation(TypesRotations.RANDOM);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		default:
+			break;
 		}
 	}
-
+	
 	/// <summary>
 	/// Retourne l'hexagone sur lequel est le scarabée
 	/// </summary>
@@ -374,7 +374,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 		//Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTypeTerrain());
 		return hexagoneCourant;
 	}
-
+	
 	/// <summary>
 	/// Retourne les infos 3D du scarabée à savoir sa rotation en (x,y,z) et sa position en (x,y,z).
 	/// String de  la forme :
@@ -386,7 +386,7 @@ public class DeplacementsScarabeeScript : MonoBehaviour {
 	public string Get3dInfos(){
 		return JSONUtils.parseInfos3D(gameObject.transform.position, gameObject.transform.rotation);
 	}
-#endregion
-
+	#endregion
+	
 }
 #endregion 

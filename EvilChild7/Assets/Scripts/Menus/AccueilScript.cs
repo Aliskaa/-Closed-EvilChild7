@@ -7,8 +7,8 @@ public class AccueilScript : MonoBehaviour {
 	public Texture2D background;
 	public bool DragWindow = false;
 	public string levelToLoadWhenClickedPlay = "";
-	private string clicked = "", MessageDisplayOnHelp = "Help \n ";
-	private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 600, 230);
+	private string clicked = "", MessageDisplayOnHelp = "Help \n ", MessageDisplayOnGame= "Description of Game\n";
+	private Rect WindowRect = new Rect((Screen.width / 4), Screen.height / 2, 600, 600);
 	private float volume = 1.0f;
 	
 	//Variable serveur
@@ -20,6 +20,7 @@ public class AccueilScript : MonoBehaviour {
 	private void Start()
 	{
 		MessageDisplayOnHelp += "Press Esc To Go Back";
+		MessageDisplayOnGame +=  "Press Esc To Go Back";
 		networkmanager = new NetworkManager(typeName,NameServer);
 	}
 	private void OnGUI()
@@ -42,6 +43,10 @@ public class AccueilScript : MonoBehaviour {
 			
 		case "help":
 			GUI.Box(new Rect (0,0,Screen.width,Screen.height), MessageDisplayOnHelp);
+			break;
+		case "descriptions":
+			GUI.Box ( new Rect ( 0, 0, Screen.width,  Screen.height), MessageDisplayOnGame); 
+			
 			break;
 			
 		case "resolution":
@@ -69,6 +74,7 @@ public class AccueilScript : MonoBehaviour {
 			break;
 			
 		default:
+			
 			WindowRect = GUI.Window(0, WindowRect, menuFunc, "Evil Child");
 			break;
 		}
@@ -185,7 +191,7 @@ public class AccueilScript : MonoBehaviour {
 		{
 			clicked = "resolution";
 		}
-		GUILayout.Box("Volume");
+		GUILayout.Label("Volume");
 		volume = GUILayout.HorizontalSlider(volume ,0.0f,1.0f);
 		AudioListener.volume = volume;
 		if (GUILayout.Button("Back"))
@@ -211,19 +217,19 @@ public class AccueilScript : MonoBehaviour {
 		{
 			clicked = "help";
 		}
-		/*
-        if (GUILayout.Button("Quit "))
-        {
-            Application.Quit();
-        }
-        */
+		
+		if (GUILayout.Button("Descriptions "))
+		{
+			clicked = "descriptions";
+		}
+		
 		if (DragWindow)
 			GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
 	}
 	
 	private void Update()
 	{
-		if (clicked == "help" && Input.GetKey (KeyCode.Escape))
+		if ((clicked == "help" || clicked == "descriptions") && Input.GetKey (KeyCode.Escape))
 			clicked = "";
 	}
 }

@@ -6,7 +6,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 4.1.0
+/// PY Lapersonne - Version 4.2.0
 /// </remarks>
 
 using UnityEngine;
@@ -17,29 +17,29 @@ using System.Collections;
 /// Script pour gérer le déplacement d'une fourmis
 /// </summary>
 public class DeplacementsFourmisScript : MonoBehaviour {
-
-
+	
+	
 	/* ********* *
 	 * Attributs *
 	 * ********* */
-
-#region Attributs privés
+	
+	#region Attributs privés
 	/// <summary>
 	/// Référence vers un script permettant de faire apapraitre des objets
 	/// </summary>
 	private InvocateurObjetsScript scriptInvocation;
-
+	
 	/// <summary>
 	/// Le type de phéromones à invoquer selon la fourmi
 	/// </summary>
 	private Invocations typePheromone;
-
+	
 	/// <summary>
 	/// La position que doit atteindre l'objet, i.e. le centre d'une case.
 	/// Position mise à jour régulièrement.
 	/// </summary>
 	private Vector3 positionAatteindre;
-
+	
 	/// <summary>
 	/// Distance de la translation à effectuer de la positon courante de départ
 	/// à la positon finale à atteindre
@@ -50,63 +50,63 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// Le début au début de la translation
 	/// </summary>
 	private float tempsDebutTranslation;
-
+	
 	/// <summary>
 	/// La vitesse qui est appliquée à la fourmis, en fonction de sa caste
 	/// </summary>
 	private int vitesseAppliquee;
-
+	
 	/// <summary>
 	/// Flag indiquant que la fourmi s'est prise un obstacle de type bétise
 	/// </summary>
 	private bool collisionFrontaleBetise;
-
+	
 	/// <summary>
 	/// Une références vers l'objet gérant le terrain
 	/// </summary>
 	private TerrainManagerScript scriptTerrainManager;
-
+	
 	/// <summary>
 	/// Les coordonnées de la reine
 	/// </summary>
 	private Vector3 positionReine;
-#endregion
-
-#region Constantes privées
+	#endregion
+	
+	#region Constantes privées
 	/// <summary>
 	/// La distance pour aller du centre d'une case à un autre, égale à 5
 	/// </summary>
 	public static /*const*/ int DISTANCE_CASE = 5;
-
+	
 	/// <summary>
 	/// Le nombre de case maximum que peut parcourir la fourmi en une traite
 	/// </summary>
 	private const int AVANCEMENT_CASE = 1;
-
+	
 	/// <summary>
 	/// Un coefficient pour la vitesse de déplacement l'objet
 	/// </summary>
-	private const float COEFF_VITESSE = 1f;
-#endregion
-
-#region Attributs publics
+	private const float COEFF_VITESSE = 0.3f;
+	#endregion
+	
+	#region Attributs publics
 	/// <summary>
 	/// Le type de fourmi auquel doit s'appliquer le script
 	/// </summary>
 	public TypesFourmis typeFourmi;
-
+	
 	/// <summary>
 	/// Flag indiquant qu'il faut déposer des phéromones
 	/// </summary>
 	[HideInInspector]
 	public bool activerDepotPheromone;
-
+	
 	/// <summary>
 	/// L'orientation courante de l'objet
 	/// </summary>
 	[HideInInspector]
 	public TypesRotations orientationCourante;
-
+	
 	/// <summary>
 	/// Flag indiquant que l'objet est en mouvement ou non
 	/// Flag mis à jour régulièrement.
@@ -121,26 +121,26 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	[HideInInspector]
 	public bool objectifAtteint;
-
+	
 	/// <summary>
 	/// Flag indiquant que le retour à la base est en cours
 	/// </summary>
 	[HideInInspector]
 	public bool retourBaseEnCours;
-
+	
 	/// <summary>
 	/// Flag indiquant qu'il faut commencer le retour
 	/// </summary>
 	[HideInInspector]
 	public bool retourCommence;
-#endregion
-
-
+	#endregion
+	
+	
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
-
-#region Méthodes privées
+	
+	#region Méthodes privées
 	/// <summary>
 	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée la fourmis,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
@@ -156,7 +156,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			return null;
 		}
 	}
-
+	
 	/// <summary>
 	/// Récupère le morceau de terrain, i.e. le bloc, sur lequel est posée la fourmis,
 	/// c'est à dire le bloc ayant un pool d'hexagones de meme texture.
@@ -166,7 +166,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		GameObject goBlocTerrain = GetBlocCourantAsGO();
 		return JSONUtils.parseBlocTerrain(goBlocTerrain);
 	}
-
+	
 	/// <summary>
 	/// Retourne la position courante de l'objet
 	/// </summary>
@@ -175,7 +175,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		//Debug.Log("BlocTerrain :" + GetBlocCourantAsString());
 		//Debug.Log("Infos :" + Get3dInfos());
 	}
-
+	
 	/// <summary>
 	/// Idéalement, dès qu'un objet apparait sur le terrain, il faut le recentrer sur un hexagone.
 	/// Pour cela, la classe utilitaire TerrainUtils permet de trouver l'hexagone le plus proche.
@@ -191,7 +191,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		//Debug.Log("Recentrage de l="+transform.localPosition+" vers "+hexPlusProche.positionGlobale);
 		transform.localPosition = hexPlusProche.positionLocaleSurTerrain;
 	}
-
+	
 	/// <summary>
 	/// Effectue une rotation de la fourmis.
 	/// Les valeurs utilisées pour la rotation sont des valeurs euleriennes,
@@ -217,34 +217,34 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		orientationCourante = r;
 		transform.rotation = Quaternion.identity;
 		switch (r){
-			case TypesRotations.NORD:
-				transform.Rotate(0,-90,0);
-				break;
-			case TypesRotations.NORD_OUEST:
-				transform.Rotate(0,-135,0);
-				break;
-			case TypesRotations.SUD_OUEST:
-				transform.Rotate(0,+135,0);
-				break;
-			case TypesRotations.SUD:
-				transform.Rotate(0,+90,0);
-				break;
-			case TypesRotations.SUD_EST:
-				transform.Rotate(0,+45,0);
-				break;
-			case TypesRotations.NORD_EST:
-				transform.Rotate(0,-45,0);
-				break;
-			case TypesRotations.AUCUN:
-				//Debug.LogError("Aucune rotation ?");
-				break;
-			default:
-				//Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
-				break;
+		case TypesRotations.NORD:
+			transform.Rotate(0,-90,0);
+			break;
+		case TypesRotations.NORD_OUEST:
+			transform.Rotate(0,-135,0);
+			break;
+		case TypesRotations.SUD_OUEST:
+			transform.Rotate(0,+135,0);
+			break;
+		case TypesRotations.SUD:
+			transform.Rotate(0,+90,0);
+			break;
+		case TypesRotations.SUD_EST:
+			transform.Rotate(0,+45,0);
+			break;
+		case TypesRotations.NORD_EST:
+			transform.Rotate(0,-45,0);
+			break;
+		case TypesRotations.AUCUN:
+			//Debug.LogError("Aucune rotation ?");
+			break;
+		default:
+			//Debug.LogError("ERREUR: FaireRotation() : Rotation non gérée :"+r);
+			break;
 		}
 		//Debug.Log("Rotation actuelle en Y : " + r);
 	}
-
+	
 	/// <summary>
 	/// Routine appelée par la routine Unity Update().
 	/// Fait déambuler la fourmis.
@@ -253,24 +253,25 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	/// </summary>
 	//private void Deambuler(){
 	public void Deambuler(){
-
+		
+		//Debug.Log ("Déambuler");
+		
 		if ( retourBaseEnCours && (objectifAtteint || retourCommence) ){
 			RetourBase();
 			Avancer(AVANCEMENT_CASE);
 		}
-
+		
 		// Cas de déambulation classique
 		if ( enMouvement && !objectifAtteint ){
-
+			
 			//transform.position = Vector3.Lerp (transform.position, positionAatteindre, COEFF_VITESSE * vitesseAppliquee);
 			float distCovered = (Time.time - tempsDebutTranslation) * COEFF_VITESSE * vitesseAppliquee;/*speed*/;
 			float fracJourney = distCovered / distanceTranslation;
 			transform.position = Vector3.Lerp(transform.position, positionAatteindre, fracJourney);
-
-			//Debug.Log ("Déambuler");
+			
 			//Debug.Log("Je suis en "+transform.position+" et dois aller en "+ positionAatteindre);
 			//Debug.Log("Distance :"+Vector3.Distance (transform.position, positionAatteindre));
-
+			
 			if ( Mathf.Abs(Mathf.Abs(transform.position.x)-Mathf.Abs(positionAatteindre.x)) <= 1
 			    && Mathf.Abs(Mathf.Abs(transform.position.z)-Mathf.Abs(positionAatteindre.z)) <= 1 ){
 				enMouvement = false;
@@ -278,65 +279,65 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				Avancer(-1);
 				return;
 			}
-
+			
 		}
-
+		
 	}
-
+	
 	/// <summary>
 	/// Initialise les variables qui dépendent de la caste de la fourmis
 	/// </summary>
 	private void InitialiserVariablesFourmi(){
 		switch ( typeFourmi ){
-			case TypesFourmis.COMBATTANTE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.CONTREMAITRE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
-				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_NOIRE;
-				activerDepotPheromone = true;
-				break;
-			case TypesFourmis.GENERALE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.OUVRIERE_NOIRE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
-				typePheromone = Invocations.PHEROMONES_OUVRIERE_NOIRE;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.COMBATTANTE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.CONTREMAITRE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
-				typePheromone = Invocations.PHEROMONES_CONTREMAITRE_BLANCHE;
-				activerDepotPheromone = true;	
-				break;
-			case TypesFourmis.GENERALE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
-				typePheromone = Invocations.RIEN;	
-				activerDepotPheromone = false;
-				break;
-			case TypesFourmis.OUVRIERE_BLANCHE:
-				vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
-				typePheromone = Invocations.PHEROMONES_OUVRIERE_BLANCHE;
-				activerDepotPheromone = false;	
-				break;
-			default:
-				vitesseAppliquee = 0;
-				typePheromone = Invocations.RIEN;
-				activerDepotPheromone = false;	
-				break;
+		case TypesFourmis.COMBATTANTE_NOIRE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
+			typePheromone = Invocations.RIEN;
+			activerDepotPheromone = false;
+			break;
+		case TypesFourmis.CONTREMAITRE_NOIRE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
+			typePheromone = Invocations.PHEROMONES_CONTREMAITRE_NOIRE;
+			activerDepotPheromone = true;
+			break;
+		case TypesFourmis.GENERALE_NOIRE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
+			typePheromone = Invocations.RIEN;
+			activerDepotPheromone = false;
+			break;
+		case TypesFourmis.OUVRIERE_NOIRE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
+			typePheromone = Invocations.PHEROMONES_OUVRIERE_NOIRE;
+			activerDepotPheromone = false;
+			break;
+		case TypesFourmis.COMBATTANTE_BLANCHE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_COMBATTANTE;
+			typePheromone = Invocations.RIEN;
+			activerDepotPheromone = false;
+			break;
+		case TypesFourmis.CONTREMAITRE_BLANCHE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_CONTREMAITRE;	
+			typePheromone = Invocations.PHEROMONES_CONTREMAITRE_BLANCHE;
+			activerDepotPheromone = true;	
+			break;
+		case TypesFourmis.GENERALE_BLANCHE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_GENERALE;	
+			typePheromone = Invocations.RIEN;	
+			activerDepotPheromone = false;
+			break;
+		case TypesFourmis.OUVRIERE_BLANCHE:
+			vitesseAppliquee = (int) VitessesFourmis.VITESSE_OUVRIERE;	
+			typePheromone = Invocations.PHEROMONES_OUVRIERE_BLANCHE;
+			activerDepotPheromone = false;	
+			break;
+		default:
+			vitesseAppliquee = 0;
+			typePheromone = Invocations.RIEN;
+			activerDepotPheromone = false;	
+			break;
 		}
 		//Debug.Log("Initialisation d'une fourmi "+typeFourmi+" avec une vitesse de "+vitesseAppliquee);
 	}
-
+	
 	/// <summary>
 	/// Dépose des phéromones
 	/// </summary>
@@ -348,9 +349,9 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		FourmiScript fs = this.gameObject.GetComponent<FourmiScript>();
 		ps.direction = fs.dernierAxeUtilise;
 	}
-#endregion
-
-#region Méthodes package
+	#endregion
+	
+	#region Méthodes package
 	/// <summary>
 	/// Routine appellée automatiquement par Unity au démarrage du script
 	/// </summary>
@@ -367,23 +368,23 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		TypesCamps monCamps = (type >= 1 && type <= 4 ? TypesCamps.NOIR : TypesCamps.BLANC);
 		positionReine = (monCamps == TypesCamps.NOIR ? scriptTerrainManager.positionReineNoire : scriptTerrainManager.positionReineBlanche);
 	}
-
+	
 	/// <summary>
 	/// Routine appellée automatiquement par Unity à chaque frame
 	/// </summary>
 	void FixedUpdate(){
 		Deambuler();
 	}
-#endregion
-
-#region Méthodes publiques
+	#endregion
+	
+	#region Méthodes publiques
 	/// <summary>
 	/// Fait avancer la fourmis de nbCases cases.
 	/// Si nbCases est à <= 0, l'objet ne bouge plus
 	/// </summary>
 	/// <param name="nbCases">Le nombre de cases à avancer</param>
 	public void Avancer( int nbCases ){
-
+		
 		// Arret de l'objet
 		if  (nbCases <= 0 ){
 			rigidbody.velocity = Vector3.zero;
@@ -392,71 +393,71 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 			objectifAtteint = true;
 			return;
 		}
-
+		
 		//Debug.Log("Dois avancer de "+nbCases+" cases");
 		positionAatteindre = transform.position;
-
+		
 		switch (orientationCourante){
-			case TypesRotations.NORD:
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				break;
-			case TypesRotations.NORD_EST:
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.NORD_OUEST:
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.SUD:
-				positionAatteindre.x += nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				break;
-			case TypesRotations.SUD_EST:
-				positionAatteindre.x += nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.SUD_OUEST:
-				positionAatteindre.x += nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
-				break;
-			case TypesRotations.AUCUN:
-				//Debug.LogError("Aucune rotation ?");
-				//FIXME : Cas ne devant jamais apapraitre normalement
-				positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
-				positionAatteindre.y = 0;
-				positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
-				break;
-			default:
-				//Debug.LogError("ERREUR: Valeur non gérée dans switch : "+orientationCourante);
-				break;
+		case TypesRotations.NORD:
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			break;
+		case TypesRotations.NORD_EST:
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.NORD_OUEST:
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.SUD:
+			positionAatteindre.x += nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			break;
+		case TypesRotations.SUD_EST:
+			positionAatteindre.x += nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.SUD_OUEST:
+			positionAatteindre.x += nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+			break;
+		case TypesRotations.AUCUN:
+			//Debug.LogError("Aucune rotation ?");
+			//FIXME : Cas ne devant jamais apapraitre normalement
+			positionAatteindre.x += (-1) * nbCases*DISTANCE_CASE;
+			positionAatteindre.y = 0;
+			positionAatteindre.z += (-1) * nbCases*DISTANCE_CASE;
+			break;
+		default:
+			//Debug.LogError("ERREUR: Valeur non gérée dans switch : "+orientationCourante);
+			break;
 		}
-
+		
 		enMouvement = true;
 		objectifAtteint = false;
 		rigidbody.isKinematic = false;
-
+		
 		distanceTranslation = Vector3.Distance(transform.position, positionAatteindre);
 		tempsDebutTranslation = Time.time;
-
+		
 		if ( activerDepotPheromone ) DeposerPheromones(transform.localPosition);
-
+		
 		//Debug.Log("Je suis en " + transform.position + ", je dois aller en " + positionAatteindre);
-
+		
 	}
-
+	
 	/// <summary>
 	/// Stoppe l'objet en mouvement
 	/// </summary>
 	public void Stopper(){
 		Avancer(-1);
 	}
-
+	
 	/// <summary>
 	/// Stoppe l'objet en mouvement à cause d'une collision
 	/// </summary>
@@ -469,38 +470,38 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		Avancer(-1);
 		// Changement de direction su on tape dans un coté du bac à sable
 		switch (causeCollision){
-			case TypesObjetsRencontres.COTE_BAC_1:
-				collisionFrontaleBetise = false;
-				FaireRotation(TypesRotations.SUD_EST);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.COTE_BAC_2:
-				collisionFrontaleBetise = false;
-				FaireRotation(TypesRotations.SUD_OUEST);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.COTE_BAC_3:
-				collisionFrontaleBetise = false;
-				FaireRotation(TypesRotations.SUD);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.COTE_BAC_4:
-				collisionFrontaleBetise = false;
-				FaireRotation(TypesRotations.NORD);
-				Avancer(AVANCEMENT_CASE);
-				break;
-			case TypesObjetsRencontres.PETIT_CAILLOU:
-			case TypesObjetsRencontres.CAILLOU:
-			case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
-			case TypesObjetsRencontres.EAU:
-			case TypesObjetsRencontres.EAU3D:
-				collisionFrontaleBetise = true;
-				break;
-			default:
-				break;
+		case TypesObjetsRencontres.COTE_BAC_1:
+			collisionFrontaleBetise = false;
+			FaireRotation(TypesRotations.SUD_EST);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.COTE_BAC_2:
+			collisionFrontaleBetise = false;
+			FaireRotation(TypesRotations.SUD_OUEST);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.COTE_BAC_3:
+			collisionFrontaleBetise = false;
+			FaireRotation(TypesRotations.SUD);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.COTE_BAC_4:
+			collisionFrontaleBetise = false;
+			FaireRotation(TypesRotations.NORD);
+			Avancer(AVANCEMENT_CASE);
+			break;
+		case TypesObjetsRencontres.PETIT_CAILLOU:
+		case TypesObjetsRencontres.CAILLOU:
+		case TypesObjetsRencontres.TRES_GROS_CAILLOUX:
+		case TypesObjetsRencontres.EAU:
+		case TypesObjetsRencontres.EAU3D:
+			collisionFrontaleBetise = true;
+			break;
+		default:
+			break;
 		}
 	}
-
+	
 	/// <summary>
 	/// Retourne l'hexagone sur lequel est la fourmis
 	/// </summary>
@@ -510,7 +511,7 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 		//Debug.Log("Hexagone courant : pos=" + hexagoneCourant.positionLocaleSurTerrain + "/ texture=" + hexagoneCourant.GetTypeTerrain());
 		return hexagoneCourant;
 	}
-
+	
 	/// <summary>
 	/// Retourne les infos 3D de la fourmis à savoir sa rotation en (x,y,z) et sa position en (x,y,z).
 	/// String de  la forme :
@@ -522,21 +523,21 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 	public string Get3dInfos(){
 		return JSONUtils.parseInfos3D(gameObject.transform.position, gameObject.transform.rotation);
 	}
-
+	
 	/// <summary>
 	/// Retour à la base d'une fourmi.
 	/// Typiquement, va changer l'orientation de la fourmi puisque le déplacement
 	/// à proprement parler est géré ailleurs.
 	/// </summary>
 	public void RetourBase(){
-
+		
 		// Calculer la distance entre la reine et la fourmi en X
 		float distanceEnX = positionReine.x - transform.localPosition.x;
 		// Calculer la distance entre la reine et la fourmi en Z
 		float distanceEnZ = positionReine.z - transform.localPosition.z;
-
+		
 		//Debug.Log("Ma reine est en "+positionReine+", je suis en "+transform.localPosition +", distance en X de "+distanceEnX+", distance en Z de "+distanceEnZ);
-
+		
 		// Déterminer en fonction des résultats la direction à prendre pour rejoindra la reine
 		TypesRotations directionReine;
 		// Distance en X positive : la reine est plus en bas sous la fourmi qui doit descendre
@@ -561,16 +562,16 @@ public class DeplacementsFourmisScript : MonoBehaviour {
 				directionReine = TypesRotations.NORD_OUEST;
 			}
 		}
-
+		
 		// Effectuer le déplacement
 		// Je tourne si je suis pas dans le bon sens
 		if ( orientationCourante != directionReine ){
 			FaireRotation(directionReine);
 		}
-
+		
 	}
-#endregion
-
+	#endregion
+	
 }
 #endregion 
 

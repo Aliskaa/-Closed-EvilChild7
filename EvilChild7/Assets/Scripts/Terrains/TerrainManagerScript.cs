@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 3.0.0
+/// PY Lapersonne - Version 4.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -23,183 +23,183 @@ using System.Collections.Generic;
 /// <see cref="HexagonesVueScript"/>
 /// <see cref="HexagoneInfo"/> 
 public class TerrainManagerScript : MonoBehaviour {
-
+	
 	/* ********* *
 	 * Attributs *
 	 * ********* */
-
-#region Attributs publics
-
+	
+	#region Attributs publics
+	
 	/// <summary>
 	/// Le mesh pour des hexagones à la flat design
 	/// </summary>
-    [HideInInspector]
-    public Mesh meshHexagonesFlat;
-
+	[HideInInspector]
+	public Mesh meshHexagonesFlat;
+	
 	/// <summary>
 	/// Le rayon
 	/// </summary>
-    public float hexRadiusSize;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [HideInInspector]
-    public Vector3 hexExt;
-
+	public float hexRadiusSize;
+	
+	/// <summary>
+	/// 
+	/// </summary>
+	[HideInInspector]
+	public Vector3 hexExt;
+	
 	/// <summary>
 	/// La taille de l'hexagone
 	/// </summary>
-    [HideInInspector]
-    public Vector3 tailleHexagone;
+	[HideInInspector]
+	public Vector3 tailleHexagone;
 	/// <summary>
 	/// Le centre de l'hexagone
 	/// </summary>
 	[HideInInspector]
-    public Vector3 centreHexagone;
-
+	public Vector3 centreHexagone;
+	
 	/// <summary>
 	/// Le game object associé
 	/// </summary>
-    [HideInInspector]
-    public GameObject chunkHolder;
-
+	[HideInInspector]
+	public GameObject chunkHolder;
+	
 	/// <summary>
 	/// La texture du terrain de type sable avec hexagones visibles
 	/// </summary>
-    public Texture2D textureTerrainSableHexagones;
+	public Texture2D textureTerrainSableHexagones;
 	
 	/// <summary>
 	/// La texture du terrain de type sable sans hexagones visibles
 	/// </summary>
 	public Texture2D textureTerrainSable;
-
+	
 	/// <summary>
 	/// La texture du terrain de type eau
 	/// </summary>
 	public Texture2D textureTerrainEau;
-
+	
 	/// <summary>
 	/// Les pièces
 	/// </summary>
 	public HexagonesVueScript[,] pieces;
-
+	
 	/// <summary>
 	/// La taille de la map
 	/// </summary>
 	public Vector2 tailleMap;
-
+	
 	/// <summary>
 	/// La taille d'une pièce
 	/// </summary>
 	public int taillePiece;
-
+	
 	/// <summary>
 	/// Le game object parent qui va embarquer le terrain
 	/// </summary>
 	public GameObject parentTerrain;
-
+	
 	/// <summary>
 	/// Le type de terrain à générer
 	/// </summary>
 	public TypesMaps type;
-
+	
 	/// <summary>
 	/// Flag indiquant s'il faut afficher les hexagones ou non
 	/// </summary>
 	public bool afficherHexagones;
-
+	
 	/// <summary>
 	/// Flag indiquant qu'il faut placer les reines
 	/// </summary>
 	public bool placerReines;
-
+	
 	/// <summary>
 	/// Les coordonnées 3D locales au terrain de la reine noire
 	/// </summary>
 	[HideInInspector]
 	public Vector3 positionReineNoire;
-
+	
 	/// <summary>
 	/// Les coordonnées 3D locales au terrain de la reine blanche
 	/// </summary>
 	[HideInInspector]
 	public Vector3 positionReineBlanche;
-#endregion
-
-#region Attributs package
-
+	#endregion
+	
+	#region Attributs package
+	
 	int segmentsEnX;
-    int segmentsEnZ;
-
-#endregion
-
-
+	int segmentsEnZ;
+	
+	#endregion
+	
+	
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
-
-#region Méthodes privées
+	
+	#region Méthodes privées
 	/// <summary>
 	/// Créé des meshes pour les hexagones 
 	/// </summary>
 	private void GetHexagonesProp(){
-
-        GameObject inst = new GameObject("Bounds Set Up: Flat");
-        inst.AddComponent<MeshFilter>();
-        inst.AddComponent<MeshRenderer>();
-        inst.AddComponent<MeshCollider>();
-        inst.transform.position = Vector3.zero;
-        inst.transform.rotation = Quaternion.identity;
-
-        Vector3[] _sommets;
-        int[] _triangles;
-        Vector2[] _uv;
-
-        #region Les sommets
-        float floorLevel = 0;
-
-        _sommets = new Vector3[]{
-                /*0*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(3+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(3+0.5)/6)))),
-                /*1*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(2+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(2+0.5)/6)))),
-                /*2*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(1+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(1+0.5)/6)))),
-                /*3*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(0+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(0+0.5)/6)))),
-                /*4*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(5+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(5+0.5)/6)))),
-                /*5*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(4+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(4+0.5)/6))))
-        };
-        #endregion
-
-        #region Les triangles
-        _triangles = new int[]{1,5,0,1,4,5,1,2,4,2,3,4};
-        #endregion
-
-        #region uv
-        _uv = new Vector2[]{
-                new Vector2(0,0.25f),
-                new Vector2(0,0.75f),
-                new Vector2(0.5f,1),
-                new Vector2(1,0.75f),
-                new Vector2(1,0.25f),
-                new Vector2(0.5f,0),
-            };
-        #endregion
-
-        meshHexagonesFlat = new Mesh();
-        meshHexagonesFlat.vertices = _sommets;
-        meshHexagonesFlat.triangles = _triangles;
-        meshHexagonesFlat.uv = _uv;
-        inst.GetComponent<MeshFilter>().mesh = meshHexagonesFlat;
-        inst.GetComponent<MeshFilter>().mesh.RecalculateNormals();
-        inst.GetComponent<MeshCollider>().sharedMesh = meshHexagonesFlat;
-
-        hexExt = new Vector3(inst.gameObject.collider.bounds.extents.x, inst.gameObject.collider.bounds.extents.y, inst.gameObject.collider.bounds.extents.z);
-        tailleHexagone = new Vector3(inst.gameObject.collider.bounds.size.x, inst.gameObject.collider.bounds.size.y, inst.gameObject.collider.bounds.size.z);
-        centreHexagone = new Vector3(inst.gameObject.collider.bounds.center.x, inst.gameObject.collider.bounds.center.y, inst.gameObject.collider.bounds.center.z);
-
+		
+		GameObject inst = new GameObject("Bounds Set Up: Flat");
+		inst.AddComponent<MeshFilter>();
+		inst.AddComponent<MeshRenderer>();
+		inst.AddComponent<MeshCollider>();
+		inst.transform.position = Vector3.zero;
+		inst.transform.rotation = Quaternion.identity;
+		
+		Vector3[] _sommets;
+		int[] _triangles;
+		Vector2[] _uv;
+		
+		#region Les sommets
+		float floorLevel = 0;
+		
+		_sommets = new Vector3[]{
+			/*0*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(3+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(3+0.5)/6)))),
+			/*1*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(2+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(2+0.5)/6)))),
+			/*2*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(1+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(1+0.5)/6)))),
+			/*3*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(0+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(0+0.5)/6)))),
+			/*4*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(5+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(5+0.5)/6)))),
+			/*5*/new Vector3((hexRadiusSize * Mathf.Cos((float)(2*Mathf.PI*(4+0.5)/6))), floorLevel, (hexRadiusSize * Mathf.Sin((float)(2*Mathf.PI*(4+0.5)/6))))
+		};
+		#endregion
+		
+		#region Les triangles
+		_triangles = new int[]{1,5,0,1,4,5,1,2,4,2,3,4};
+		#endregion
+		
+		#region uv
+		_uv = new Vector2[]{
+			new Vector2(0,0.25f),
+			new Vector2(0,0.75f),
+			new Vector2(0.5f,1),
+			new Vector2(1,0.75f),
+			new Vector2(1,0.25f),
+			new Vector2(0.5f,0),
+		};
+		#endregion
+		
+		meshHexagonesFlat = new Mesh();
+		meshHexagonesFlat.vertices = _sommets;
+		meshHexagonesFlat.triangles = _triangles;
+		meshHexagonesFlat.uv = _uv;
+		inst.GetComponent<MeshFilter>().mesh = meshHexagonesFlat;
+		inst.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+		inst.GetComponent<MeshCollider>().sharedMesh = meshHexagonesFlat;
+		
+		hexExt = new Vector3(inst.gameObject.collider.bounds.extents.x, inst.gameObject.collider.bounds.extents.y, inst.gameObject.collider.bounds.extents.z);
+		tailleHexagone = new Vector3(inst.gameObject.collider.bounds.size.x, inst.gameObject.collider.bounds.size.y, inst.gameObject.collider.bounds.size.z);
+		centreHexagone = new Vector3(inst.gameObject.collider.bounds.center.x, inst.gameObject.collider.bounds.center.y, inst.gameObject.collider.bounds.center.z);
+		
 		Destroy(inst);
-
-    }
-
+		
+	}
+	
 	/// <summary>
 	/// Créé le terrain en générant les pièces.
 	/// Beaucoup de sable, partout, rien d'autres.
@@ -232,9 +232,9 @@ public class TerrainManagerScript : MonoBehaviour {
 		foreach ( HexagonesVueScript chunk in pieces ){
 			chunk.Demarrer();
 		}
-
+		
 	}
-
+	
 	/// <summary>
 	/// Créé le terrain en générant les pièces.
 	/// De l'eau et du sable.
@@ -269,7 +269,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		}
 		
 	}
-
+	
 	/// <summary>
 	/// Créé le terrain en générant les pièces.
 	/// Enormément d'eau.
@@ -281,7 +281,7 @@ public class TerrainManagerScript : MonoBehaviour {
 		segmentsEnZ = Mathf.CeilToInt(tailleMap.y / taillePiece);
 		
 		pieces = new HexagonesVueScript[segmentsEnX, segmentsEnZ];
-
+		
 		// FIXME : Trop lourd
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
@@ -324,13 +324,13 @@ public class TerrainManagerScript : MonoBehaviour {
 		}
 		
 	}
-
+	
 	/// <summary>
 	/// Créé le terrain en générant les pièces.
 	/// Enormément d'eau avec quelques petits passages.
 	/// </summary>
 	private void CreerMapTraversees(){
-
+		
 		// Détermine le nombre de pièces
 		segmentsEnX = Mathf.CeilToInt(tailleMap.x / taillePiece);
 		segmentsEnZ = Mathf.CeilToInt(tailleMap.y / taillePiece);
@@ -362,21 +362,21 @@ public class TerrainManagerScript : MonoBehaviour {
 		foreach ( HexagonesVueScript chunk in pieces ){
 			chunk.Demarrer();
 		}
-
+		
 	}
-
+	
 	/// <summary>
 	/// Créé le terrain en générant les pièces.
 	/// Tirage au hasard.
 	/// </summary>
 	private void CreerMapRandom(){
-
+		
 		// Détermine le nombre de pièces
 		segmentsEnX = Mathf.CeilToInt(tailleMap.x / taillePiece);
 		segmentsEnZ = Mathf.CeilToInt(tailleMap.y / taillePiece);
 		
 		pieces = new HexagonesVueScript[segmentsEnX, segmentsEnZ];
-
+		
 		for ( int x = 0; x < segmentsEnX; x++ ){
 			for ( int z = 0; z < segmentsEnZ; z++ ){
 				// 1 : Type sable, 2 : Type eau
@@ -394,63 +394,62 @@ public class TerrainManagerScript : MonoBehaviour {
 		foreach ( HexagonesVueScript chunk in pieces ){
 			chunk.Demarrer();
 		}
-
+		
 	}
-
+	
 	/// <summary>
 	/// Créé la map selon le type voulu
 	/// </summary>
 	/// <param name="typeMap">Le type de terrain</param>
 	private void CreerMap( TypesMaps typeMap ){
-//		Debug.Log("Création du terrain : "+typeMap);
+		//		Debug.Log("Création du terrain : "+typeMap);
 		TypesMaps tm = typeMap;
-		if ( tm == TypesMaps.RANDOM ){
+		if ( tm == TypesMaps.QUELCONQUE ){
 			int indice = UnityEngine.Random.Range(1,6);
 			switch ( indice ){
-				case 1:
-					tm = TypesMaps.NIVEAU_1;
-					break;
-				case 2:
-					tm = TypesMaps.NIVEAU_2;
-					break;
-				case 3:
-					tm = TypesMaps.NIVEAU_3;
-					break;
-				case 4:
-					tm = TypesMaps.NIVEAU_4;
-					break;
-				case 5:
-				case 6:
-					tm = TypesMaps.RANDOM;
-					break;
+			case 1:
+				tm = TypesMaps.NIVEAU_1;
+				break;
+			case 2:
+				tm = TypesMaps.NIVEAU_2;
+				break;
+			case 3:
+				tm = TypesMaps.NIVEAU_3;
+				break;
+			case 4:
+				tm = TypesMaps.NIVEAU_4;
+				break;
+			default:
+				tm = TypesMaps.RANDOM;
+				break;
 			}
 		}
 		switch (tm){
-			case TypesMaps.NIVEAU_1:
-				CreerMapDesert();
-				if ( placerReines) PlacerReines(tm);
-				break;
-			case TypesMaps.NIVEAU_2:
-				CreerMapLac();
-				if ( placerReines) PlacerReines(tm);
-				break;
-			case TypesMaps.NIVEAU_3:
-				CreerMapTraversees();
-				if ( placerReines) PlacerReines(tm);
-				break;
-			case TypesMaps.NIVEAU_4:
-				CreerMapEtranglement();
-				if ( placerReines) PlacerReines(tm);
-				break;
-			case TypesMaps.RANDOM:
-				CreerMapRandom();	
-				if ( placerReines) PlacerReines(tm);
-				break;
+		case TypesMaps.NIVEAU_1:
+			CreerMapDesert();
+			if ( placerReines) PlacerReines(tm);
+			break;
+		case TypesMaps.NIVEAU_2:
+			CreerMapLac();
+			if ( placerReines) PlacerReines(tm);
+			break;
+		case TypesMaps.NIVEAU_3:
+			CreerMapTraversees();
+			if ( placerReines) PlacerReines(tm);
+			break;
+		case TypesMaps.NIVEAU_4:
+			CreerMapEtranglement();
+			if ( placerReines) PlacerReines(tm);
+			break;
+		case TypesMaps.RANDOM:
+			CreerMapRandom();	
+			if ( placerReines) PlacerReines(tm);
+			break;
 		}
 		// FIXME : Valeur en dur, Translate() non relatif, sale
 		chunkHolder.transform.Translate(new Vector3 (-98.5f, 0.1f, -93));
 	}
-
+	
 	/// <summary>
 	/// Créé la map 3D, c'est à dire définit les gameobjets
 	/// pour repérer "facilement" certains éléments comme l'eau.
@@ -465,7 +464,7 @@ public class TerrainManagerScript : MonoBehaviour {
 			scriptInvoc.InvoquerObjet(Invocations.EAU3D, h.positionLocaleSurTerrain);
 		}
 	}
-
+	
 	/// <summary>
 	/// Place un gameobject sur chaque hexagone pour bien vérifier les coordonnées associées
 	/// </summary>
@@ -477,7 +476,7 @@ public class TerrainManagerScript : MonoBehaviour {
 			scriptInvoc.InvoquerObjet(Invocations.DEBUG_OBJECT, h.positionLocaleSurTerrain);
 		}
 	}
-
+	
 	/// <summary>
 	/// Va placer les reines sur le terrain
 	/// </summary>
@@ -487,63 +486,63 @@ public class TerrainManagerScript : MonoBehaviour {
 		InvocateurObjetsScript scriptInvoc = bacAsable.GetComponent<InvocateurObjetsScript>();
 		HexagoneInfo h;
 		switch (tm){
-			case TypesMaps.NIVEAU_1:
-				// Reine blanche dans le 37ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(37);
-				positionReineBlanche = h.positionLocaleSurTerrain;
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 359ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(359);
-				positionReineNoire = h.positionLocaleSurTerrain;
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
-				break;
-			case TypesMaps.NIVEAU_2:
-				// Reine blanche dans le 37ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(37);
-				positionReineBlanche = h.positionLocaleSurTerrain;	
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 359ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(359);
-				positionReineNoire = h.positionLocaleSurTerrain;
-				scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
-				break;
-			case TypesMaps.NIVEAU_3:
-				// Reine blanche dans le 37ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(37);
-				positionReineBlanche = h.positionLocaleSurTerrain;	
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 359ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(359);
-				positionReineNoire = h.positionLocaleSurTerrain;
-				scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
-				break;
-			case TypesMaps.NIVEAU_4:
-				// Reine blanche dans le 61ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(61);
-				positionReineBlanche = h.positionLocaleSurTerrain;	
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire dans le 380ème hexagone (sur 400)
-				h = TerrainUtils.GetHexagoneAt(380);
-				positionReineNoire = h.positionLocaleSurTerrain;	
-				scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
-				break;
-			case TypesMaps.RANDOM:
-				// Reine blanche en random
-				int caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
-				h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
-				positionReineBlanche = h.positionLocaleSurTerrain;	
-				scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
-				// Reine noire en random
-				caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
-				positionReineNoire = h.positionLocaleSurTerrain;	
-				h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
-				scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
-				break;
+		case TypesMaps.NIVEAU_1:
+			// Reine blanche dans le 37ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(37);
+			positionReineBlanche = h.positionLocaleSurTerrain;
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+			// Reine noire dans le 359ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(359);
+			positionReineNoire = h.positionLocaleSurTerrain;
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+			break;
+		case TypesMaps.NIVEAU_2:
+			// Reine blanche dans le 37ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(37);
+			positionReineBlanche = h.positionLocaleSurTerrain;	
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+			// Reine noire dans le 359ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(359);
+			positionReineNoire = h.positionLocaleSurTerrain;
+			scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+			break;
+		case TypesMaps.NIVEAU_3:
+			// Reine blanche dans le 37ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(37);
+			positionReineBlanche = h.positionLocaleSurTerrain;	
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+			// Reine noire dans le 359ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(359);
+			positionReineNoire = h.positionLocaleSurTerrain;
+			scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+			break;
+		case TypesMaps.NIVEAU_4:
+			// Reine blanche dans le 61ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(61);
+			positionReineBlanche = h.positionLocaleSurTerrain;	
+			scriptInvoc.InvoquerObjet(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+			// Reine noire dans le 380ème hexagone (sur 400)
+			h = TerrainUtils.GetHexagoneAt(380);
+			positionReineNoire = h.positionLocaleSurTerrain;	
+			scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+			break;
+		case TypesMaps.RANDOM:
+			// Reine blanche en random
+			int caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
+			h = TerrainUtils.GetHexagonesSable()[caseAuHasard];
+			positionReineBlanche = h.positionLocaleSurTerrain;	
+			scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_BLANCHE_REINE, h.positionLocaleSurTerrain);
+			// Reine noire en random
+			caseAuHasard = UnityEngine.Random.Range(0,TerrainUtils.GetHexagonesSable().Count);
+			h = TerrainUtils.GetHexagonesSable()[caseAuHasard];	
+			positionReineNoire = h.positionLocaleSurTerrain;	
+			scriptInvoc.InvoquerObjetSansRecentrage(Invocations.FOURMI_NOIRE_REINE, h.positionLocaleSurTerrain);
+			break;
 		}
 	}
-#endregion
-
-#region Méthodes package
+	#endregion
+	
+	#region Méthodes package
 	/// <summary>
 	/// Routine appellée automatiquement par Unity au lancement du script
 	/// </summary>
@@ -553,9 +552,9 @@ public class TerrainManagerScript : MonoBehaviour {
 		CreerMap(type);
 		CreerMap3D();
 	}
-#endregion
-
-#region Méthodes publics
+	#endregion
+	
+	#region Méthodes publics
 	/// <summary>
 	/// Créé une nouvelle pièce
 	/// </summary>
@@ -625,8 +624,8 @@ public class TerrainManagerScript : MonoBehaviour {
 		scriptInvoc.InvoquerObjet(Invocations.EAU, hexagoneClick.positionLocaleSurTerrain);
 		scriptInvoc.InvoquerObjet(Invocations.EAU3D, hexagoneClick.positionLocaleSurTerrain);
 	}
-#endregion
-
+	#endregion
+	
 }
 #endregion
 
@@ -656,6 +655,14 @@ public enum TypesTerrains : int {
 /// </summary>
 public enum TypesMaps : int { 
 	/// <summary>
+	/// Génération de la map parmi les 5 autres choix
+	/// </summary>
+	QUELCONQUE = -1,
+	/// <summary>
+	/// Génération aléatoire de la map
+	/// </summary>
+	RANDOM = 0,
+	/// <summary>
 	/// Que du sable, le désert
 	/// </summary>
 	NIVEAU_1 = 1, 
@@ -671,9 +678,5 @@ public enum TypesMaps : int {
 	/// Encore plus d'eau, un zig-zag
 	/// </summary>
 	NIVEAU_4 = 4,
-	/// <summary>
-	/// Génération aléatoire de la map
-	/// </summary>
-	RANDOM = 0
 }
 #endregion

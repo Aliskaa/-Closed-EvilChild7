@@ -710,11 +710,31 @@ Commentaire...:
 	ᕕ( ᐛ )ᕗ Noix de cocomit : Le lead-dev que je suis se met en vacances avec son quota horaire ayant dépassé largement les 150h;
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  XX;
+Date..........:  19/01/2014 22h30;
 Auteur........:  py;
 Commentaire...:
-	;
+	Intégration des modifications
+		- Soukaina
+					- Plus de déplacement des fenetres
+					- Fontes action man
+					- Redimensionnement des menus
+					- Contexte du jeu (début)
+		- Matthieu
+					- Boucle de son : le son n'est plus joué une fois
+					- Timer revu
+		- Aurélien
+					- Fin des pop-ups à répétition
+		- Sophie
+					- Aide sur les fourmis
+					- Bombe à eau revue
+					- Changements des icones
+		- Py
+					- Plus de surbrillance sur le terrain en mode Jouer VS IA
+					- Les reines ne disparaissent plus
+					- Chute du FPS en partie résolue
+					- Clic droit dans le bac à sable remplacé par click molette
+					- Fuites des fourmis réglé;
 
 __________________________________
 Numero........:  ??;
