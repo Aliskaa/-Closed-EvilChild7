@@ -8,8 +8,8 @@ public class LogiqueDeJeu:GroupeRessource
 
 	private GameObject bacASable;
 
-	private IAreine iaReineBlanche = null;
-	private IAreine iaReineNoire =  null;
+	private IAreineBlanche iaReineBlanche = null;
+	private IAreineNoire iaReineNoire =  null;
 	private List<Joueur> mesJoueurs;
 
 	private Joueur monJoueur;
@@ -33,13 +33,13 @@ public class LogiqueDeJeu:GroupeRessource
 		GameObject gameObjectReineNoire = GameObject.FindGameObjectWithTag ("REINE_NOIRE");
 		
 		if (gameObjectReineBlanche != null) {
-			iaReineBlanche = (IAreine)((ReineScript)gameObjectReineBlanche.GetComponent<ReineScript> ()).iaReine;
+			iaReineBlanche = (IAreineBlanche)((ReineScript)gameObjectReineBlanche.GetComponent<ReineScript> ()).iaReine;
 		} else {
 			Debug.Log("Reine blanche non trouvée"+iaReineBlanche);
 		}
 		
 		if (gameObjectReineBlanche != null) {
-			iaReineNoire = (IAreine)((ReineScript)gameObjectReineNoire.GetComponent<ReineScript> ()).iaReine;
+			iaReineNoire = (IAreineNoire)((ReineScript)gameObjectReineNoire.GetComponent<ReineScript> ()).iaReine;
 		} else {
 			Debug.Log("Reine noire non trouvée"+iaReineNoire);
 		}
@@ -57,8 +57,8 @@ public class LogiqueDeJeu:GroupeRessource
 
 	
 
-		monJoueur = new Joueur (iaReineBlanche,true);
-		monIA = new IAjoueur  (iaReineNoire,null,monInterface,false,bacASable);
+		monJoueur = new Joueur (iaReineNoire,true);
+		monIA = new IAjoueur  (iaReineBlanche,null,monInterface,false,bacASable);
 
 		mesJoueurs = new List<Joueur> ();
 
@@ -130,17 +130,17 @@ public class LogiqueDeJeu:GroupeRessource
 		monInterface.afficherOeufs (image_oeuf, getJoueurCourant (),getTourCourant());
 		monInterface.afficherNombreTours (getJoueurCourant ());
 		monInterface.afficherSacAbetise (fond_sac,fond_betise,getJoueurCourant(),getTourCourant());
-		gestionQuitter ();
-		GestionSon ();
-		monInterface.afficherBarreVieReineJoueur (getJoueurCourant());
+		monInterface.gestionQuitter(image_quitter);
+		monInterface.GestionSon (textureBoutonMusique, this);
+		monInterface.afficherBarreVieReineJoueur (monJoueur, monIA, barre_vie_vide, barre_vie_pleine, icone_reine_noire, icone_reine_blanche);
 
 		if(getJoueurCourant().absent()){
-			monInterface.afficherTimerTour((int)timerTour,(int)AFK_TIMER);
+			monInterface.afficherTimerTour((int)timerTour,(int)AFK_TIMER, barre_timer_vide, barre_timer_pleine);
 		}else{
-			monInterface.afficherTimerTour((int)timerTour,(int)NORMAL_TIMER);
+			monInterface.afficherTimerTour((int)timerTour,(int)NORMAL_TIMER, barre_timer_vide, barre_timer_pleine);
 		}
 
-		monInterface.afficherPtac (getTourCourant ().getPTACutilise (),getTourCourant ().getPTAC ());
+		monInterface.afficherPtac(getTourCourant ().getPTACutilise (),getTourCourant ().getPTAC (), barre_ptac_pleine, barre_ptac_vide);
 
 		if (affichageDebutPartie) {
 
@@ -324,20 +324,7 @@ public class LogiqueDeJeu:GroupeRessource
 		return this.courant;
 	}
 
-	
-	void gestionQuitter(){
-		if (GUI.Button(new Rect(1280, 20, 30, 30), image_quitter)){
-			Application.LoadLevel(0);
-		}
-	}
-	
-	void GestionSon(){
-		if (GUI.Button(new Rect(1250, 20, 30, 30), textureBoutonMusique)){
-			lancerMusique();
-		}
-	}
-
-	void lancerMusique(){
+	public void lancerMusique(){
 		
 		if(sound == true){
 			textureBoutonMusique = mutted;

@@ -737,6 +737,28 @@ Commentaire...:
 					- Fuites des fourmis réglé;
 
 __________________________________
+Numero........:  XX;
+Date..........:  11/02/2015 22h40;
+Auteur........:  py;
+Commentaire...:
+	Intégration des modifications
+		- Ivan
+					-- Ajout des boutons dans le bac à sable pour envoyer des objets dessus (BacASableScript.cs)
+					-- Refactoring boutons quitter et sons, label pour les oeufs	(LogiqueDeJeu.cs, Interface.cs)
+					-- Passage en français (AccueilScript)
+		- Matthieu
+					-- Davantage de textures, barres de vie, timer (GroupeRessource.cs, Interface.cs, LogiqueDeJeu.cs)
+		- Sophie
+					-- Padding dans les infos fourmis (Interface.cs)
+		- Soukaina
+					-- Ajout de la description du jeu (= contexte)
+		- Gwendal
+					-- Les cailloux et les betises (CaillouxScript.cs, Betises.cs, Betises2.cs, Interface.cs)
+					-- La taille des fleches a été revue
+		- Aurélien
+					-- Correction gestion des oeufs des reines
+
+__________________________________
 Numero........:  ??;
 Date..........:  ??/??/2014 ??h??;
 Auteur........:  py;

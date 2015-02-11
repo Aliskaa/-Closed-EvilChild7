@@ -24,13 +24,13 @@ public class InfosFourmis : MonoBehaviour {
 		GUI.skin = guiSkin;
 
 		//GUI.BeginGroup(new Rect(Screen.width / 2 + 100, 10, 300, 100));
-		GUI.Box(new Rect(Screen.width / 2 + 100, 10, 230, 70), "Mais qui sont ces fourmis? ");
+		GUI.Box(new Rect(Screen.width / 2 + 100, 10, 230, 80), "Mais qui sont ces fourmis? ");
 			//GUI.Box(new Rect(Screen.width-500, 0, 190, 60), "Mais qui sont ces fourmis?");
-		GUI.Button(new Rect(Screen.width / 2 + 110, 30, 40, 40), new GUIContent(icon_reine, def_reine));
-		GUI.Button(new Rect(Screen.width / 2 + 150, 30, 40, 40), new GUIContent(icon_generale,def_generale));
-		GUI.Button(new Rect(Screen.width / 2 + 190, 30, 40, 40), new GUIContent(icon_combattante, def_combattante));
-		GUI.Button(new Rect(Screen.width / 2 + 230, 30, 40, 40), new GUIContent(icon_contremaitre, def_contremaitre));
-		GUI.Button(new Rect(Screen.width / 2 + 270, 30, 40, 40), new GUIContent(icon_ouvriere, def_ouvriere));
+		GUI.Button(new Rect(Screen.width / 2 + 110, 40, 40, 40), new GUIContent(icon_reine, def_reine));
+		GUI.Button(new Rect(Screen.width / 2 + 150, 40, 40, 40), new GUIContent(icon_generale,def_generale));
+		GUI.Button(new Rect(Screen.width / 2 + 190, 40, 40, 40), new GUIContent(icon_combattante, def_combattante));
+		GUI.Button(new Rect(Screen.width / 2 + 230, 40, 40, 40), new GUIContent(icon_contremaitre, def_contremaitre));
+		GUI.Button(new Rect(Screen.width / 2 + 270, 40, 40, 40), new GUIContent(icon_ouvriere, def_ouvriere));
 
 		GUI.Label(new Rect(Screen.width / 2 + 160, 80, 100, 150), GUI.tooltip);
 		//GUI.EndGroup();

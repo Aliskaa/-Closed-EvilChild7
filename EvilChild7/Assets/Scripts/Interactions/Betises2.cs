@@ -33,46 +33,47 @@ public class Betises2 : MonoBehaviour,Betise
 	private bool croissance = true;
 	private bool play = true;
 	private GameObject fleche;
-
+	private Vector3 position_arrivee;
+	
 	//temps
 	private float cTime = 0.0f;
 	private bool randomiserFait = false;
-
+	
 	//betises
 	private InvocateurObjetsScript invoc;
 	private float trajectoryHeight = 15;
 	private Vector3 position_depart = new Vector3(0.0f,0.0f,100.0f);
 	private Vector3 position_depart_fleche = new Vector3(0.0f,0.0f,0.0f);
 	#endregion
-
+	
 	#region variables publiques
 	//betises 
 	public GameObject betise;
 	public Invocations nom_betise;
-
+	
 	//game 
 	public bool isAvailable = true;
 	public bool lancerIA = false;
 	public Interface monInterface = null;
-
+	
 	//textures
 	public GUISkin skin_test;
-
+	
 	//vent initialisé à "PAS DE VENT"
 	//vent sur le cotésss
 	public static float vent_axe_z = 1.0f;
 	//vent en face et en arriere
 	public static float vent_axe_x = 1.0f;
-
+	
 	//lancer de betises
 	public float forceLancerIA = 0.0f;
 	public float directionIA = 0.0f;
-
+	
 	public TypesObjetsRencontres maFourmi;
 	#endregion
-
+	
 	#region affichage
-
+	
 	/// <summary>
 	/// Raises the GU event. Pour l'affichage des sliders
 	/// </summary>
@@ -82,13 +83,13 @@ public class Betises2 : MonoBehaviour,Betise
 			//barre de force
 			//GUI.VerticalSlider (new Rect (10, 100, 100, 100), curseur_force, FORCE_MAX, FORCE_MIN);
 			if(!lancerIA){
-			curseur_force = LabelSliderVertical (new Rect (10, 100, 100, 100), curseur_force, FORCE_MAX, FORCE_MIN,"FORCE");
-			//barre de direction
-			GUI.HorizontalSlider(new Rect(50, Screen.height - 20, Screen.width - 100, 50), curseur, DEGRE_MAX, DEGRE_MIN);
+				curseur_force = LabelSliderVertical (new Rect (10, 100, 100, 100), curseur_force, FORCE_MAX, FORCE_MIN,"FORCE");
+				//barre de direction
+				GUI.HorizontalSlider(new Rect(50, Screen.height - 20, Screen.width - 100, 50), curseur, DEGRE_MAX, DEGRE_MIN);
 			}
-				}
+		}
 	}
-
+	
 	/// <summary>
 	/// Labels the slider.
 	/// </summary>
@@ -105,157 +106,73 @@ public class Betises2 : MonoBehaviour,Betise
 		sliderValue = GUI.VerticalSlider (screenRect, sliderValue,  sliderMaxValue, sliderMinValue);
 		return sliderValue;
 	}
-
+	
 	#endregion
 	
 	/// <summary>
 	/// Instantiation de  la betise à lancer
 	/// </summary>
 	void Start(){
-
+		
 		GameObject bacASable = GameObject.FindGameObjectWithTag ("BAC_A_SABLE");
 		invoc = bacASable.GetComponent<InvocateurObjetsScript> ();
-
+		
 		skin_test = Resources.LoadAssetAtPath<GUISkin>("Assets/Scripts/Menu/GuiSkinForMenuJeu.guiskin");
-
+		
 		//instanciation de la bétise à lancer
 		betise = invoc.InvoquerObjetAvecOffset (nom_betise, position_depart, new Vector3 (0.0f, 15.0f, 0.0f));
-		//instaciation de la flèche de lancer
-		fleche = invoc.InvoquerObjetAvecOffset (Invocations.FLECHE, position_depart_fleche, new Vector3 (0.0f, 0.2f, 0.0f));
-
+		
 		
 		if (nom_betise == Invocations.OEUF_FOURMI) {
 			betise.GetComponent<OeufScript>().fourmi = genererInvoc();
 		}
-
+		
 		betise.rigidbody.isKinematic = true;
-
+		
 	}
-
+	
 	/// <summary>
 	/// Choix successif de la force de lancer, de la direction et du lancer de la betise
 	/// </summary>
 	void Update(){
-
+		
 		if (play){
 			if(lancerIA){
 				if(!randomiserFait){
-
 					randomiserLancer();
+					position_arrivee = new Vector3(forceLancerIA*10f*vent_axe_x,0.1f,directionIA*10f*vent_axe_z);
 				}
 				tour = CREATION;
 			}
-			//Sélection de la force
 			switch (tour){
-				
-			case CHOIX_FORCE:
-				//Debug.Log ("Force");
-				if (croissance) {
-					if (curseur_force >= FORCE_MAX){
-						croissance = false;
-					} else {
-						if (curseur_force <6){
-							fleche.transform.localScale = new Vector3(fleche.transform.localScale.x,fleche.transform.localScale.y,curseur_force/8f);
-						}
-						else {
-							fleche.transform.localScale = new Vector3(fleche.transform.localScale.x,fleche.transform.localScale.y,curseur_force/3f);
-						}
-						curseur_force = curseur_force + 0.1f;
-					}
-				} else {
-					if (curseur_force <= FORCE_MIN){
-						croissance = true;
-					} else {
-						if (curseur_force <6){
-							fleche.transform.localScale = new Vector3(fleche.transform.localScale.x,fleche.transform.localScale.y,curseur_force/8f);
-						}else {
-							fleche.transform.localScale = new Vector3(fleche.transform.localScale.x,fleche.transform.localScale.y,curseur_force/3f);
-						}
-						curseur_force = curseur_force - 0.1f;
-					}
-				}
-				if (Input.GetKey(KeyCode.Backspace)){
-					ForceLancer();
-					//fleche.transform.localScale = new Vector3(fleche.transform.localScale.x,fleche.transform.localScale.y,ForceLancer()/5f);
-					//Debug.Log("force de lancé" + ForceLancer());
-					tour = CHOIX_DIRECTION;
-				}
-				break;
-				
-			case CHOIX_DIRECTION:
-				//Debug.Log("Direction");
-				if (croissance) {
-					if (curseur >= DEGRE_MAX){
-						croissance = false;
-					} else {
-						curseur += 0.1f; 
-						fleche.transform.localPosition = new Vector3(fleche.transform.localPosition.x,fleche.transform.localPosition.y,fleche.transform.localPosition.z+0.44f);
-					}
-				} else {
-					if (curseur <= DEGRE_MIN){
-						croissance = true;
-					} else {
-						curseur -= 0.1f;
-						fleche.transform.localPosition = new Vector3(fleche.transform.localPosition.x,fleche.transform.localPosition.y,fleche.transform.localPosition.z-0.44f);
-
-					}
-				} 
-				if (Input.GetKey(KeyCode.Return)){
-					Direction();
-					//fleche.transform.Rotate(new Vector3(0.0f,-(Direction()*10f+270),0.0f)); 
-
-					//Debug.Log("direction" + Direction());
-					tour = CREATION;
-				}
-				break;
 			case CREATION:
 				if(monInterface!=null){
 					monInterface.lancerEnCours = false;
 				}
+				//la betise est lancée à ce moment
 				if(betise == null){
 					break;
 				}
-				//la betise est lancée à ce moment
-				betise.rigidbody.isKinematic = false;
-				//Debug.Log("vent: "+ vent_axe_z);
-
-				cTime += 0.01f;
-				Vector3 position_arrivee;
-
-				//Vérification d'un lancé fait par l'IA ou non
-				if (lancerIA==true){
-					//Debug.Log(forceLancerIA);
-					//Debug.Log(directionIA);
-					position_arrivee = new Vector3(forceLancerIA*10f*vent_axe_x,0.1f,directionIA*10f*vent_axe_z);
-					//lancerIA = false;
-				}else {
-					//Debug.Log ("coucou");
-					position_arrivee = new Vector3(ForceLancer()*10f*vent_axe_x,0.1f,Direction ()*10f*vent_axe_z);
 				
-					}
+				betise.rigidbody.isKinematic = false;
+				
+				cTime += 0.01f;
+				
 				HexagoneInfo hexPlusProche = TerrainUtils.HexagonePlusProche(position_arrivee);
 				// calcul du trajet de la betise entre son point de depart et son point d'arrivée
 				Vector3 currentPos = Vector3.Lerp(position_depart,hexPlusProche.positionLocaleSurTerrain , cTime);
 				
 				currentPos.y += trajectoryHeight * Mathf.Sin(Mathf.Clamp01(cTime) * Mathf.PI);
-
-
+				
 				//changement de position de la betise
 				betise.transform.localPosition= currentPos;
-
-
-				//on sort du tour de jeu et on enleve l'affichage des sliders une fois la betise a sa place
+				
 				if (betise.transform.localPosition == hexPlusProche.positionLocaleSurTerrain) {
 					isAvailable = !isAvailable;
-					Destroy (fleche);
 					play = !play;
-					lancerIA = false;
 				}
-
-				//Destroy (fleche);
 				break;
 			default:
-				//Debug.Log("Je ne sais pas quel choix faire");
 				break;
 			}
 		}
@@ -268,7 +185,7 @@ public class Betises2 : MonoBehaviour,Betise
 	private float ForceLancer(){
 		return curseur_force;
 	}
-
+	
 	
 	public int getPoids(){
 		if (nom_betise == Invocations.CAILLOU) {
@@ -344,11 +261,11 @@ public class Betises2 : MonoBehaviour,Betise
 			
 		}
 	}
-
+	
 	public void randomiserLancer(){
 		this.forceLancerIA = Random.Range (FORCE_MIN, FORCE_MAX-2);
 		this.directionIA = Random.Range (DEGRE_MIN, DEGRE_MAX);
 		randomiserFait = true;
 	}
-
+	
 }

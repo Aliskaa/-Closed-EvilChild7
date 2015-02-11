@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class IAreine:IAabstraite
+public abstract class IAreine:IAabstraite
 {
 	
 	protected IAreaction maReaction = null;
@@ -13,21 +13,15 @@ public class IAreine:IAabstraite
 	private bool flagDopageSoldat = false;
 	
 	
-	public IAreine(TypesObjetsRencontres monType, IAreaction reaction){
+	public IAreine(IAreaction reaction){
 		attaquants = new List<IAabstraite> ();
 		victimes = new List<IAabstraite> ();
-		
-		if (monType == TypesObjetsRencontres.REINE_BLANCHE) {
-			monCamp = TypesCamps.BLANC;
-			this.monType = TypesObjetsRencontres.REINE_BLANCHE;
-		} else {
-			monCamp = TypesCamps.NOIR;
-			this.monType = TypesObjetsRencontres.REINE_NOIRE;
-		}
 		modele = new Reine ();
 		maReaction = reaction;
 		
 	}
+	
+	public  abstract Oeuf genererOeuf ();
 	
 	override public void signaler(List<Cible> objetsReperes){
 		/* NOTHING TO SEE HEEEEEEEERE
@@ -89,45 +83,6 @@ public class IAreine:IAabstraite
 			mesOeufs.Add (genererOeuf());
 		}
 		return mesOeufs;
-	}
-	public Oeuf genererOeuf(){
-		float limiteOuvriere = modele.getRatioOuvriere ();
-		System.Random random = new System.Random ();
-		float resultat = (float)random.NextDouble();
-		
-		if (resultat <= limiteOuvriere) {
-			resultat = (float)random.NextDouble();
-			if(resultat < modele.getSpeciale()){
-				if(getCamp() == TypesCamps.BLANC){
-					return new Oeuf(TypesObjetsRencontres.CONTREMAITRE_BLANCHE);
-				}else{
-					return new Oeuf(TypesObjetsRencontres.CONTREMAITRE_NOIRE);
-				}
-			}else{
-				if(getCamp() == TypesCamps.BLANC){
-					return new Oeuf(TypesObjetsRencontres.OUVRIERE_BLANCHE);
-				}else{
-					return new Oeuf(TypesObjetsRencontres.OUVRIERE_NOIRE);
-				}
-			}
-		}else{
-			resultat = (float)random.NextDouble();
-			if(resultat <  modele.getSpeciale()){
-				if(getCamp() == TypesCamps.BLANC){
-					return new Oeuf(TypesObjetsRencontres.CONTREMAITRE_BLANCHE);
-				}else{
-					return new Oeuf(TypesObjetsRencontres.CONTREMAITRE_NOIRE);
-				}
-			}else{
-				if(getCamp() == TypesCamps.BLANC){
-					return new Oeuf(TypesObjetsRencontres.OUVRIERE_BLANCHE);
-				}else{
-					return new Oeuf(TypesObjetsRencontres.OUVRIERE_NOIRE);
-				}
-			}
-			
-		}
-		
 	}
 	
 	public void recevoirNourriture(){

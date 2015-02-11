@@ -7,7 +7,7 @@ public class AccueilScript : MonoBehaviour {
 	public Texture2D background;
 	public bool DragWindow = false;
 	public string levelToLoadWhenClickedPlay = "";
-	private string clicked = "", MessageDisplayOnHelp = "Help \n ", MessageDisplayOnGame= "Description of Game\n";
+	private string clicked = "", MessageDisplayOnHelp = "Aide \n ", MessageDisplayOnGame= "Description du jeu\n";
 	private Rect WindowRect = new Rect((Screen.width / 4), Screen.height / 2, 600, 600);
 	private float volume = 1.0f;
 	
@@ -15,12 +15,17 @@ public class AccueilScript : MonoBehaviour {
 	private HostData[] hostList = null;
 	private const string typeName = "EvilChild";
 	private NetworkManager networkmanager;
-	private string NameServer = "Name server";
+	private string NameServer = "Nom du serveur";
 	
 	private void Start()
 	{
-		MessageDisplayOnHelp += "Press Esc To Go Back";
-		MessageDisplayOnGame +=  "Press Esc To Go Back";
+		MessageDisplayOnHelp += "Echap. pour revenir";
+		//MessageDisplayOnGame +=  "Echap. pour revenir";
+		MessageDisplayOnGame += 
+			"\n\n\n\tDeux enfants se confrontent en faisant s'affronter deux colonies de fourmis\n dans un bac à sable.\n\n" +
+				"Chaque enfant démarre avec une reine fourmi qui pond des oeufs.\n\n" +
+				"Ces oeufs donnent naissance à différentes sortes de fourmis qui ont une mission.\n\n" +
+				"\t\tLes fourmis pourront alors s'affronter, déambuler sur le terrain,\n rapporter de la nourriture et surtout, tuer l'autre reine !\n";
 		networkmanager = new NetworkManager(typeName,NameServer);
 	}
 	private void OnGUI()
@@ -60,7 +65,7 @@ public class AccueilScript : MonoBehaviour {
 			}
 			GUILayout.EndVertical();
 			GUILayout.BeginHorizontal();
-			if (GUILayout.Button("Back"))
+			if (GUILayout.Button("Retour"))
 			{
 				clicked = "options";
 			}
@@ -82,7 +87,7 @@ public class AccueilScript : MonoBehaviour {
 	
 	private void optionsPlay(int id)
 	{
-		if (GUILayout.Button ("Player vs IA")) {
+		if (GUILayout.Button ("Joueur contre IA")) {
 			Application.LoadLevel(1);
 		} 
 		/*
@@ -93,7 +98,7 @@ public class AccueilScript : MonoBehaviour {
 		else if (GUILayout.Button ("Bac à sable")) {
 			Application.LoadLevel(3);
 		}
-		else if (GUILayout.Button("Back")){
+		else if (GUILayout.Button("Retour")){
 			clicked = "";
 		}
 		
@@ -106,28 +111,28 @@ public class AccueilScript : MonoBehaviour {
 	private void optionStartServer(){
 		//Box 1
 		GUI.BeginGroup(new Rect((Screen.width*66)/100, (Screen.height*42)/100, (Screen.width*26)/100, (Screen.height*50)/100));
-		GUI.Box(new Rect(0, 0, (Screen.width*26)/100, (Screen.height*50)/100), "Start Server !");
+		GUI.Box(new Rect(0, 0, (Screen.width*26)/100, (Screen.height*50)/100), "Lancer le serveur !");
 		// Nom du serveur
 		GUI.BeginGroup(new Rect((Screen.width*7)/100, (Screen.height*7)/100, (Screen.width*22)/100, (Screen.height*7)/100));
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("Name server:", GUILayout.Width(100));
+		GUILayout.Label("Nom du serveur:", GUILayout.Width(100));
 		NameServer = GUILayout.TextField(NameServer);
 		GUILayout.EndHorizontal();
 		GUI.EndGroup();
 		
-		if (GUI.Button(new Rect( (Screen.width*2)/100, (Screen.height*13)/100, (Screen.width*22)/100, (Screen.height*7)/100), "launch" ) )
+		if (GUI.Button(new Rect( (Screen.width*2)/100, (Screen.height*13)/100, (Screen.width*22)/100, (Screen.height*7)/100), "Lancer" ) )
 		{
 			networkmanager.setGameName(NameServer);
 			networkmanager.StartServer();
 			//Debug.Log("launch");
 			Application.LoadLevel(2);
 		}
-		if (GUI.Button(new Rect( (Screen.width*2)/100, (Screen.height*20)/100, (Screen.width*22)/100, (Screen.height*7)/100), "Reset" ))
+		if (GUI.Button(new Rect( (Screen.width*2)/100, (Screen.height*20)/100, (Screen.width*22)/100, (Screen.height*7)/100), "Vider" ))
 		{
 			NameServer = "Name server";
 		}
 		
-		if (GUI.Button(new Rect( (Screen.width*2)/100, (Screen.height*42)/100, (Screen.width*22)/100, (Screen.height*7)/100),"Back")){
+		if (GUI.Button(new Rect( (Screen.width*2)/100, (Screen.height*42)/100, (Screen.width*22)/100, (Screen.height*7)/100),"Retour")){
 			clicked = "Multiplayer";
 		}
 		
@@ -144,7 +149,7 @@ public class AccueilScript : MonoBehaviour {
 		{
 			//Box 1
 			GUI.BeginGroup(new Rect((Screen.width*37)/100, (Screen.height*42)/100, (Screen.width*26)/100, (Screen.height*50)/100));
-			GUI.Box(new Rect(0, 0, (Screen.width*26)/100, (Screen.height*50)/100), "Choice of servers ?");
+			GUI.Box(new Rect(0, 0, (Screen.width*26)/100, (Screen.height*50)/100), "Choix du serveur ?");
 			networkmanager.RefreshHostList();
 			hostList = networkmanager.getHostList();
 			
@@ -157,25 +162,25 @@ public class AccueilScript : MonoBehaviour {
 				}
 			}
 			else{
-				GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*7)/100, (Screen.width*22)/100, (Screen.height*7)/100), "No servers available!");
+				GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*7)/100, (Screen.width*22)/100, (Screen.height*7)/100), "Pas de serveur disponible");
 			}
 			
 			GUI.EndGroup();
 			
 			//Box 2
 			GUI.BeginGroup(new Rect((Screen.width*66)/100, (Screen.height*42)/100, (Screen.width*26)/100, (Screen.height*50)/100));
-			GUI.Box(new Rect(0, 0, (Screen.width*26)/100, (Screen.height*50)/100),"Server management");
+			GUI.Box(new Rect(0, 0, (Screen.width*26)/100, (Screen.height*50)/100),"Gestion du serveur");
 			
-			if (GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*7)/100, (Screen.width*22)/100, (Screen.height*7)/100), "Start Server")) {
+			if (GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*7)/100, (Screen.width*22)/100, (Screen.height*7)/100), "Lancer le serveur")) {
 				clicked = "StartServer";
 				//networkmanager.StartServer();
 			} 
-			else if (GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*13)/100, (Screen.width*22)/100, (Screen.height*7)/100 ), "Refresh Hosts")) {
+			else if (GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*13)/100, (Screen.width*22)/100, (Screen.height*7)/100 ), "Rafraichir")) {
 				networkmanager.RefreshHostList();
 				hostList = networkmanager.getHostList();
 				//Debug.Log("Refresh Hosts!");
 			}
-			else if (GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*42)/100, (Screen.width*22)/100, (Screen.height*7)/100 ), "Back")){
+			else if (GUI.Button(new Rect( (Screen.width*3)/100, (Screen.height*42)/100, (Screen.width*22)/100, (Screen.height*7)/100 ), "Retour")){
 				clicked = "";
 			}
 			
@@ -187,14 +192,14 @@ public class AccueilScript : MonoBehaviour {
 	
 	private void optionsFunc(int id)
 	{
-		if (GUILayout.Button("Resolution"))
+		if (GUILayout.Button("Résolution"))
 		{
 			clicked = "resolution";
 		}
 		GUILayout.Label("Volume");
 		volume = GUILayout.HorizontalSlider(volume ,0.0f,1.0f);
 		AudioListener.volume = volume;
-		if (GUILayout.Button("Back"))
+		if (GUILayout.Button("Retour"))
 		{
 			clicked = "";
 		}
@@ -205,7 +210,7 @@ public class AccueilScript : MonoBehaviour {
 	private void menuFunc(int id)
 	{
 		//buttons 
-		if (GUILayout.Button("Play "))
+		if (GUILayout.Button("Lancer"))
 		{
 			clicked = "Play";
 		}
@@ -213,12 +218,12 @@ public class AccueilScript : MonoBehaviour {
 		{
 			clicked = "options";
 		}
-		if (GUILayout.Button("Help"))
+		if (GUILayout.Button("Aide"))
 		{
 			clicked = "help";
 		}
 		
-		if (GUILayout.Button("Descriptions "))
+		if (GUILayout.Button("Descriptions"))
 		{
 			clicked = "descriptions";
 		}

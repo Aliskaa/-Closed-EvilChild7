@@ -10,14 +10,14 @@ public class CaillouxScript : MonoBehaviour {
 	private Vector3 nouvellePosition;
 	//private bool rebond = false;
 	private int direction;
-
+	
 	void Start(){
 		nouvellePosition = new Vector3(-1, -1, -1);
 		direction = 0;
 	}
-	/*
+	
 	void Update(){
-		if (rebond){
+		/*if (rebond){
 			HexagoneInfo hexaNouvelle = TerrainUtils.HexagonePlusProche (nouvellePosition);
 			HexagoneInfo hexaCourante = TerrainUtils.HexagonePlusProche (transform.localPosition);
 
@@ -30,44 +30,65 @@ public class CaillouxScript : MonoBehaviour {
 				transform.Rotate(0, 0, 0);
 				transform.collider.isTrigger = false;
 			}
-		}
+		}*/
 	}
-
-	// TODO il faut que l'on gère s'il y a déjà un élément sur la case suite au rebond.
+	
 	void OnTriggerEnter(Collider c){
 		string objetTouche = c.gameObject.name;
 		TypesObjetsRencontres tor = GameObjectUtils.parseToType (objetTouche);
-		switch (tor) {
-		case TypesObjetsRencontres.COMBATTANTE_BLANCHE :// va falloir rajouter pour tous les éléments du terrain :)
-			Debug.Log("Rencontre d'une fourmi");
-			break;
-		case TypesObjetsRencontres.SCARABEE:
-			//pareil que pour la fourmis
-			Debug.Log ("rencontre d'un scarabée");
-			break;
-		case TypesObjetsRencontres.CAILLOU:
-			deplacerGameObject(c.gameObject, direction, 1);
-			Debug.Log("CAILLOU - Collision avec un caillou" + direction);
-			break;
-		case TypesObjetsRencontres.SABLE:
-			Debug.Log("Rencontre sur le sol");
-			break;
-		case TypesObjetsRencontres.EAU:
-			Debug.Log("CAILLOU - Collision avec de l'eau");
-			//transform.gameObject.
-			// TODO rajouter des petites particules pour faire comme une gerbe d'eau
-			Destroy(transform.gameObject);
-			break;
-		default:
-			break;
-		}
+		
+		/** IF MEGA BADASS **/
+		if (tor.Equals(TypesObjetsRencontres.COMBATTANTE_BLANCHE) 
+		    || tor.Equals(TypesObjetsRencontres.COMBATTANTE_NOIRE) 
+		    || tor.Equals(TypesObjetsRencontres.OUVRIERE_BLANCHE)
+		    || tor.Equals(TypesObjetsRencontres.OUVRIERE_NOIRE)
+		    || tor.Equals(TypesObjetsRencontres.REINE_BLANCHE)
+		    || tor.Equals(TypesObjetsRencontres.REINE_NOIRE)
+		    || tor.Equals(TypesObjetsRencontres.CONTREMAITRE_BLANCHE)
+		    || tor.Equals(TypesObjetsRencontres.CONTREMAITRE_NOIRE)
+		    || tor.Equals(TypesObjetsRencontres.GENERALE_NOIRE)
+		    || tor.Equals(TypesObjetsRencontres.GENERALE_BLANCHE)){
 
+			IAabstraite ia = null;
+			// On a une fourmi normale
+			if ( c.gameObject.GetComponent<FourmiScript>() != null ){
+				ia = (IAabstraite)c.gameObject.GetComponent<FourmiScript>().iaBestiole;
+			// On a une reine
+			} else {
+				ia = (IAabstraite)c.gameObject.GetComponent<ReineScript>().iaReine;
+			}
+
+			int pvRestants = ia.getModele().enleverPV(DEGAT_MOYEN_CAILLOU);
+			
+			if (pvRestants <= 0) {
+				ia.mort ();
+			}
+			
+		} else if (tor.Equals(TypesObjetsRencontres.CAILLOU)){
+			deplacerGameObject(c.gameObject, direction, 1);
+			
+		} else if (tor.Equals(TypesObjetsRencontres.EAU)){
+			Destroy(transform.gameObject);
+			
+		} else if (tor.Equals(TypesObjetsRencontres.SCARABEE)){ 
+			IAabstraite ia = (IAabstraite)c.gameObject.GetComponent<ScarabeeScript>().iaBestiole;
+			int pvRestants = ia.getModele().enleverPV(DEGAT_MOYEN_CAILLOU);
+			
+			if (pvRestants <= 0) {
+				ia.mort ();
+			}
+		}
+		
+		//transform.rigidbody.isKinematic = true;
+		transform.rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+		transform.collider.isTrigger = false;
+		/*
 		if (!rebond) {
 			//rebondir();
 			rebond = true;
-		}
+		}*/
 	}
-
+	
 	/*
 	 *<summary>
 	 *Fonction permettant de calculer le rebond d'un caillou sur le terrain.

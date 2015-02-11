@@ -72,6 +72,16 @@ public abstract class GroupeRessource:MonoBehaviour{
 	protected bool choisirBetiseIA = false;
 	protected bool stopTimer = false;
 
+	// Variable progress bar
+	public Texture2D barre_timer_pleine;
+	public Texture2D barre_timer_vide;
+	public Texture2D barre_vie_pleine;
+	public Texture2D barre_vie_vide;
+	public Texture2D icone_reine_blanche;
+	public Texture2D icone_reine_noire;
+	public Texture2D barre_ptac_pleine;
+	public Texture2D barre_ptac_vide;
+
 	protected void resetFlagsTour(){
 		
 		betisesChoisies = false;

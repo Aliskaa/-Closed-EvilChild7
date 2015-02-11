@@ -8,7 +8,9 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 2.2.0
+/// PY Lapersonne
+/// I. Jaffrennou
+/// Version 3.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -509,7 +511,112 @@ public class BacAsableScript : MonoBehaviour {
 		objetAmettre = Invocations.TRES_GROS_CAILLOU;
 	}
 	#endregion
+
+	public void afficherInvocationFourmieBlanche(){
+		GUI.Box ( new Rect (Screen.width * 0.01f,Screen.height * 0.01f, Screen.width * 0.11f,  Screen.height * 0.25f), "Camps Blanc");
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.05f, Screen.width * 0.09f, Screen.height * 0.03f), "Ouvriere")) {
+			PreparerOuvriereBlanche();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.10f, Screen.width * 0.09f, Screen.height * 0.03f), "Contremaitre")) {
+			PreparerContremaitreBlanche();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.14f, Screen.width * 0.09f, Screen.height * 0.03f), "Soldat")) {
+			PreparerSoldateBlanche();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.09f, Screen.height * 0.03f), "Generale")) {
+			PreparerGeneraleBlanche();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.22f, Screen.width * 0.09f, Screen.height * 0.03f), "Reine")) {
+			if ( reineBlanchePosee ) ViderObjet();
+			else PreparerReineBlanche();
+		}
+		
+	}
 	
+	public void afficherInvocationPheromoneBlanche(){
+		GUI.Box ( new Rect ( Screen.width * 0.01f,Screen.height * 0.31f, Screen.width * 0.11f,  Screen.height * 0.13f), "Pheromone Blanche");
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.35f, Screen.width * 0.09f, Screen.height * 0.03f), "Ouvriere")) {
+			PreparerPheroOuvBlanche();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.39f, Screen.width * 0.09f, Screen.height * 0.03f), "Contremaitre")) {
+			PreparerPheroCmBlanche();
+		}
+		
+	}
+	
+	public void afficherInvocationFourmieNoire(){
+		GUI.Box ( new Rect ( Screen.width * 0.01f,Screen.height * 0.49f, Screen.width * 0.11f,  155), "Camps Noire");
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.53f, Screen.width * 0.09f, Screen.height * 0.03f), "Ouvriere")) {
+			PreparerOuvriereNoire();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.57f, Screen.width * 0.09f, Screen.height * 0.03f), "Contremaitre")) {
+			PreparerContremaitreNoire();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.61f, Screen.width * 0.09f, Screen.height * 0.03f), "Soldat")) {
+			PreparerSoldateNoire();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.66f, Screen.width * 0.09f, Screen.height * 0.03f), "Generale")) {
+			PreparerGeneraleNoire();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.70f, Screen.width * 0.09f, Screen.height * 0.03f), "Reine")) {
+			if ( reineNoirePosee ) ViderObjet();
+			else PreparerReineNoire();
+		}
+		
+	}
+	
+	public void afficherInvocationPheromoneNoire(){
+		GUI.Box ( new Rect ( Screen.width * 0.01f,Screen.height * 0.79f, Screen.width * 0.11f,  Screen.height * 0.13f), "Pheromone Noire");
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.83f, Screen.width * 0.09f, Screen.height * 0.03f), "Ouvriere")) {
+			PreparerPheroOuvNoire();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.87f, Screen.width * 0.09f, Screen.height * 0.03f), "Contremaitre")) {
+			PreparerPheroCmNoire();
+		}
+		
+	}
+	
+	public void afficherInvocationBetises(){
+		GUI.Box ( new Rect ( Screen.width * 0.88f,Screen.height * 0.02f, Screen.width * 0.11f,  Screen.height * 0.31f), "Diver Objets");
+		
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.05f, Screen.width * 0.09f, Screen.height * 0.03f), "Scarabee")) {
+			PreparerScarabee();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.10f, Screen.width * 0.09f, Screen.height * 0.03f), "Nourriture")) {
+			PreparerNourriture();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.14f, Screen.width * 0.09f, Screen.height * 0.03f), "Petit caillou")) {
+			PreparerPetitCaillou();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.18f, Screen.width * 0.09f, Screen.height * 0.03f), "Caillou")) {
+			PreparerCaillou();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.22f, Screen.width * 0.09f, Screen.height * 0.03f), "Gros caillou")) {
+			PreparerGrosCaillou();
+		}
+		
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.26f, Screen.width * 0.09f, Screen.height * 0.03f), "Oeuf")) {
+			PreparerOeuf();
+		}
+		
+	}
+
 	#region Méthodes package
 	/// <summary>
 	/// Routine appelée automatiquement par Unity au réveil du script
@@ -537,6 +644,11 @@ public class BacAsableScript : MonoBehaviour {
 	/// à la GUI/UI
 	/// </summary>
 	void OnGUI(){
+		afficherInvocationFourmieBlanche();
+		afficherInvocationPheromoneBlanche();
+		afficherInvocationFourmieNoire();
+		afficherInvocationPheromoneNoire();
+		afficherInvocationBetises();
 		Event e = Event.current;
 		if ( e!= null && e.isKey & Input.anyKeyDown && e.keyCode.ToString () != "None" ){
 			KeyCode touche = e.keyCode;
