@@ -93,9 +93,9 @@ public class Betises : MonoBehaviour,Betise
 			//GUI.VerticalSlider (new Rect (10, 100, 100, 100), curseur_force, FORCE_MAX, FORCE_MIN); 
 			if(!lancerIA){
 				//curseur_force = LabelSliderVertical (new Rect (10, 100, 100, 100), curseur_force, FORCE_MAX, FORCE_MIN,"Force");
-				Texture2D barre_force_pleine = (Texture2D)Resources.LoadAssetAtPath("Assets/Resources/force_pleine.png", typeof(Texture2D));
-				Texture2D barre_force_vide = (Texture2D)Resources.LoadAssetAtPath("Assets/Resources/force_vide.png", typeof(Texture2D));
-				
+				Texture2D barre_force_pleine = (Texture2D)Resources.Load("force_pleine", typeof(Texture2D));
+				Texture2D barre_force_vide = (Texture2D)Resources.Load("force_vide", typeof(Texture2D));
+
 				float avancement = (curseur_force - FORCE_MIN)/FORCE_MAX;
 				GUI.BeginGroup (new Rect ((Screen.width*1)/100,(Screen.height*30)/100,(Screen.width * 2) / 100,(Screen.height*20)/100));
 				GUI.DrawTexture (new Rect (0,0, (Screen.width * 2) / 100,(Screen.height*20)/100), barre_force_pleine);

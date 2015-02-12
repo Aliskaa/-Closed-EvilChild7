@@ -799,11 +799,11 @@ Commentaire...:
 		- http://docs.unity3d.com/Manual/LogFiles.html
 		- C:\Users\plaperso\AppData\Local\Temp\UnityWebPlayer\log
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2015 ??h??;
+Numero........:  XX;
+Date..........:  12/02/2015 22h01;
 Auteur........:  py;
 Commentaire...:
-	??
+	Correction : jauge de force de lancer qui était absente au build...
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;
