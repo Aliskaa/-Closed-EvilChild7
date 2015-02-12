@@ -815,11 +815,12 @@ Commentaire...:
 	- Ajout des logos ENSSAT et RGS
 	- Nettoyage des logs;
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2015 ??h??;
+Numero........:  XX;
+Date..........:  12/02/2015 19h57;
 Auteur........:  py;
 Commentaire...:
-	??
+>>>v3.x.x
+	- Préparation démo : niveau 1 pour le terrain en JvsIA
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;
