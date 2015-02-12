@@ -10,7 +10,7 @@
 /// <remarks>
 /// PY Lapersonne
 /// I. Jaffrennou
-/// Version 3.0.0
+/// Version 4.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -184,7 +184,11 @@ public class BacAsableScript : MonoBehaviour {
 	/// </summary>
 	private const int CLIC_CENTRE_SOURIS = 2;
 	#endregion
-	
+
+	#region Attirbuts publics
+	public Texture2D image_quitter;
+	#endregion
+
 	/* ******** *
 	 * Méthodes *
 	 * ******** */
@@ -589,29 +593,29 @@ public class BacAsableScript : MonoBehaviour {
 	}
 	
 	public void afficherInvocationBetises(){
-		GUI.Box ( new Rect ( Screen.width * 0.88f,Screen.height * 0.02f, Screen.width * 0.11f,  Screen.height * 0.31f), "Diver Objets");
+		GUI.Box ( new Rect ( Screen.width * 0.88f,Screen.height * 0.10f, Screen.width * 0.11f,  Screen.height * 0.31f), "Diver Objets");
 		
-		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.05f, Screen.width * 0.09f, Screen.height * 0.03f), "Scarabee")) {
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.13f, Screen.width * 0.09f, Screen.height * 0.03f), "Scarabee")) {
 			PreparerScarabee();
 		}
 		
-		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.10f, Screen.width * 0.09f, Screen.height * 0.03f), "Nourriture")) {
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.18f, Screen.width * 0.09f, Screen.height * 0.03f), "Nourriture")) {
 			PreparerNourriture();
 		}
 		
-		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.14f, Screen.width * 0.09f, Screen.height * 0.03f), "Petit caillou")) {
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.23f, Screen.width * 0.09f, Screen.height * 0.03f), "Petit caillou")) {
 			PreparerPetitCaillou();
 		}
 		
-		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.18f, Screen.width * 0.09f, Screen.height * 0.03f), "Caillou")) {
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.28f, Screen.width * 0.09f, Screen.height * 0.03f), "Caillou")) {
 			PreparerCaillou();
 		}
 		
-		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.22f, Screen.width * 0.09f, Screen.height * 0.03f), "Gros caillou")) {
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.33f, Screen.width * 0.09f, Screen.height * 0.03f), "Gros caillou")) {
 			PreparerGrosCaillou();
 		}
 		
-		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.26f, Screen.width * 0.09f, Screen.height * 0.03f), "Oeuf")) {
+		if (GUI.Button (new Rect (Screen.width * 0.89f, Screen.height * 0.38f, Screen.width * 0.09f, Screen.height * 0.03f), "Oeuf")) {
 			PreparerOeuf();
 		}
 		
@@ -649,6 +653,7 @@ public class BacAsableScript : MonoBehaviour {
 		afficherInvocationFourmieNoire();
 		afficherInvocationPheromoneNoire();
 		afficherInvocationBetises();
+		gestionQuitter(image_quitter);
 		Event e = Event.current;
 		if ( e!= null && e.isKey & Input.anyKeyDown && e.keyCode.ToString () != "None" ){
 			KeyCode touche = e.keyCode;
@@ -738,6 +743,14 @@ public class BacAsableScript : MonoBehaviour {
 				PreparerOeuf();
 				return;
 			}
+		}
+	}
+	#endregion
+
+	#region Méthodes publiques
+	public void gestionQuitter(Texture2D image_quitter){
+		if (GUI.Button(new Rect(Screen.width*0.96f, Screen.height*0.03f, Screen.width*0.02f, Screen.height*0.05f), image_quitter)){
+			Application.LoadLevel(0);
 		}
 	}
 	#endregion

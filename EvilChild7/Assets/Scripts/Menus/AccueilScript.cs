@@ -22,10 +22,10 @@ public class AccueilScript : MonoBehaviour {
 		MessageDisplayOnHelp += "Echap. pour revenir";
 		//MessageDisplayOnGame +=  "Echap. pour revenir";
 		MessageDisplayOnGame += 
-			"\n\n\n\tDeux enfants se confrontent en faisant s'affronter deux colonies de fourmis\n dans un bac à sable.\n\n" +
+			"\n\n\n\tDeux enfants se confrontent en faisant s'affronter deux colonies\n\n de fourmis dans un bac à sable.\n\n" +
 				"Chaque enfant démarre avec une reine fourmi qui pond des oeufs.\n\n" +
-				"Ces oeufs donnent naissance à différentes sortes de fourmis qui ont une mission.\n\n" +
-				"\t\tLes fourmis pourront alors s'affronter, déambuler sur le terrain,\n rapporter de la nourriture et surtout, tuer l'autre reine !\n";
+				"\tCes oeufs donnent naissance à différentes sortes de fourmis\n qui ont une mission.\n\n" +
+				"\t\tLes fourmis pourront alors s'affronter, déambuler\n sur le terrain, rapporter de la nourriture\n et surtout, tuer l'autre reine !\n";
 		networkmanager = new NetworkManager(typeName,NameServer);
 	}
 	private void OnGUI()

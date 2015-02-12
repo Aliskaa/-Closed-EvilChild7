@@ -759,10 +759,46 @@ Commentaire...:
 					-- Correction gestion des oeufs des reines
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2014 ??h??;
+Numero........:  ?XX;
+Date..........:  12/02/2015 14h40;
 Auteur........:  py;
 Commentaire...:
-	;
+	Ivan
+			-- Ajout bouton quitter bac à sable
+			-- Type/dimensionnements texte du jeu revu (trop tard en format Web)
+			-- Correction import inutle UnityEditor faisant cracher le build
+	Matthieu
+			-- Refonte affichage label vies reines
 
 __________________________________
+Numero........:  ??;
+Date..........:  ??/??/2015 ??h??;
+Auteur........:  py;
+Commentaire...:
+	??
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2015 ??h??;
+Auteur........:  py;
+Commentaire...:
+	??
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2015 ??h??;
+Auteur........:  py;
+Commentaire...:
+	??
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2015 ??h??;
+Auteur........:  py;
+Commentaire...:
+	??
+__________________________________
+Numero........:  ??;
+Date..........:  ??/??/2015 ??h??;
+Auteur........:  py;
+Commentaire...:
+	??
+__________________________________
+

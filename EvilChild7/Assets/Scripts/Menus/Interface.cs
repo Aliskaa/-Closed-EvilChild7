@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor;
 
 public class Interface:ValeursInterfaces
 {
@@ -71,10 +70,11 @@ public class Interface:ValeursInterfaces
 	public void afficherBarreVieReineJoueur(Joueur joueur1, Joueur joueur2, Texture2D barre_vide, Texture2D barre_pleine, Texture2D reine_noire, Texture2D reine_blanche){
 		int vie  = joueur1.getIaReine ().getModele ().getPointsDeVie ();
 		int barVie = vie/100;
-		GUI.Box (new Rect ((Screen.width*0)/100,(Screen.height*1)/100,(Screen.width * 17) / 100,(Screen.height*20)/100),"");
+		GUI.Box (new Rect ((Screen.width*0)/100,(Screen.height*1)/100,(Screen.width * 17) / 100,(Screen.height*26)/100),"");
 		
-		GUI.Label(new Rect ((Screen.width*1)/100,(Screen.height*4)/100,(Screen.width*25)/100,(Screen.height*0.1f)), vie + "/" + "10000 PV Reine "+joueur1.getNameJoueur());
-		GUI.BeginGroup (new Rect ((Screen.width*1)/100,(Screen.height*7)/100,(Screen.width * 16) / 100,(Screen.height*5)/100));
+		GUI.Label(new Rect ((Screen.width*1)/100,(Screen.height*4)/100,(Screen.width*25)/100,(Screen.height*0.1f)),joueur1.getNameJoueur() + " :");
+		GUI.Label(new Rect ((Screen.width*1)/100,(Screen.height*7)/100,(Screen.width*25)/100,(Screen.height*0.1f)), vie + "/" + "10000 PV ");
+		GUI.BeginGroup (new Rect ((Screen.width*1)/100,(Screen.height*10)/100,(Screen.width * 16) / 100,(Screen.height*5)/100));
 		GUI.DrawTexture (new Rect (0,0, (Screen.width * 15) / 100,(Screen.height*4)/100), barre_vide);
 		GUI.BeginGroup (new Rect (0, 0, (Screen.width * 15) / 100*barVie,(Screen.height*4)/100));
 		GUI.DrawTexture(new Rect (0,0, (Screen.width * 15) / 100,(Screen.height*4)/100), barre_pleine);
@@ -84,8 +84,9 @@ public class Interface:ValeursInterfaces
 		vie  = joueur2.getIaReine ().getModele ().getPointsDeVie ();
 		barVie = vie/100;
 		
-		GUI.Label(new Rect ((Screen.width*1)/100,(Screen.height*12)/100,(Screen.width*25)/100,(Screen.height*0.1f)), vie + "/" + "10000 PV Reine "+joueur2.getNameJoueur());
-		GUI.BeginGroup (new Rect ((Screen.width*1)/100,(Screen.height*15)/100,(Screen.width * 16) / 100,(Screen.height*5)/100));
+		GUI.Label(new Rect ((Screen.width*1)/100,(Screen.height*15)/100,(Screen.width*25)/100,(Screen.height*0.1f)), joueur2.getNameJoueur() + " :");
+		GUI.Label(new Rect ((Screen.width*1)/100,(Screen.height*18)/100,(Screen.width*25)/100,(Screen.height*0.1f)), vie + "/" + "10000 PV ");
+		GUI.BeginGroup (new Rect ((Screen.width*1)/100,(Screen.height*21)/100,(Screen.width * 16) / 100,(Screen.height*5)/100));
 		GUI.DrawTexture (new Rect (0,0, (Screen.width * 15) / 100,(Screen.height*4)/100), barre_vide);
 		GUI.BeginGroup (new Rect (0, 0, (Screen.width * 15) / 100*barVie,(Screen.height*4)/100));
 		GUI.DrawTexture(new Rect (0,0, (Screen.width * 15) / 100,(Screen.height*4)/100), barre_pleine);
