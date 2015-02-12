@@ -816,11 +816,12 @@ Commentaire...:
 	- Nettoyage des logs;
 __________________________________
 Numero........:  XX;
-Date..........:  12/02/2015 19h57;
+Date..........:  12/02/2015 20h00;
 Auteur........:  py;
 Commentaire...:
 >>>v3.x.x
 	- Préparation démo : niveau 1 pour le terrain en JvsIA
+	- demo : v3.4.1
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;
