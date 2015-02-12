@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Dev_py\changelog.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menus\Interface.cs">
     <Files>
+      <File FileName="Assets\Scripts\Menus\Interface.cs" Line="85" Column="20" />
       <File FileName="Assets\Dev_py\changelog.txt" Line="786" Column="44" />
     </Files>
   </MonoDevelop.Ide.Workbench>
