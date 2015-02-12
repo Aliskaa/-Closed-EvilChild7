@@ -10,7 +10,10 @@ public class AccueilScript : MonoBehaviour {
 	private string clicked = "", MessageDisplayOnHelp = "Aide \n ", MessageDisplayOnGame= "Description du jeu\n";
 	private Rect WindowRect = new Rect((Screen.width / 4), Screen.height / 2, 600, 600);
 	private float volume = 1.0f;
-	
+
+	public Texture2D logoENSSAT;
+	public Texture2D logoRGS;
+
 	//Variable serveur
 	private HostData[] hostList = null;
 	private const string typeName = "EvilChild";
@@ -32,8 +35,11 @@ public class AccueilScript : MonoBehaviour {
 	{
 		//Debug.Log(Screen.height);
 		GUI.skin = guiSkin;
-		if (background != null)
-			GUI.DrawTexture(new Rect(0,0,Screen.width , Screen.height),background);
+		if (background != null) {
+			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), background);
+			GUI.DrawTexture (new Rect (10, 10, 185, 50), logoENSSAT);
+			GUI.DrawTexture (new Rect (220, 10, 50, 50), logoRGS);
+		}
 		
 		
 		switch (clicked) {

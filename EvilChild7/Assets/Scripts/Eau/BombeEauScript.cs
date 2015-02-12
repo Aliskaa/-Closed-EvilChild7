@@ -22,8 +22,8 @@ public class BombeEauScript : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider c){
-		Debug.Log ("Collision bombe");
-		Debug.Log ( collisionPassee);
+		//Debug.Log ("Collision bombe");
+		//Debug.Log ( collisionPassee);
 		if (collisionPassee == false){
 			GameObject g;
 			GameObject terrain = GameObject.FindGameObjectWithTag("BAC_A_SABLE");
