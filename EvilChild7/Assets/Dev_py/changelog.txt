@@ -778,11 +778,12 @@ Commentaire...:
 	Py
 			-- Correction bug où les hexagones d'eau (objets 3D) persistaient entre deux parties
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2015 ??h??;
+Numero........:  XX;
+Date..........:  12/02/2015 16h00;
 Auteur........:  py;
 Commentaire...:
-	??
+	Matthieu
+			- Ajout des progress-bar pour les lancers (Betises.cs)
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;
