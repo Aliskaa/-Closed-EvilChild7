@@ -789,6 +789,7 @@ Numero........:  XX;
 Date..........:  12/02/2015 19h10;
 Auteur........:  py;
 Commentaire...:
+>>>>v4.x.x (PoC leap)
 	Intégration de la leap-motion dans le mode Joueur VS IA et le mode bac à sable
 		- Les objets n'ont plus de freeze en rotation et en position en X/Y/Z
 		- Ce PoC doit etre différent et dissocié de la version non-PoC i.e. sans la leap motion
@@ -799,11 +800,12 @@ Commentaire...:
 		- http://docs.unity3d.com/Manual/LogFiles.html
 		- C:\Users\plaperso\AppData\Local\Temp\UnityWebPlayer\log
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2015 ??h??;
+Numero........:  XX;
+Date..........:  12/02/2015 19h33;
 Auteur........:  py;
 Commentaire...:
-	??
+>>>v3.x.x (livrable sans leap)
+	-  Correction taille des colldiers des cases d'eau 3D (division par 2 en Y)
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;

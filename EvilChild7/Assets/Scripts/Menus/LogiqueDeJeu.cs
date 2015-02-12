@@ -35,13 +35,13 @@ public class LogiqueDeJeu:GroupeRessource
 		if (gameObjectReineBlanche != null) {
 			iaReineBlanche = (IAreineBlanche)((ReineScript)gameObjectReineBlanche.GetComponent<ReineScript> ()).iaReine;
 		} else {
-			Debug.Log("Reine blanche non trouvée"+iaReineBlanche);
+			//Debug.Log("Reine blanche non trouvée"+iaReineBlanche);
 		}
 		
 		if (gameObjectReineBlanche != null) {
 			iaReineNoire = (IAreineNoire)((ReineScript)gameObjectReineNoire.GetComponent<ReineScript> ()).iaReine;
 		} else {
-			Debug.Log("Reine noire non trouvée"+iaReineNoire);
+			//Debug.Log("Reine noire non trouvée"+iaReineNoire);
 		}
 	}
 	void Start(){
