@@ -96,7 +96,7 @@ public class AccueilScript : MonoBehaviour {
         } 
         */
 		else if (GUILayout.Button ("Bac à sable")) {
-			Application.LoadLevel(3);
+			Application.LoadLevel(2);
 		}
 		else if (GUILayout.Button("Retour")){
 			clicked = "";

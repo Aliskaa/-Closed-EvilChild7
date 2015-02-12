@@ -785,11 +785,19 @@ Commentaire...:
 	Matthieu
 			- Ajout des progress-bar pour les lancers (Betises.cs)
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2015 ??h??;
+Numero........:  XX;
+Date..........:  12/02/2015 19h10;
 Auteur........:  py;
 Commentaire...:
-	??
+	Intégration de la leap-motion dans le mode Joueur VS IA et le mode bac à sable
+		- Les objets n'ont plus de freeze en rotation et en position en X/Y/Z
+		- Ce PoC doit etre différent et dissocié de la version non-PoC i.e. sans la leap motion
+		- Terrain "lac" exclusif pour le mode bac à sable
+		- Terrain "desert" execlusif pour le mode jouer vs IA
+		- HandController de scale 250/175/250, rotationY=271, position 2.3/-29/-1
+	Pour info (log web browser)
+		- http://docs.unity3d.com/Manual/LogFiles.html
+		- C:\Users\plaperso\AppData\Local\Temp\UnityWebPlayer\log
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;

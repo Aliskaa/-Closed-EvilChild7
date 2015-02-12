@@ -80,7 +80,7 @@ public class CaillouxScript : MonoBehaviour {
 		}
 		
 		//transform.rigidbody.isKinematic = true;
-		transform.rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+		//transform.rigidbody.constraints = RigidbodyConstraints.FreezePosition;
 		transform.collider.isTrigger = false;
 		/*
 		if (!rebond) {

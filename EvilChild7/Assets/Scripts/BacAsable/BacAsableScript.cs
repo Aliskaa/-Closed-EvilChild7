@@ -750,6 +750,7 @@ public class BacAsableScript : MonoBehaviour {
 	#region Méthodes publiques
 	public void gestionQuitter(Texture2D image_quitter){
 		if (GUI.Button(new Rect(Screen.width*0.96f, Screen.height*0.03f, Screen.width*0.02f, Screen.height*0.05f), image_quitter)){
+			TerrainUtils.Flush();
 			Application.LoadLevel(0);
 		}
 	}
