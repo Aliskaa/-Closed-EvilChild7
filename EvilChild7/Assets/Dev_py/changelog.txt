@@ -759,7 +759,7 @@ Commentaire...:
 					-- Correction gestion des oeufs des reines
 
 __________________________________
-Numero........:  ?XX;
+Numero........:  XX;
 Date..........:  12/02/2015 14h40;
 Auteur........:  py;
 Commentaire...:
@@ -771,11 +771,12 @@ Commentaire...:
 			-- Refonte affichage label vies reines
 
 __________________________________
-Numero........:  ??;
-Date..........:  ??/??/2015 ??h??;
+Numero........:  XX;
+Date..........:  12/02/2015 15h55;
 Auteur........:  py;
 Commentaire...:
-	??
+	Py
+			-- Correction bug où les hexagones d'eau (objets 3D) persistaient entre deux parties
 __________________________________
 Numero........:  ??;
 Date..........:  ??/??/2015 ??h??;

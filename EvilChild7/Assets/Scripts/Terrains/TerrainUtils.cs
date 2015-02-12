@@ -5,7 +5,7 @@
 /// </summary>
 /// 
 /// <remarks>
-/// PY Lapersonne - Version 1.5.0
+/// PY Lapersonne - Version 2.0.0
 /// </remarks>
 
 using UnityEngine;
@@ -15,6 +15,8 @@ using System.Collections.Generic;
 /// <summary>
 /// Classe utilitaire pour gérer le terrain et ses hexagones
 /// </summary>
+
+// FIXME Méthode statique... A changer !
 public static class TerrainUtils {
 
 	/* ********* *
@@ -175,6 +177,16 @@ public static class TerrainUtils {
 	/// <returns>Une liste avec tous les hexagones</returns>
 	public static List<HexagoneInfo> GetHexagones(){
 		return hexagones;
+	}
+
+	/// <summary>
+	/// Vider la liste, i.e. les hexagones créés.
+	/// </summary>
+	/// <remarks>
+	/// Impératif si on relance le jeu !
+	/// </remarks>
+	public static void Flush(){
+		hexagones = new List<HexagoneInfo>();
 	}
 #endregion
 
