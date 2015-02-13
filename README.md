@@ -1,4 +1,8 @@
 # academical_Enssat_EvilChild7
+
+[closed]
+Conservé ici par nostalgie ^_^
+
 Projet académique fait en groupe autour d'un cahier de charges abordant les jeux-vidéos de type RTS.
 L'enjeu ici était de créer un jeux-vidéo mettant en scènes de fourmis s'affrontant dans un bac à sable afin de tuer la reine adverse.
 Une architecure orientée agents a été choisie, ainsi que des prefabs sous Blender.
